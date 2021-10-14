@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const { dateSetter, dateGetter } = require("../utils/utils");
 
 const customerSchema = mongoose.Schema(
   {
@@ -8,26 +9,41 @@ const customerSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    dateOfBirth: Date,
+    dateOfBirth: {
+      type: Date,
+      required: true,
+      set: dateSetter,
+      get: dateGetter,
+    },
     address: {
       trim: true,
+      required: true,
       type: String,
     },
     identityNumber: {
       trim: true,
+      required: true,
       type: String,
     },
-    identityCardCreatedDate: Date,
+    identityCardCreatedDate: {
+      type: Date,
+      set: dateSetter,
+      required: true,
+      get: dateGetter,
+    },
     phoneNumber: {
       trim: true,
+      required: true,
       type: String,
     },
     permanentResidence: {
       trim: true,
+      required: true,
       type: String,
     },
     email: {
       type: String,
+
       unique: true,
       trim: true,
       lowercase: true,
@@ -40,6 +56,15 @@ const customerSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+// customerSchema.methods.toJSON = function () {
+//   const customerObject = this.toObject();
+//   customerObject.dateOfBirth = dateGetter(customerObject.dateOfBirth);
+//   customerObject.identityCardCreatedDate = dateGetter(
+//     customerObject.identityCardCreatedDate
+//   );
+
+//   return customerObject;
+// };
 
 const Customer = mongoose.model("Customer", customerSchema);
 
