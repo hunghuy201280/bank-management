@@ -6,6 +6,28 @@ const Customer = require("../models/customer");
 
 const router = express.Router();
 
+//#region params
+router.param("id", async (req, res, next, id) => {
+  try {
+    const loanProfile = await LoanProfile.findById(id);
+    if (!loanProfile)
+      return res
+        .status(404)
+        .send({ error: "This loan profile doesn't exist'" });
+    req.loanProfile = loanProfile;
+    next();
+  } catch (err) {
+    log.error(err);
+    res.status(404).send({ error: "This loan profile doesn't exist'" });
+  }
+});
+//#endregion
+
+//#region Create Loan Profile
+
+/**
+ * Create Loan Profile
+ */
 router.post("/loan_profile", auth, async (req, res) => {
   const loanProf = req.body;
   try {
@@ -36,6 +58,50 @@ router.post("/loan_profile", auth, async (req, res) => {
     });
     log.error(error);
   }
+});
+
+//#endregion
+
+/**
+ * Get multiple loan profiles
+ *
+ */
+router.get("/loan_profile", auth, async (req, res) => {
+  try {
+    let limit = 20,
+      skip = 0;
+    if (req.query.limit) {
+      limit = parseInt(req.query.limit);
+      if (limit == 0) limit = 20;
+    }
+    if (req.query.skip) {
+      skip = parseInt(req.query.skip);
+    }
+
+    const match = {};
+    const sort = {};
+    if (req.query.sortBy) {
+      const splittedSortQuery = req.query.sortBy.split(":");
+      sort[splittedSortQuery[0]] = splittedSortQuery[1] === "desc" ? -1 : 1;
+    }
+
+    const result = await LoanProfile.find(match)
+      .skip(skip)
+      .limit(limit)
+      .sort(sort)
+      .exec();
+    res.send(result);
+  } catch (error) {
+    log.error(error);
+    res.status(400).send({ error });
+  }
+});
+
+/**
+ * Get single loan profile
+ */
+router.get("/loan_profile/:id", auth, async function (req, res) {
+  res.send(req.loanProfile);
 });
 
 module.exports = router;

@@ -22,7 +22,7 @@ const loanProfileSchema = mongoose.Schema(
     },
     proofOfIncome: [
       {
-        imageLink: {
+        imageId: {
           type: String,
           required: true,
         },

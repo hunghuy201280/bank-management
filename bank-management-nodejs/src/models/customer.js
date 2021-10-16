@@ -23,7 +23,13 @@ const customerSchema = mongoose.Schema(
     identityNumber: {
       trim: true,
       required: true,
+      unique: true,
       type: String,
+      validate(value) {
+        return validator.isNumeric(value, {
+          no_symbols: true,
+        });
+      },
     },
     identityCardCreatedDate: {
       type: Date,
@@ -33,8 +39,14 @@ const customerSchema = mongoose.Schema(
     },
     phoneNumber: {
       trim: true,
+      unique: true,
       required: true,
       type: String,
+      validate(value) {
+        return validator.isNumeric(value, {
+          no_symbols: true,
+        });
+      },
     },
     permanentResidence: {
       trim: true,
@@ -43,13 +55,14 @@ const customerSchema = mongoose.Schema(
     },
     email: {
       type: String,
-
       unique: true,
       trim: true,
       lowercase: true,
       validate(value) {
         return validator.isEmail(value);
       },
+      sparse: true,
+      index: true,
     },
   },
   {

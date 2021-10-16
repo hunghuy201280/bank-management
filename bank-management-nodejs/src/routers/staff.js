@@ -14,7 +14,7 @@ router.post("/staffs", async (req, res) => {
     res.status(201).send({ staff, token });
   } catch (err) {
     log.error(err);
-    res.sendStatus(400).send();
+    res.status(400).send({ error: err });
   }
 });
 

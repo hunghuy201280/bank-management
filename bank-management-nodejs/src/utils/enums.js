@@ -12,7 +12,18 @@ const ProofOfIncomeType = {
   BusinessLicense: 5,
 };
 
+const LoanType = {
+  EachTime: 1,
+  CreditLine: 2,
+  InvestmentProject: 3,
+  Installment: 4,
+  StandbyCreditLimit: 5,
+  CapitalMeeting: 6,
+  UnderOverdraftLimit: 7,
+};
+
 module.exports = {
   StaffRole,
+  LoanType,
   ProofOfIncomeType,
 };
