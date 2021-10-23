@@ -14,6 +14,7 @@ router.param("id", async (req, res, next, id) => {
       return res
         .status(404)
         .send({ error: "This loan profile doesn't exist'" });
+
     req.loanProfile = loanProfile;
     next();
   } catch (err) {
@@ -101,6 +102,8 @@ router.get("/loan_profile", auth, async (req, res) => {
  * Get single loan profile
  */
 router.get("/loan_profile/:id", auth, async function (req, res) {
+  await req.loanProfile.populate("customer");
+
   res.send(req.loanProfile);
 });
 

@@ -22,8 +22,14 @@ const LoanType = {
   UnderOverdraftLimit: 7,
 };
 
+const CustomerType = {
+  Business: 1,
+  Resident: 2,
+};
+
 module.exports = {
   StaffRole,
   LoanType,
+  CustomerType,
   ProofOfIncomeType,
 };

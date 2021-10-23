@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const { dateSetter, dateGetter } = require("../utils/utils");
-
+const { CustomerType } = require("../utils/enums");
+const { toArray } = require("../utils/utils");
 const customerSchema = mongoose.Schema(
   {
     name: {
@@ -63,6 +64,11 @@ const customerSchema = mongoose.Schema(
       },
       sparse: true,
       index: true,
+    },
+    customerType: {
+      type: Number,
+      required: true,
+      enum: [toArray(CustomerType)],
     },
   },
   {
