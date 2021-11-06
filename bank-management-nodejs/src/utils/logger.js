@@ -1,4 +1,4 @@
-const chalk = require("chalk");
+import chalk from "chalk";
 const log = console.log;
 function error(message) {
   log(`
@@ -8,6 +8,4 @@ function error(message) {
   console.log(message);
 }
 
-module.exports = {
-  error,
-};
+export { error };

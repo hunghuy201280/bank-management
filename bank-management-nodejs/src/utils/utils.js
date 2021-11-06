@@ -1,4 +1,4 @@
-const moment = require("moment");
+import moment from "moment";
 
 function toArray(obj) {
   return Object.keys(obj).map(function (key) {
@@ -13,8 +13,4 @@ function dateSetter(date) {
 function dateGetter(date) {
   return moment(date).format("DD/MM/YYYY");
 }
-module.exports = {
-  toArray,
-  dateSetter,
-  dateGetter,
-};
+export { toArray, dateSetter, dateGetter };

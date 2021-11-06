@@ -1,8 +1,8 @@
-const express = require("express");
-const BranchInfo = require("../models/branch_info");
-const auth = require("../middleware/auth");
-const log = require("../utils/logger");
-const { StaffRole } = require("../utils/enums");
+import express from "express";
+import BranchInfo from "../models/branch_info.js";
+import auth from "../middleware/auth.js";
+import * as log from "../utils/logger.js";
+import { StaffRole } from "../utils/enums.js";
 
 const router = express.Router();
 
@@ -25,4 +25,4 @@ router.post("/branch_info", auth, async (req, res) => {
 
 //#endregion
 
-module.exports = router;
+export default router;

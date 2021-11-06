@@ -1,2 +1,2 @@
-const mongoose = require("mongoose");
-mongoose.connect(process.env.CONNECTION_URL);
+import mongoose from "mongoose";
+export default mongoose.connect(process.env.CONNECTION_URL);

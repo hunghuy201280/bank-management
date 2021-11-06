@@ -1,8 +1,8 @@
-const BImage = require("../models/b_image");
-const multer = require("multer");
-const sharp = require("sharp");
-const express = require("express");
-const auth = require("../middleware/auth");
+import BImage from "../models/b_image.js";
+import multer from "multer";
+import sharp from "sharp";
+import express from "express";
+import auth from "../middleware/auth.js";
 const router = express.Router();
 const upload = multer({
   limits: {
@@ -61,4 +61,4 @@ router.get("/images/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

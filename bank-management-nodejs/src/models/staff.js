@@ -1,9 +1,59 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { StaffRole } = require("../utils/enums");
-const { toArray } = require("../utils/utils");
+import mongoose from "mongoose";
+import validator from "validator";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { StaffRole } from "../utils/enums.js";
+import { toArray } from "../utils/utils.js";
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Staff:
+ *       type: object
+ *       description: This model contain information about staff
+ *       required:
+ *         - role
+ *         - name
+ *         - password
+ *         - email
+ *         - tokens
+ *       properties:
+ *         role:
+ *           type: Number
+ *           description: |
+ *              | Staff Role | Value |
+ *              | ----------------- | ----- |
+ *              | Support | 1 |
+ *              | Business | 2 |
+ *              | Appraisal | 3 |
+ *              | Director | 4 |
+ *         name:
+ *           type: String
+ *         password:
+ *           type: String
+ *         email:
+ *           type: String
+ *           description: Must be unique
+ *         tokens:
+ *           type: Array
+ *           example:
+ *              - "asdadwda23weqwdsd"
+ *              - "sda123eqwadqwewasd"
+ *              - "sad234rwedf3456wers"
+ *         branchInfo:
+ *           type: object
+ *           $ref: "#/components/schemas/BranchInfo"
+ *         _id:
+ *           type: string
+ *           description: The auto generated id for this object
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Staff
+ */
 
 const staffSchema = mongoose.Schema(
   {
@@ -45,6 +95,11 @@ const staffSchema = mongoose.Schema(
         },
       },
     ],
+    branchInfo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BranchInfo",
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -114,4 +169,4 @@ staffSchema.pre("save", async function (next) {
 
 const Staff = mongoose.model("Staff", staffSchema);
 
-module.exports = Staff;
+export default Staff;

@@ -1,8 +1,92 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
-const { ProofOfIncomeType } = require("../utils/enums");
-const { toArray } = require("../utils/utils");
-const moment = require("moment");
+import mongoose from "mongoose";
+import validator from "validator";
+import { ProofOfIncomeType } from "../utils/enums.js";
+import { toArray } from "../utils/utils.js";
+import moment from "moment";
+import { LoanType, LoanProfileStatus } from "../utils/enums.js";
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     LoanProfile:
+ *       type: object
+ *       description: This model contain information about loan profile
+ *       required:
+ *         - customer
+ *         - staff
+ *         - loanApplicationNumber
+ *         - proofOfIncome
+ *         - moneyToLoan
+ *         - loanPurpose
+ *         - loanDuration
+ *         - collateral
+ *         - expectedSourceMoneyToRepay
+ *         - benefitFromLoan
+ *         - signatureImg
+ *       properties:
+ *         customer:
+ *           type: ObjectId
+ *           description: Customer's id who owns this profile
+ *         staff:
+ *           type: ObjectId
+ *           description: Staff's id who creates this profile
+ *         loanApplicationNumber:
+ *           type: String
+ *         proofOfIncome:
+ *           type: Array
+ *           description: |
+ *            | ProofOfIncomeType | Value |
+ *            | ----------------- | ----- |
+ *            | Labor Contract | 1 |
+ *            | Salary Confirmation | 2 |
+ *            | House Rental Contract | 3 |
+ *            | Car Rental Contract | 4 |
+ *            | Business License | 5 |
+ *           example:
+ *             proofOfIncome:
+ *                - imageId: "2312asd234d"
+ *                  imageType: 1
+ *                - imageId: "123asdqwe13easd"
+ *                  imageType: 2
+ *         moneyToLoan:
+ *           type: Number
+ *         loanPurpose:
+ *           type: String
+ *         loanDuration:
+ *           type: Number
+ *         collateral:
+ *           type: String
+ *         expectedSourceMoneyToRepay:
+ *           type: String
+ *         benefitFromLoan:
+ *           type: String
+ *         signatureImg:
+ *           type: String
+ *         loanStatus:
+ *           type: Number
+ *           description: |
+ *            | LoanProfileStatus | Value |
+ *            | ----------------- | ----- |
+ *            | Pending | 1 |
+ *            | Done | 2 |
+ *            | Rejected | 3 |
+ *         _id:
+ *           type: string
+ *           description: The auto generated id for this object
+ *         createdAt:
+ *           type: Date
+ *           description: date createdAt
+ *         updatedAt:
+ *           type: Date
+ *           description: last update time
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: LoanProfile
+ */
 
 const loanProfileSchema = mongoose.Schema(
   {
@@ -14,7 +98,7 @@ const loanProfileSchema = mongoose.Schema(
     staff: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Customer",
+      ref: "Staff",
     },
     loanApplicationNumber: {
       type: String,
@@ -61,6 +145,16 @@ const loanProfileSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    loanType: {
+      type: Number,
+      required: true,
+      enum: [toArray(LoanType)],
+    },
+    loanStatus: {
+      type: Number,
+      default: 1,
+      enum: [toArray(LoanProfileStatus)],
+    },
   },
   {
     timestamps: true,
@@ -81,4 +175,4 @@ loanProfileSchema.statics.getApplicationNumber = async function () {
 
 const LoanProfile = mongoose.model("LoanProfile", loanProfileSchema);
 
-module.exports = LoanProfile;
+export default LoanProfile;

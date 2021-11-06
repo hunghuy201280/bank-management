@@ -27,9 +27,16 @@ const CustomerType = {
   Resident: 2,
 };
 
-module.exports = {
+const LoanProfileStatus = {
+  Pending: 1,
+  Done: 2,
+  Rejected: 3,
+};
+
+export {
   StaffRole,
   LoanType,
   CustomerType,
   ProofOfIncomeType,
+  LoanProfileStatus,
 };
