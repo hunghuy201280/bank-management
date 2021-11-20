@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleObserver
 import com.example.bankmanagement.base.BaseActions
-import com.example.bankmanagement.utils.SystemHelper
+import com.example.bankmanagement.utils.helper.SystemHelper
 
 abstract class BaseAppCompatActivity : AppCompatActivity(), BaseActions, LifecycleObserver {
 

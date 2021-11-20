@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="H1">@dimen/_17ssp</dimen>
+    <dimen name="H2">@dimen/_16ssp</dimen>
+    <dimen name="H3">@dimen/_13ssp</dimen>
+
+    <dimen name="default_margin">@dimen/_12sdp</dimen>
+    <dimen name="space_8">@dimen/_8sdp</dimen>
+</resources>
