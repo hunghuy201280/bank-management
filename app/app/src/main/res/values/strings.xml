@@ -1,6 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">IncomBank</string>
     <string name="app_name_upper">INCOMBANK</string>
     <string name="app_title">Run and grow your business</string>
     <string name="get_started">Get started</string>
+    
+    <string name="sign_in_with_branch_code">Sign In With Branch Code</string>
 </resources>

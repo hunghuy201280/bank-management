@@ -18,6 +18,12 @@
         <item name="fontFamily">@font/poppins_bold</item>
     </style>
 
+    <style name="TextPoppins.SemiBold.Wrap" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
+
     <style name="WrapLayout">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -33,4 +39,9 @@
         <item name="backgroundTint">@color/secondaryBackground</item>
     </style>
 
+    <style name="PinWidget.PinView" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:maxLines">1</item>
+    </style>
 </resources>

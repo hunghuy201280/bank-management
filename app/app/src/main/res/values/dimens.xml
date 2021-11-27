@@ -6,4 +6,10 @@
 
     <dimen name="default_margin">@dimen/_12sdp</dimen>
     <dimen name="space_8">@dimen/_8sdp</dimen>
+
+    <!--PinCodeView-->
+    <dimen name="pin_code_item_size">@dimen/_48sdp</dimen>
+    <dimen name="pv_pin_view_item_spacing">@dimen/_5sdp</dimen>
+    <dimen name="pv_pin_view_item_line_width">@dimen/_2sdp</dimen>
+    <dimen name="pv_pin_view_cursor_width">@dimen/_2sdp</dimen>
 </resources>
