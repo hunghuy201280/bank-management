@@ -15,6 +15,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity(), BaseActions, Lifecyc
     private var autoHideKeyboard = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        preOnCreate();
         super.onCreate(savedInstanceState)
 
         initLayout()
@@ -26,6 +27,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity(), BaseActions, Lifecyc
     }
 
     protected open fun initSettings() {}
+    protected open fun preOnCreate() {}
 
     protected open fun initView() {}
 
