@@ -2,6 +2,7 @@ package com.example.bankmanagement.view.device_code
 
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentDeviceCodeBinding
 import com.example.bankmanagement.view_models.MainViewModel
@@ -26,6 +27,7 @@ class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeVie
         viewModel.branch.observe(this,{
             it?.let {
                 mainVM.currentBranch.value=it;
+                findNavController().navigate(R.id.action_deviceCodeFragment_to_signInFragment)
             }
         })
     }

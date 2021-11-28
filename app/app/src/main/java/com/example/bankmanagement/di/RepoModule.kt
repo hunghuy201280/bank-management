@@ -5,7 +5,7 @@ import com.example.bankmanagement.repo.ApiService
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.MainRepositoryImpl
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
-import com.google.gson.Gson
+import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -45,6 +45,12 @@ class RepoModule {
         return BranchInfoDtoMapper()
     }
 
+    @Singleton
+    @Provides
+    fun provideStaffMapper(): StaffDtoMapper {
+        return StaffDtoMapper()
+    }
+
 
     @Singleton
     @Provides
@@ -63,10 +69,12 @@ class RepoModule {
     fun provideMainRepository(
         apiService: ApiService,
         branchInfoMapper: BranchInfoDtoMapper,
+        staffDtoMapper: StaffDtoMapper
     ): MainRepository{
         return MainRepositoryImpl(
             apiService = apiService,
             branchInfoMapper = branchInfoMapper,
+            staffDtoMapper=staffDtoMapper,
         );
     }
 }

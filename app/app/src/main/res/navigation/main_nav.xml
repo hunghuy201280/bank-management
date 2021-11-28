@@ -6,6 +6,17 @@
     app:startDestination="@id/deviceCodeFragment">
     <fragment
         android:id="@+id/deviceCodeFragment"
+        tools:layout="@layout/fragment_device_code"
         android:name="com.example.bankmanagement.view.device_code.DeviceCodeFragment"
-        android:label="DeviceCodeFragment" />
+        android:label="DeviceCodeFragment" >
+        <action
+            android:id="@+id/action_deviceCodeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        tools:layout="@layout/fragment_sign_in"
+
+        android:name="com.example.bankmanagement.view.sign_in.SignInFragment"
+        android:label="SignInFragment" />
 </navigation>

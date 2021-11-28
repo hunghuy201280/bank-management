@@ -75,6 +75,7 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> : Fragment(
             .apply {
                 initViewModel(this)
             }
+
         initView()
         initData()
         initAction()

@@ -13,44 +13,41 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
 class DeviceCodeViewModel
 @Inject
 constructor(
-    private val mainRepo:MainRepository,
-): BaseUiViewModel<BaseUserView>() {
+    private val mainRepo: MainRepository,
+) : BaseUiViewModel<BaseUserView>() {
 
-    private val TAG:String="DeviceCodeViewModel";
+    private val TAG: String = "DeviceCodeViewModel";
     val pinCode: MutableLiveData<String> = MutableLiveData("");
-    val branch:MutableLiveData<BranchInfo> = MutableLiveData();
+    val branch: MutableLiveData<BranchInfo> = MutableLiveData();
 
-    fun getBranchInfo(){
+    fun getBranchInfo() {
         showLoading(true);
 
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
 
             // simulate a delay to show loading
             delay(1000)
-            try{
-                val info:BranchInfo =
-                    withContext(Dispatchers.Default) {
-                        mainRepo.getBranchInfo(pinCode.value!!)
-                    }
-                Log.d(TAG,info.branchAddress);
+            try {
+                val info: BranchInfo = mainRepo.getBranchInfo(pinCode.value!!)
+
+                Log.d(TAG, info.branchAddress);
                 branch.postValue(info);
-            }
-            catch (e:Exception){
-                Log.d(TAG,"Error happened: $e");
+            } catch (e: HttpException) {
+                Log.d(TAG, "Error happened: ${e.response()} ");
 
             }
 
-
-
-
+            withContext(Dispatchers.Main){
+                showLoading(false);
+            }
         }
-        showLoading(false);
 
     }
 

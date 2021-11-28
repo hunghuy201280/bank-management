@@ -19,6 +19,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.bankmanagement.R
+import com.example.bankmanagement.base.BaseUserView
 import com.google.android.material.textfield.TextInputEditText
 import com.example.bankmanagement.base.dialog.AppAlertDialog
 import com.example.bankmanagement.base.dialog.AppFunctionDialog

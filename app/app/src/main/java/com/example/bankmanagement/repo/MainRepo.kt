@@ -1,12 +1,23 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.BranchInfo
+import com.example.bankmanagement.models.Staff
 
 
 interface MainRepository {
     suspend fun getBranchInfo(
         branchCode: String
     ): BranchInfo
+    suspend fun login(
+        email: String,
+        password: String,
+        branchId:String,
+    ): Staff
+
+    fun getToken():String;
+
+
+
 }
 
 

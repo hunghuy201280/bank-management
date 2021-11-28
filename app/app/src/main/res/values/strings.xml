@@ -8,7 +8,10 @@
     <string name="sign_in_with_branch_code">Sign In With Branch Code</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="alert_msg_an_error_has_occurred">Error occured</string>
+    <string name="alert_msg_an_error_has_occurred">Error occurred</string>
     <string name="alert_btn_go_to_settings">Go to settings</string>
     <string name="alert_btn_negative">No</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
 </resources>
