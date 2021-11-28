@@ -4,6 +4,11 @@
     <string name="app_name_upper">INCOMBANK</string>
     <string name="app_title">Run and grow your business</string>
     <string name="get_started">Get started</string>
-    
+
     <string name="sign_in_with_branch_code">Sign In With Branch Code</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alert_msg_an_error_has_occurred">Error occured</string>
+    <string name="alert_btn_go_to_settings">Go to settings</string>
+    <string name="alert_btn_negative">No</string>
 </resources>

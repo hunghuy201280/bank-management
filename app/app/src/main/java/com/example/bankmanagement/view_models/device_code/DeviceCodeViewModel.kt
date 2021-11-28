@@ -1,0 +1,57 @@
+package com.example.bankmanagement.view_models.device_code
+
+
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.bankmanagement.base.BaseUserView
+import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
+import com.example.bankmanagement.models.BranchInfo
+import com.example.bankmanagement.repo.MainRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+
+@HiltViewModel
+class DeviceCodeViewModel
+@Inject
+constructor(
+    private val mainRepo:MainRepository,
+): BaseUiViewModel<BaseUserView>() {
+
+    private val TAG:String="DeviceCodeViewModel";
+    val pinCode: MutableLiveData<String> = MutableLiveData("");
+    val branch:MutableLiveData<BranchInfo> = MutableLiveData();
+
+    fun getBranchInfo(){
+        showLoading(true);
+
+        viewModelScope.launch(Dispatchers.IO){
+
+            // simulate a delay to show loading
+            delay(1000)
+            try{
+                val info:BranchInfo =
+                    withContext(Dispatchers.Default) {
+                        mainRepo.getBranchInfo(pinCode.value!!)
+                    }
+                Log.d(TAG,info.branchAddress);
+                branch.postValue(info);
+            }
+            catch (e:Exception){
+                Log.d(TAG,"Error happened: $e");
+
+            }
+
+
+
+
+        }
+        showLoading(false);
+
+    }
+
+}

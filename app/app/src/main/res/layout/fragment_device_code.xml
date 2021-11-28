@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.device_code.DeviceCodeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextPoppins.SemiBold.Wrap"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@color/primaryBackground"
+            android:gravity="center"
+            android:text="@string/sign_in_with_branch_code"
+            android:textSize="@dimen/_10ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+
+                android:background="@drawable/bg_device_code_group">
+
+                <com.example.bankmanagement.widgets.PinCodeView
+                    android:id="@+id/codeView"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:cursorVisible="false"
+
+                    android:inputType="text"
+                    android:itemBackground="@android:color/transparent"
+                    android:text="@={viewModel.pinCode}"
+                    android:textColor="@color/primaryText"
+                    android:textSize="@dimen/_10ssp"
+                    app:cursorWidth="@dimen/_1sdp"
+                    app:hideLineWhenFilled="true"
+                    app:itemCount="9"
+                    app:itemHeight="@dimen/_35sdp"
+                    app:itemRadius="@dimen/_4sdp"
+                    app:itemSpacing="0dp"
+                    app:itemWidth="@dimen/_36sdp"
+                    app:lineColor="@android:color/transparent"
+                    app:lineWidth="0.5dp"
+                    app:viewType="rectangle" />
+
+            </FrameLayout>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/ButtonDefault"
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/space_8"
+                android:elevation="0dp"
+                android:onClick="@{() -> viewModel.getBranchInfo()}"
+                android:text="@string/get_started"
+                android:textSize="@dimen/_8ssp"
+                app:cornerRadius="@dimen/_6sdp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

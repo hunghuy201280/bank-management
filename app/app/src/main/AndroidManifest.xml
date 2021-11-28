@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.device_code.DeviceCodeActivity"
+        <activity android:name=".view.MainActivity"
             android:screenOrientation="landscape"/>
 
     </application>

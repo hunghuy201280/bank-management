@@ -3,11 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/myFragment">
-
+    app:startDestination="@id/deviceCodeFragment">
     <fragment
-        android:id="@+id/myFragment"
-        android:name="com.example.bankmanagement.view.MyFragment"
-        android:label="fragment_my"
-        tools:layout="@layout/fragment_my" />
+        android:id="@+id/deviceCodeFragment"
+        android:name="com.example.bankmanagement.view.device_code.DeviceCodeFragment"
+        android:label="DeviceCodeFragment" />
 </navigation>

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.bankmanagement.view.welcome.WelcomeViewModel" />
+            type="com.example.bankmanagement.view_models.welcome.WelcomeViewModel" />
     </data>
 
     <LinearLayout
@@ -47,6 +47,7 @@
             android:elevation="0dp"
             android:onClick="@{() -> viewModel.openDeviceCode()}"
             app:cornerRadius="@dimen/_6sdp" />
+
 
     </LinearLayout>
 

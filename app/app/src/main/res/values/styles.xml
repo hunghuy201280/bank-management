@@ -44,4 +44,5 @@
         <item name="android:minHeight">0dp</item>
         <item name="android:maxLines">1</item>
     </style>
+
 </resources>

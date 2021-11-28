@@ -1,7 +1,7 @@
 package com.example.bankmanagement.view.welcome
 
-import com.example.bankmanagement.base.BaseUiCallback
+import com.example.bankmanagement.base.BaseUserView
 
-interface WelcomeUiCallback: BaseUiCallback {
+interface WelcomeUiCallback: BaseUserView {
     fun openDeviceCode()
 }

@@ -12,4 +12,18 @@
     <dimen name="pv_pin_view_item_spacing">@dimen/_5sdp</dimen>
     <dimen name="pv_pin_view_item_line_width">@dimen/_2sdp</dimen>
     <dimen name="pv_pin_view_cursor_width">@dimen/_2sdp</dimen>
+
+
+    <!-- Layout -->
+    <dimen name="layout_margin_def">@dimen/_8sdp</dimen>
+    <dimen name="layout_padding_def">@dimen/_8sdp</dimen>
+
+
+    <dimen name="ic_S">@dimen/_4sdp</dimen>
+    <dimen name="ic">@dimen/_9sdp</dimen>
+    <dimen name="ic_L">@dimen/_12sdp</dimen>
+    <dimen name="ic_XL">@dimen/_15sdp</dimen>
+    <dimen name="ic_XXL">@dimen/_20sdp</dimen>
+    <dimen name="ic_img">@dimen/_10sdp</dimen>
+    <dimen name="ic_img_L">@dimen/_12sdp</dimen>
 </resources>

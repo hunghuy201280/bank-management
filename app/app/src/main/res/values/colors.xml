@@ -10,4 +10,39 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="divider">#B2B2B2</color>
+
+
+    <!-- Primary brand color. -->
+    <color name="primary">#FD2C70</color>
+    <color name="primaryVariant">#B3FD2B70</color>
+    <color name="onPrimary">#FFFFFF</color>
+
+    <!-- Secondary brand color. -->
+    <color name="secondary">#0B70D7</color>
+    <color name="secondaryVariant">#0965C1</color>
+    <color name="onSecondary">#FFFFFF</color>
+
+    <!-- Others -->
+    <color name="textPrimary">#000000</color>
+    <color name="textSecondary">#B8B8B8</color>
+    <color name="error">#FF0000</color>
+    <color name="onError">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="onSurface">#000000</color>
+    <color name="background">#FFFFFF</color>
+    <color name="backgroundDim">#80000000</color>
+    <color name="backgroundSecondary">#F6F6F6</color>
+    <color name="ripple">#D6D6D6</color>
+    <color name="disabled">#939393</color>
+
+    <color name="_1067A7">#1067A7</color>
+    <color name="_EEEEEE">#EEEEEE</color>
+    <color name="_007EFF">#007EFF</color>
+    <color name="_FBD536">#FBD536</color>
+    <color name="radicalRed">#FD2B70</color>
+
+
+    <color name="grayText">#777777</color>
+    <color name="extraAdjust">#40693B</color>
+
 </resources>
