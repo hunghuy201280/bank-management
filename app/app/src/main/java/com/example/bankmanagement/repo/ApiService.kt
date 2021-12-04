@@ -1,15 +1,10 @@
 package com.example.bankmanagement.repo
 
-import com.example.bankmanagement.models.Staff
-import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDto
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
-import com.example.bankmanagement.repo.dtos.sign_in.LoginData
+import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
+import com.example.bankmanagement.repo.dtos.sign_in.SignInData
 import com.example.bankmanagement.repo.dtos.sign_in.SignInResponse
-import com.example.bankmanagement.repo.dtos.sign_in.StaffDto
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
     @GET("branch_info/{branchCode}")
@@ -19,6 +14,21 @@ interface ApiService {
 
     @POST("staffs/login")
     suspend fun login(
-        @Body body: LoginData
+        @Body body: SignInData
     ): SignInResponse
+
+    @POST("staffs/clock_in")
+    suspend fun clockIn(
+        @Header("Authorization") token:String
+    )
+
+    @POST("staffs/clock_out")
+    suspend fun clockOut(
+        @Header("Authorization") token:String
+    )
+
+    @GET("staffs/clock_in_out_time")
+    suspend fun getClockInOutTime(
+        @Header("Authorization") token:String
+    ):ClockInOutResponse
 }

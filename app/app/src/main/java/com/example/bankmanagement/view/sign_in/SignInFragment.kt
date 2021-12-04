@@ -8,13 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentSignInBinding
+import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.Staff
+import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.sign_in.SignInViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -53,10 +59,12 @@ class SignInFragment(
         binding.signInButton.setOnClickListener{
             viewModel.signIn(mainViewModel.currentBranch.value!!.id)
         }
+
     }
 
     override fun onLoggedIn(staff: Staff) {
         mainViewModel.currentStaff.postValue(staff);
+        findNavController().navigate(R.id.action_signInFragment_to_clockInOutFragment)
     }
 
 }

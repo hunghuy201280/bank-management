@@ -18,4 +18,6 @@ enum class StaffRole(val value:Int) {
         private val map = StaffRole.values().associateBy(StaffRole::value)
         fun fromInt(type: Int):StaffRole = map[type]!!
     }
+
+
 }

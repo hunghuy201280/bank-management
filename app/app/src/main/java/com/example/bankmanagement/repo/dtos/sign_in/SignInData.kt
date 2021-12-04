@@ -2,7 +2,7 @@ package com.example.bankmanagement.repo.dtos.sign_in
 
 import com.google.gson.annotations.SerializedName
 
-class LoginData (
+class SignInData (
     @SerializedName("email")
     val email:String,
 

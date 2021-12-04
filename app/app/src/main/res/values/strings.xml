@@ -14,4 +14,12 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign In</string>
+    <string name="clock_in_out">Clock In/Out</string>
+    <string name="cancel_clock_in_out">Cancel Clock In/Out</string>
+    <string name="start_shift">Start shift</string>
+    <string name="end_shift">End shift</string>
+    <string name="name">Name</string>
+    <string name="continue_string">Continue</string>
+    <string name="clock_in">Clock in</string>
+    <string name="clock_out">Clock out</string>
 </resources>

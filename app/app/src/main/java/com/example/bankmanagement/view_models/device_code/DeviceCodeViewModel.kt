@@ -39,14 +39,17 @@ constructor(
 
                 Log.d(TAG, info.branchAddress);
                 branch.postValue(info);
+                withContext(Dispatchers.Main){
+                    showLoading(false);
+                }
             } catch (e: HttpException) {
                 Log.d(TAG, "Error happened: ${e.response()} ");
-
+                withContext(Dispatchers.Main){
+                    showLoading(false);
+                }
             }
 
-            withContext(Dispatchers.Main){
-                showLoading(false);
-            }
+
         }
 
     }

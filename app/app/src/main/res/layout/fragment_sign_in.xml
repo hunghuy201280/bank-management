@@ -18,6 +18,7 @@
 
         <!-- TODO: Update blank fragment layout -->
         <View
+            android:id="@+id/blankView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/_007EFF"
@@ -56,6 +57,14 @@
                 android:text="@string/sign_in"
                 android:textSize="@dimen/_8ssp"
                 app:cornerRadius="@dimen/_6sdp" />
+            <TextView
+                android:layout_marginTop="@dimen/_89sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()-> viewModel.clockInToggled()}"
+                tools:text="Clock In/Out"
+                android:text="@{viewModel.isClockInEnabled? @string/clock_in_out: @string/cancel_clock_in_out}"
+                />
         </LinearLayout>
 
     </LinearLayout>

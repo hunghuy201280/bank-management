@@ -16,7 +16,15 @@
     <fragment
         android:id="@+id/signInFragment"
         tools:layout="@layout/fragment_sign_in"
-
         android:name="com.example.bankmanagement.view.sign_in.SignInFragment"
-        android:label="SignInFragment" />
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_clockInOutFragment"
+            app:destination="@id/clockInOutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clockInOutFragment"
+        android:name="com.example.bankmanagement.view.clockin.ClockInOutFragment"
+        tools:layout="@layout/fragment_clock_in_out"
+        android:label="ClockInOutFragment" />
 </navigation>
