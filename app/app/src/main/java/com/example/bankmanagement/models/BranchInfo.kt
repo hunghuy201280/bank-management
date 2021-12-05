@@ -12,4 +12,5 @@ data class BranchInfo (
     val branchFax:String,
 
     val branchCode:String,
+    val branchBalance:Double,
     )

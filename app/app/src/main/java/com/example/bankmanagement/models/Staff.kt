@@ -17,6 +17,8 @@ enum class StaffRole(val value:Int) {
     companion object {
         private val map = StaffRole.values().associateBy(StaffRole::value)
         fun fromInt(type: Int):StaffRole = map[type]!!
+
+        fun getName():String ="";
     }
 
 

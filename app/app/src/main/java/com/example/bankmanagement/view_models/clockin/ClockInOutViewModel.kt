@@ -3,13 +3,11 @@ package com.example.bankmanagement.view_models.clockin
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.view.clockin.ClockInOutUICallback
-import com.example.bankmanagement.view.sign_in.SignInUiCallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,6 +36,9 @@ constructor(
             onClockedInClicked();
         } else if (!isClockedOut.value!!) {
             onClockedOutClicked();
+        }
+        else{
+            uiCallback?.onContinueClicked();
         }
     }
 

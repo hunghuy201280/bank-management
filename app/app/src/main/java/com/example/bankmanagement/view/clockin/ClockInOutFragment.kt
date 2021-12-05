@@ -65,4 +65,8 @@ class ClockInOutFragment(
     override fun onClockedOut() {
     }
 
+    override fun onContinueClicked() {
+
+    }
+
 }

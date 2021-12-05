@@ -22,4 +22,13 @@
     <string name="continue_string">Continue</string>
     <string name="clock_in">Clock in</string>
     <string name="clock_out">Clock out</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="contract">Contract</string>
+    <string name="profile">Profile</string>
+    <string name="find_loan_profiles_via">Find loan profiles via</string>
+    <string name="find">Find</string>
+    <string name="loan_id">Loan ID</string>
+    <string name="customer_name">Customer name</string>
+    <string name="money_to_loan">Money to loan</string>
+    <string name="loan_type">Loan type</string>
 </resources>

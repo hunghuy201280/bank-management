@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{()-> viewModel.clockInToggled()}"
                 tools:text="Clock In/Out"
-                android:text="@{viewModel.isClockInEnabled? @string/clock_in_out: @string/cancel_clock_in_out}"
+                android:text="@{viewModel.isClockInEnabled?  @string/cancel_clock_in_out:@string/clock_in_out}"
                 />
         </LinearLayout>
 

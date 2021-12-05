@@ -6,4 +6,5 @@ import com.example.bankmanagement.models.Staff
 interface ClockInOutUICallback: BaseUserView {
     fun onClockedIn()
     fun onClockedOut()
+    fun onContinueClicked()
 }

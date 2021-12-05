@@ -13,6 +13,7 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentSignInBinding
 import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.Staff
+import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.sign_in.SignInViewModel
@@ -64,7 +65,15 @@ class SignInFragment(
 
     override fun onLoggedIn(staff: Staff) {
         mainViewModel.currentStaff.postValue(staff);
-        findNavController().navigate(R.id.action_signInFragment_to_clockInOutFragment)
+        var route:Int=0;
+        if(viewModel.isClockInEnabled.value == true) {
+           route=R.id.action_signInFragment_to_clockInOutFragment;
+        }
+        else{
+            route=R.id.action_signInFragment_to_dashboardFragment;
+        }
+        findNavController().navigate(route);
+
     }
 
 }

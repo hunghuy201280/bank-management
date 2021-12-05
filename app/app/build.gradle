@@ -30,7 +30,7 @@ android {
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
         }
         applicationId "com.example.bankmanagement"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -113,6 +113,11 @@ dependencies {
     // Custom Font
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
     implementation 'io.github.inflationx:viewpump:2.0.3'
+
+    //vertical tablayout
+
+    implementation 'com.github.secf4ult:VerticalTabLayout:v0.1.0'
+
 }
 kapt {
     correctErrorTypes = true

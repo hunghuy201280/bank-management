@@ -22,4 +22,7 @@ data class BranchInfoDto (
 
     @SerializedName("branchCode")
     val branchCode:String,
+
+    @SerializedName("branchBalance")
+    val branchBalance:Double,
     )

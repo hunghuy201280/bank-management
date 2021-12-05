@@ -11,6 +11,7 @@ class BranchInfoDtoMapper :ModelMapper<BranchInfoDto,BranchInfo>{
             branchPhoneNumber= model.branchPhoneNumber,
             branchFax= model.branchFax,
             branchCode= model.branchCode,
+            branchBalance = model.branchBalance
         );
     }
 
@@ -21,6 +22,8 @@ class BranchInfoDtoMapper :ModelMapper<BranchInfoDto,BranchInfo>{
             branchPhoneNumber= domainModel.branchPhoneNumber,
             branchFax= domainModel.branchFax,
             branchCode= domainModel.branchCode,
+            branchBalance = domainModel.branchBalance
+
         );
     }
 }
