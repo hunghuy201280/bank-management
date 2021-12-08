@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentDashboardBinding
@@ -25,17 +26,20 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding,BaseViewModel>()
     override fun layoutRes(): Int=R.layout.fragment_dashboard
 
     override val viewModel: BaseViewModel=MainViewModel()
-        
+
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun viewModelClass(): Class<BaseViewModel>
         =BaseViewModel::class.java
 
 
     override fun initViewModel(viewModel: BaseViewModel) {
+        binding.mainVM=mainViewModel
     }
 
     override fun initView() {
-       val dashboardViewPagerAdapter = DashboardViewPagerAdapter(this)
+        binding.pager.isUserInputEnabled = false;
+        val dashboardViewPagerAdapter = DashboardViewPagerAdapter(this)
         binding.pager.adapter=dashboardViewPagerAdapter;
         VerticalTabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = tabSettings[position]["name"] as String;

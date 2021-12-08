@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentDashboardHeaderBinding
 import com.example.bankmanagement.view_models.MainViewModel
+import com.example.bankmanagement.view_models.device_code.DeviceCodeViewModel
+import com.example.bankmanagement.view_models.welcome.WelcomeViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,9 +25,8 @@ class DashboardHeaderFragment : BaseFragment<FragmentDashboardHeaderBinding, Bas
 
     override fun layoutRes(): Int=R.layout.fragment_dashboard_header
 
-    override val viewModel: BaseViewModel = MainViewModel()
+    override val viewModel: BaseViewModel by viewModels();
 
-    private val mainViewModel: MainViewModel by activityViewModels()
 
 
     override fun viewModelClass(): Class<BaseViewModel>
@@ -32,7 +34,6 @@ class DashboardHeaderFragment : BaseFragment<FragmentDashboardHeaderBinding, Bas
 
 
     override fun initViewModel(viewModel: BaseViewModel) {
-        binding.mainVM=mainViewModel;
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.BranchInfo
+import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.Staff
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 
@@ -25,6 +26,12 @@ interface MainRepository {
     suspend fun getClockInOutTime(
 
     ):ClockInOutResponse
+
+    suspend fun getLoanProfiles(
+
+    ):ArrayList<LoanProfile>
+
+
 
     fun getToken():String;
 

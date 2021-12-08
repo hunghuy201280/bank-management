@@ -42,11 +42,11 @@ class ClockInOutFragment(
 
     private fun initClockInAsText(){
         if(!viewModel.isClockedIn.value!!){
-            binding.clockInAsTV.text="You will clock in as ${mainViewModel.currentStaff.value?.role?.name} Staff";
+            binding.clockInAsTV.text="You will clock in as ${mainViewModel.currentStaff.value?.getRoleName()} Staff";
         }
         else
         {
-            binding.clockInAsTV.text="Clocked in as ${mainViewModel.currentStaff.value?.role?.name} Staff";
+            binding.clockInAsTV.text="Clocked in as ${mainViewModel.currentStaff.value?.getRoleName()} Staff";
 
         }
     }

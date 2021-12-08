@@ -29,6 +29,10 @@
     <string name="find">Find</string>
     <string name="loan_id">Loan ID</string>
     <string name="customer_name">Customer name</string>
-    <string name="money_to_loan">Money to loan</string>
     <string name="loan_type">Loan type</string>
+    <string name="loan_profiles_list">Loan profiles list</string>
+    <string name="create">Create +</string>
+    <string name="status">Status</string>
+    <string name="date_created">Date created</string>
+    <string name="money_to_loan">Money to loan</string>
 </resources>

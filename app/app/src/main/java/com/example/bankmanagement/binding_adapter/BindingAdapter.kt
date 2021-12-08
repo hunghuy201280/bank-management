@@ -49,6 +49,16 @@ fun bindDate(textView: TextView, dateParam: String?) {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
+@BindingAdapter("bindCommonDate")
+fun bindCommonDate(textView: TextView, dateParam: String?) {
+    val sdf = SimpleDateFormat("dd/MM/yyyy");
+    val d = Date()
+
+    val dayOfTheWeek: String = sdf.format(dateParam?.let { dateFromISOString(it) } ?: d)
+    textView.text=dayOfTheWeek;
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bindTime")
 fun bindTime(textView: TextView, date: String?) {
     val sdf = SimpleDateFormat("HH:mm");

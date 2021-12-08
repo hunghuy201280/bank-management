@@ -1,6 +1,8 @@
 package com.example.bankmanagement.repo
 
+import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
+import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.sign_in.SignInData
 import com.example.bankmanagement.repo.dtos.sign_in.SignInResponse
@@ -31,4 +33,9 @@ interface ApiService {
     suspend fun getClockInOutTime(
         @Header("Authorization") token:String
     ):ClockInOutResponse
+
+    @GET("loan_profiles/")
+    suspend fun getLoanProfiles(
+        @Header("Authorization") token:String
+    ):ArrayList<LoanProfileDto>
 }

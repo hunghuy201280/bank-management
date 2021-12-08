@@ -5,6 +5,8 @@ import com.example.bankmanagement.repo.ApiService
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.MainRepositoryImpl
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
+import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
+import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
 import com.example.bankmanagement.utils.ValueWrapper
 import com.google.gson.GsonBuilder
@@ -48,6 +50,23 @@ class RepoModule {
 
     @Singleton
     @Provides
+    fun provideCustomerDtoMapper(): CustomerDtoMapper
+    {
+        return CustomerDtoMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideLoanProfileDtoMapper(
+        customerDtoMapper: CustomerDtoMapper,
+        staffDtoMapper: StaffDtoMapper
+    ): LoanProfileDtoMapper
+    {
+        return LoanProfileDtoMapper(customerDtoMapper,staffDtoMapper)
+    }
+
+    @Singleton
+    @Provides
     fun provideStaffMapper(): StaffDtoMapper {
         return StaffDtoMapper()
     }
@@ -71,12 +90,13 @@ class RepoModule {
         apiService: ApiService,
         branchInfoMapper: BranchInfoDtoMapper,
         staffDtoMapper: StaffDtoMapper,
+        profileDtoMapper: LoanProfileDtoMapper
     ): MainRepository{
         return MainRepositoryImpl(
             apiService = apiService,
             branchInfoMapper = branchInfoMapper,
             staffDtoMapper=staffDtoMapper,
-
+            profileMapper = profileDtoMapper
         );
     }
 }

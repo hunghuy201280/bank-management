@@ -14,8 +14,8 @@ class DashboardViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragm
         // Return a NEW fragment instance in createFragment(int)
 
         return when(position){
-            0->ProfileFragment()
-            1->ContractFragment()
+            0->ContractFragment()
+            1->ProfileFragment()
             else -> {
                 throw Exception("[$TAG] Error: Exceed Fragment count");
             }

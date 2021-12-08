@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="mainVM"
+            type="com.example.bankmanagement.view_models.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -13,7 +15,9 @@
         android:orientation="vertical"
         tools:context=".view.dashboard.DashboardFragment">
 
-        <include layout="@layout/fragment_dashboard_header" />
+        <include layout="@layout/fragment_dashboard_header"
+            app:mainVM="@{mainVM}"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +25,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="@dimen/_272sdp"
+                android:layout_width="@dimen/_75sdp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:layout_height="match_parent">

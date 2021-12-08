@@ -8,38 +8,55 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentProfileBinding
+import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.view_models.MainViewModel
+import com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding, BaseViewModel>() {
-
-
-
-    override fun layoutRes(): Int=R.layout.fragment_profile
-
-    override val viewModel: BaseViewModel = MainViewModel()
+@AndroidEntryPoint
+class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
 
 
-    override fun viewModelClass(): Class<BaseViewModel>
-            = BaseViewModel::class.java
+    private val TAG = "ProfileFragment";
+    override fun layoutRes(): Int = R.layout.fragment_profile
+    private val profileAdapter=ProfileAdapter();
+
+    override val viewModel: ProfileViewModel by viewModels()
 
 
-    override fun initViewModel(viewModel: BaseViewModel) {
+    override fun viewModelClass(): Class<ProfileViewModel> = ProfileViewModel::class.java
+
+
+    override fun initViewModel(viewModel: ProfileViewModel) {
     }
 
     override fun initView() {
-        val items = listOf("Option 1", "Option 2", "Option 3", "Option 4")
+        val items = viewModel.loanTypes
+
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
         binding.loanTypeDropDown.setAdapter(adapter)
     }
 
     override fun initData() {
+        binding.loanProfileRV.adapter=profileAdapter;
     }
 
     override fun initAction() {
+        binding.loanTypeDropDown.setOnItemClickListener { _, _, position, _ ->
+            viewModel.selectedTypePosition.value=position
+         }
+        viewModel.selectedTypePosition.observe(this, {
+            println("$TAG : ${viewModel.loanTypes[it ?: 0]}")
+        })
+        viewModel.loanProfiles.observe(this,{
+           profileAdapter.submitList(it)
+        });
+
     }
 
 

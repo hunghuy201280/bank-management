@@ -12,14 +12,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="@dimen/_22sdp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         tools:context=".view.dashboard.widgets.DashboardHeaderFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <ImageView
-            android:layout_width="@dimen/_272sdp"
+            android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher" />
 

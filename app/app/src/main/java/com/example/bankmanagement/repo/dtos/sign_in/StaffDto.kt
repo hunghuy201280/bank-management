@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class StaffDto(
     @SerializedName("_id")
-    val id: String="",
+    val id: String = "",
     @SerializedName("role")
-    val role: Int=1,
+    val role: Int = 1,
     @SerializedName("name")
-    val name: String="",
+    val name: String = "",
     @SerializedName("email")
     val email: String,
     @SerializedName("branchInfo")
