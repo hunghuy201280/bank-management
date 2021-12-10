@@ -35,4 +35,9 @@
     <string name="status">Status</string>
     <string name="date_created">Date created</string>
     <string name="money_to_loan">Money to loan</string>
+    <string name="back">Back</string>
+    <string name="customer">Customer</string>
+    <string name="_1">1</string>
+    <string name="_3">3</string>
+    <string name="_2">2</string>
 </resources>

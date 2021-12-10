@@ -39,5 +39,15 @@
         android:name="com.example.bankmanagement.view.dashboard.DashboardFragment"
         tools:layout="@layout/fragment_dashboard"
 
-        android:label="DashboardFragment" />
+        android:label="DashboardFragment" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_createProfile1Fragment"
+            app:destination="@id/createProfile1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProfile1Fragment"
+        android:name="com.example.bankmanagement.view.create_profile.CreateProfile1Fragment"
+        tools:layout="@layout/fragment_create_profile1"
+
+        android:label="CreateProfile1Fragment" />
 </navigation>

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentProfileBinding
@@ -19,7 +20,7 @@ import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(),ProfileUICallback {
 
 
     private val TAG = "ProfileFragment";
@@ -33,6 +34,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
 
     override fun initViewModel(viewModel: ProfileViewModel) {
+        binding.viewModel=viewModel;
+        viewModel.init(this)
     }
 
     override fun initView() {
@@ -57,6 +60,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
            profileAdapter.submitList(it)
         });
 
+    }
+
+    override fun onCreateClicked() {
+        findNavController().navigate(R.id.action_dashboardFragment_to_createProfile1Fragment)
     }
 
 
