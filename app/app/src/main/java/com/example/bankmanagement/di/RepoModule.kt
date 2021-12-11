@@ -8,7 +8,6 @@ import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
-import com.example.bankmanagement.utils.ValueWrapper
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -31,7 +30,7 @@ class RepoModule {
     @Singleton
     @Provides
     fun provideApiService(
-        @BaseURL baseUrl:String,
+        @BaseURL baseUrl: String,
         converterFactory: Converter.Factory,
     ): ApiService {
         return Retrofit.Builder()
@@ -50,8 +49,7 @@ class RepoModule {
 
     @Singleton
     @Provides
-    fun provideCustomerDtoMapper(): CustomerDtoMapper
-    {
+    fun provideCustomerDtoMapper(): CustomerDtoMapper {
         return CustomerDtoMapper()
     }
 
@@ -60,9 +58,8 @@ class RepoModule {
     fun provideLoanProfileDtoMapper(
         customerDtoMapper: CustomerDtoMapper,
         staffDtoMapper: StaffDtoMapper
-    ): LoanProfileDtoMapper
-    {
-        return LoanProfileDtoMapper(customerDtoMapper,staffDtoMapper)
+    ): LoanProfileDtoMapper {
+        return LoanProfileDtoMapper(customerDtoMapper, staffDtoMapper)
     }
 
     @Singleton
@@ -77,6 +74,7 @@ class RepoModule {
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create(GsonBuilder().create())
     }
+
     @Singleton
     @Provides
     @BaseURL
@@ -90,13 +88,16 @@ class RepoModule {
         apiService: ApiService,
         branchInfoMapper: BranchInfoDtoMapper,
         staffDtoMapper: StaffDtoMapper,
-        profileDtoMapper: LoanProfileDtoMapper
-    ): MainRepository{
+        profileDtoMapper: LoanProfileDtoMapper,
+        customerDtoMapper: CustomerDtoMapper
+    ): MainRepository {
         return MainRepositoryImpl(
             apiService = apiService,
             branchInfoMapper = branchInfoMapper,
-            staffDtoMapper=staffDtoMapper,
-            profileMapper = profileDtoMapper
-        );
+            staffDtoMapper = staffDtoMapper,
+            profileMapper = profileDtoMapper,
+            customerDtoMapper = customerDtoMapper,
+
+            );
     }
 }

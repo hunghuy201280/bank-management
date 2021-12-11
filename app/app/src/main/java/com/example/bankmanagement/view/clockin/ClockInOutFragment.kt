@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.databinding.FragmentClockInOutBinding
@@ -66,7 +67,7 @@ class ClockInOutFragment(
     }
 
     override fun onContinueClicked() {
-
+        findNavController().navigate(R.id.action_clockInOutFragment_to_dashboardFragment2)
     }
 
 }

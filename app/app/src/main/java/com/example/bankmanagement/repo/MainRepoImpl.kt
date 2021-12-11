@@ -1,9 +1,11 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.BranchInfo
+import com.example.bankmanagement.models.Customer
 import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.Staff
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
+import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.sign_in.SignInData
@@ -15,6 +17,7 @@ class MainRepositoryImpl
         private val branchInfoMapper:BranchInfoDtoMapper,
         private val staffDtoMapper: StaffDtoMapper,
         private val profileMapper: LoanProfileDtoMapper,
+        private val customerDtoMapper: CustomerDtoMapper,
         private val apiService: ApiService,
         private var accessToken:String="",
     ):MainRepository {
@@ -56,6 +59,14 @@ class MainRepositoryImpl
         val response=apiService.getLoanProfiles(accessToken);
         return ArrayList(response.map { profileMapper.fromDto(it) });
     }
+
+    override suspend fun searchCustomers(query: Map<String, Any>): ArrayList<Customer> {
+        val response=apiService.searchCustomer(query = query, token = accessToken);
+
+        return ArrayList(response.data.map { customerDtoMapper.fromDto(it) })
+
+    }
+
 
     override fun getToken(): String =accessToken;
 }

@@ -1,9 +1,11 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.BranchInfo
+import com.example.bankmanagement.models.Customer
 import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.Staff
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
+import retrofit2.http.QueryMap
 
 
 interface MainRepository {
@@ -30,6 +32,11 @@ interface MainRepository {
     suspend fun getLoanProfiles(
 
     ):ArrayList<LoanProfile>
+
+    suspend fun searchCustomers(
+        query: Map<String, Any>,
+
+        ):ArrayList<Customer>
 
 
 

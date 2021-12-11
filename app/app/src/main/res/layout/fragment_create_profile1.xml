@@ -6,8 +6,11 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="createProfileVM"
             type="com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel" />
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.create_profile.CreateProfile1ViewModel" />
     </data>
 
     <RelativeLayout
@@ -45,6 +48,7 @@
             android:text="@string/customer" />
 
         <include
+            android:id="@+id/stepCountLayout"
             layout="@layout/create_loan_step_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,5 +56,85 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_8sdp"
             app:currentStep="@{1}" />
+
+        <LinearLayout
+            android:id="@+id/searchBar"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/stepCountLayout"
+            android:layout_centerHorizontal="true"
+
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchTextField"
+                android:layout_width="@dimen/_290sdp"
+                android:layout_height="wrap_content"
+                android:autofillHints="emailAddress"
+                android:hint="@string/search_customer_via_name"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/secondaryText"
+                android:textCursorDrawable="@color/textSecondary"
+                android:textSize="@dimen/_8ssp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sign_in_button"
+                style="@style/ButtonDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                android:text="@string/_plus"
+                android:padding="0dp"
+                android:layout_margin="0dp"
+                android:textSize="@dimen/_8ssp"
+                app:cornerRadius="@dimen/_6sdp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/customerRV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchBar"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_centerHorizontal="true"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_search_customer_result" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+
+            style="@style/ButtonDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:elevation="0dp"
+            android:padding="0dp"
+            android:text="@string/next"
+            android:textSize="@dimen/_8ssp"
+            app:cornerRadius="@dimen/_6sdp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/previousButton"
+            style="@style/ButtonDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:elevation="0dp"
+            android:padding="0dp"
+            android:text="@string/previous"
+            android:textSize="@dimen/_8ssp"
+            app:cornerRadius="@dimen/_6sdp" />
     </RelativeLayout>
+
 </layout>

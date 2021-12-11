@@ -49,5 +49,15 @@
         android:name="com.example.bankmanagement.view.create_profile.CreateProfile1Fragment"
         tools:layout="@layout/fragment_create_profile1"
 
-        android:label="CreateProfile1Fragment" />
+        android:label="CreateProfile1Fragment" >
+        <action
+            android:id="@+id/action_createProfile1Fragment_to_createProfile2Fragment"
+            app:destination="@id/createProfile2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProfile2Fragment"
+        tools:layout="@layout/fragment_create_profile2"
+
+        android:name="com.example.bankmanagement.view.create_profile.CreateProfile2Fragment"
+        android:label="CreateProfile2Fragment" />
 </navigation>

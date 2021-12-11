@@ -1,7 +1,7 @@
 package com.example.bankmanagement.repo
 
-import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
+import com.example.bankmanagement.repo.dtos.customer.GetCustomerResponse
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.sign_in.SignInData
@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface ApiService {
     @GET("branch_info/{branchCode}")
     suspend fun getBranchInfo(
-        @Path("branchCode") branchCode:String
+        @Path("branchCode") branchCode: String
     ): BranchInfoResponse
 
     @POST("staffs/login")
@@ -21,21 +21,30 @@ interface ApiService {
 
     @POST("staffs/clock_in")
     suspend fun clockIn(
-        @Header("Authorization") token:String
+        @Header("Authorization") token: String
     )
 
     @POST("staffs/clock_out")
     suspend fun clockOut(
-        @Header("Authorization") token:String
+        @Header("Authorization") token: String
     )
 
     @GET("staffs/clock_in_out_time")
     suspend fun getClockInOutTime(
-        @Header("Authorization") token:String
-    ):ClockInOutResponse
+        @Header("Authorization") token: String
+    ): ClockInOutResponse
 
     @GET("loan_profiles/")
     suspend fun getLoanProfiles(
-        @Header("Authorization") token:String
-    ):ArrayList<LoanProfileDto>
+        @Header("Authorization") token: String
+    ): ArrayList<LoanProfileDto>
+
+    @GET("customers/")
+    @JvmSuppressWildcards
+    suspend fun searchCustomer(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @QueryMap query: Map<String, Any>,
+    ): GetCustomerResponse
 }

@@ -16,6 +16,7 @@ import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentCreateProfile1Binding
+import com.example.bankmanagement.databinding.FragmentCreateProfile2Binding
 import com.example.bankmanagement.models.Customer
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.clockin.ClockInOutViewModel
@@ -24,28 +25,26 @@ import com.example.bankmanagement.view_models.create_profile.CreateProfileViewMo
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.view.dashboard.profile.ProfileAdapter
+import com.example.bankmanagement.view_models.create_profile.CreateProfile2ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateProfile1Fragment :
-    BaseFragment<FragmentCreateProfile1Binding, CreateProfile1ViewModel>(), BaseUserView {
-    override fun layoutRes(): Int = R.layout.fragment_create_profile1
+class CreateProfile2Fragment :
+    BaseFragment<FragmentCreateProfile2Binding, CreateProfile2ViewModel>(), BaseUserView {
+    override fun layoutRes(): Int = R.layout.fragment_create_profile2
 
-    override val viewModel: CreateProfile1ViewModel by viewModels()
-    private lateinit var searchCustomerAdapter:SearchCustomerAdapter;
+    override val viewModel: CreateProfile2ViewModel by viewModels()
 
     val createProfileVM: CreateProfileViewModel by activityViewModels()
 
-    override fun viewModelClass(): Class<CreateProfile1ViewModel> =
-        CreateProfile1ViewModel::class.java;
+    override fun viewModelClass(): Class<CreateProfile2ViewModel> =
+        CreateProfile2ViewModel::class.java;
 
-    override fun initViewModel(viewModel: CreateProfile1ViewModel) {
+    override fun initViewModel(viewModel: CreateProfile2ViewModel) {
         binding.viewModel = viewModel;
         viewModel.init(this);
 
-        viewModel.customers.observe(this,{
-            searchCustomerAdapter.submitList(it)
-        });
+
     }
 
     override fun initView() {
@@ -53,13 +52,7 @@ class CreateProfile1Fragment :
 
 
     override fun initData() {
-        searchCustomerAdapter= SearchCustomerAdapter(itemClickListener = object:BaseItemClickListener<Customer>{
-            override fun onItemClick(adapterPosition: Int, item: Customer) {
-                createProfileVM.selectedCustomer.value=item;
-                searchCustomerAdapter.setSelectedCustomer(adapterPosition);
-            }
-        } )
-        binding.customerRV.adapter=searchCustomerAdapter;
+
 
     }
 
@@ -67,19 +60,8 @@ class CreateProfile1Fragment :
         binding.backButton.setOnClickListener {
             findNavController().popBackStack();
         }
-        binding.nextButton.setOnClickListener{
-            findNavController().navigate(R.id.action_createProfile1Fragment_to_createProfile2Fragment);
-        }
 
-        val onSearchQueryChanged: (String) -> Unit = Utils.debounce(
-            300L,
-            viewLifecycleOwner.lifecycleScope,
-            viewModel::onSearch
-        )
 
-        binding.searchTextField.addTextChangedListener {
-            onSearchQueryChanged(it.toString().trim())
-        }
     }
 
 

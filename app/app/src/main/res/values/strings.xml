@@ -42,4 +42,15 @@
     <string name="_1">1</string>
     <string name="_3">3</string>
     <string name="_2">2</string>
+    <string name="_plus">+</string>
+    <string name="search_customer_via_name">Search customer via name...</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="loan_profile_information">Loan profile information</string>
+    <string name="staff_name">Staff Name</string>
+    <string name="loan_duration">Loan Duration</string>
+    <string name="benefit_from_loan">Benefit from loan</string>
+    <string name="loan_purpose">Loan purpose</string>
+    <string name="expected_source_money_to_repay">Expected source money to repay</string>
+    <string name="collateral">Collateral</string>
 </resources>

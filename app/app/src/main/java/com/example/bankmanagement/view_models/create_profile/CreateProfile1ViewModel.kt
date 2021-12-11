@@ -15,18 +15,40 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateProfileViewModel
+class CreateProfile1ViewModel
 @Inject
 constructor(
     private val mainRepo: MainRepository,
 ) : BaseUiViewModel<BaseUserView>() {
-    private val TAG: String = "CreateProfileViewModel";
+    private val TAG: String = "CreateProfile1ViewModel";
 
-    val selectedCustomer=MutableLiveData<Customer>();
+     val customers = MutableLiveData<ArrayList<Customer>>(arrayListOf())
 
+
+
+    fun onSearch(query: String) {
+        if(query.isEmpty()) return;
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = mainRepo.searchCustomers(query = mapOf("name" to query,"isStartWith" to true));
+                customers.postValue(result);
+
+                println("Customer loaded $result");
+
+            } catch (e: HttpException) {
+                customers.postValue(arrayListOf())
+                Log.d(TAG, "Error happened: ${e.response()?.errorBody()?.string()} ");
+
+            } catch (e: Exception) {
+                customers.postValue(arrayListOf())
+                Log.d(TAG, "Error happened: $e ");
+            }
+        }
+    }
 
 
 }
