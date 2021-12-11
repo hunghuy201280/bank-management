@@ -18,7 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
     override val viewModel: MainViewModel by viewModels()
     override fun initView() {
         SystemHelper.hideNavBar(this)
-
+        SystemHelper.hideStatusBar(this)
     }
 
     override fun initData() {

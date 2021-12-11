@@ -38,6 +38,21 @@
         <item name="textAllCaps">false</item>
         <item name="backgroundTint">@color/secondaryBackground</item>
     </style>
+    
+    <style name="TextTime" parent="TextPoppins.SemiBold.Wrap">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColor">@color/secondaryText</item>
+    </style>
+
+    <style name="TextClockInHeader" parent="TextPoppins.Regular.Wrap">
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="android:textColor">@color/secondaryText</item>
+    </style>
+
+    <style name="TextClockInData" parent="TextClockInHeader">
+        <item name="android:layout_marginTop">@dimen/_2sdp</item>
+        <item name="android:textColor">@color/primaryText</item>
+    </style>
 
     <style name="PinWidget.PinView" parent="Widget.AppCompat.EditText">
         <item name="android:background">@null</item>

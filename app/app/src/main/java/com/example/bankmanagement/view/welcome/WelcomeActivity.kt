@@ -32,6 +32,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding, WelcomeViewModel>()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         SystemHelper.hideNavBar(this)
+        SystemHelper.hideStatusBar(this)
         viewModel.init(this)
 
         binding.viewModel = viewModel
