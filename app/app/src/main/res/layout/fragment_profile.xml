@@ -231,6 +231,7 @@
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_24sdp"
                     android:layout_gravity="center"
+                    android:onClick="@{()-> viewModel.onCreateClicked()}"
                     android:elevation="0dp"
                     android:text="@string/create"
                     android:textSize="@dimen/_8ssp"
