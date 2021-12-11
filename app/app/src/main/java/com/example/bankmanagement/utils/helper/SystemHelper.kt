@@ -2,6 +2,7 @@ package com.example.bankmanagement.utils.helper
 
 import android.app.Activity
 import android.view.View
+import android.view.WindowManager
 
 object SystemHelper {
 
@@ -18,6 +19,10 @@ object SystemHelper {
                         or View.SYSTEM_UI_FLAG_FULLSCREEN
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
+    }
+
+    fun hideStatusBar(activity: Activity?) {
+        activity?.window?.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
 }

@@ -9,11 +9,11 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragment_container"
+        android:name="com.example.bankmanagement.utils.MainNavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.bankmanagement.utils.MainNavHostFragment"
+        android:fitsSystemWindows="true"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/main_nav"
-        />
+        app:navGraph="@navigation/main_nav" />
 
 </layout>
