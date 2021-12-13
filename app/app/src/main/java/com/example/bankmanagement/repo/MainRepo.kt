@@ -4,8 +4,12 @@ import com.example.bankmanagement.models.BranchInfo
 import com.example.bankmanagement.models.Customer
 import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.Staff
+import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
+import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
+import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
 import retrofit2.http.QueryMap
+import java.io.File
 
 
 interface MainRepository {
@@ -37,6 +41,15 @@ interface MainRepository {
         query: Map<String, Any>,
 
         ):ArrayList<Customer>
+
+
+    suspend fun createLoanProfile(
+        data: CreateLoanProfileData
+        ):LoanProfileDto
+
+    suspend fun upFiles(
+        files: List<File>
+        ):UpFileResp
 
 
 

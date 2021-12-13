@@ -53,4 +53,7 @@
     <string name="loan_purpose">Loan purpose</string>
     <string name="expected_source_money_to_repay">Expected source money to repay</string>
     <string name="collateral">Collateral</string>
+    <string name="add_one_or_many_proofs_of_income">Add one or many proofs of income</string>
+    <string name="add_signature_image">Add signature image</string>
+    <string name="signature_image">Signature image</string>
 </resources>

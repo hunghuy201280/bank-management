@@ -26,8 +26,7 @@ constructor(
 ) : BaseUiViewModel<ProfileUICallback>() {
     private val TAG: String = "ProfileViewModel";
 
-    public val loanTypes= LoanType.values().map { it.name }
-    var selectedTypePosition=MutableLiveData<Int?>()
+    var selectedLoanType=MutableLiveData<LoanType>()
     var loanProfiles=MutableLiveData<List<LoanProfile>>(listOf())
     init {
      getProfiles()

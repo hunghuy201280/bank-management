@@ -1,16 +1,15 @@
 package com.example.bankmanagement.models
 
 
-import com.example.bankmanagement.repo.dtos.sign_in.StaffDto
 import com.google.gson.annotations.SerializedName
 
 data class LoanProfile(
     @SerializedName("_id")
-    val id: String,
+    val id: String="",
     val customer: Customer,
     val staff: Staff,
     val loanApplicationNumber: String,
-    val proofOfIncome: List<ProofOfIncome>,
+    val proofOfIncome: List<ProofOfIncomeResp>,
     val moneyToLoan: Double,
     val loanPurpose: String,
     val loanDuration: Long,

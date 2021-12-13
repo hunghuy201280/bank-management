@@ -2,10 +2,13 @@ package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
 import com.example.bankmanagement.repo.dtos.customer.GetCustomerResponse
+import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.sign_in.SignInData
 import com.example.bankmanagement.repo.dtos.sign_in.SignInResponse
+import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -47,4 +50,23 @@ interface ApiService {
         ) token: String,
         @QueryMap query: Map<String, Any>,
     ): GetCustomerResponse
+
+    @POST("loan_profiles/")
+    @JvmSuppressWildcards
+    suspend fun createLoanProfile(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: CreateLoanProfileData,
+    ): LoanProfileDto
+
+
+    @Multipart
+    @POST("images/")
+    suspend fun upFiles(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Part images: List<MultipartBody.Part>
+    ): UpFileResp;
 }

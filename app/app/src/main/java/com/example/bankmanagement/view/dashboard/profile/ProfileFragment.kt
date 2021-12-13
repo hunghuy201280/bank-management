@@ -1,20 +1,11 @@
 package com.example.bankmanagement.view.dashboard.profile
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
-import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentProfileBinding
 import com.example.bankmanagement.models.LoanType
-import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +30,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     override fun initView() {
-        val items = viewModel.loanTypes
+        val items = LoanType.values().map { it.name };
 
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
         binding.loanTypeDropDown.setAdapter(adapter)
@@ -51,10 +42,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
     override fun initAction() {
         binding.loanTypeDropDown.setOnItemClickListener { _, _, position, _ ->
-            viewModel.selectedTypePosition.value=position
+            viewModel.selectedLoanType.value= LoanType.values()[position];
          }
-        viewModel.selectedTypePosition.observe(this, {
-            println("$TAG : ${viewModel.loanTypes[it ?: 0]}")
+        viewModel.selectedLoanType.observe(this, {
+            println("$TAG : $it")
         })
         viewModel.loanProfiles.observe(this,{
            profileAdapter.submitList(it)

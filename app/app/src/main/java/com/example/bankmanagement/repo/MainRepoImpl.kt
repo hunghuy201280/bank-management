@@ -6,35 +6,50 @@ import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.Staff
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
+import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
+import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.sign_in.SignInData
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
+import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
+import com.example.bankmanagement.utils.Utils
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 
 class MainRepositoryImpl
-    constructor(
-        private val branchInfoMapper:BranchInfoDtoMapper,
-        private val staffDtoMapper: StaffDtoMapper,
-        private val profileMapper: LoanProfileDtoMapper,
-        private val customerDtoMapper: CustomerDtoMapper,
-        private val apiService: ApiService,
-        private var accessToken:String="",
-    ):MainRepository {
+constructor(
+    private val branchInfoMapper: BranchInfoDtoMapper,
+    private val staffDtoMapper: StaffDtoMapper,
+    private val profileMapper: LoanProfileDtoMapper,
+    private val customerDtoMapper: CustomerDtoMapper,
+    private val apiService: ApiService,
+    private var accessToken: String = "",
+) : MainRepository {
 
 
     override suspend fun getBranchInfo(branchCode: String): BranchInfo {
-        return branchInfoMapper.fromDto(apiService.getBranchInfo(branchCode =branchCode).data);
+        return branchInfoMapper.fromDto(apiService.getBranchInfo(branchCode = branchCode).data);
     }
 
-    override suspend fun login(email: String, password: String, branchId: String): Pair<Staff,ClockInOutResponse> {
-        val response= apiService.login(body = SignInData(
-            email=email,
-            password=password,
-            branchId=branchId,
-        ));
-        accessToken=response.token;
-        return Pair(staffDtoMapper.fromDto(response.staff),response.clockInOut);
+    override suspend fun login(
+        email: String,
+        password: String,
+        branchId: String
+    ): Pair<Staff, ClockInOutResponse> {
+        val response = apiService.login(
+            body = SignInData(
+                email = email,
+                password = password,
+                branchId = branchId,
+            )
+        );
+        accessToken = response.token;
+        return Pair(staffDtoMapper.fromDto(response.staff), response.clockInOut);
 
     }
 
@@ -51,23 +66,51 @@ class MainRepositoryImpl
     }
 
     override suspend fun getClockInOutTime(): ClockInOutResponse {
-        val response= apiService.getClockInOutTime(token=accessToken);
+        val response = apiService.getClockInOutTime(token = accessToken);
         return response;
     }
 
     override suspend fun getLoanProfiles(): ArrayList<LoanProfile> {
-        val response=apiService.getLoanProfiles(accessToken);
-        return ArrayList(response.map { profileMapper.fromDto(it) });
+        val response = apiService.getLoanProfiles(accessToken);
+        return ArrayList(
+            response.map
+            {
+                profileMapper.fromDto(it)
+            });
     }
 
     override suspend fun searchCustomers(query: Map<String, Any>): ArrayList<Customer> {
-        val response=apiService.searchCustomer(query = query, token = accessToken);
+        val response = apiService.searchCustomer(query = query, token = accessToken);
 
         return ArrayList(response.data.map { customerDtoMapper.fromDto(it) })
 
     }
 
+    override suspend fun createLoanProfile(data: CreateLoanProfileData): LoanProfileDto {
+        val response = apiService.createLoanProfile(body = data, token = accessToken);
+        return response;
+    }
 
-    override fun getToken(): String =accessToken;
+    override suspend fun upFiles(files: List<File>): UpFileResp {
+        val multipartFiles = arrayListOf<MultipartBody.Part>();
+
+        for (file in files) {
+            val fileBody: RequestBody =
+                file.asRequestBody(Utils.getMimeType(file.absolutePath)?.toMediaTypeOrNull())
+            val part = MultipartBody.Part.createFormData(
+                "images",
+                file.name,
+                fileBody
+            );
+            multipartFiles.add(part);
+        }
+
+        val response = apiService.upFiles(token=accessToken,images=multipartFiles);
+        return response;
+
+    }
+
+
+    override fun getToken(): String = accessToken;
 }
 
