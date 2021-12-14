@@ -1,5 +1,6 @@
 package com.example.bankmanagement.view.create_profile
 
+import android.net.Uri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -8,11 +9,10 @@ import com.example.bankmanagement.base.adapter.BaseBindingListAdapter
 import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.ItemImageBinding
-import com.example.bankmanagement.models.ProofOfIncome
 import com.example.bankmanagement.utils.Utils
 
 
-class ProofOfIncomeImageAdapter(private  val onItemDeleted: BaseItemClickListener<ProofOfIncome>) : BaseBindingListAdapter<ProofOfIncome>(
+class ProofOfIncomeImageAdapter(private  val onItemDeleted: BaseItemClickListener<Uri>) : BaseBindingListAdapter<Uri>(
     DiffCallback(),
 ) {
 
@@ -20,11 +20,11 @@ class ProofOfIncomeImageAdapter(private  val onItemDeleted: BaseItemClickListene
         return R.layout.item_image;
     }
 
-    override fun onBindViewHolder(holder: BaseBindingViewHolder<ProofOfIncome>, position: Int) {
+    override fun onBindViewHolder(holder: BaseBindingViewHolder<Uri>, position: Int) {
 
         val binding = (holder.binding as ItemImageBinding);
         val item = getItem(position);
-        binding.imageUri=item.getPathOrUrl().toString();
+        binding.imageUri=item.toString();
 
         binding.deleteImage.setOnClickListener{
             onItemDeleted.onItemClick(position,item);
@@ -32,17 +32,17 @@ class ProofOfIncomeImageAdapter(private  val onItemDeleted: BaseItemClickListene
 
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<ProofOfIncome>() {
+    class DiffCallback : DiffUtil.ItemCallback<Uri>() {
         override fun areItemsTheSame(
-            oldItem: ProofOfIncome,
-            newItem: ProofOfIncome
+            oldItem: Uri,
+            newItem: Uri
         ): Boolean {
             return oldItem == newItem;
         }
 
         override fun areContentsTheSame(
-            oldItem: ProofOfIncome,
-            newItem: ProofOfIncome
+            oldItem: Uri,
+            newItem: Uri
         ): Boolean {
             return false
         }

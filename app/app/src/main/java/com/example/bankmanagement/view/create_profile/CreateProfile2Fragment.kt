@@ -10,6 +10,7 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentCreateProfile2Binding
+import com.example.bankmanagement.models.IncomeType
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.models.ProofOfIncome
 import com.example.bankmanagement.view_models.MainViewModel
@@ -27,8 +28,8 @@ class CreateProfile2Fragment(private val TAG: String ="CreateProfile2Fragment") 
 
     val createProfileVM: CreateProfileViewModel by activityViewModels()
     val mainVM: MainViewModel by activityViewModels()
-    private val proofOfIncomeAdapter=ProofOfIncomeImageAdapter(object :BaseItemClickListener<ProofOfIncome>{
-        override fun onItemClick(adapterPosition: Int, item: ProofOfIncome) {
+    private val proofOfIncomeAdapter=ProofOfIncomeImageAdapter(object :BaseItemClickListener<Uri>{
+        override fun onItemClick(adapterPosition: Int, item: Uri) {
            viewModel.proofOfIncomeDeleted(adapterPosition);
         }
     });
@@ -43,9 +44,14 @@ class CreateProfile2Fragment(private val TAG: String ="CreateProfile2Fragment") 
         viewModel.init(this);
 
         viewModel.proofOfIncomes.observe(this,{
-            proofOfIncomeAdapter.submitList(it)
+            proofOfIncomeAdapter.submitList(it[viewModel.currentIncomeType.value])
             proofOfIncomeAdapter.notifyDataSetChanged()
         });
+        viewModel.currentIncomeType.observe(this,{
+            proofOfIncomeAdapter.submitList(viewModel.proofOfIncomes.value?.get(it))
+            proofOfIncomeAdapter.notifyDataSetChanged()
+        })
+
 
     }
 
@@ -53,12 +59,21 @@ class CreateProfile2Fragment(private val TAG: String ="CreateProfile2Fragment") 
         binding.proofOfIncomeRV.adapter=proofOfIncomeAdapter;
 
 
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, LoanType.values().map { it.name });
-        binding.loanTypeDropDown.setAdapter(adapter)
+        //region loantype adapter
+        val loanAdapter = ArrayAdapter(requireContext(), R.layout.list_item, LoanType.values().map { it.name });
+        binding.loanTypeDropDown.setAdapter(loanAdapter)
+        //endregion
+
+        //region proof of income type adapter
+        val proofOfIncomeTypeAdapter = ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
+        binding.proofOfIncomeTypeDropDown.setAdapter(proofOfIncomeTypeAdapter)
+        //endregion
     }
 
 
     override fun initData() {
+        viewModel.customer= createProfileVM.selectedCustomer.value!!;
+        viewModel.branchInfo= mainVM.currentBranch.value!!;
 
 
 
@@ -76,6 +91,10 @@ class CreateProfile2Fragment(private val TAG: String ="CreateProfile2Fragment") 
         }
         binding.loanTypeDropDown.setOnItemClickListener { _, _, position, _ ->
             viewModel.selectedLoanType.value= LoanType.values()[position];
+        }
+
+        binding.proofOfIncomeTypeDropDown.setOnItemClickListener { _, _, position, _ ->
+            viewModel.currentIncomeType.value= IncomeType.values()[position];
         }
 
         viewModel.selectedLoanType.observe(this, {

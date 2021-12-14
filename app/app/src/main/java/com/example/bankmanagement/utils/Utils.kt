@@ -24,10 +24,15 @@ import android.os.Build
 
 import android.annotation.SuppressLint
 import android.content.CursorLoader
+import java.util.*
+import kotlin.collections.HashMap
+
 
 
 class Utils {
+
     companion object{
+
         fun ContentResolver.getFileName(fileUri: Uri): String {
             var name = ""
             val returnCursor = this.query(fileUri, null, null, null, null)

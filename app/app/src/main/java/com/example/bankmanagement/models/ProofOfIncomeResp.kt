@@ -38,6 +38,14 @@ data class ProofOfIncomeResp(
     val id: String=""
 
 ) ;
+data class ProofOfIncomeRequest(
+    @SerializedName("imageId")
+     val imageID: String,
+    @SerializedName("imageType")
+     val imageType: IncomeType,
+
+
+) ;
 
 data class ProofOfIncomeUI(
     val imageUri: Uri,

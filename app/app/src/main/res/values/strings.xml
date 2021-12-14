@@ -56,4 +56,5 @@
     <string name="add_one_or_many_proofs_of_income">Add one or many proofs of income</string>
     <string name="add_signature_image">Add signature image</string>
     <string name="signature_image">Signature image</string>
+    <string name="proof_of_income">Proof of income</string>
 </resources>

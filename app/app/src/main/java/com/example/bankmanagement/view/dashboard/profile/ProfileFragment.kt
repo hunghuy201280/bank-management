@@ -30,8 +30,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     override fun initView() {
-        val items = LoanType.values().map { it.name };
 
+        val items = LoanType.values().map { it.name };
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
         binding.loanTypeDropDown.setAdapter(adapter)
     }

@@ -240,7 +240,7 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
-                                android:text="@{viewModel.benefitFromLoan}"
+                                android:text="@={viewModel.benefitFromLoan}"
                                 android:layout_height="wrap_content" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -263,7 +263,7 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
-                                android:text="@{viewModel.loanPurpose}"
+                                android:text="@={viewModel.loanPurpose}"
 
                                 android:layout_height="wrap_content" />
 
@@ -287,7 +287,7 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
-                                android:text="@{viewModel.expectedSourceMoneyToRepay}"
+                                android:text="@={viewModel.expectedSourceMoneyToRepay}"
 
                                 android:layout_height="wrap_content" />
 
@@ -311,7 +311,7 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
-                                android:text="@{viewModel.collateral}"
+                                android:text="@={viewModel.collateral}"
 
                                 android:layout_height="wrap_content" />
 
@@ -332,13 +332,26 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/collateral" />
+                                android:text="@string/proof_of_income" />
 
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="@dimen/_123sdp"
+                                android:layout_height="wrap_content">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/proofOfIncomeTypeDropDown"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="none" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
                             <TextView
                                 android:id="@+id/addProofIncome"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/add_one_or_many_proofs_of_income" />
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/proofOfIncomeRV"
                                 android:layout_width="match_parent"
