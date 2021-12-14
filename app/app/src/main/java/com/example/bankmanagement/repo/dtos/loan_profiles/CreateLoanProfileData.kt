@@ -1,12 +1,7 @@
 package com.example.bankmanagement.repo.dtos.loan_profiles
 
-import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.models.ProofOfIncomeRequest
-import com.example.bankmanagement.models.ProofOfIncomeResp
-import com.example.bankmanagement.repo.dtos.customer.CustomerDto
-import com.example.bankmanagement.repo.dtos.sign_in.StaffDto
-import com.google.gson.annotations.SerializedName
 
 data class CreateLoanProfileData(
     val customerId: String,
@@ -20,4 +15,17 @@ data class CreateLoanProfileData(
     val signatureImg: String,
     val loanType: LoanType,
     val branchInfo: String,
-)
+){
+    fun validate():String?{
+        if(proofOfIncome.isEmpty()) return "Please choose proof of income images"
+        if(signatureImg.isEmpty()) return "Please choose proof of income images"
+        if(moneyToLoan<=0.0) return "Invalid money to loan"
+        if(loanPurpose.isEmpty()) return "Invalid loan purpose"
+        if(loanDuration<=0) return "Invalid loan duration"
+        if(collateral.isEmpty()) return "Invalid collateral"
+        if(expectedSourceMoneyToRepay.isEmpty()) return "Invalid expected money to repay"
+        if(benefitFromLoan.isEmpty()) return "Invalid benefit from loan"
+
+        return null;
+    }
+}

@@ -66,11 +66,10 @@ class SignInFragment(
     override fun onLoggedIn(staff: Staff) {
         mainViewModel.currentStaff.postValue(staff);
         var route:Int=0;
-        if(viewModel.isClockInEnabled.value == true) {
-           route=R.id.action_signInFragment_to_clockInOutFragment;
-        }
-        else{
-            route=R.id.action_signInFragment_to_dashboardFragment;
+        route = if(viewModel.isClockInEnabled.value == true) {
+            R.id.action_signInFragment_to_clockInOutFragment;
+        } else{
+            R.id.action_signInFragment_to_dashboardFragment;
         }
         findNavController().navigate(route);
 

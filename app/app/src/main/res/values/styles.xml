@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="TextPoppins.Regular.Wrap" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -38,7 +39,7 @@
         <item name="textAllCaps">false</item>
         <item name="backgroundTint">@color/secondaryBackground</item>
     </style>
-    
+
     <style name="TextTime" parent="TextPoppins.SemiBold.Wrap">
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textColor">@color/secondaryText</item>
@@ -58,6 +59,11 @@
         <item name="android:background">@null</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.Theme.BankManagement.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
 
 </resources>

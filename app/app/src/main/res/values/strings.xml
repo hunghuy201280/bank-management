@@ -43,7 +43,7 @@
     <string name="_3">3</string>
     <string name="_2">2</string>
     <string name="_plus">+</string>
-    <string name="search_customer_via_name">Search customer via name...</string>
+    <string name="search_customer_via_name">Search customer via name…</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="loan_profile_information">Loan profile information</string>
@@ -57,4 +57,12 @@
     <string name="add_signature_image">Add signature image</string>
     <string name="signature_image">Signature image</string>
     <string name="proof_of_income">Proof of income</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="check_information">Check information</string>
+    <string name="save">Save</string>
+    <string name="customer_info">Customer info</string>
+    <string name="customer_id">Customer ID</string>
+    <string name="phone_number">Phone number</string>
+    <string name="loan_profile_detail">Loan profile detail</string>
 </resources>

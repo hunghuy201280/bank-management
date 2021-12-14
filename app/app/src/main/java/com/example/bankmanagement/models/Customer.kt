@@ -11,6 +11,8 @@ abstract class Customer(
     open val identityNumber: String,
     open val identityCardCreatedDate: String,
     open val phoneNumber: String,
+    open val email: String?,
+
 ){
      abstract fun getType():CustomerType
 }
@@ -24,9 +26,17 @@ data class ResidentCustomer(
     override val identityNumber: String,
     override val identityCardCreatedDate: String,
     override val phoneNumber: String,
-) : Customer(
-    id,
-    name, address, identityNumber, identityCardCreatedDate, phoneNumber,
+    override val email: String?=null,
+
+    ) : Customer(
+    id=id,
+    name=name,
+    address=address,
+    identityNumber=identityNumber,
+    identityCardCreatedDate=identityCardCreatedDate,
+    phoneNumber=phoneNumber,
+    email=email
+
 ) {
     override fun getType(): CustomerType = CustomerType.Resident
 }
@@ -40,9 +50,15 @@ data class BusinessCustomer(
     override val identityNumber: String,
     override val identityCardCreatedDate: String,
     override val phoneNumber: String,
+    override val email: String?=null,
 ) : Customer(
-    id,
-    name, address, identityNumber, identityCardCreatedDate, phoneNumber,
+    id=id,
+    name=name,
+    address=address,
+    identityNumber=identityNumber,
+    identityCardCreatedDate=identityCardCreatedDate,
+    phoneNumber=phoneNumber,
+    email=email
 ) {
     override fun getType(): CustomerType = CustomerType.Business
 

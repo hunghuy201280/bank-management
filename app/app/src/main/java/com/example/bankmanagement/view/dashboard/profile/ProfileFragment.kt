@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentProfileBinding
+import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
@@ -31,9 +32,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
     override fun initView() {
 
-        val items = LoanType.values().map { it.name };
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
-        binding.loanTypeDropDown.setAdapter(adapter)
+        //region Loan type dropdown
+        val loanTypes = LoanType.values().map { it.name };
+        val loanTypesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanTypes)
+        binding.loanTypeDropDown.setAdapter(loanTypesAdapter)
+        //endregion
+
+        //region Loan status dropdown
+        val loanStatuses = LoanStatus.values().map { it.name };
+        val loanStatusesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanStatuses)
+        binding.loanStatusDropdown.setAdapter(loanStatusesAdapter)
+        //endregion
     }
 
     override fun initData() {

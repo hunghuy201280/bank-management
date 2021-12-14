@@ -2,6 +2,7 @@ package com.example.bankmanagement.models
 
 
 import com.google.gson.annotations.SerializedName
+import org.joda.time.DateTime
 
 data class LoanProfile(
     @SerializedName("_id")
@@ -22,7 +23,11 @@ data class LoanProfile(
     val branchInfo: String,
     val approver: Staff?,
     val createdAt:String,
-)
+){
+    fun getDate():DateTime{
+        return DateTime.parse(createdAt);
+    }
+}
 
 
 enum class LoanStatus(val value: Int) {

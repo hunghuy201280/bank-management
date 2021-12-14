@@ -6,22 +6,19 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="createProfileVM"
+            name="viewModel"
             type="com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel" />
 
         <variable
             name="mainVM"
             type="com.example.bankmanagement.view_models.MainViewModel" />
 
-        <variable
-            name="viewModel"
-            type="com.example.bankmanagement.view_models.create_profile.CreateProfile2ViewModel" />
-    </data>
+      </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.create_profile.CreateProfile1Fragment">
+        tools:context=".view.create_profile.CreateProfile2Fragment">
 
         <LinearLayout
             android:id="@+id/backButton"
@@ -334,18 +331,23 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/proof_of_income" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            <Spinner
+                                android:id="@+id/proofOfIncomeTypeDropDown"
+
                                 android:layout_width="@dimen/_123sdp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"/>
+<!--                            <com.google.android.material.textfield.TextInputLayout-->
+<!--                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--                                android:layout_width="@dimen/_123sdp"-->
+<!--                                android:layout_height="wrap_content">-->
 
-                                <AutoCompleteTextView
-                                    android:id="@+id/proofOfIncomeTypeDropDown"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:inputType="none" />
+<!--                                <AutoCompleteTextView-->
+<!--                                    android:id="@+id/proofOfIncomeTypeDropDown"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:inputType="none" />-->
 
-                            </com.google.android.material.textfield.TextInputLayout>
+<!--                            </com.google.android.material.textfield.TextInputLayout>-->
                             <TextView
                                 android:id="@+id/addProofIncome"
                                 android:layout_width="wrap_content"
@@ -386,10 +388,10 @@
 
                                 <ImageView
                                     android:id="@+id/imageView"
+                                    bindImage="@{viewModel.signatureImage.toString()}"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:scaleType="centerCrop"
-                                    bindImage="@{viewModel.signatureImage.toString()}"
                                     tools:src="@drawable/ic_contract" />
 
                                 <ImageView
@@ -414,12 +416,12 @@
 
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
             style="@style/ButtonDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:onClick="@{(v)->viewModel.onProfileCreated(v)}"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
@@ -431,11 +433,15 @@
             app:cornerRadius="@dimen/_6sdp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/previousButton"
             style="@style/ButtonDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
             android:elevation="0dp"
             android:padding="0dp"
             android:text="@string/previous"

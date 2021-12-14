@@ -287,4 +287,9 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">@color/white</item>
     </style>
+
+    <style name="ThemeOverlay.BankManagement.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
 </resources>

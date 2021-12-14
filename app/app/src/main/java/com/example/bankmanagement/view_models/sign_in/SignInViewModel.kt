@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,10 +40,12 @@ constructor(
     fun signIn(branchId:String){
         showLoading(true);
         viewModelScope.launch(Dispatchers.IO) {
-            if(email.value.isNullOrEmpty() || password.value.isNullOrEmpty())
-                return@launch;
+
 
             try{
+                if(email.value.isNullOrEmpty() || password.value.isNullOrEmpty()) {
+                    throw Exception("Please enter email and password")
+                }
                 val loginResult =mainRepo.login(email=email.value!!, password = password.value!!, branchId = branchId);
                 val staff=loginResult.first;
                 clockInOut.clockedInTime=loginResult.second.clockedInTime;
@@ -52,8 +55,10 @@ constructor(
 
                 Log.d(TAG, "Login successfully: $staff \n Token ${mainRepo.getToken()}");
                 withContext(Dispatchers.Main){
-                    uiCallback?.onLoggedIn(staff);
                     showLoading(false);
+
+                    uiCallback?.onLoggedIn(staff);
+
                 }
             }
             catch(e:HttpException){
@@ -62,6 +67,13 @@ constructor(
                     showLoading(false);
                 }
             }
+            catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    showLoading(false);
+                }
+            }
+
+
 
         }
 
