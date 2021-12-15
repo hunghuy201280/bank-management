@@ -19,6 +19,7 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.bumptech.glide.Glide
 import com.example.bankmanagement.utils.Utils
+import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.time.temporal.TemporalAccessor
 
@@ -91,6 +92,17 @@ fun bindImage(imageView: ImageView, uri: String?) {
     }
 
 }
+@BindingAdapter("bindDateTime")
+fun bindDateTime(textView: TextView, dateTime: DateTime?) {
+    if(dateTime==null) {
+        textView.text = ""
+        return
+    }
+    val dateString="${dateTime.dayOfMonth().asString}/${dateTime.monthOfYear().asString}/${dateTime.year().asString}";
+
+    textView.text=dateString;
+
+}
 
 //region 2way bind double
 //-------------------------------------------------------------------------------------------------//
@@ -120,6 +132,24 @@ fun setDoubleInTextView(tv: TextView, dbl: Double?) {
     }//catch
 
 }//setDoubleInTextView
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
+
+
+@InverseBindingAdapter(attribute = "app:text")
+fun getDoubleFromTextView(editText: TextView): Double? {
+
+    return try {
+        editText.text.toString().toDouble()
+    } catch (e: NumberFormatException) {
+        null
+    }//catch
+
+}//getDoubleFromTextView
+//endregion
+
+//region 2way bind long
 @BindingAdapter("app:text")
 fun setLongInTextView(tv: TextView, dbl: Long?) {
 
@@ -144,20 +174,7 @@ fun setLongInTextView(tv: TextView, dbl: Long?) {
 
     }//catch
 
-}//setDoubleInTextView
-
-//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
-
-@InverseBindingAdapter(attribute = "app:text")
-fun getDoubleFromTextView(editText: TextView): Double? {
-
-    return try {
-        editText.text.toString().toDouble()
-    } catch (e: NumberFormatException) {
-        null
-    }//catch
-
-}//getDoubleFromTextView
+}//setLongInTextView
 @InverseBindingAdapter(attribute = "app:text")
 fun getLongFromTextView(editText: TextView): Long? {
 
@@ -167,9 +184,11 @@ fun getLongFromTextView(editText: TextView): Long? {
         null
     }//catch
 
-}//getDoubleFromTextView
+}//getLongFromTextView
+//endregion
 
-//-------------------------------------------------------------------------------------------------//
+
+
 
 @BindingAdapter("textAttrChanged")
 fun setTextChangeListener(editText: TextView, listener: InverseBindingListener) {
@@ -185,6 +204,4 @@ fun setTextChangeListener(editText: TextView, listener: InverseBindingListener) 
     })
 }
 
-//-------------------------------------------------------------------------------------------------//
 
-//endregion

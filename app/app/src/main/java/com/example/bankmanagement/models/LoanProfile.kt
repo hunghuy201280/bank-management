@@ -38,10 +38,21 @@ enum class LoanStatus(val value: Int) {
     @SerializedName("3")
     Rejected(3),
     @SerializedName("4")
-    Deleted(4);
+    Deleted(4),
+    @SerializedName("-1")
+    All(-1);
     companion object {
         private val map = LoanStatus.values().associateBy(LoanStatus::value)
         fun fromInt(type: Int): LoanStatus = map[type]!!
+    }
+    fun getName():String{
+        return when(this){
+            Pending ->"Pending"
+            Done ->"Done"
+            Rejected ->"Rejected"
+            Deleted ->"Deleted"
+            All ->"All"
+        }
     }
 }
 
@@ -70,8 +81,9 @@ enum class LoanType(val value: Int) {
     CapitalMeeting(6),
 
     @SerializedName("7")
-    UnderOverdraftLimit(7);
-
+    UnderOverdraftLimit(7),
+    @SerializedName("-1")
+    All(-1);
     companion object {
         private val map = LoanType.values().associateBy(LoanType::value)
         fun fromInt(type: Int): LoanType = map[type]!!
@@ -85,6 +97,7 @@ enum class LoanType(val value: Int) {
             InvestmentProject->"Investment Project"
             CreditLine->"Credit Line"
             EachTime->"Each Time"
+            All->"All"
             else->""
         }
     }

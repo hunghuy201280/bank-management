@@ -47,6 +47,17 @@
                     android:textSize="@dimen/_8ssp"
                     app:cornerRadius="@dimen/_6sdp"
                     android:onClick="@{()->viewModel.onFindClicked()}"
+                    /><com.google.android.material.button.MaterialButton
+                    android:id="@+id/resetFilterButton"
+                    style="@style/ButtonDefault"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_gravity="center"
+                    android:elevation="0dp"
+                    android:text="@string/reset_filter"
+                    android:textSize="@dimen/_8ssp"
+                    app:cornerRadius="@dimen/_6sdp"
+                    android:onClick="@{()->viewModel.resetFilter()}"
                     />
             </LinearLayout>
 
@@ -191,6 +202,9 @@
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:layout_width="match_parent"
+                                    android:onClick="@{(v)->viewModel.showDatePicker(v)}"
+                                    android:focusable="false"
+                                    bindDateTime="@{viewModel.dateCreated}"
                                     android:layout_height="wrap_content" />
 
                             </com.google.android.material.textfield.TextInputLayout>

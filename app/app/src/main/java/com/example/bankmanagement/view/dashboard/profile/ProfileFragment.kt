@@ -33,15 +33,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     override fun initView() {
 
         //region Loan type dropdown
-        val loanTypes = LoanType.values().map { it.name };
+        val loanTypes = LoanType.values().map { it.getName() };
         val loanTypesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanTypes)
         binding.loanTypeDropDown.setAdapter(loanTypesAdapter)
+
         //endregion
 
         //region Loan status dropdown
-        val loanStatuses = LoanStatus.values().map { it.name };
+        val loanStatuses = LoanStatus.values().map { it.getName() };
         val loanStatusesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanStatuses)
         binding.loanStatusDropdown.setAdapter(loanStatusesAdapter)
+
         //endregion
     }
 
@@ -53,11 +55,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         binding.loanTypeDropDown.setOnItemClickListener { _, _, position, _ ->
             viewModel.selectedLoanType.value= LoanType.values()[position];
          }
-        viewModel.selectedLoanType.observe(this, {
-            println("$TAG : $it")
-        })
+        binding.loanStatusDropdown.setOnItemClickListener { _, _, position, _ ->
+            viewModel.loanStatus.value= LoanStatus.values()[position];
+         }
+
         viewModel.loanProfiles.observe(this,{
            profileAdapter.submitList(it)
+        });
+        viewModel.selectedLoanType.observe(this,{
+            binding.loanTypeDropDown.setText(it.getName(),false)
+        });
+        viewModel.loanStatus.observe(this,{
+            binding.loanStatusDropdown.setText(it.getName(),false)
         });
 
     }
