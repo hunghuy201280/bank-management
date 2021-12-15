@@ -15,9 +15,14 @@
         android:orientation="vertical"
         tools:context=".view.dashboard.DashboardFragment">
 
-        <include layout="@layout/fragment_dashboard_header"
-            app:mainVM="@{mainVM}"
-            />
+        <include
+            layout="@layout/fragment_dashboard_header"
+            app:mainVM="@{mainVM}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/divider" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,6 +63,7 @@
                 <io.secf4ult.verticaltablayout.VerticalTabLayout
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
+                    android:background="@color/primaryBackground"
                     app:tabBackground="?attr/selectableItemBackground"
                     app:tabInlineLabel="true"
                     app:tabUnboundedRipple="false"
@@ -69,9 +75,10 @@
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" />
+                tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
     </LinearLayout>

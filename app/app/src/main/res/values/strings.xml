@@ -42,4 +42,15 @@
     <string name="_1">1</string>
     <string name="_3">3</string>
     <string name="_2">2</string>
+    <string name="current_balance">Current balance</string>
+
+    <!--Contract-->
+    <string name="find_contract_via">Find contract via</string>
+    <string name="loan_contract_list">Loan contract list</string>
+    <string name="contract_id">Contract ID</string>
+    <string name="staff_in_charge">Staff in charge</string>
+    <string name="bod_in_charge">BOD in charge</string>
+    <string name="loan_profile_id">Loan profile ID</string>
+    <string name="phone_number">Phone number</string>
+
 </resources>
