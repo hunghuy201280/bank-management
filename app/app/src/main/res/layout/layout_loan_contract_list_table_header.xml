@@ -7,11 +7,11 @@
 
     <TextView
         style="@style/ContractListTableTextHeader"
-        android:text="@string/contract_id" />
+        android:text="@string/contract_number" />
 
     <TextView
         style="@style/ContractListTableTextHeader"
-        android:text="@string/loan_profile_id" />
+        android:text="@string/loan_profile_number" />
 
     <TextView
         style="@style/ContractListTableTextHeader"

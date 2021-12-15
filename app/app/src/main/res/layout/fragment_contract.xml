@@ -71,7 +71,7 @@
 
                             <TextView
                                 style="@style/DashboardTextContentNormal"
-                                android:text="@string/contract_id" />
+                                android:text="@string/contract_number" />
 
                             <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
 
@@ -126,7 +126,7 @@
 
                             <TextView
                                 style="@style/DashboardTextContentNormal"
-                                android:text="@string/loan_profile_id" />
+                                android:text="@string/loan_profile_number" />
 
                             <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
 
