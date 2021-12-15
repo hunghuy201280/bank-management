@@ -9,11 +9,8 @@
 
         <variable
             name="viewModel"
-            type="com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel" />
+            type="com.example.bankmanagement.view_models.review_profile.ReviewProfileViewModel" />
 
-        <variable
-            name="mainVM"
-            type="com.example.bankmanagement.view_models.MainViewModel" />
 
     </data>
 
@@ -21,53 +18,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/_10sdp"
-        tools:context=".view.create_profile.CreateProfile3Fragment">
+        tools:context=".view.review_profile.ReviewProfileFragment">
 
-        <LinearLayout
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_9sdp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/_7sdp"
-                android:layout_height="@dimen/_7sdp"
-                android:layout_marginEnd="@dimen/_7sdp"
-                android:background="@mipmap/ic_launcher" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/back" />
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/customerTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/check_information" />
 
-        <include
-            android:id="@+id/stepCountLayout"
-            layout="@layout/create_loan_step_count"
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/customerTextView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_8sdp"
-            app:currentStep="@{3}" />
+            android:layout_centerHorizontal="false"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/loan_profile" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/stepCountLayout"
-            android:orientation="horizontal"
+            android:layout_below="@id/titleTextView"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="@dimen/_19sdp"
-            >
+            android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/customerInfoCard"
@@ -95,22 +66,22 @@
 
                     <include
                         layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.selectedCustomer.name}"
+                        app:content="@{viewModel.loanProfile.customer.name}"
                         app:header="@{@string/customer_name}" />
 
                     <include
                         layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.selectedCustomer.name}"
+                        app:content="@{viewModel.loanProfile.customer.id}"
                         app:header="@{@string/customer_id}" />
 
                     <include
                         layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.selectedCustomer.phoneNumber}"
+                        app:content="@{viewModel.loanProfile.customer.phoneNumber}"
                         app:header="@{@string/phone_number}" />
 
                     <include
                         layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.selectedCustomer.email}"
+                        app:content="@{viewModel.loanProfile.customer.email}"
                         app:header="@{@string/email}" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -136,96 +107,113 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
                         android:background="@color/black" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
+                        android:orientation="horizontal">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{mainVM.currentStaff.name}"
+                                app:content="@{viewModel.loanProfile.id}"
                                 app:header="@{@string/staff_name}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.selectedLoanType.name()}"
+                                app:content="@{viewModel.loanProfile.staff.name}"
+                                app:header="@{@string/staff_name}" />
+
+                            <include
+                                layout="@layout/create_profile_3_text_view"
+                                app:content="@{viewModel.loanProfile.loanType.name}"
                                 app:header="@{@string/loan_type}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.moneyToLoan.toString()}"
+                                app:content="@{String.valueOf(viewModel.loanProfile.moneyToLoan)}"
                                 app:header="@{@string/money_to_loan}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanDuration.toString()}"
+                                app:content="@{viewModel.loanProfile.loanStatus.name}"
+                                app:header="@{@string/money_to_loan}" />
+
+                            <include
+                                layout="@layout/create_profile_3_text_view"
+                                app:content="@{String.valueOf(viewModel.loanProfile.loanDuration)}"
                                 app:header="@{@string/loan_duration}" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginStart="@dimen/_45sdp"
-                            >
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                >
+                                android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    tools:text="Header"
-                                    android:textColor="@color/cornflower_blue"
                                     android:text="@string/date_created"
-                                    />
+                                    android:textColor="@color/cornflower_blue"
+                                    tools:text="Header" />
+
                                 <TextView
+                                    bindCommonDate="@{viewModel.loanProfile.createdAt}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    tools:text="Content"
-                                    bindCommonDate="@{null}"
-                                    />
+                                    tools:text="Content" />
 
                             </LinearLayout>
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.benefitFromLoan}"
+                                app:content="@{viewModel.loanProfile.benefitFromLoan}"
                                 app:header="@{@string/benefit_from_loan}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.expectedSourceMoneyToRepay}"
+                                app:content="@{viewModel.loanProfile.expectedSourceMoneyToRepay}"
                                 app:header="@{@string/expected_source_money_to_repay}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.collateral}"
+                                app:content="@{viewModel.loanProfile.collateral}"
+                                app:header="@{@string/collateral}" />
+
+                            <include
+                                layout="@layout/create_profile_3_text_view"
+                                app:content="@{String.valueOf(viewModel.loanProfile.loanDuration)}"
                                 app:header="@{@string/collateral}" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginStart="@dimen/_45sdp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/proof_of_income"
-                                android:textColor="@color/cornflower_blue"
-                                />
+                                android:textColor="@color/cornflower_blue" />
+
                             <Spinner
                                 android:id="@+id/proofOfIncomeTypeDropDown"
+
                                 android:layout_width="@dimen/_123sdp"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/proofOfIncomeRV"
                                 android:layout_width="match_parent"
@@ -237,20 +225,21 @@
                                 tools:listitem="@layout/item_image" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/proof_of_income"
-                            android:textColor="@color/cornflower_blue"
-                            />
+                            android:text="@string/signature"
+                            android:textColor="@color/cornflower_blue" />
+
                         <ImageView
                             android:id="@+id/imageView"
-                            bindImage="@{viewModel.signatureImage.toString()}"
+                            bindImage="@{viewModel.loanProfile.signatureImage.toString()}"
                             android:layout_width="@dimen/_50sdp"
                             android:layout_height="@dimen/_50sdp"
                             android:scaleType="centerCrop"
@@ -262,39 +251,7 @@
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/nextButton"
-            style="@style/ButtonDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:elevation="0dp"
-            android:padding="0dp"
-            android:onClick="@{(v)->viewModel.onProfileCreated(v)}"
-            android:text="@string/save"
-            android:textSize="@dimen/_8ssp"
-            app:cornerRadius="@dimen/_6sdp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/previousButton"
-            style="@style/ButtonDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:elevation="0dp"
-            android:padding="0dp"
-            android:text="@string/previous"
-            android:textSize="@dimen/_8ssp"
-            app:cornerRadius="@dimen/_6sdp" />
 
     </RelativeLayout>
 

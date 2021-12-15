@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_createProfile1Fragment"
             app:destination="@id/createProfile1Fragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_reviewProfileFragment"
+            app:destination="@id/reviewProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/createProfile1Fragment"
@@ -69,4 +72,9 @@
         android:name="com.example.bankmanagement.view.create_profile.CreateProfile3Fragment"
         android:label="fragment_create_profile3"
         tools:layout="@layout/fragment_create_profile3" />
+    <fragment
+        tools:layout="@layout/fragment_review_profile"
+        android:id="@+id/reviewProfileFragment"
+        android:name="com.example.bankmanagement.view.review_profile.ReviewProfileFragment"
+        android:label="ReviewProfileFragment" />
 </navigation>

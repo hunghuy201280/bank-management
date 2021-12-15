@@ -6,10 +6,12 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
+import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.repo.MainRepository
+import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +25,7 @@ class ProfileViewModel
 @Inject
 constructor(
     private val mainRepo: MainRepository,
+    @AppModule.ReviewLoanProfileArgs val reviewLoanProfileArgs: ValueWrapper<LoanProfile>,
 ) : BaseUiViewModel<ProfileUICallback>() {
     private val TAG: String = "ProfileViewModel";
 

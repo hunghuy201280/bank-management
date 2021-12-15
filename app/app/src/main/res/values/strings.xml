@@ -66,4 +66,6 @@
     <string name="phone_number">Phone number</string>
     <string name="loan_profile_detail">Loan profile detail</string>
     <string name="reset_filter">Reset Filter</string>
+    <string name="signature">Signature</string>
+    <string name="loan_profile">Loan profile</string>
 </resources>

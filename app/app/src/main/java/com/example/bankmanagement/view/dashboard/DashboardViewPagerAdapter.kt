@@ -5,7 +5,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bankmanagement.view.dashboard.contract.ContractFragment
 import com.example.bankmanagement.view.dashboard.profile.ProfileFragment
 
-class DashboardViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class DashboardViewPagerAdapter(
+    fragment: Fragment
+) : FragmentStateAdapter(fragment) {
 
     private val TAG="DashboardViewPagerAdapter";
     override fun getItemCount(): Int = 2

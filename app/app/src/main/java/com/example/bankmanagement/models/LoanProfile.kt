@@ -1,7 +1,11 @@
 package com.example.bankmanagement.models
 
 
+import android.net.Uri
+import android.os.Parcelable
+import com.example.bankmanagement.constants.AppConfigs
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 import org.joda.time.DateTime
 
 data class LoanProfile(
@@ -23,9 +27,12 @@ data class LoanProfile(
     val branchInfo: String,
     val approver: Staff?,
     val createdAt:String,
-){
+)  {
     fun getDate():DateTime{
         return DateTime.parse(createdAt);
+    }
+    fun getSignatureImage():Uri{
+          return  Uri.parse( "${AppConfigs.baseUrl}images/$signatureImg")
     }
 }
 

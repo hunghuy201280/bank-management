@@ -7,6 +7,7 @@ import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view.clockin.ClockInOutFragment
 import com.example.bankmanagement.view.device_code.DeviceCodeFragment
+import com.example.bankmanagement.view.review_profile.ReviewProfileFragment
 import com.example.bankmanagement.view.sign_in.SignInFragment
 import javax.inject.Inject
 
@@ -26,6 +27,9 @@ constructor(
             }
             ClockInOutFragment::class.java.name -> {
                 ClockInOutFragment();
+            }
+            ReviewProfileFragment::class.java.name -> {
+                ReviewProfileFragment();
             }
             else -> super.instantiate(classLoader, className)
         }

@@ -2,8 +2,10 @@ package com.example.bankmanagement.models
 
 
 import android.net.Uri
+import android.os.Parcelable
 import com.example.bankmanagement.constants.AppConfigs
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 abstract class ProofOfIncome(
     open val imageType: IncomeType,
@@ -28,6 +30,8 @@ abstract class ProofOfIncome(
 //       Uri.parse( "${AppConfigs.baseUrl}/$imageID")
 //
 //}
+@Parcelize
+
 data class ProofOfIncomeResp(
     @SerializedName("imageId")
      val imageID: String,
@@ -37,7 +41,10 @@ data class ProofOfIncomeResp(
     @SerializedName("_id")
     val id: String=""
 
-) ;
+) : Parcelable {
+     fun getUrl(): Uri=
+       Uri.parse( "${AppConfigs.baseUrl}images/$imageID")
+}
 data class ProofOfIncomeRequest(
     @SerializedName("imageId")
      val imageID: String,

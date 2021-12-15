@@ -3,6 +3,7 @@ package com.example.bankmanagement.di
 import android.content.Context
 import androidx.fragment.app.FragmentFactory
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.sign_in.SignInResponse
@@ -32,6 +33,12 @@ class AppModule {
     fun provideClockedOut():ClockInOutResponse = ClockInOutResponse();
 
 
+    @Provides
+    @Singleton
+    @ReviewLoanProfileArgs
+    fun provideReviewProfileArgs():ValueWrapper<LoanProfile?> = ValueWrapper(value = null);
+
+
 
 
 
@@ -43,6 +50,10 @@ class AppModule {
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
     annotation class ClockedInOut
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class ReviewLoanProfileArgs
 
 
 

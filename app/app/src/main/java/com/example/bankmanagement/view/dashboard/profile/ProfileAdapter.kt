@@ -5,10 +5,12 @@ import com.example.bankmanagement.models.LoanProfile
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
+import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.ItemRowLoanProfileBinding
 
-class ProfileAdapter : BaseBindingListAdapter<LoanProfile>(
+class ProfileAdapter(itemClickListener: BaseItemClickListener<LoanProfile>) : BaseBindingListAdapter<LoanProfile>(
 DiffCallback(),
+    itemClickListener = itemClickListener
 ){
 
     override fun getItemViewType(position: Int): Int {

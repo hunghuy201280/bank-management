@@ -1,23 +1,40 @@
 package com.example.bankmanagement.view.dashboard.profile
 
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
+import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentProfileBinding
+import com.example.bankmanagement.di.AppModule
+import com.example.bankmanagement.models.IncomeType
+import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
+import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel
+import com.google.gson.Gson
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(),ProfileUICallback {
+class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(), ProfileUICallback {
 
 
     private val TAG = "ProfileFragment";
     override fun layoutRes(): Int = R.layout.fragment_profile
-    private val profileAdapter=ProfileAdapter();
+    private val profileAdapter = ProfileAdapter(
+            itemClickListener = object : BaseItemClickListener<LoanProfile> {
+                override fun onItemClick(adapterPosition: Int, item: LoanProfile) {
+                    viewModel.reviewLoanProfileArgs.value = item;
+                    findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
+                }
+            }
+    );
 
     override val viewModel: ProfileViewModel by viewModels()
 
@@ -26,7 +43,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
 
     override fun initViewModel(viewModel: ProfileViewModel) {
-        binding.viewModel=viewModel;
+        binding.viewModel = viewModel;
         viewModel.init(this)
     }
 
@@ -35,7 +52,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         //region Loan type dropdown
         val loanTypes = LoanType.values().map { it.getName() };
         val loanTypesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanTypes)
-        binding.loanTypeDropDown.setAdapter(loanTypesAdapter)
+        binding.loanTypeDropDown.adapter = loanTypesAdapter
 
         //endregion
 
@@ -48,25 +65,51 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     override fun initData() {
-        binding.loanProfileRV.adapter=profileAdapter;
+        binding.loanProfileRV.adapter = profileAdapter;
     }
 
     override fun initAction() {
-        binding.loanTypeDropDown.setOnItemClickListener { _, _, position, _ ->
-            viewModel.selectedLoanType.value= LoanType.values()[position];
-         }
-        binding.loanStatusDropdown.setOnItemClickListener { _, _, position, _ ->
-            viewModel.loanStatus.value= LoanStatus.values()[position];
-         }
+        binding.loanTypeDropDown.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                    ) {
+                        viewModel.selectedLoanType.value = LoanType.values()[position];
 
-        viewModel.loanProfiles.observe(this,{
-           profileAdapter.submitList(it)
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+                }
+
+        binding.loanStatusDropdown.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                    ) {
+                        viewModel.loanStatus.value = LoanStatus.values()[position];
+
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+                }
+
+        viewModel.loanProfiles.observe(this, {
+            profileAdapter.submitList(it)
         });
-        viewModel.selectedLoanType.observe(this,{
-            binding.loanTypeDropDown.setText(it.getName(),false)
+        viewModel.selectedLoanType.observe(this, {
+            binding.loanTypeDropDown.setSelection(LoanType.values().indexOf(it),true)
         });
-        viewModel.loanStatus.observe(this,{
-            binding.loanStatusDropdown.setText(it.getName(),false)
+        viewModel.loanStatus.observe(this, {
+            binding.loanStatusDropdown.setSelection(LoanStatus.values().indexOf(it),true)
+
         });
 
     }

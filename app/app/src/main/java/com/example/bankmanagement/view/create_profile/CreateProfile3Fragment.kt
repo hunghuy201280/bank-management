@@ -38,9 +38,7 @@ class CreateProfile3Fragment (private val TAG: String = "CreateProfile3Fragment"
     private val proofOfIncomeAdapter =
         ProofOfIncomeImageAdapter(
             object : BaseItemClickListener<Uri> {
-            override fun onItemClick(adapterPosition: Int, item: Uri) {
-                viewModel.proofOfIncomeDeleted(adapterPosition);
-            }
+            override fun onItemClick(adapterPosition: Int, item: Uri) {}
         }, isRemoveAble = false);
 
     override fun viewModelClass(): Class<CreateProfileViewModel> =
@@ -65,20 +63,11 @@ class CreateProfile3Fragment (private val TAG: String = "CreateProfile3Fragment"
 
     override fun initView() {
         binding.proofOfIncomeRV.adapter = proofOfIncomeAdapter;
-//
-//
-//        //region loantype adapter
-//        val loanAdapter =
-//            ArrayAdapter(requireContext(), R.layout.list_item, LoanType.values().map { it.name });
-//        binding.loanTypeDropDown.setAdapter(loanAdapter)
-//        //endregion
-//
+
         //region proof of income type adapter
         val proofOfIncomeTypeAdapter =
             ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
-        Log.d(TAG,"create adapter 3 ${proofOfIncomeTypeAdapter.count}");
         binding.proofOfIncomeTypeDropDown.adapter=proofOfIncomeTypeAdapter
-      //  binding.proofOfIncomeTypeDropDown.setText(proofOfIncomeTypeAdapter.getItem(0),false);
         //endregion
     }
 
@@ -98,16 +87,6 @@ class CreateProfile3Fragment (private val TAG: String = "CreateProfile3Fragment"
         binding.nextButton.setOnClickListener {
             findNavController().navigate(R.id.action_createProfile2Fragment_to_createProfile3Fragment);
         }
-//        binding.addProofIncome.setOnClickListener {
-//            pickProofOfIncomeImages.launch("image/*")
-//        }
-//        binding.addSignature.setOnClickListener {
-//            pickSignatureImage.launch("image/*")
-//        }
-//        binding.loanTypeDropDown.setOnItemClickListener { _, _, position, _ ->
-//            viewModel.selectedLoanType.value = LoanType.values()[position];
-//        }
-//
         binding.proofOfIncomeTypeDropDown.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -125,22 +104,11 @@ class CreateProfile3Fragment (private val TAG: String = "CreateProfile3Fragment"
             }
 
 
-        viewModel.selectedLoanType.observe(this, {
-            println("$TAG : $it")
-        })
+
 
 
     }
 
-    private val pickProofOfIncomeImages =
-        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uri: List<Uri>? ->
-            uri?.let { viewModel.proofOfIncomesAdded(it); }
-        }
-
-    private val pickSignatureImage =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let { viewModel.signatureImageSelected(it); }
-        }
 
     override fun onProfileCreated() {
         binding.backButton.performClick();
