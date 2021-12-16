@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginHorizontal="@dimen/_8sdp">
+
+    <TextView
+        style="@style/ContractListTableTextHeader"
+        android:text="@string/contract_number" />
+
+    <TextView
+        style="@style/ContractListTableTextHeader"
+        android:text="@string/loan_profile_number" />
+
+    <TextView
+        style="@style/ContractListTableTextHeader"
+        android:text="@string/staff_in_charge" />
+
+    <TextView
+        style="@style/ContractListTableTextHeader"
+        android:text="@string/bod_in_charge" />
+
+    <TextView
+        style="@style/ContractListTableTextHeader"
+        android:text="@string/date_created" />
+
+    <TextView
+        style="@style/ContractListTableTextHeader"
+        android:text="@string/loan_type" />
+
+    <TextView
+        style="@style/ContractListTableTextHeader"
+        android:text="@string/money_to_loan" />
+
+</LinearLayout>

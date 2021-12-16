@@ -51,7 +51,7 @@ fun dateFromISOString(isoString:String):Date{
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bindDate")
 fun bindDate(textView: TextView, dateParam: String?) {
-    val sdf = SimpleDateFormat("EEEE ,dd MMMM");
+    val sdf = SimpleDateFormat("EEEE, dd MMMM");
     val d = Date()
 
     val dayOfTheWeek: String = sdf.format(dateParam?.let { dateFromISOString(it) } ?: d)

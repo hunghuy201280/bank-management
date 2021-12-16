@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.bankmanagement.models.LoanContract" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp">
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.id}" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.loanProfile.id}" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.loanProfile.staff.name}" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.loanProfile.approver.name}" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            bindCommonDate="@{item.dateCreated}" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.loanProfile.loanType.getName()}" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{`$` + item.loanProfile.moneyToLoan}" />
+
+    </LinearLayout>
+
+</layout>

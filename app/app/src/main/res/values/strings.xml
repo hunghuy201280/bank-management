@@ -68,4 +68,15 @@
     <string name="reset_filter">Reset Filter</string>
     <string name="signature">Signature</string>
     <string name="loan_profile">Loan profile</string>
+    <string name="current_balance">Current balance</string>
+
+    <!--Contract-->
+    <string name="find_contract_via">Find contract via</string>
+    <string name="loan_contract_list">Loan contract list</string>
+    <string name="contract_number">Contract number</string>
+    <string name="staff_in_charge">Staff in charge</string>
+    <string name="bod_in_charge">BOD in charge</string>
+    <string name="loan_profile_number">Loan profile number</string>
+    <string name="phone_number">Phone number</string>
+
 </resources>

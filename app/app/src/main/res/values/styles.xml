@@ -60,6 +60,50 @@
         <item name="android:minHeight">0dp</item>
         <item name="android:maxLines">1</item>
     </style>
+    
+    <style name="DashboardHeaderH2" parent="TextPoppins.SemiBold.Wrap">
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:textSize">@dimen/H2</item>
+        <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    
+    <style name="DashboardActionButton" parent="ButtonDefault">
+        <item name="android:layout_height">@dimen/_13sdp</item>
+        <item name="android:layout_width">@dimen/_41sdp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/H3</item>
+        <item name="android:paddingVertical" tools:targetApi="o">0dp</item>
+        <item name="elevation">@dimen/_3sdp</item>
+    </style>
+    
+    <style name="DashboardCardViewBackground">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="DashboardTextContentNormal" parent="TextPoppins.Regular.Wrap">
+        <item name="android:textSize">@dimen/H3</item>
+        <item name="android:textColor">@color/secondaryText</item>
+    </style>
+
+    <style name="DashboardEditTextFilter">
+        <item name="android:layout_width">@dimen/_130sdp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/text_input_edittext_filter_bg</item>
+    </style>
+
+    <style name="ContractListTableTextHeader" parent="DashboardTextContentNormal">
+        <item name="android:textColor">@color/cornflower_blue</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="ContractListTableTextItem" parent="ContractListTableTextHeader">
+        <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
 
     <style name="Widget.Theme.BankManagement.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>

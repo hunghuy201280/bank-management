@@ -10,71 +10,89 @@
 
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_22sdp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        tools:context=".view.dashboard.widgets.DashboardHeaderFragment">
+        android:gravity="center">
 
-        <!-- TODO: Update blank fragment layout -->
-        <ImageView
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:background="@color/primaryBackground"
+            android:orientation="horizontal"
+            tools:context=".view.dashboard.widgets.DashboardHeaderFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dashboard" />
+            <LinearLayout
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+                <ImageView
+                    android:layout_width="@dimen/_21sdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/app_icon" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextPoppins.SemiBold.Wrap"
+                android:layout_marginStart="@dimen/default_margin"
+                android:textColor="@color/primaryText"
+                android:textSize="@dimen/H2"
+                android:text="@string/dashboard" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+
+            <TextView
+                style="@style/TextPoppins.Regular.Wrap"
+                bindTime="@{null}"
+                android:textColor="@color/primaryText"
+                tools:text="12:04"
+                android:textSize="@dimen/H3" />
+
+            <View
+                android:layout_width="0.7dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@color/textPrimary" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/ic_notification" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextPoppins.Medium.Wrap"
+                android:textColor="@color/secondaryBackground"
+                android:textSize="@dimen/H3"
                 android:text="@{`$` + String.valueOf(mainVM.currentBranch.branchBalance)}"
                 tools:text="$ 1200.0" />
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Current balance" />
+                style="@style/TextPoppins.Medium.Wrap"
+                android:textColor="@color/primaryText"
+                android:textSize="@dimen/H4"
+                android:text="@string/current_balance" />
 
         </LinearLayout>
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+    </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="12:04"
-            bindTime="@{null}"
-            />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginHorizontal="@dimen/_18sdp"
-            android:background="@color/black" />
-
-        <ImageView
-            android:layout_width="@dimen/_18sdp"
-            android:layout_height="@dimen/_18sdp"
-            android:src="@mipmap/ic_launcher" />
-
-    </LinearLayout>
 </layout>
