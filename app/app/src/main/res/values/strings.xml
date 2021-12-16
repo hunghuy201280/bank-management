@@ -63,7 +63,6 @@
     <string name="save">Save</string>
     <string name="customer_info">Customer info</string>
     <string name="customer_id">Customer ID</string>
-    <string name="phone_number">Phone number</string>
     <string name="loan_profile_detail">Loan profile detail</string>
     <string name="reset_filter">Reset Filter</string>
     <string name="signature">Signature</string>
