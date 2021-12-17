@@ -79,5 +79,7 @@
     <string name="phone_number">Phone number</string>
     <string name="approve">Approve</string>
     <string name="reject">Reject</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 
 </resources>

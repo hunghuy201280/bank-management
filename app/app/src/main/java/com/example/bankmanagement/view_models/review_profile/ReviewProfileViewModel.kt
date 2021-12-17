@@ -2,15 +2,16 @@ package com.example.bankmanagement.view_models.review_profile
 
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.IncomeType
 import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.repo.MainRepository
+import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view.review_profile.ReviewProfileUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -61,7 +62,7 @@ constructor(
                     status = LoanStatus.Done,
                     profileId = loanProfile.value!!.id
                 )
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     uiCallback?.onBack()
                 }
 
@@ -74,13 +75,14 @@ constructor(
     }
 
     fun rejectProfile() {
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 mainRepo.updateLoanStatus(
                     status = LoanStatus.Rejected,
                     profileId = loanProfile.value!!.id
                 )
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     uiCallback?.onBack()
                 }
             } catch (e: HttpException) {
@@ -91,22 +93,29 @@ constructor(
 
         }
     }
-    fun deleteProfile() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                mainRepo.updateLoanStatus(
-                    status = LoanStatus.Deleted,
-                    profileId = loanProfile.value!!.id
-                )
-                withContext(Dispatchers.Main){
-                    uiCallback?.onBack()
+
+    fun deleteProfile(view: View) {
+        Utils.showAlertDialog(
+            view.context,
+            onPositiveClick = {
+                viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        mainRepo.updateLoanStatus(
+                            status = LoanStatus.Deleted,
+                            profileId = loanProfile.value!!.id
+                        )
+                        withContext(Dispatchers.Main) {
+                            Utils.showCompleteDialog(view.context, onDismiss = {
+                                uiCallback?.onBack()
+                            })
+                        }
+                    } catch (e: HttpException) {
+                        Log.e(TAG, "Delete Error: ${e.response()?.errorBody()?.string()}")
+                    }
                 }
-            } catch (e: HttpException) {
-                Log.e(TAG, "Delete Error: ${e.response()?.errorBody()?.string()}")
-            }
+            },
+        );
 
-
-        }
     }
 
 

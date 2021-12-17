@@ -129,6 +129,10 @@ dependencies {
     //joda time
     implementation 'net.danlew:android.joda:2.10.12.2'
 
+    //material dialog
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+
+
 }
 kapt {
     correctErrorTypes = true

@@ -2,41 +2,79 @@ package com.example.bankmanagement.utils
 
 import android.content.ContentResolver
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import android.provider.MediaStore
+import android.os.Handler
 import android.provider.OpenableColumns
 import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import java.lang.Exception
-import android.provider.DocumentsContract
 
-import android.content.ContentUris
-
-import android.os.Environment
-
-import android.os.Build
-
-import android.annotation.SuppressLint
-import android.content.CursorLoader
+import android.view.View
+import android.widget.TextView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.example.bankmanagement.R
 import com.example.bankmanagement.repo.MainRepository
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.*
 import retrofit2.HttpException
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.util.*
-import kotlin.collections.HashMap
-
+import kotlin.concurrent.schedule
 
 
 class Utils {
 
     companion object{
+
+        fun showCompleteDialog(
+            context: Context,
+            mainText:String="Completed",
+            onDismiss:View.OnClickListener?
+        ){
+            val dialog=MaterialDialog(context).noAutoDismiss().customView(R.layout.app_complete_dialog)
+            dialog.findViewById<TextView>(R.id.completeTextView).text=mainText
+            Timer().schedule(2000) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    onDismiss?.onClick(dialog.view)
+                }
+                dialog.dismiss()
+            }
+            dialog.show()
+
+        }
+        fun showAlertDialog(
+            context: Context,
+            title:String="Warning",
+            body:String="This loan profile will be deleted permanently.\nDo you want to delete?",
+            negativeText:String="Cancel",
+            positiveText:String="OK",
+            onPositiveClick:View.OnClickListener?=null,
+            onNegativeClick: View.OnClickListener?=null,
+        ){
+            val dialog=MaterialDialog(context).noAutoDismiss().customView(R.layout.app_alert_dialog)
+            dialog.findViewById<TextView>(R.id.title).text=title
+            dialog.findViewById<TextView>(R.id.body).text=body
+            dialog.findViewById<MaterialButton>(R.id.cancelButton).apply {
+                text=negativeText
+                setOnClickListener{
+                    onNegativeClick?.onClick(this)
+                    dialog.dismiss()
+                }
+            }
+            dialog.findViewById<MaterialButton>(R.id.okButton).apply {
+                text=positiveText
+                setOnClickListener{
+                    onPositiveClick?.onClick(this)
+                    dialog.dismiss()
+                }
+            }
+
+            dialog.show()
+
+        }
          suspend fun uploadFile(context: Context, uris: List<Uri>?,mainRepo:MainRepository): List<String> {
             if (uris == null || uris.isEmpty()) return listOf();
             val cacheDir = context.cacheDir;

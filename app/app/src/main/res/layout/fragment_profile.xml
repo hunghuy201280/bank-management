@@ -38,17 +38,17 @@
                     android:layout_weight="1" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sign_in_button"
                     style="@style/ButtonDefault"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_24sdp"
                     android:layout_gravity="center"
                     android:elevation="0dp"
+                    android:onClick="@{()->viewModel.onFindClicked()}"
                     android:text="@string/find"
                     android:textSize="@dimen/_8ssp"
-                    app:cornerRadius="@dimen/_6sdp"
-                    android:onClick="@{()->viewModel.onFindClicked()}"
-                    /><com.google.android.material.button.MaterialButton
+                    app:cornerRadius="@dimen/_6sdp" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/resetFilterButton"
                     style="@style/ButtonDefault"
                     android:layout_width="@dimen/_100sdp"
