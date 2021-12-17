@@ -1,9 +1,6 @@
 package com.example.bankmanagement.repo
 
-import com.example.bankmanagement.models.BranchInfo
-import com.example.bankmanagement.models.Customer
-import com.example.bankmanagement.models.LoanProfile
-import com.example.bankmanagement.models.Staff
+import com.example.bankmanagement.models.*
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
@@ -22,16 +19,10 @@ interface MainRepository {
         branchId:String,
     ): Pair<Staff,ClockInOutResponse>
 
-    suspend fun clockIn(
+    suspend fun clockIn()
+    suspend fun clockOut()
 
-    )
-    suspend fun clockOut(
-
-    )
-
-    suspend fun getClockInOutTime(
-
-    ):ClockInOutResponse
+    suspend fun getClockInOutTime():ClockInOutResponse
 
     suspend fun getLoanProfiles(
 
@@ -50,6 +41,11 @@ interface MainRepository {
     suspend fun upFiles(
         files: List<File>
         ):UpFileResp
+
+    suspend fun updateLoanStatus(
+        status: LoanStatus,
+        profileId:String,
+    );
 
 
 

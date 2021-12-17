@@ -41,7 +41,7 @@ constructor(
         getProfiles()
     }
 
-    private fun getProfiles() {
+     fun getProfiles() {
         viewModelScope.launch(Dispatchers.IO) {
             _getProfiles();
         }
@@ -108,7 +108,7 @@ constructor(
                 val _moneyToLoan =
                     if (moneyToLoan.value == null) true else moneyToLoan.value == it.moneyToLoan
 
-                val _loanId = if (loanId.value.isNullOrBlank()) true else it.id.contains(loanId.value!!)
+                val _loanId = if (loanId.value.isNullOrBlank()) true else it.loanApplicationNumber.contains(loanId.value!!)
                 val _dateCreated =
                     if (dateCreated.value == null) true else dateCreated.value!!.toLocalDate()
                         .isEqual(it.getDate().toLocalDate())

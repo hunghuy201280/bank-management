@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel" />
+
     </data>
 
     <ScrollView

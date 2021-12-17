@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
@@ -24,6 +25,7 @@ import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view.create_profile.ProofOfIncomeImageAdapter
 import com.example.bankmanagement.view.dashboard.profile.ProfileAdapter
 import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
+import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel
 import com.example.bankmanagement.view_models.review_profile.ReviewProfileViewModel
 import com.google.gson.Gson
@@ -31,13 +33,14 @@ import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewProfileViewModel>(), BaseUserView{
+class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewProfileViewModel>(), ReviewProfileUICallback{
 
 
     private val TAG = "ReviewProfileFragment";
     override fun layoutRes(): Int = R.layout.fragment_review_profile
 
     override val viewModel: ReviewProfileViewModel by viewModels()
+    val mainVM: MainViewModel by activityViewModels()
     private val proofOfIncomeAdapter =
         ProofOfIncomeImageAdapter(
             object : BaseItemClickListener<Uri> {
@@ -49,7 +52,8 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
 
 
     override fun initViewModel(viewModel: ReviewProfileViewModel) {
-        binding.viewModel=viewModel;
+        binding.viewModel=viewModel
+        binding.mainVM=mainVM
         viewModel.init(this)
 
         viewModel.currentIncomeType.observe(this, {
@@ -90,7 +94,9 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
             }
     }
 
-
+    override fun onBack() {
+        findNavController().popBackStack()
+    }
 
 
 }

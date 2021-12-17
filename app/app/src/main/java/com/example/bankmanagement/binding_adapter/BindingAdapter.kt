@@ -5,6 +5,7 @@ import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -23,6 +24,18 @@ import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.time.temporal.TemporalAccessor
 
+
+//@BindingAdapter("currentRole", "requireRole", requireAll = false)
+//fun setVisibilityByRole(view: View, currentRole: String, requireRole: String,) {
+//   if(currentRole==requireRole){
+//       view.visibility=View.VISIBLE
+//   }
+//    else{
+//       view.visibility=View.GONE
+//
+//   }
+//
+//}
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("durationFromTime")

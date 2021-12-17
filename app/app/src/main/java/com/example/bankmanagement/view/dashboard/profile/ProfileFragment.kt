@@ -66,6 +66,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
     override fun initData() {
         binding.loanProfileRV.adapter = profileAdapter;
+        viewModel.getProfiles()
     }
 
     override fun initAction() {

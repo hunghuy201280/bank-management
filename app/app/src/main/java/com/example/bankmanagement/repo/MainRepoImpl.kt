@@ -1,9 +1,6 @@
 package com.example.bankmanagement.repo
 
-import com.example.bankmanagement.models.BranchInfo
-import com.example.bankmanagement.models.Customer
-import com.example.bankmanagement.models.LoanProfile
-import com.example.bankmanagement.models.Staff
+import com.example.bankmanagement.models.*
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
@@ -108,6 +105,10 @@ constructor(
         val response = apiService.upFiles(token=accessToken,images=multipartFiles);
         return response;
 
+    }
+
+    override suspend fun updateLoanStatus(status: LoanStatus, profileId: String) {
+        val response = apiService.updateLoanStatus(token=accessToken, profileId = profileId, body = mapOf("status" to status.value))
     }
 
 

@@ -11,6 +11,12 @@
             name="viewModel"
             type="com.example.bankmanagement.view_models.review_profile.ReviewProfileViewModel" />
 
+        <variable
+            name="mainVM"
+            type="com.example.bankmanagement.view_models.MainViewModel" />
+
+        <import type="com.example.bankmanagement.models.StaffRole" />
+        <import type="com.example.bankmanagement.models.LoanStatus" />
 
     </data>
 
@@ -19,7 +25,6 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/_10sdp"
         tools:context=".view.review_profile.ReviewProfileFragment">
-
 
 
         <TextView
@@ -97,11 +102,22 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_32sdp"
-                        android:text="@string/loan_profile_detail" />
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginStart="@dimen/_32sdp"
+                           android:text="@string/loan_profile_detail" />
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_contract"
+                           android:onClick="@{()->viewModel.deleteProfile()}"
+                           />
+                   </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -120,8 +136,8 @@
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.id}"
-                                app:header="@{@string/staff_name}" />
+                                app:content="@{viewModel.loanProfile.loanApplicationNumber}"
+                                app:header="@{@string/loan_id}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
@@ -141,7 +157,7 @@
                             <include
                                 layout="@layout/create_profile_3_text_view"
                                 app:content="@{viewModel.loanProfile.loanStatus.name}"
-                                app:header="@{@string/money_to_loan}" />
+                                app:header="@{@string/status}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
@@ -193,7 +209,7 @@
                             <include
                                 layout="@layout/create_profile_3_text_view"
                                 app:content="@{String.valueOf(viewModel.loanProfile.loanDuration)}"
-                                app:header="@{@string/collateral}" />
+                                app:header="@{@string/loan_duration}" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -246,11 +262,45 @@
                             tools:src="@drawable/ic_contract" />
 
                     </LinearLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:orientation="horizontal"
+                        android:visibility="@{mainVM.currentStaff.roleName==StaffRole.Director.name() &amp;&amp; viewModel.loanProfile.loanStatus == LoanStatus.Pending ?View.VISIBLE:View.GONE}">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/rejectButton"
+                            style="@style/ButtonDefault"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_24sdp"
+                            android:layout_gravity="center"
+                            android:elevation="0dp"
+                            android:onClick="@{()->viewModel.rejectProfile()}"
+                            android:text="@string/reject"
+                            android:textSize="@dimen/_8ssp"
+                            app:backgroundTint="@color/radicalRed"
+                            app:cornerRadius="@dimen/_6sdp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/approveButton"
+                            style="@style/ButtonDefault"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_24sdp"
+                            android:layout_gravity="center"
+                            android:elevation="0dp"
+                            android:onClick="@{()->viewModel.approveProfile()}"
+                            android:text="@string/approve"
+                            android:textSize="@dimen/_8ssp"
+                            app:backgroundTint="@android:color/holo_green_light"
+                            app:cornerRadius="@dimen/_6sdp" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
 
 
     </RelativeLayout>

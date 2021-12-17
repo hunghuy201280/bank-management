@@ -69,4 +69,16 @@ interface ApiService {
         ) token: String,
         @Part images: List<MultipartBody.Part>
     ): UpFileResp;
+
+
+    @PATCH("loan_profiles/status/{id}")
+    @JvmSuppressWildcards
+    suspend fun updateLoanStatus(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+        @Path(value="id",encoded = true) profileId:String,
+        )
+
 }
