@@ -4,11 +4,17 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseBindingListAdapter
 import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
+import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.ItemLoanContractTableItemBinding
 import com.example.bankmanagement.models.LoanContract
+import com.example.bankmanagement.models.LoanProfile
 
-class ContractAdapter : BaseBindingListAdapter<LoanContract>(
+class ContractAdapter(
+    itemClickListener: BaseItemClickListener<LoanContract>
+) : BaseBindingListAdapter<LoanContract>(
     DiffCallback(),
+    itemClickListener = itemClickListener
+
 ){
 
     override fun getItemViewType(position: Int): Int {

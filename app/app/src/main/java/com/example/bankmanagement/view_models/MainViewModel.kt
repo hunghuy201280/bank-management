@@ -15,4 +15,6 @@ class MainViewModel
 constructor(): BaseUiViewModel<BaseUserView>() {
     val currentBranch:MutableLiveData<BranchInfo> = MutableLiveData();
     val currentStaff:MutableLiveData<Staff> = MutableLiveData();
+
+
 }

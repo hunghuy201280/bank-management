@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.dashboard.contract.ContractViewModel" />
 
     </data>
 
@@ -234,7 +237,11 @@
                     android:orientation="vertical">
 
                     <include layout="@layout/item_loan_contract_table_header" />
-
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/loanContractRV"
+                        style="@style/AppRecyclerView"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/item_loan_contract_table_item"/>
                 </LinearLayout>
 
 

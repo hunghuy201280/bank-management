@@ -1,6 +1,7 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
@@ -45,7 +46,10 @@ interface MainRepository {
     suspend fun updateLoanStatus(
         status: LoanStatus,
         profileId:String,
-    );
+    )
+
+    suspend fun getContracts(
+    ):ArrayList<LoanContract>
 
 
 

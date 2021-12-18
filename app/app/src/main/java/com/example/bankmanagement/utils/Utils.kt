@@ -1,5 +1,6 @@
 package com.example.bankmanagement.utils
 
+import android.app.DatePickerDialog
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
@@ -15,8 +16,10 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.example.bankmanagement.R
 import com.example.bankmanagement.repo.MainRepository
+import com.example.bankmanagement.utils.listener.ValueCallBack
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.*
+import org.joda.time.DateTime
 import retrofit2.HttpException
 import java.io.File
 import java.io.FileInputStream
@@ -28,7 +31,20 @@ import kotlin.concurrent.schedule
 class Utils {
 
     companion object {
+        fun showDatePicker(v: View,callback: ValueCallBack<DateTime>){
+            val c = Calendar.getInstance()
+            val initYear = c.get(Calendar.YEAR)
+            val initMonth = c.get(Calendar.MONTH)
+            val initDay = c.get(Calendar.DAY_OF_MONTH)
 
+
+            val dpd = DatePickerDialog(v.context, { _, year, monthOfYear, dayOfMonth ->
+                val result= DateTime(year,monthOfYear+1,dayOfMonth,0,0)
+                callback.onValue(result)
+            }, initYear, initMonth, initDay)
+
+            dpd.show()
+        }
         fun showNotifyDialog(
             context: Context,
             mainText: String = "Completed",

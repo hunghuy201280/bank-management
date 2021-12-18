@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.example.bankmanagement.models.LoanContract" />
@@ -15,31 +17,39 @@
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.id}" />
+            android:text="@{item.contractNumber}"
+            tools:text="Contract number" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.loanProfile.loanApplicationNumber}" />
+            android:text="@{item.loanProfile.loanApplicationNumber}"
+            tools:text="Profile number" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.loanProfile.staff.name}" />
+            android:text="@{item.loanProfile.staff.name}"
+            tools:text="Staff in charges" />
 
         <TextView
             style="@style/ContractListTableTextItem"
+            tools:text="BOD in charges"
             android:text="@{item.loanProfile.approver.name}" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            bindCommonDate="@{item.dateCreated}" />
+            bindCommonDate="@{item.createdAt}"
+            tools:text="Date created"
+            />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.loanProfile.loanType.getName()}" />
+            android:text="@{item.loanProfile.loanType.getName()}"
+            tools:text="Loan type" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{`$` + item.loanProfile.moneyToLoan}" />
+            android:text="@{`$` + item.loanProfile.moneyToLoan}"
+            tools:text="Money to loan" />
 
     </LinearLayout>
 

@@ -6,6 +6,7 @@ import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.MainRepositoryImpl
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
+import com.example.bankmanagement.repo.dtos.loan_contract.*
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
 import com.google.gson.GsonBuilder
@@ -40,6 +41,42 @@ class RepoModule {
             .create(ApiService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun providePaymentReceiptMapper(): PaymentReceiptDtoMapper {
+        return PaymentReceiptDtoMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideLiquidationDecisionDtoMapper(
+        paymentReceiptDtoMapper: PaymentReceiptDtoMapper
+    ): LiquidationDecisionDtoMapper {
+        return LiquidationDecisionDtoMapper(paymentReceiptDtoMapper)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLiquidationApplicationDtoMapper(
+        decisionDtoMapper: LiquidationDecisionDtoMapper,
+    ): LiquidationApplicationDtoMapper {
+        return LiquidationApplicationDtoMapper(decisionDtoMapper)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDisburseCertificateDtoMapper(): DisburseCertificateDtoMapper {
+        return DisburseCertificateDtoMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideLoanContractDtoMapper(
+        disburseCertificateDtoMapper: DisburseCertificateDtoMapper,
+        liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper
+    ): LoanContractDtoMapper {
+        return LoanContractDtoMapper(disburseCertificateDtoMapper, liquidationApplicationDtoMapper)
+    }
 
     @Singleton
     @Provides
@@ -89,7 +126,8 @@ class RepoModule {
         branchInfoMapper: BranchInfoDtoMapper,
         staffDtoMapper: StaffDtoMapper,
         profileDtoMapper: LoanProfileDtoMapper,
-        customerDtoMapper: CustomerDtoMapper
+        customerDtoMapper: CustomerDtoMapper,
+        loanContractDtoMapper: LoanContractDtoMapper,
     ): MainRepository {
         return MainRepositoryImpl(
             apiService = apiService,
@@ -97,7 +135,7 @@ class RepoModule {
             staffDtoMapper = staffDtoMapper,
             profileMapper = profileDtoMapper,
             customerDtoMapper = customerDtoMapper,
-
-            );
+            loanContractDtoMapper = loanContractDtoMapper
+        );
     }
 }

@@ -3,6 +3,8 @@ package com.example.bankmanagement.repo
 import com.example.bankmanagement.models.*
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
+import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
+import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
@@ -26,7 +28,8 @@ constructor(
     private val customerDtoMapper: CustomerDtoMapper,
     private val apiService: ApiService,
     private var accessToken: String = "",
-) : MainRepository {
+    private val loanContractDtoMapper: LoanContractDtoMapper,
+    ) : MainRepository {
 
 
     override suspend fun getBranchInfo(branchCode: String): BranchInfo {
@@ -102,13 +105,24 @@ constructor(
             multipartFiles.add(part);
         }
 
-        val response = apiService.upFiles(token=accessToken,images=multipartFiles);
+        val response = apiService.upFiles(token = accessToken, images = multipartFiles);
         return response;
 
     }
 
     override suspend fun updateLoanStatus(status: LoanStatus, profileId: String) {
-        val response = apiService.updateLoanStatus(token=accessToken, profileId = profileId, body = mapOf("status" to status.value))
+        val response = apiService.updateLoanStatus(
+            token = accessToken,
+            profileId = profileId,
+            body = mapOf("status" to status.value)
+        )
+    }
+
+    override suspend fun getContracts(): ArrayList<LoanContract> {
+        val response = apiService.getLoanContracts(token = accessToken)
+        val contracts=response.map { loanContractDtoMapper.fromDto(it) }
+        return  ArrayList(contracts)
+
     }
 
 

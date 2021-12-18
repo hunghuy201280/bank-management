@@ -2,6 +2,7 @@ package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
 import com.example.bankmanagement.repo.dtos.customer.GetCustomerResponse
+import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
@@ -80,5 +81,13 @@ interface ApiService {
         @Body body: Map<String, Any>,
         @Path(value="id",encoded = true) profileId:String,
         )
+
+
+    @GET("loan_contracts?sortBy=createdAt:desc")
+    suspend fun getLoanContracts(
+        @Header(
+            "Authorization",
+        ) token: String,
+    ): ArrayList<LoanContractDto>
 
 }

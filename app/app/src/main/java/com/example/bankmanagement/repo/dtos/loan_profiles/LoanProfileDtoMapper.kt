@@ -8,7 +8,6 @@ import com.example.bankmanagement.utils.ModelMapper
 import javax.inject.Inject
 
 class LoanProfileDtoMapper
-    @Inject
     constructor(
         private val customerMapper:CustomerDtoMapper,
        private val staffDtoMapper: StaffDtoMapper

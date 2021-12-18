@@ -39,11 +39,18 @@ constructor(
 
     init {
         getProfiles()
+        //testApi()
     }
 
      fun getProfiles() {
         viewModelScope.launch(Dispatchers.IO) {
             _getProfiles();
+        }
+    }
+    fun testApi(){
+        viewModelScope.launch(Dispatchers.IO) {
+           val res= mainRepo.getContracts();
+            Log.d(TAG,"TEST API RES: $res");
         }
     }
 
