@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_170sdp"
+    android:layout_height="@dimen/_108sdp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Warning" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/cornflower_blue" />
+
+    <TextView
+        android:id="@+id/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        tools:text="This loan profile will be deleted permanently.\nDo you want to delete?" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelButton"
+            style="@style/ButtonDefault"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_gravity="center"
+            android:elevation="0dp"
+            android:text="@string/cancel"
+            android:textSize="@dimen/_8ssp"
+            app:cornerRadius="@dimen/_6sdp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/okButton"
+            style="@style/ButtonDefault"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_gravity="center"
+            android:elevation="0dp"
+            android:text="@string/delete"
+            android:textSize="@dimen/_8ssp"
+            app:cornerRadius="@dimen/_6sdp" />
+    </LinearLayout>
+</LinearLayout>

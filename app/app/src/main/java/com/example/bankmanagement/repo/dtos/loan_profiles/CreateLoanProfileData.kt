@@ -18,13 +18,13 @@ data class CreateLoanProfileData(
 ){
     fun validate():String?{
         if(proofOfIncome.isEmpty()) return "Please choose proof of income images"
-        if(signatureImg.isEmpty()) return "Please choose proof of income images"
+        if(signatureImg.isBlank()) return "Please choose proof of income images"
         if(moneyToLoan<=0.0) return "Invalid money to loan"
-        if(loanPurpose.isEmpty()) return "Invalid loan purpose"
+        if(loanPurpose.isBlank()) return "Invalid loan purpose"
         if(loanDuration<=0) return "Invalid loan duration"
-        if(collateral.isEmpty()) return "Invalid collateral"
-        if(expectedSourceMoneyToRepay.isEmpty()) return "Invalid expected money to repay"
-        if(benefitFromLoan.isEmpty()) return "Invalid benefit from loan"
+        if(collateral.isBlank()) return "Invalid collateral"
+        if(expectedSourceMoneyToRepay.isBlank()) return "Invalid expected money to repay"
+        if(benefitFromLoan.isBlank()) return "Invalid benefit from loan"
 
         return null;
     }

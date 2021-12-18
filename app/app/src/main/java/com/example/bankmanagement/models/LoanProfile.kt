@@ -49,8 +49,8 @@ enum class LoanStatus(val value: Int) {
     @SerializedName("-1")
     All(-1);
     companion object {
-        private val map = LoanStatus.values().associateBy(LoanStatus::value)
-        fun fromInt(type: Int): LoanStatus = map[type]!!
+        fun getValues():List<String> = values().map { it.getName() }
+
     }
     fun getName():String{
         return when(this){
@@ -94,6 +94,10 @@ enum class LoanType(val value: Int) {
     companion object {
         private val map = LoanType.values().associateBy(LoanType::value)
         fun fromInt(type: Int): LoanType = map[type]!!
+
+
+        fun getValues():List<String> = values().dropLast(1).map { it.getName() }
+        fun getFilterValues():List<String> = values().map { it.getName() }
     }
     fun getName():String{
         return when(this){

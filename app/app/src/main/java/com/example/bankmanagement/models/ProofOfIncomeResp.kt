@@ -80,6 +80,19 @@ enum class IncomeType(val value: Int) {
     CarRentalContract(4),
 
     @SerializedName("5")
-    BusinessLicense(5),
+    BusinessLicense(5);
+    companion object {
+        fun getValues():List<String> = values().map { it.getName() }
+    }
 
+    fun getName():String{
+        return when(this){
+            LaborContract ->"Labor Contract"
+            SalaryConfirmation ->"Salary Confirmation"
+            HouseRentalContract ->"House Rental Contract"
+            CarRentalContract ->"Car Rental Contract"
+            BusinessLicense ->"Business License"
+            else->""
+        }
+    }
 }

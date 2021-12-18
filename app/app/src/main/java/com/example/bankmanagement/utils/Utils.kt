@@ -27,15 +27,35 @@ import kotlin.concurrent.schedule
 
 class Utils {
 
-    companion object{
+    companion object {
+
+        fun showNotifyDialog(
+            context: Context,
+            mainText: String = "Completed",
+            title: String = "Title"
+        ) {
+            val dialog = MaterialDialog(context).apply {
+                title(text = title)
+                message(text = mainText)
+            }
+            Timer().schedule(2000) {
+                GlobalScope.launch(Dispatchers.Main) {
+                }
+                dialog.dismiss()
+            }
+            dialog.show()
+
+
+        }
 
         fun showCompleteDialog(
             context: Context,
-            mainText:String="Completed",
-            onDismiss:View.OnClickListener?
-        ){
-            val dialog=MaterialDialog(context).noAutoDismiss().customView(R.layout.app_complete_dialog)
-            dialog.findViewById<TextView>(R.id.completeTextView).text=mainText
+            mainText: String = "Completed",
+            onDismiss: View.OnClickListener?
+        ) {
+            val dialog =
+                MaterialDialog(context).noAutoDismiss().customView(R.layout.app_complete_dialog)
+            dialog.findViewById<TextView>(R.id.completeTextView).text = mainText
             Timer().schedule(2000) {
                 GlobalScope.launch(Dispatchers.Main) {
                     onDismiss?.onClick(dialog.view)
@@ -45,28 +65,30 @@ class Utils {
             dialog.show()
 
         }
+
         fun showAlertDialog(
             context: Context,
-            title:String="Warning",
-            body:String="This loan profile will be deleted permanently.\nDo you want to delete?",
-            negativeText:String="Cancel",
-            positiveText:String="OK",
-            onPositiveClick:View.OnClickListener?=null,
-            onNegativeClick: View.OnClickListener?=null,
-        ){
-            val dialog=MaterialDialog(context).noAutoDismiss().customView(R.layout.app_alert_dialog)
-            dialog.findViewById<TextView>(R.id.title).text=title
-            dialog.findViewById<TextView>(R.id.body).text=body
+            title: String = "Warning",
+            body: String = "This loan profile will be deleted permanently.\nDo you want to delete?",
+            negativeText: String = "Cancel",
+            positiveText: String = "OK",
+            onPositiveClick: View.OnClickListener? = null,
+            onNegativeClick: View.OnClickListener? = null,
+        ) {
+            val dialog =
+                MaterialDialog(context).noAutoDismiss().customView(R.layout.app_alert_dialog)
+            dialog.findViewById<TextView>(R.id.title).text = title
+            dialog.findViewById<TextView>(R.id.body).text = body
             dialog.findViewById<MaterialButton>(R.id.cancelButton).apply {
-                text=negativeText
-                setOnClickListener{
+                text = negativeText
+                setOnClickListener {
                     onNegativeClick?.onClick(this)
                     dialog.dismiss()
                 }
             }
             dialog.findViewById<MaterialButton>(R.id.okButton).apply {
-                text=positiveText
-                setOnClickListener{
+                text = positiveText
+                setOnClickListener {
                     onPositiveClick?.onClick(this)
                     dialog.dismiss()
                 }
@@ -75,7 +97,12 @@ class Utils {
             dialog.show()
 
         }
-         suspend fun uploadFile(context: Context, uris: List<Uri>?,mainRepo:MainRepository): List<String> {
+
+        suspend fun uploadFile(
+            context: Context,
+            uris: List<Uri>?,
+            mainRepo: MainRepository
+        ): List<String> {
             if (uris == null || uris.isEmpty()) return listOf();
             val cacheDir = context.cacheDir;
             val contentResolver = context.contentResolver;
@@ -131,6 +158,7 @@ class Utils {
             }
             return circularProgressDrawable;
         }
+
         fun <T> debounce(
             waitMs: Long = 300L,
             coroutineScope: CoroutineScope,

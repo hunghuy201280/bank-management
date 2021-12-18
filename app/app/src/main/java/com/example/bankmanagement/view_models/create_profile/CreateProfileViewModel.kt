@@ -14,8 +14,10 @@ import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.utils.Utils.Companion.getFileName
+import com.example.bankmanagement.utils.Utils.Companion.showNotifyDialog
 import com.example.bankmanagement.utils.Utils.Companion.uploadFile
 import com.example.bankmanagement.view.clockin.ClockInOutUICallback
+import com.example.bankmanagement.view.create_profile.CreateProfile2UICallback
 import com.example.bankmanagement.view.create_profile.CreateProfile3UICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +40,8 @@ constructor(
 
     val selectedCustomer = MutableLiveData<Customer>();
 
-     var uiCallBack3: CreateProfile3UICallback?=null
+    var uiCallBack3: CreateProfile3UICallback? = null
+    var uiCallBack2: CreateProfile2UICallback? = null
 
     val moneyToLoan = MutableLiveData<Double>()
     val loanDuration = MutableLiveData<Long>()
@@ -92,15 +95,15 @@ constructor(
                 )
 
             val data = CreateLoanProfileData(
-                customerId = selectedCustomer.value?.id?:"",
+                customerId = selectedCustomer.value?.id ?: "",
                 proofOfIncome = proofOfIncomeData,
-                moneyToLoan = moneyToLoan.value?:0.0,
-                loanPurpose = loanPurpose.value?:"",
-                loanDuration = loanDuration.value?:0,
-                collateral = collateral.value?:"",
-                expectedSourceMoneyToRepay = expectedSourceMoneyToRepay.value?:"",
-                benefitFromLoan = benefitFromLoan.value?:"",
-                signatureImg = signatureUrls.firstOrNull()?:"",
+                moneyToLoan = moneyToLoan.value ?: 0.0,
+                loanPurpose = loanPurpose.value ?: "",
+                loanDuration = loanDuration.value ?: 0,
+                collateral = collateral.value ?: "",
+                expectedSourceMoneyToRepay = expectedSourceMoneyToRepay.value ?: "",
+                benefitFromLoan = benefitFromLoan.value ?: "",
+                signatureImg = signatureUrls.firstOrNull() ?: "",
                 loanType = selectedLoanType.value!!,
                 branchInfo = branchInfo.id,
             );
@@ -115,7 +118,7 @@ constructor(
                 }
 
                 mainRepo.createLoanProfile(data = data);
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     uiCallBack3?.onProfileCreated();
                 }
             } catch (e: HttpException) {
@@ -127,6 +130,45 @@ constructor(
         }
     }
 
+    fun navigateFrom2To3(v: View) {
+        val proofOfIncomeData = arrayListOf<ProofOfIncomeRequest>();
+        proofOfIncomes.value?.let { incomeMap ->
+            for (item in incomeMap.entries) {
+                val tempUrls = item.value.toList();
+                proofOfIncomeData.addAll(tempUrls.map { url ->
+                    ProofOfIncomeRequest(
+                        imageType = item.key,
+                        imageID = url.toString()
+                    )
+                })
+            }
+        }
+        val data = CreateLoanProfileData(
+            customerId = selectedCustomer.value?.id ?: "",
+            proofOfIncome = proofOfIncomeData,
+            moneyToLoan = moneyToLoan.value ?: 0.0,
+            loanPurpose = loanPurpose.value ?: "",
+            loanDuration = loanDuration.value ?: 0,
+            collateral = collateral.value ?: "",
+            expectedSourceMoneyToRepay = expectedSourceMoneyToRepay.value ?: "",
+            benefitFromLoan = benefitFromLoan.value ?: "",
+            signatureImg = signatureImage.value?.toString() ?: "",
+            loanType = selectedLoanType.value!!,
+            branchInfo = branchInfo.id,
+        );
+        try {
+            val validateDataResult = data.validate();
+            if (validateDataResult != null) {
+                return showNotifyDialog(v.context, title = "Error", mainText = validateDataResult)
+            }
+            uiCallBack2?.onNextClick()
+        } catch (e: HttpException) {
+            Log.d(TAG, "Error happened: ${e.response()?.errorBody()?.string()} ");
+        } catch (e: Exception) {
+            Log.d(TAG, "Create profile validate data error: ${e.message} ");
+
+        }
+    }
 
     fun signatureImageSelected(uri: Uri) {
         signatureImage.value = uri

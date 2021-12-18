@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment") :
-    BaseFragment<FragmentCreateProfile2Binding, CreateProfileViewModel>(), BaseUserView {
+    BaseFragment<FragmentCreateProfile2Binding, CreateProfileViewModel>(), CreateProfile2UICallback {
     override fun layoutRes(): Int = R.layout.fragment_create_profile2
 
     override val viewModel: CreateProfileViewModel by activityViewModels()
@@ -44,7 +44,7 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
         binding.viewModel = viewModel;
         binding.mainVM = mainVM;
         viewModel.init(this);
-
+        viewModel.uiCallBack2=this
         viewModel.proofOfIncomes.observe(this, {
             proofOfIncomeAdapter.submitList(it[viewModel.currentIncomeType.value])
             proofOfIncomeAdapter.notifyDataSetChanged()
@@ -63,13 +63,13 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
 
         //region loantype adapter
         val loanAdapter =
-            ArrayAdapter(requireContext(), R.layout.list_item, LoanType.values().map { it.name });
-        binding.loanTypeDropDown.setAdapter(loanAdapter)
+            ArrayAdapter(requireContext(), R.layout.list_item, LoanType.getValues());
+        binding.loanTypeDropDown.adapter = loanAdapter
         //endregion
 
         //region proof of income type adapter
         val proofOfIncomeTypeAdapter =
-            ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
+            ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.getValues());
         Log.d(TAG, "create adapter 2 ${proofOfIncomeTypeAdapter.count}");
 
         binding.proofOfIncomeTypeDropDown.adapter = proofOfIncomeTypeAdapter
@@ -91,20 +91,27 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
         binding.previousButton.setOnClickListener {
             findNavController().popBackStack();
         }
-        binding.nextButton.setOnClickListener {
-            findNavController().navigate(R.id.action_createProfile2Fragment_to_createProfile3Fragment);
-        }
+
         binding.addProofIncome.setOnClickListener {
             pickProofOfIncomeImages.launch("image/*")
         }
         binding.addSignature.setOnClickListener {
             pickSignatureImage.launch("image/*")
         }
-        binding.loanTypeDropDown.setOnItemClickListener { _, _, position, _ ->
-            viewModel.selectedLoanType.value = LoanType.values()[position];
-        }
 
 
+        binding.loanTypeDropDown.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.selectedLoanType.value = LoanType.values()[position];
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
         binding.proofOfIncomeTypeDropDown.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -139,6 +146,10 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let { viewModel.signatureImageSelected(it); }
         }
+
+    override fun onNextClick() {
+        findNavController().navigate(R.id.action_createProfile2Fragment_to_createProfile3Fragment);
+    }
 
 
 }

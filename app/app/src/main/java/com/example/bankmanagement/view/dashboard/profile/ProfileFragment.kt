@@ -50,16 +50,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     override fun initView() {
 
         //region Loan type dropdown
-        val loanTypes = LoanType.values().map { it.getName() };
+        val loanTypes = LoanType.getFilterValues()
         val loanTypesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanTypes)
         binding.loanTypeDropDown.adapter = loanTypesAdapter
 
         //endregion
 
         //region Loan status dropdown
-        val loanStatuses = LoanStatus.values().map { it.getName() };
+        val loanStatuses = LoanStatus.getValues();
         val loanStatusesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanStatuses)
-        binding.loanStatusDropdown.setAdapter(loanStatusesAdapter)
+        binding.loanStatusDropdown.adapter = loanStatusesAdapter
 
         //endregion
     }
