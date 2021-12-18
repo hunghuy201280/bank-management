@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeViewModel>() {
+class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeViewModel>(),DeviceCodeUICallback {
     override fun layoutRes(): Int = R.layout.fragment_device_code;
 
     override val viewModel: DeviceCodeViewModel by viewModels()
@@ -27,19 +27,17 @@ class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeVie
 
         viewModel.branch.observe(this,{
             it?.let {
-                if (UserHelper.alreadyLogInDevice != true) {
-                    UserHelper.alreadyLogInDevice = true
+                if (UserHelper.branchCode.isNullOrBlank() || UserHelper.branchCode!=it.branchCode) {
+                    UserHelper.branchCode = it.branchCode
                 }
                 mainVM.currentBranch.value=it;
-                findNavController().navigate(R.id.action_deviceCodeFragment_to_signInFragment)
+                navigateToSignIn()
             }
         })
     }
 
     override fun initView() {
-        if (UserHelper.alreadyLogInDevice == true) {
-            findNavController().navigate(R.id.action_deviceCodeFragment_to_signInFragment)
-        }
+
     }
 
     override fun initData() {
@@ -50,6 +48,10 @@ class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeVie
 
     }
 
+    override fun navigateToSignIn() {
+        findNavController().navigate(R.id.action_deviceCodeFragment_to_signInFragment)
+
+    }
 
 
 }

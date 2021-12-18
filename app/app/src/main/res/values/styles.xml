@@ -106,7 +106,7 @@
     </style>
 
     <style name="DashboardSpinnerFilter" parent="DashboardEditTextFilter">
-        <item name="android:layout_height">@dimen/_16sdp</item>
+        <item name="android:layout_height">@dimen/_24sdp</item>
     </style>
 
     <style name="ContractListTableTextHeader" parent="DashboardTextContentNormal">

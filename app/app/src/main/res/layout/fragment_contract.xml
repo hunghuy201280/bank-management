@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.bankmanagement.view_models.dashboard.contract.ContractViewModel" />
@@ -42,7 +45,18 @@
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/DashboardActionButton"
+                    android:onClick="@{()->viewModel.onFindClicked()}"
                     android:text="@string/find" />
+                <Space
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/resetFilterButton"
+                    style="@style/DashboardActionButton"
+                    android:layout_width="wrap_content"
+                    android:text="@string/reset_filter"
+                    android:onClick="@{()->viewModel.resetFilter()}" />
 
 
             </LinearLayout>
@@ -76,7 +90,10 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/contract_number" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                style="@style/DashboardEditTextFilter"
+                                android:text="@={viewModel.contractNumber}"
+                                />
 
 
                         </LinearLayout>
@@ -91,7 +108,10 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/staff_in_charge" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:text="@={viewModel.staffInCharge}"
+
+                                style="@style/DashboardEditTextFilter" />
 
 
                         </LinearLayout>
@@ -106,7 +126,10 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/bod_in_charge" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:text="@={viewModel.BODInCharge}"
+
+                                style="@style/DashboardEditTextFilter" />
 
 
                         </LinearLayout>
@@ -131,7 +154,10 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/loan_profile_number" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:text="@={viewModel.profileNumber}"
+
+                                style="@style/DashboardEditTextFilter" />
 
 
                         </LinearLayout>
@@ -146,8 +172,9 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/loan_type" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
-
+                            <Spinner
+                                android:id="@+id/loanTypeDropDown"
+                                style="@style/DashboardSpinnerFilter" />
 
                         </LinearLayout>
 
@@ -161,7 +188,11 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/date_created" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:onClick="@{(v)->viewModel.showDatePicker(v)}"
+                                android:focusable="false"
+                                bindDateTime="@{viewModel.dateCreated}"
+                                style="@style/DashboardEditTextFilter" />
 
 
                         </LinearLayout>
@@ -185,7 +216,9 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/money_to_loan" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                app:text="@={viewModel.moneyToLoan}"
+                                style="@style/DashboardEditTextFilter" />
 
 
                         </LinearLayout>
@@ -200,7 +233,10 @@
                                 style="@style/DashboardTextContentNormal"
                                 android:text="@string/phone_number" />
 
-                            <com.google.android.material.textfield.TextInputEditText style="@style/DashboardEditTextFilter" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:text="@={viewModel.phoneNumber}"
+
+                                style="@style/DashboardEditTextFilter" />
 
 
                         </LinearLayout>
@@ -237,11 +273,12 @@
                     android:orientation="vertical">
 
                     <include layout="@layout/item_loan_contract_table_header" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/loanContractRV"
                         style="@style/AppRecyclerView"
                         tools:itemCount="10"
-                        tools:listitem="@layout/item_loan_contract_table_item"/>
+                        tools:listitem="@layout/item_loan_contract_table_item" />
                 </LinearLayout>
 
 

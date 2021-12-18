@@ -73,9 +73,14 @@ class RepoModule {
     @Provides
     fun provideLoanContractDtoMapper(
         disburseCertificateDtoMapper: DisburseCertificateDtoMapper,
-        liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper
+        liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
+        loanProfileDtoMapper: LoanProfileDtoMapper,
     ): LoanContractDtoMapper {
-        return LoanContractDtoMapper(disburseCertificateDtoMapper, liquidationApplicationDtoMapper)
+        return LoanContractDtoMapper(
+            disburseCertificateDtoMapper,
+            liquidationApplicationDtoMapper,
+            loanProfileDtoMapper
+        )
     }
 
     @Singleton

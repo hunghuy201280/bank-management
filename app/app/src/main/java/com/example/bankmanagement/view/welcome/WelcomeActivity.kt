@@ -44,7 +44,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding, WelcomeViewModel>()
     }
 
     override fun initAction() {
-        if (UserHelper.alreadyLogInDevice == true) {
+        if (UserHelper.branchCode?.isNotEmpty()==true) {
             openActivity<MainActivity1>()
         }
     }

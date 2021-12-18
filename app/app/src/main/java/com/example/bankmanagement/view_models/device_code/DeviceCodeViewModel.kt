@@ -4,10 +4,14 @@ package com.example.bankmanagement.view_models.device_code
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
+import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.models.BranchInfo
 import com.example.bankmanagement.repo.MainRepository
+import com.example.bankmanagement.utils.UserHelper
+import com.example.bankmanagement.view.device_code.DeviceCodeUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -21,12 +25,17 @@ class DeviceCodeViewModel
 @Inject
 constructor(
     private val mainRepo: MainRepository,
-) : BaseUiViewModel<BaseUserView>() {
+) : BaseUiViewModel<DeviceCodeUICallback>() {
 
     private val TAG: String = "DeviceCodeViewModel";
-    val pinCode: MutableLiveData<String> = MutableLiveData("");
+    val pinCode: MutableLiveData<String> = MutableLiveData(UserHelper.branchCode);
     val branch: MutableLiveData<BranchInfo> = MutableLiveData();
 
+    init {
+        if (pinCode.value?.isNotEmpty()==true) {
+            getBranchInfo()
+        }
+    }
     fun getBranchInfo() {
         showLoading(true);
 

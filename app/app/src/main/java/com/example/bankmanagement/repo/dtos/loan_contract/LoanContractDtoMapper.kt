@@ -1,18 +1,21 @@
 package com.example.bankmanagement.repo.dtos.loan_contract
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.utils.ModelMapper
 
 class LoanContractDtoMapper
     (
     private val disburseCertificateDtoMapper: DisburseCertificateDtoMapper,
-    private val liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper
+    private val liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
+    private val loanProfileDtoMapper: LoanProfileDtoMapper
+
 ) : ModelMapper<LoanContractDto, LoanContract> {
     override fun fromDto(dto: LoanContractDto): LoanContract {
         return LoanContract(
             id = dto.id,
             branchInfo = dto.branchInfo,
-            loanProfile = dto.loanProfile,
+            loanProfile = loanProfileDtoMapper.fromDto(dto.loanProfile),
             commitment = dto.commitment,
             signatureImg = dto.signatureImg,
             createdAt = dto.createdAt,
@@ -34,7 +37,7 @@ class LoanContractDtoMapper
         return LoanContractDto(
             id = model.id,
             branchInfo = model.branchInfo,
-            loanProfile = model.loanProfile,
+            loanProfile = loanProfileDtoMapper.toDto(model.loanProfile),
             commitment = model.commitment,
             signatureImg = model.signatureImg,
             createdAt = model.createdAt,

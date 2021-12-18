@@ -5,15 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
+import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentContractBinding
 import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.models.LoanProfile
+import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.view.dashboard.profile.ProfileAdapter
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.dashboard.contract.ContractViewModel
@@ -21,9 +25,9 @@ import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel>() {
+class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel>(),BaseUserView {
 
-    override fun layoutRes(): Int=R.layout.fragment_contract
+    override fun layoutRes(): Int = R.layout.fragment_contract
 
     override val viewModel: ContractViewModel by viewModels()
 
@@ -36,14 +40,20 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
         }
     );
 
-    override fun viewModelClass(): Class<ContractViewModel>
-            =ContractViewModel::class.java
+    override fun viewModelClass(): Class<ContractViewModel> = ContractViewModel::class.java
 
 
     override fun initViewModel(viewModel: ContractViewModel) {
+        viewModel.init(this)
+        binding.viewModel=viewModel
     }
 
     override fun initView() {
+        //region Loan type dropdown
+        val loanTypes = LoanType.getFilterValues()
+        val loanTypesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanTypes)
+        binding.loanTypeDropDown.adapter = loanTypesAdapter
+        //endregion
     }
 
     override fun initData() {
@@ -54,7 +64,26 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
     override fun initAction() {
         viewModel.loanContracts.observe(this, {
             contractAdapter.submitList(it)
+        })
+
+        //region loanTypeDropDown
+        binding.loanTypeDropDown.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.loanType.value = LoanType.values()[position];
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+        viewModel.loanType.observe(this, {
+            binding.loanTypeDropDown.setSelection(LoanType.values().indexOf(it), true)
         });
+        //endregion
     }
 
 

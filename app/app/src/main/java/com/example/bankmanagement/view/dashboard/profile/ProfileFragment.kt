@@ -74,11 +74,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
                     id: Long
                 ) {
                     viewModel.selectedLoanType.value = LoanType.values()[position];
-
                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
         binding.loanStatusDropdown.onItemSelectedListener =

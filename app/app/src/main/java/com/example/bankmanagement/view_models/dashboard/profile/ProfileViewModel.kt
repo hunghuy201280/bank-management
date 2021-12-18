@@ -11,7 +11,9 @@ import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.repo.MainRepository
+import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
+import com.example.bankmanagement.utils.listener.ValueCallBack
 import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,59 +31,55 @@ constructor(
 ) : BaseUiViewModel<ProfileUICallback>() {
     private val TAG: String = "ProfileViewModel";
 
-    var selectedLoanType = MutableLiveData<LoanType>(LoanType.All)
-    var customerName = MutableLiveData<String>()
-    var moneyToLoan = MutableLiveData<Double>()
-    var loanId = MutableLiveData<String>()
-    var dateCreated = MutableLiveData<DateTime>()
-    var loanStatus = MutableLiveData<LoanStatus>(LoanStatus.All)
-    var loanProfiles = MutableLiveData<List<LoanProfile>>(listOf())
+    val selectedLoanType = MutableLiveData<LoanType>(LoanType.All)
+    val customerName = MutableLiveData<String>()
+    val moneyToLoan = MutableLiveData<Double>()
+    val loanId = MutableLiveData<String>()
+    val dateCreated = MutableLiveData<DateTime>()
+    val loanStatus = MutableLiveData<LoanStatus>(LoanStatus.All)
+    val loanProfiles = MutableLiveData<List<LoanProfile>>(listOf())
 
     init {
         getProfiles()
         //testApi()
     }
 
-     fun getProfiles() {
+    fun getProfiles() {
         viewModelScope.launch(Dispatchers.IO) {
             _getProfiles();
         }
     }
-    fun testApi(){
+
+    fun testApi() {
         viewModelScope.launch(Dispatchers.IO) {
-           val res= mainRepo.getContracts();
-            Log.d(TAG,"TEST API RES: $res");
+            val res = mainRepo.getContracts();
+            Log.d(TAG, "TEST API RES: $res");
         }
     }
 
-    fun resetFilter(){
+    fun resetFilter() {
         getProfiles();
-        selectedLoanType.value=LoanType.All
-        customerName.value=null
-        moneyToLoan.value=null
-        loanId.value=null
-        dateCreated.value=null
-        loanStatus.value=LoanStatus.All
-        loanProfiles.value=null
+        selectedLoanType.value = LoanType.All
+        customerName.value = null
+        moneyToLoan.value = null
+        loanId.value = null
+        dateCreated.value = null
+        loanStatus.value = LoanStatus.All
+        loanProfiles.value = null
     }
+
     private suspend fun _getProfiles() {
         val profiles = mainRepo.getLoanProfiles();
         loanProfiles.postValue(profiles);
 
     }
 
-    fun showDatePicker(v: View){
-        val c = Calendar.getInstance()
-        val initYear = c.get(Calendar.YEAR)
-        val initMonth = c.get(Calendar.MONTH)
-        val initDay = c.get(Calendar.DAY_OF_MONTH)
-
-
-        val dpd = DatePickerDialog(v.context, { _, year, monthOfYear, dayOfMonth ->
-            dateCreated.value=DateTime(year,monthOfYear+1,dayOfMonth,0,0);
-        }, initYear, initMonth, initDay)
-
-        dpd.show()
+    fun showDatePicker(v: View) {
+        Utils.showDatePicker(v, callback = object : ValueCallBack<DateTime> {
+            override fun onValue(value: DateTime) {
+                dateCreated.postValue(value)
+            }
+        })
     }
 
 
@@ -107,7 +105,7 @@ constructor(
             );
             val result = loanProfiles.value?.filter {
                 val _loanType =
-                    if (selectedLoanType.value == null || selectedLoanType.value==LoanType.All) true else selectedLoanType.value == it.loanType
+                    if (selectedLoanType.value == null || selectedLoanType.value == LoanType.All) true else selectedLoanType.value == it.loanType
 
                 val _customerName = if (customerName.value.isNullOrBlank()) true
                 else it.customer.name.contains(customerName.value!!)
@@ -115,14 +113,18 @@ constructor(
                 val _moneyToLoan =
                     if (moneyToLoan.value == null) true else moneyToLoan.value == it.moneyToLoan
 
-                val _loanId = if (loanId.value.isNullOrBlank()) true else it.loanApplicationNumber.contains(loanId.value!!)
+                val _loanId =
+                    if (loanId.value.isNullOrBlank()) true else it.loanApplicationNumber.contains(
+                        loanId.value!!
+                    )
                 val _dateCreated =
                     if (dateCreated.value == null) true else dateCreated.value!!.toLocalDate()
                         .isEqual(it.getDate().toLocalDate())
                 val _loanStatus =
-                    if (loanStatus.value == null ||loanStatus.value== LoanStatus.All) true else loanStatus.value == it.loanStatus
+                    if (loanStatus.value == null || loanStatus.value == LoanStatus.All) true else loanStatus.value == it.loanStatus
 
-               val predicateRes= _loanType && _customerName && _moneyToLoan && _loanId && _dateCreated && _loanStatus
+                val predicateRes =
+                    _loanType && _customerName && _moneyToLoan && _loanId && _dateCreated && _loanStatus
                 predicateRes
             }
 

@@ -1,21 +1,28 @@
 package com.example.bankmanagement.models
 
-import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
-
-
+import android.net.Uri
+import com.example.bankmanagement.constants.AppConfigs
+import org.joda.time.DateTime
 
 
 data class LoanContract(
     val id: String,
     val branchInfo: String,
-    val loanProfile: LoanProfileDto,
+    val loanProfile: LoanProfile,
     val commitment: String,
     val signatureImg: String,
     val createdAt: String,
     val contractNumber: String,
     val disburseCertificates: List<DisburseCertificate>,
     val liquidationApplications: List<LiquidationApplication>
-)
+){
+    fun getDate(): DateTime {
+        return DateTime.parse(createdAt);
+    }
+    fun getSignatureImage(): Uri {
+        return  Uri.parse( "${AppConfigs.baseUrl}images/$signatureImg")
+    }
+}
 
 data class DisburseCertificate(
     val id: String,
