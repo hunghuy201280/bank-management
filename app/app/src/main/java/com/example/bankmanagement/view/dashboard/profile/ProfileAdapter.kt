@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
-import com.example.bankmanagement.databinding.ItemRowLoanProfileBinding
+import com.example.bankmanagement.databinding.ItemLoanProfileTableItemBinding
 
 class ProfileAdapter(itemClickListener: BaseItemClickListener<LoanProfile>) : BaseBindingListAdapter<LoanProfile>(
 DiffCallback(),
@@ -14,13 +14,13 @@ DiffCallback(),
 ){
 
     override fun getItemViewType(position: Int): Int {
-        return R.layout.item_row_loan_profile;
+        return R.layout.item_loan_profile_table_item;
     }
 
     override fun onBindViewHolder(holder: BaseBindingViewHolder<LoanProfile>, position: Int) {
         val item = getItem(position);
         holder.bindItem(item);
-        val binding  = (holder.binding as ItemRowLoanProfileBinding);
+        val binding  = (holder.binding as ItemLoanProfileTableItemBinding);
 
 
     }

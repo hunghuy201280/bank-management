@@ -228,7 +228,15 @@
                 card_view:cardCornerRadius="@dimen/_3sdp"
                 card_view:cardElevation="@dimen/_2sdp">
 
-                <include layout="@layout/layout_loan_contract_list_table_header" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/item_loan_contract_table_header" />
+
+                </LinearLayout>
+
 
             </androidx.cardview.widget.CardView>
 

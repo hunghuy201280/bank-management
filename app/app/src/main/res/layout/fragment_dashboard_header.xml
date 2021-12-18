@@ -80,7 +80,7 @@
                 style="@style/TextPoppins.Medium.Wrap"
                 android:textColor="@color/secondaryBackground"
                 android:textSize="@dimen/H3"
-                android:text="@{`$` + String.valueOf(mainVM.currentBranch.branchBalance)}"
+                price="@{mainVM.currentBranch.branchBalance}"
                 tools:text="$ 1200.0" />
 
 

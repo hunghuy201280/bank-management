@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseBindingListAdapter
 import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
-import com.example.bankmanagement.databinding.LayoutLoanContractListTableItemBinding
+import com.example.bankmanagement.databinding.ItemLoanContractTableItemBinding
 import com.example.bankmanagement.models.LoanContract
 
 class ContractAdapter : BaseBindingListAdapter<LoanContract>(
@@ -12,13 +12,13 @@ class ContractAdapter : BaseBindingListAdapter<LoanContract>(
 ){
 
     override fun getItemViewType(position: Int): Int {
-        return R.layout.layout_loan_contract_list_table_item;
+        return R.layout.item_loan_contract_table_item;
     }
 
     override fun onBindViewHolder(holder: BaseBindingViewHolder<LoanContract>, position: Int) {
         val item = getItem(position);
         holder.bindItem(item);
-        val binding  = (holder.binding as LayoutLoanContractListTableItemBinding);
+        val binding  = (holder.binding as ItemLoanContractTableItemBinding);
 
 
     }

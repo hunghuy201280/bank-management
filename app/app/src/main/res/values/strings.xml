@@ -75,7 +75,7 @@
     <string name="contract_number">Contract number</string>
     <string name="staff_in_charge">Staff in charge</string>
     <string name="bod_in_charge">BOD in charge</string>
-    <string name="loan_profile_number">Loan profile number</string>
+    <string name="loan_profile_number">Profile number</string>
     <string name="phone_number">Phone number</string>
 
 </resources>
