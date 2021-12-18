@@ -95,7 +95,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
                             id: Long
                     ) {
                         viewModel.loanStatus.value = LoanStatus.values()[position];
-
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -110,7 +109,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         });
         viewModel.loanStatus.observe(this, {
             binding.loanStatusDropdown.setSelection(LoanStatus.values().indexOf(it),true)
-
         });
 
     }

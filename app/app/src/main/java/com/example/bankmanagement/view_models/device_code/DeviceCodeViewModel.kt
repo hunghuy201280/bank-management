@@ -38,10 +38,11 @@ constructor(
                 val info: BranchInfo = mainRepo.getBranchInfo(pinCode.value!!)
 
                 Log.d(TAG, info.branchAddress);
-                branch.postValue(info);
                 withContext(Dispatchers.Main){
                     showLoading(false);
                 }
+                branch.postValue(info);
+
             } catch (e: HttpException) {
                 Log.d(TAG, "Error happened: ${e.response()} ");
                 withContext(Dispatchers.Main){
