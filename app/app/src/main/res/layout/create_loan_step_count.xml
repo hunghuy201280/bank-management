@@ -16,10 +16,11 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextTitleH2"
+            android:textSize="@dimen/_9sdp"
             android:text="@string/_1"
             android:gravity="center"
+            android:textColor="@{currentStep>=1 ? @color/white : @color/secondaryText}"
             android:background="@{currentStep>=1?@drawable/circle_active_background:@drawable/circle_unactive_background,default=@drawable/circle_active_background}" />
 
         <View
@@ -28,10 +29,11 @@
             android:background="@{currentStep>=2?@color/cornflower_blue:@color/alto,default=@color/alto}" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextTitleH2"
+            android:textSize="@dimen/_9sdp"
             android:text="@string/_2"
             android:gravity="center"
+            android:textColor="@{currentStep>=1 ? @color/white : @color/secondaryText}"
             android:background="@{currentStep>=2?@drawable/circle_active_background:@drawable/circle_unactive_background,default=@drawable/circle_unactive_background}"  />
 
         <View
@@ -40,10 +42,11 @@
             android:background="@{currentStep>=3?@color/cornflower_blue:@color/alto,default=@color/alto}" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextTitleH2"
+            android:textSize="@dimen/_9sdp"
             android:text="@string/_3"
             android:gravity="center"
+            android:textColor="@{currentStep>=1 ? @color/white : @color/secondaryText}"
             android:background="@{currentStep>=3?@drawable/circle_active_background:@drawable/circle_unactive_background,default=@drawable/circle_unactive_background}"  />
 
     </LinearLayout>

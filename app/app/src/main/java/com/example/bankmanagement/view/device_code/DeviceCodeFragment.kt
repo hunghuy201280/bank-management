@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentDeviceCodeBinding
+import com.example.bankmanagement.utils.UserHelper
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.device_code.DeviceCodeViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
@@ -26,6 +27,9 @@ class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeVie
 
         viewModel.branch.observe(this,{
             it?.let {
+                if (UserHelper.alreadyLogInDevice != true) {
+                    UserHelper.alreadyLogInDevice = true
+                }
                 mainVM.currentBranch.value=it;
                 findNavController().navigate(R.id.action_deviceCodeFragment_to_signInFragment)
             }
@@ -33,7 +37,9 @@ class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeVie
     }
 
     override fun initView() {
-
+        if (UserHelper.alreadyLogInDevice == true) {
+            findNavController().navigate(R.id.action_deviceCodeFragment_to_signInFragment)
+        }
     }
 
     override fun initData() {

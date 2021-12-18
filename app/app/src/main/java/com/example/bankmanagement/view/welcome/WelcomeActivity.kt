@@ -2,12 +2,14 @@ package com.example.bankmanagement.view.welcome
 
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.ActivityWelcomeBinding
 import com.example.bankmanagement.utils.helper.SystemHelper
 import com.example.bankmanagement.utils.view.openActivity
 import com.example.bankmanagement.view_models.welcome.WelcomeViewModel
 import com.example.bankmanagement.base.activity.BaseActivity
+import com.example.bankmanagement.utils.UserHelper
 import com.example.bankmanagement.view_models.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -42,6 +44,9 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding, WelcomeViewModel>()
     }
 
     override fun initAction() {
+        if (UserHelper.alreadyLogInDevice == true) {
+            openActivity<MainActivity1>()
+        }
     }
 
 
