@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.viewmodel.BaseViewModel
+import com.example.bankmanagement.databinding.FragmentContractBinding
 import com.example.bankmanagement.view_models.MainViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ContractFragment : BaseFragment<ViewDataBinding, BaseViewModel>() {
+class ContractFragment : BaseFragment<FragmentContractBinding, BaseViewModel>() {
 
     override fun layoutRes(): Int=R.layout.fragment_contract
 
