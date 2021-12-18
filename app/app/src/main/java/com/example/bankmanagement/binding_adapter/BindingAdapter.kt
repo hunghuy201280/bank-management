@@ -1,8 +1,10 @@
 package com.example.bankmanagement.binding_adapter
 
+import android.icu.text.NumberFormat
 import android.net.Uri
 import android.os.Build
 import android.text.Editable
+import android.text.SpannableString
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -10,19 +12,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
-import java.time.Instant
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
-import java.util.concurrent.TimeUnit
-import androidx.annotation.NonNull
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.bumptech.glide.Glide
 import com.example.bankmanagement.utils.Utils
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
-import java.time.temporal.TemporalAccessor
+import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 //@BindingAdapter("currentRole", "requireRole", requireAll = false)
@@ -78,7 +78,24 @@ fun bindCommonDate(textView: TextView, dateParam: String?) {
     val d = Date()
 
     val dayOfTheWeek: String = sdf.format(dateParam?.let { dateFromISOString(it) } ?: d)
-    textView.text=dayOfTheWeek;
+    textView.text = dayOfTheWeek;
+}
+
+@BindingAdapter("price")
+fun setTextPrice(textView: TextView?, price: Double?) {
+    if (textView == null) return
+    val priceSpannable: SpannableString =
+        getPriceSpannable(price) ?: SpannableString("")
+    textView.text = priceSpannable
+}
+
+fun getPriceSpannable(price: Double?): SpannableString? {
+    var s = "$ "
+    if (price != null) {
+        s += NumberFormat.getNumberInstance(Locale.US).format(price)
+        return SpannableString(s)
+    }
+    return null
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -88,7 +105,7 @@ fun bindTime(textView: TextView, date: String?) {
     val d = Date()
 
     val dayOfTheWeek: String = sdf.format(date?.let { dateFromISOString(it) } ?: d)
-    textView.text=dayOfTheWeek;
+    textView.text = dayOfTheWeek;
 }
 @BindingAdapter("bindImage")
 fun bindImage(imageView: ImageView, uri: String?) {

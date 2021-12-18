@@ -40,13 +40,19 @@
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/activity_main.xml" value="0.15625" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/activity_welcome.xml" value="0.15625" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_clock_in_out.xml" value="0.2" />
-        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_contract.xml" value="0.3517823639774859" />
+        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_contract.xml" value="0.22542266750156542" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_dashboard.xml" value="0.259375" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_dashboard_header.xml" value="0.328125" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_device_code.xml" value="0.264" />
+        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_profile.xml" value="0.37815126050420167" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_sign_in.xml" value="0.17135416666666667" />
+        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/item_loan_contract_table_header.xml" value="0.536" />
+        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/item_loan_contract_table_item.xml" value="0.259375" />
+        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/item_loan_profile_table_header.xml" value="0.6" />
+        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/item_loan_profile_table_item.xml" value="0.259375" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/layout_loan_contract_list_table_header.xml" value="0.259375" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/layout_loan_contract_list_table_item.xml" value="0.259375" />
+        <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/layout_loan_profile_table_header.xml" value="0.259375" />
       </map>
     </option>
   </component>

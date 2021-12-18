@@ -19,7 +19,7 @@
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.loanProfile.id}" />
+            android:text="@{item.loanProfile.loanApplicationNumber}" />
 
         <TextView
             style="@style/ContractListTableTextItem"

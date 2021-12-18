@@ -12,52 +12,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_marginHorizontal="@dimen/_8sdp">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/ContractListTableTextItem"
             android:text="@{item.loanApplicationNumber}"
-            android:maxLength="20"
-            android:ellipsize="end"
             tools:text="@string/loan_id" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/ContractListTableTextItem"
             android:text="@{item.customer.name}"
-
-            tools:text="@string/customer_name" />
+            tools:text="@string/customer_name"/>
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/ContractListTableTextItem"
             android:text="@{item.loanStatus.name()}"
             tools:text="@string/status" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/ContractListTableTextItem"
             android:text="@{item.loanType.getName()}"
             tools:text="@string/loan_type" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/ContractListTableTextItem"
             bindCommonDate="@{item.createdAt}"
             tools:text="@string/date_created" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@{String.valueOf(item.moneyToLoan)}"
+            style="@style/ContractListTableTextItem"
+            price="@{item.moneyToLoan}"
             tools:text="@string/money_to_loan" />
 
     </LinearLayout>
