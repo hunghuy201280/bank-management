@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="createProfileVM"
             type="com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel" />
@@ -19,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.create_profile.CreateProfile1Fragment">
+        
+        <include layout="@layout/layout_create_profile_background_header" />
 
         <LinearLayout
             android:id="@+id/backButton"
@@ -36,13 +40,13 @@
                 android:background="@drawable/ic_left_arrow" />
 
             <TextView
-                style="@style/TextTitleH2"
+                style="@style/TextTitleH2SemiBold"
                 android:text="@string/back" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/customerTextView"
-            style="@style/TextTitleH2"
+            style="@style/TextTitleH2SemiBold"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_8sdp"
             android:text="@string/customer"
@@ -64,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/stepCountLayout"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_8sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -88,19 +93,6 @@
                     android:textSize="@dimen/_8ssp" />
 
             </androidx.cardview.widget.CardView>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/sign_in_button"
-                style="@style/ButtonDefault"
-                android:layout_width="@dimen/_18sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:elevation="0dp"
-                android:padding="0dp"
-                android:text="@string/_plus"
-                android:textSize="@dimen/_8ssp"
-                app:cornerRadius="@dimen/_6sdp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -109,30 +101,45 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/searchBar"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="10dp"
             android:nestedScrollingEnabled="false"
             android:orientation="vertical"
+            android:visibility="@{viewModel.isEmpty ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
             tools:listitem="@layout/item_search_customer_result" />
 
+        <ImageView
+            android:layout_width="@dimen/_101sdp"
+            android:layout_height="@dimen/_101sdp"
+            android:layout_below="@+id/searchBar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:src="@drawable/image_empty_state"
+            android:visibility="@{viewModel.isEmpty ? View.VISIBLE : View.GONE}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/previousButton"
+            style="@style/DashboardActionButton"
+            android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:backgroundTint="@color/white"
+            android:text="@string/previous_button"
+            android:textColor="@color/cornflower_blue"
+            app:strokeColor="@color/cornflower_blue"
+            app:strokeWidth="2px" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
-
-            style="@style/ButtonDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/DashboardActionButton"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:elevation="0dp"
-            android:padding="0dp"
-            android:text="@string/next"
-            android:textSize="@dimen/_8ssp"
-            app:cornerRadius="@dimen/_6sdp" />
+            android:text="@string/next_button" />
 
 
     </RelativeLayout>

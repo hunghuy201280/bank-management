@@ -25,6 +25,7 @@ import com.example.bankmanagement.models.IncomeType
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel
+import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
 
 
@@ -66,7 +67,7 @@ class CreateProfile3Fragment (private val TAG: String = "CreateProfile3Fragment"
 
         //region proof of income type adapter
         val proofOfIncomeTypeAdapter =
-            ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
+            CustomSpinnerAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
         binding.proofOfIncomeTypeDropDown.adapter=proofOfIncomeTypeAdapter
         //endregion
     }

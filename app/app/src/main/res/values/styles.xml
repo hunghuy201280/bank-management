@@ -19,9 +19,19 @@
         <item name="fontFamily">@font/poppins_bold</item>
     </style>
 
-    <style name="TextTitleH2" parent="TextPoppins.SemiBold.Wrap">
+    <style name="TextTitleH2SemiBold" parent="TextPoppins.SemiBold.Wrap">
         <item name="android:textSize">@dimen/H2</item>
         <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="TextTitleH2Regular" parent="TextPoppins.Regular.Wrap">
+        <item name="android:textSize">@dimen/H2</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="TextTitleH3Regular" parent="TextPoppins.Regular.Wrap">
+        <item name="android:textSize">@dimen/H3</item>
+        <item name="android:textColor">@color/textSecondary</item>
     </style>
 
     <style name="TextPoppins.SemiBold.Wrap" parent="TextAppearance.AppCompat">
@@ -98,6 +108,10 @@
         <item name="android:textColor">@color/secondaryText</item>
     </style>
 
+    <style name="CreateProfileTextContentNormal" parent="DashboardTextContentNormal">
+        <item name="android:textSize">@dimen/H4</item>
+    </style>
+
     <style name="DashboardEditTextFilter">
         <item name="android:layout_width">@dimen/_130sdp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -105,8 +119,13 @@
         <item name="android:background">@drawable/text_input_edittext_filter_bg</item>
     </style>
 
+    <style name="CreateProfileEditText" parent="DashboardEditTextFilter">
+        <item name="android:layout_width">@dimen/_135sdp</item>
+    </style>
+
     <style name="DashboardSpinnerFilter" parent="DashboardEditTextFilter">
-        <item name="android:layout_height">@dimen/_24sdp</item>
+        <item name="android:layout_height">@dimen/_17sdp</item>
+        <item name="android:background">@drawable/bg_spinner_border</item>
     </style>
 
     <style name="ContractListTableTextHeader" parent="DashboardTextContentNormal">

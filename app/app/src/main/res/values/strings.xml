@@ -46,6 +46,8 @@
     <string name="search_customer_via_name">Search customer via name…</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="next_button">Next &gt;</string>
+    <string name="previous_button">&lt; Previous</string>
     <string name="loan_profile_information">Loan profile information</string>
     <string name="staff_name">Staff Name</string>
     <string name="loan_duration">Loan Duration</string>
@@ -53,8 +55,8 @@
     <string name="loan_purpose">Loan purpose</string>
     <string name="expected_source_money_to_repay">Expected source money to repay</string>
     <string name="collateral">Collateral</string>
-    <string name="add_one_or_many_proofs_of_income">Add one or many proofs of income</string>
-    <string name="add_signature_image">Add signature image</string>
+    <string name="add_one_or_many_proofs_of_income">+ Add one or many proofs of income</string>
+    <string name="add_signature_image">+ Add signature image</string>
     <string name="signature_image">Signature image</string>
     <string name="proof_of_income">Proof of income</string>
     <string name="dummy_button">Dummy Button</string>

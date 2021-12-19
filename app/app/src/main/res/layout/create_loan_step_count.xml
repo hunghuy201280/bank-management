@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            style="@style/TextTitleH2"
+            style="@style/TextTitleH2SemiBold"
             android:textSize="@dimen/_9sdp"
             android:text="@string/_1"
             android:gravity="center"
@@ -29,7 +29,7 @@
             android:background="@{currentStep>=2?@color/cornflower_blue:@color/alto,default=@color/alto}" />
 
         <TextView
-            style="@style/TextTitleH2"
+            style="@style/TextTitleH2SemiBold"
             android:textSize="@dimen/_9sdp"
             android:text="@string/_2"
             android:gravity="center"
@@ -42,7 +42,7 @@
             android:background="@{currentStep>=3?@color/cornflower_blue:@color/alto,default=@color/alto}" />
 
         <TextView
-            style="@style/TextTitleH2"
+            style="@style/TextTitleH2SemiBold"
             android:textSize="@dimen/_9sdp"
             android:text="@string/_3"
             android:gravity="center"
