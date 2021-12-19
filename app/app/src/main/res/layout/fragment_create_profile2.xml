@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel" />
@@ -13,19 +16,21 @@
             name="mainVM"
             type="com.example.bankmanagement.view_models.MainViewModel" />
 
-      </data>
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.create_profile.CreateProfile2Fragment">
 
+        <include layout="@layout/layout_create_profile_background_header" />
+
         <LinearLayout
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_9sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -33,21 +38,20 @@
                 android:layout_width="@dimen/_7sdp"
                 android:layout_height="@dimen/_7sdp"
                 android:layout_marginEnd="@dimen/_7sdp"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@drawable/ic_left_arrow" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextTitleH2SemiBold"
                 android:text="@string/back" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/customerTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextTitleH2SemiBold"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/loan_profile_information" />
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/loan_profile_information"
+            android:textSize="@dimen/_9sdp" />
 
         <include
             android:id="@+id/stepCountLayout"
@@ -60,13 +64,13 @@
             app:currentStep="@{2}" />
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
+            style="@style/DashboardCardViewBackground"
+            android:layout_height="@dimen/_213sdp"
             android:layout_below="@id/stepCountLayout"
-            android:layout_marginHorizontal="@dimen/_54sdp"
-            android:layout_marginBottom="@dimen/_48sdp"
-            app:cardCornerRadius="@dimen/_20sdp">
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/_8sdp"
+            card_view:cardCornerRadius="@dimen/_3sdp"
+            card_view:cardElevation="@dimen/_2sdp">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -75,6 +79,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -84,7 +89,6 @@
                         android:orientation="horizontal">
 
 
-
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -92,78 +96,75 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/CreateProfileTextContentNormal"
                                 android:text="@string/staff_name" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <com.google.android.material.textfield.TextInputEditText
+                                style="@style/CreateProfileEditText"
+                                android:enabled="false"
+                                android:text="@{mainVM.currentStaff.name}"
+                                android:textColor="@color/primaryText" />
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:text="@{mainVM.currentStaff.name}"
-                                    android:layout_width="match_parent"
-                                    android:enabled="false"
-                                    android:layout_height="wrap_content" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:gravity="center_horizontal">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/date_created" />
+                                android:orientation="vertical">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                <TextView
+                                    style="@style/CreateProfileTextContentNormal"
+                                    android:text="@string/date_created" />
 
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="match_parent"
+                                    style="@style/CreateProfileEditText"
                                     bindDate="@{null}"
                                     android:enabled="false"
+                                    android:textColor="@color/primaryText" />
 
-                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
 
-                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:gravity="end">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/loan_type" />
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
-                            <Spinner
-                                android:id="@+id/loanTypeDropDown"
+                                <TextView
+                                    style="@style/CreateProfileTextContentNormal"
+                                    android:text="@string/loan_type" />
 
-                                android:layout_width="@dimen/_123sdp"
-                                tools:layout_height="@dimen/_12sdp"
-                                android:layout_height="wrap_content"/>
+                                <Spinner
+                                    android:id="@+id/loanTypeDropDown"
+                                    style="@style/DashboardSpinnerFilter" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
+
+
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="horizontal">
 
 
-
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -171,147 +172,119 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/CreateProfileTextContentNormal"
                                 android:text="@string/money_to_loan" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <com.google.android.material.textfield.TextInputEditText
+                                style="@style/CreateProfileEditText"
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    app:text="@={viewModel.moneyToLoan}"
-                                    android:layout_width="match_parent"
+                                app:text="@={viewModel.moneyToLoan}" />
 
-                                    android:layout_height="wrap_content" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:gravity="center_horizontal">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/loan_duration" />
+                                android:orientation="vertical">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                <TextView
+                                    style="@style/CreateProfileTextContentNormal"
+                                    android:text="@string/loan_duration" />
 
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="match_parent"
-                                    app:text="@={viewModel.loanDuration}"
-                                    android:layout_height="wrap_content" />
+                                    style="@style/CreateProfileEditText"
+                                    app:text="@={viewModel.loanDuration}" />
 
-                            </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            style="@style/CreateProfileTextContentNormal"
                             android:text="@string/benefit_from_loan" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/CreateProfileEditText"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:text="@={viewModel.benefitFromLoan}" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:text="@={viewModel.benefitFromLoan}"
-                                android:layout_height="wrap_content" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            style="@style/CreateProfileTextContentNormal"
                             android:text="@string/loan_purpose" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/CreateProfileEditText"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:text="@={viewModel.loanPurpose}" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:text="@={viewModel.loanPurpose}"
-
-                                android:layout_height="wrap_content" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            style="@style/CreateProfileTextContentNormal"
                             android:text="@string/expected_source_money_to_repay" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/CreateProfileEditText"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:text="@={viewModel.expectedSourceMoneyToRepay}" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:text="@={viewModel.expectedSourceMoneyToRepay}"
-
-                                android:layout_height="wrap_content" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            style="@style/CreateProfileTextContentNormal"
                             android:text="@string/collateral" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/CreateProfileEditText"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:text="@={viewModel.collateral}" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:text="@={viewModel.collateral}"
-
-                                android:layout_height="wrap_content" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -321,21 +294,19 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/CreateProfileTextContentNormal"
                                 android:text="@string/proof_of_income" />
 
                             <Spinner
                                 android:id="@+id/proofOfIncomeTypeDropDown"
+                                style="@style/DashboardSpinnerFilter" />
 
-                                android:layout_width="@dimen/_123sdp"
-                                tools:layout_height="@dimen/_12sdp"
-                                android:layout_height="wrap_content"/>
                             <TextView
                                 android:id="@+id/addProofIncome"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_one_or_many_proofs_of_income" />
+                                style="@style/DashboardTextContentNormal"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:text="@string/add_one_or_many_proofs_of_income"
+                                android:textColor="@color/cornflower_blue" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/proofOfIncomeRV"
@@ -355,19 +326,20 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/CreateProfileTextContentNormal"
                                 android:text="@string/signature_image" />
 
                             <TextView
                                 android:id="@+id/addSignature"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_signature_image" />
+                                style="@style/DashboardTextContentNormal"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:text="@string/add_signature_image"
+                                android:textColor="@color/cornflower_blue" />
+
                             <RelativeLayout
-                                android:visibility="@{viewModel.signatureImage!=null?View.VISIBLE:View.GONE}"
                                 android:layout_width="@dimen/_50sdp"
-                                android:layout_height="@dimen/_50sdp">
+                                android:layout_height="@dimen/_50sdp"
+                                android:visibility="@{viewModel.signatureImage!=null?View.VISIBLE:View.GONE}">
 
                                 <ImageView
                                     android:id="@+id/imageView"
@@ -379,10 +351,10 @@
 
                                 <ImageView
                                     android:id="@+id/deleteImage"
-                                    android:onClick="@{()->viewModel.signatureImageRemoved()}"
                                     android:layout_width="@dimen/_16sdp"
                                     android:layout_height="@dimen/_16sdp"
                                     android:layout_alignParentEnd="true"
+                                    android:onClick="@{()->viewModel.signatureImageRemoved()}"
                                     android:src="@color/cornflower_blue"
 
                                     />
@@ -397,40 +369,29 @@
             </ScrollView>
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/previousButton"
+            style="@style/DashboardActionButton"
+            android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:backgroundTint="@color/white"
+            android:text="@string/previous_button"
+            android:textColor="@color/cornflower_blue"
+            app:strokeColor="@color/cornflower_blue"
+            app:strokeWidth="2px" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
-            style="@style/ButtonDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/DashboardActionButton"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:elevation="0dp"
-            android:padding="0dp"
-            android:text="@string/next"
-            android:textSize="@dimen/_8ssp"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:onClick="@{(v)->viewModel.navigateFrom2To3(v)}"
-            app:cornerRadius="@dimen/_6sdp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/previousButton"
-            style="@style/ButtonDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:elevation="0dp"
-            android:padding="0dp"
-            android:text="@string/previous"
-            android:textSize="@dimen/_8ssp"
-            app:cornerRadius="@dimen/_6sdp" />
+            android:text="@string/next_button" />
 
     </RelativeLayout>
 

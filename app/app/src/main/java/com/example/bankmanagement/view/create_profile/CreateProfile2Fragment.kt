@@ -20,6 +20,7 @@ import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import com.example.bankmanagement.view_models.create_profile.CreateProfile2ViewModel
+import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,13 +64,13 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
 
         //region loantype adapter
         val loanAdapter =
-            ArrayAdapter(requireContext(), R.layout.list_item, LoanType.getValues());
+            CustomSpinnerAdapter(requireContext(), R.layout.list_item, LoanType.getValues());
         binding.loanTypeDropDown.adapter = loanAdapter
         //endregion
 
         //region proof of income type adapter
         val proofOfIncomeTypeAdapter =
-            ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.getValues());
+            CustomSpinnerAdapter(requireContext(), R.layout.list_item, IncomeType.getValues());
         Log.d(TAG, "create adapter 2 ${proofOfIncomeTypeAdapter.count}");
 
         binding.proofOfIncomeTypeDropDown.adapter = proofOfIncomeTypeAdapter

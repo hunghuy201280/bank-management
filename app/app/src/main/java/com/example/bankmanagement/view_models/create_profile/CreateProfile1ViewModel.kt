@@ -2,6 +2,7 @@ package com.example.bankmanagement.view_models.create_profile
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
@@ -26,15 +27,18 @@ constructor(
 ) : BaseUiViewModel<BaseUserView>() {
     private val TAG: String = "CreateProfile1ViewModel";
 
-     val customers = MutableLiveData<ArrayList<Customer>>(arrayListOf())
+    val customers = MutableLiveData<ArrayList<Customer>>(arrayListOf())
 
-
+    val isEmpty = Transformations.map(customers) {
+        return@map it.isEmpty()
+    }
 
     fun onSearch(query: String) {
-        if(query.isEmpty()) return;
+        if (query.isEmpty()) return;
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = mainRepo.searchCustomers(query = mapOf("name" to query,"isStartWith" to true));
+                val result =
+                    mainRepo.searchCustomers(query = mapOf("name" to query, "isStartWith" to true));
                 customers.postValue(result);
 
                 println("Customer loaded $result");

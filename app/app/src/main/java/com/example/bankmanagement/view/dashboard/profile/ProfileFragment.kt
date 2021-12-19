@@ -2,7 +2,6 @@ package com.example.bankmanagement.view.dashboard.profile
 
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
@@ -12,6 +11,7 @@ import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel
+import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,14 +46,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
         //region Loan type dropdown
         val loanTypes = LoanType.getFilterValues()
-        val loanTypesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanTypes)
+        val loanTypesAdapter = CustomSpinnerAdapter(requireContext(), R.layout.list_item, loanTypes)
+        loanTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.loanTypeDropDown.adapter = loanTypesAdapter
 
         //endregion
 
         //region Loan status dropdown
         val loanStatuses = LoanStatus.getValues();
-        val loanStatusesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanStatuses)
+        val loanStatusesAdapter = CustomSpinnerAdapter(requireContext(), R.layout.list_item, loanStatuses)
         binding.loanStatusDropdown.adapter = loanStatusesAdapter
 
         //endregion

@@ -1,82 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="item"
             type="com.example.bankmanagement.models.Customer" />
+
         <variable
             name="selectedCustomer"
             type="com.example.bankmanagement.models.Customer" />
     </data>
 
- <LinearLayout
-     android:layout_width="@dimen/_330sdp"
-     android:layout_marginBottom="@dimen/_16sdp"
-     android:gravity="center"
-     android:orientation="horizontal"
-     android:layout_height="wrap_content">
-     <RelativeLayout
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:gravity="center_vertical"
-         >
+    <LinearLayout
+        android:layout_width="@dimen/_350sdp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        android:background="@{selectedCustomer != null &amp;&amp; selectedCustomer.id==item.id ? @drawable/bg_active_search_customer_background : null}"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-         <View
-             android:id="@+id/circleLeft"
-             android:layout_width="@dimen/_24sdp"
-             android:layout_height="@dimen/_24sdp"
-             android:background="@drawable/circle_active_background" />
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="@{String.valueOf(item.name)}"
-             android:layout_toEndOf="@id/circleLeft"
-             android:id="@+id/customerName"
-             android:textColor="@{selectedCustomer!=null &amp;&amp; selectedCustomer.id==item.id?@color/alto:@color/cornflower_blue}"
-             tools:text="Truong Hung Huy" />
-         <LinearLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal"
-             android:layout_below="@+id/customerName"
-             android:layout_toEndOf="@id/circleLeft"
-             android:gravity="center_vertical"
-             >
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@{String.valueOf(item.getType().name)}"
-                 tools:text="Individual customer" />
-             <View
-                 android:layout_width="@dimen/_1sdp"
-                 android:layout_height="@dimen/_14sdp"
-                 android:background="@color/black"
-                 android:layout_marginHorizontal="@dimen/_4sdp"
-                 />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
 
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@{String.valueOf(item.id)}"
-                 tools:text="123xzcq21" />
-         </LinearLayout>
+            <View
+                android:id="@+id/circleLeft"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@drawable/circle_active_background" />
 
-     </RelativeLayout>
+            <TextView
+                android:id="@+id/customerName"
+                style="@style/TextTitleH2Regular"
+                android:layout_toEndOf="@id/circleLeft"
+                android:text="@{String.valueOf(item.name)}"
+                tools:text="Truong Hung Huy" />
 
-     <TextView
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:layout_weight="1"
-         android:gravity="center"
-         android:text="@{String.valueOf(item.phoneNumber)}"
-         tools:text="0938563752" />
-     <ImageView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:src="@drawable/ic_contract"
-         />
- </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customerName"
+                android:layout_toEndOf="@id/circleLeft"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextTitleH2Regular"
+                    android:text="@{String.valueOf(item.getType().name)}"
+                    android:textColor="@color/textSecondary"
+                    tools:text="Individual customer" />
+
+                <TextView
+                    style="@style/TextTitleH2Regular"
+                    android:visibility="@{item.email != null ? View.VISIBLE : View.GONE}"
+                    android:text="@{` | ` + item.email}"
+                    android:textColor="@color/textSecondary"
+                    tools:text="123xzcq21" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            style="@style/TextTitleH2Regular"
+            android:textColor="@color/textSecondary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@{String.valueOf(item.phoneNumber)}"
+            tools:text="0938563752" />
+
+        <ImageView
+            android:layout_width="@dimen/_9sdp"
+            android:layout_height="@dimen/_9sdp"
+            android:src="@drawable/ic_info" />
+
+    </LinearLayout>
 </layout>

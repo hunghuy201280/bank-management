@@ -1,26 +1,17 @@
 package com.example.bankmanagement.view.dashboard.contract
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
-import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentContractBinding
 import com.example.bankmanagement.models.LoanContract
-import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanType
-import com.example.bankmanagement.view.dashboard.profile.ProfileAdapter
-import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.dashboard.contract.ContractViewModel
+import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,7 +42,7 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
     override fun initView() {
         //region Loan type dropdown
         val loanTypes = LoanType.getFilterValues()
-        val loanTypesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, loanTypes)
+        val loanTypesAdapter = CustomSpinnerAdapter(requireContext(), R.layout.list_item, loanTypes)
         binding.loanTypeDropDown.adapter = loanTypesAdapter
         //endregion
     }

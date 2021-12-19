@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="header"
             type="String" />
+
         <variable
             name="content"
             type="String" />
@@ -14,21 +16,21 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:orientation="vertical">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Header"
-            android:textColor="@color/cornflower_blue"
+            style="@style/TextTitleH3Regular"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:text="@{header}"
-            />
+            android:textColor="@color/cornflower_blue"
+            tools:text="Header" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Content"
+            style="@style/TextTitleH3Regular"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:text="@{content==null?`Unknown`:content,default=`Unknown`}"
-            />
+            tools:text="Content" />
 
     </LinearLayout>
 </layout>
