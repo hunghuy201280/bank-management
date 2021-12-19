@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentCreateContractBinding
@@ -24,7 +25,7 @@ data class CreateContractFragmentArgs(
     val loanProfile:LoanProfile,
 )
 @AndroidEntryPoint
-class CreateContractFragment : DialogFragment() {
+class CreateContractFragment : DialogFragment() ,CreateContractUICallBack{
     private var _binding: FragmentCreateContractBinding? = null
 
     private val binding get() = _binding!!
@@ -32,13 +33,19 @@ class CreateContractFragment : DialogFragment() {
     val mainVM:MainViewModel by activityViewModels()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = FragmentCreateContractBinding.inflate(LayoutInflater.from(context))
-        binding.viewModel=viewModel
-        binding.mainVM=mainVM
-        binding.lifecycleOwner=this
+        initViewModel()
+
         initAction()
         return MaterialDialog(requireContext()).apply {
             setContentView(binding.root)
         }
+    }
+
+    fun initViewModel(){
+        viewModel.init(this)
+        binding.viewModel=viewModel
+        binding.mainVM=mainVM
+        binding.lifecycleOwner=this
     }
 
 
@@ -61,5 +68,12 @@ class CreateContractFragment : DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun dismissDialog() {
+        findNavController().popBackStack(R.id.dashboardFragment,false)
+    }
+
+    override fun showLoading(show: Boolean) {
     }
 }

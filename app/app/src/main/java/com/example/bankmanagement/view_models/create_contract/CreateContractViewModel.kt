@@ -16,6 +16,7 @@ import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.Utils.Companion.getFileName
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.view.create_contract.CreateContractFragmentArgs
+import com.example.bankmanagement.view.create_contract.CreateContractUICallBack
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -37,7 +38,7 @@ class CreateContractViewModel
 constructor(
     private val mainRepo: MainRepository,
     @AppModule.CreateContractArgs private val createContractFragmentArgs: ValueWrapper<CreateContractFragmentArgs>
-) : BaseUiViewModel<BaseUserView>() {
+) : BaseUiViewModel<CreateContractUICallBack>() {
     private val TAG: String = "CreateContractViewModel";
     val commitment = MutableLiveData<String>()
     val signatureImg = MutableLiveData<Uri>()
@@ -64,15 +65,25 @@ constructor(
                     signatureImg = signatureUrl.first()
                 )
                 Log.d(TAG, "Create contract result: $newContract")
+                withContext(Dispatchers.Main) {
+                    Utils.showCompleteDialog(
+                        v.context,
+                        mainText = "Contract created successfully",
+                        onDismiss = {
+                            uiCallback?.dismissDialog()
+                        })
+                }
             } catch (e: HttpException) {
                 Log.e(TAG, "Create contract error: ${e.response()?.errorBody()?.string()}")
 
             }
         }
     }
+
     fun signatureImageSelected(uri: Uri) {
         signatureImg.value = uri
     }
+
     fun signatureImageRemoved() {
         signatureImg.value = null;
 

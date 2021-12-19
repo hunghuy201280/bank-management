@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             tools:text="HSVV.21.21.21"
-            android:text="@{content}"
+            android:text="@{content==null?`Unknown`:content}"
 
             />
     </LinearLayout>

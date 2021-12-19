@@ -6,18 +6,18 @@
     app:startDestination="@id/deviceCodeFragment">
     <fragment
         android:id="@+id/deviceCodeFragment"
-        tools:layout="@layout/fragment_device_code"
         android:name="com.example.bankmanagement.view.device_code.DeviceCodeFragment"
-        android:label="DeviceCodeFragment" >
+        android:label="DeviceCodeFragment"
+        tools:layout="@layout/fragment_device_code">
         <action
             android:id="@+id/action_deviceCodeFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        tools:layout="@layout/fragment_sign_in"
         android:name="com.example.bankmanagement.view.sign_in.SignInFragment"
-        android:label="SignInFragment" >
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_clockInOutFragment"
             app:destination="@id/clockInOutFragment" />
@@ -28,8 +28,8 @@
     <fragment
         android:id="@+id/clockInOutFragment"
         android:name="com.example.bankmanagement.view.clockin.ClockInOutFragment"
-        tools:layout="@layout/fragment_clock_in_out"
-        android:label="ClockInOutFragment" >
+        android:label="ClockInOutFragment"
+        tools:layout="@layout/fragment_clock_in_out">
         <action
             android:id="@+id/action_clockInOutFragment_to_dashboardFragment2"
             app:destination="@id/dashboardFragment" />
@@ -37,32 +37,35 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.bankmanagement.view.dashboard.DashboardFragment"
-        tools:layout="@layout/fragment_dashboard"
+        android:label="DashboardFragment"
 
-        android:label="DashboardFragment" >
+        tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_createProfile1Fragment"
             app:destination="@id/createProfile1Fragment" />
         <action
             android:id="@+id/action_dashboardFragment_to_reviewProfileFragment"
             app:destination="@id/reviewProfileFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_reviewContractFragment"
+            app:destination="@id/reviewContractFragment" />
     </fragment>
     <fragment
         android:id="@+id/createProfile1Fragment"
         android:name="com.example.bankmanagement.view.create_profile.CreateProfile1Fragment"
-        tools:layout="@layout/fragment_create_profile1"
+        android:label="CreateProfile1Fragment"
 
-        android:label="CreateProfile1Fragment" >
+        tools:layout="@layout/fragment_create_profile1">
         <action
             android:id="@+id/action_createProfile1Fragment_to_createProfile2Fragment"
             app:destination="@id/createProfile2Fragment" />
     </fragment>
     <fragment
         android:id="@+id/createProfile2Fragment"
-        tools:layout="@layout/fragment_create_profile2"
-
         android:name="com.example.bankmanagement.view.create_profile.CreateProfile2Fragment"
-        android:label="CreateProfile2Fragment" >
+
+        android:label="CreateProfile2Fragment"
+        tools:layout="@layout/fragment_create_profile2">
         <action
             android:id="@+id/action_createProfile2Fragment_to_createProfile3Fragment"
             app:destination="@id/createProfile3Fragment" />
@@ -73,8 +76,14 @@
         android:label="fragment_create_profile3"
         tools:layout="@layout/fragment_create_profile3" />
     <fragment
-        tools:layout="@layout/fragment_review_profile"
         android:id="@+id/reviewProfileFragment"
         android:name="com.example.bankmanagement.view.review_profile.ReviewProfileFragment"
-        android:label="ReviewProfileFragment" />
+        android:label="ReviewProfileFragment"
+        tools:layout="@layout/fragment_review_profile" />
+    <fragment
+        android:id="@+id/reviewContractFragment"
+
+        android:name="com.example.bankmanagement.view.review_contract.ReviewContractFragment"
+        android:label="ReviewContractFragment"
+        tools:layout="@layout/fragment_review_contract" />
 </navigation>

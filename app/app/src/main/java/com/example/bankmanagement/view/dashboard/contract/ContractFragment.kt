@@ -34,8 +34,8 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
     private val contractAdapter = ContractAdapter(
         itemClickListener = object : BaseItemClickListener<LoanContract> {
             override fun onItemClick(adapterPosition: Int, item: LoanContract) {
-//                viewModel.reviewLoanProfileArgs.value = item;
-                findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
+                viewModel.reviewLoanContractArgs.value = item
+                findNavController().navigate(R.id.action_dashboardFragment_to_reviewContractFragment)
             }
         }
     );
