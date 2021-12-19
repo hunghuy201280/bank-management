@@ -89,5 +89,13 @@
     <string name="commitment">Commitment</string>
     <string name="upload">Upload</string>
     <string name="loan_contract">Loan contract</string>
+    <string name="loan_contract_detail">Loan contract detail</string>
+    <string name="contract_signature">Contract signature</string>
+    <string name="disburse_certificate_list">Disburse certificate list</string>
+    <string name="add">Add</string>
+    <string name="certificate_number">Certificate number</string>
+    <string name="amount">Amount</string>
+    <string name="payment_receipt_list">Payment receipt list</string>
+    <string name="receipt_number">Receipt number</string>
 
 </resources>

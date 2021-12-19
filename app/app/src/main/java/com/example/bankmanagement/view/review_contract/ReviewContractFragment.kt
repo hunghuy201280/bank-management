@@ -15,7 +15,10 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentReviewContractBinding
 import com.example.bankmanagement.databinding.FragmentReviewProfileBinding
+import com.example.bankmanagement.models.DisburseCertificate
 import com.example.bankmanagement.models.IncomeType
+import com.example.bankmanagement.models.LiquidationDecision
+import com.example.bankmanagement.models.PaymentReceipt
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.create_profile.ProofOfIncomeImageAdapter
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
@@ -36,12 +39,18 @@ class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, Revi
 
     override val viewModel: ReviewContractViewModel by viewModels()
     val mainVM: MainViewModel by activityViewModels()
-//    private val proofOfIncomeAdapter =
-//        ProofOfIncomeImageAdapter(
-//            object : BaseItemClickListener<Uri> {
-//                override fun onItemClick(adapterPosition: Int, item: Uri) {
-//                }
-//            }, isRemoveAble = false);
+    private val disburseAdapter =
+        DisburseAdapter(
+            object : BaseItemClickListener<DisburseCertificate> {
+                override fun onItemClick(adapterPosition: Int, item: DisburseCertificate) {
+                }
+            })
+    private val receiptAdapter =
+        PaymentReceiptAdapter(
+            object : BaseItemClickListener<LiquidationDecision> {
+                override fun onItemClick(adapterPosition: Int, item: LiquidationDecision) {
+                }
+            })
 
     override fun viewModelClass(): Class<ReviewContractViewModel> = ReviewContractViewModel::class.java
 
@@ -50,11 +59,8 @@ class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, Revi
         binding.viewModel=viewModel
         binding.mainVM=mainVM
         viewModel.init(this)
-//
-//        viewModel.currentIncomeType.observe(this, {
-//            proofOfIncomeAdapter.submitList(viewModel.proofOfIncomes.value?.get(it))
-//            proofOfIncomeAdapter.notifyDataSetChanged()
-//        })
+
+
 
     }
 
@@ -64,6 +70,10 @@ class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, Revi
 //            ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
 //        binding.proofOfIncomeTypeDropDown.adapter=proofOfIncomeTypeAdapter
 
+        binding.disburseCertRV.adapter=disburseAdapter
+        disburseAdapter.submitList(viewModel.loanContract.disburseCertificates)
+        binding.paymentRV.adapter=receiptAdapter
+        receiptAdapter.submitList(viewModel.loanContract.getLiquidationDecisions())
     }
 
     override fun initData() {

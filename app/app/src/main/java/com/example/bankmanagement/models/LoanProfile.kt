@@ -34,6 +34,7 @@ data class LoanProfile(
     fun getSignatureImage():Uri{
           return  Uri.parse( "${AppConfigs.baseUrl}images/$signatureImg")
     }
+
 }
 
 

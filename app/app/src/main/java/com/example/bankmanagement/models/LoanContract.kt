@@ -22,6 +22,11 @@ data class LoanContract(
     fun getSignatureImage(): Uri {
         return  Uri.parse( "${AppConfigs.baseUrl}images/$signatureImg")
     }
+    fun getLiquidationDecisions():List<LiquidationDecision>{
+        val temp=ArrayList(liquidationApplications)
+
+        return temp.filter { it.decision!=null }.map { it.decision!! }
+    }
 }
 
 data class DisburseCertificate(

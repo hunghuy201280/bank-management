@@ -35,5 +35,11 @@ constructor(
 
     val loanContract:LoanContract=reviewLoanContractArgs.value
 
+    fun onDisburseAdded(v:View){
+
+    }
+    fun onPaymentReceiptAdded(v:View){
+
+    }
 
 }
