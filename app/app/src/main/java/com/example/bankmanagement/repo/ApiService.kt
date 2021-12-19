@@ -90,4 +90,22 @@ interface ApiService {
         ) token: String,
     ): ArrayList<LoanContractDto>
 
+    @GET("loan_profiles/has_contract/{id}")
+    suspend fun hasContract(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Path(value="id",encoded = true) profileId:String,
+        ): Boolean
+
+
+    @POST("loan_contracts")
+    @JvmSuppressWildcards
+    suspend fun createContract(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+    ):LoanContractDto
+
 }

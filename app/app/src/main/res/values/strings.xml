@@ -81,5 +81,10 @@
     <string name="reject">Reject</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="create_contract">Create contract</string>
+    <string name="create_loan_contract">Create loan contract</string>
+    <string name="branch_address">Branch address</string>
+    <string name="commitment">Commitment</string>
+    <string name="upload">Upload</string>
 
 </resources>

@@ -302,6 +302,20 @@
 
         </LinearLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/createContractButton"
+            style="@style/ButtonDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:elevation="0dp"
+            android:text="@string/create_contract"
+            android:textSize="@dimen/_8ssp"
+            android:onClick="@{(v)->viewModel.showCreateContractDialog(v)}"
+            android:visibility="@{viewModel.loanProfile.loanStatus== LoanStatus.Done &amp;&amp; viewModel.hasContract==false ?View.VISIBLE:View.GONE}"
+            app:backgroundTint="@color/radicalRed"
+            app:cornerRadius="@dimen/_6sdp" />
 
     </RelativeLayout>
 

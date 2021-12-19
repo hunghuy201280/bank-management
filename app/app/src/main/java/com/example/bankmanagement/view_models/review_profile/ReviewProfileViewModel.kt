@@ -3,6 +3,7 @@ package com.example.bankmanagement.view_models.review_profile
 import android.net.Uri
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
@@ -13,6 +14,8 @@ import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
+import com.example.bankmanagement.view.create_contract.CreateContractFragment
+import com.example.bankmanagement.view.create_contract.CreateContractFragmentArgs
 import com.example.bankmanagement.view.review_profile.ReviewProfileUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +30,7 @@ class ReviewProfileViewModel
 constructor(
     private val mainRepo: MainRepository,
     @AppModule.ReviewLoanProfileArgs val reviewLoanProfileArgs: ValueWrapper<LoanProfile>,
+    @AppModule.CreateContractArgs val createContractFragmentArgs: ValueWrapper<CreateContractFragmentArgs>,
 
     ) : BaseUiViewModel<ReviewProfileUICallback>() {
     private val TAG: String = "ReviewProfileViewModel";
@@ -34,12 +38,24 @@ constructor(
     val loanProfile = MutableLiveData<LoanProfile>(reviewLoanProfileArgs.value);
     var currentIncomeType = MutableLiveData(IncomeType.BusinessLicense)
     val proofOfIncomes = MutableLiveData<HashMap<IncomeType, ArrayList<Uri>>>()
+    val hasContract = MutableLiveData(true)
 
 
     init {
         initProofOfIncomes()
+        initHasContract()
     }
 
+    fun initHasContract() {
+        viewModelScope.launch(Dispatchers.IO) {
+            hasContract.postValue(loanProfile.value?.let { mainRepo.hasContract(it.id) } ?: true)
+        }
+    }
+
+    fun showCreateContractDialog(v:View){
+        createContractFragmentArgs.value= CreateContractFragmentArgs(loanProfile = loanProfile.value!!)
+        uiCallback?.showCreateContractDialogFragment()
+    }
     private fun initProofOfIncomes() {
         val result = HashMap<IncomeType, ArrayList<Uri>>();
         for (item in IncomeType.values()) {
@@ -54,6 +70,8 @@ constructor(
         proofOfIncomes.postValue(result);
 
     }
+
+
 
     fun approveProfile() {
         viewModelScope.launch(Dispatchers.IO) {

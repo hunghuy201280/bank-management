@@ -22,6 +22,7 @@ import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.utils.ValueWrapper
+import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.create_profile.ProofOfIncomeImageAdapter
 import com.example.bankmanagement.view.dashboard.profile.ProfileAdapter
 import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
@@ -60,6 +61,7 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
             proofOfIncomeAdapter.submitList(viewModel.proofOfIncomes.value?.get(it))
             proofOfIncomeAdapter.notifyDataSetChanged()
         })
+
     }
 
     override fun initView() {
@@ -96,6 +98,10 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
 
     override fun onBack() {
         findNavController().popBackStack()
+    }
+
+    override fun showCreateContractDialogFragment() {
+        CreateContractFragment().show(childFragmentManager,TAG)
     }
 
 

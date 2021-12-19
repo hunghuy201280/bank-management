@@ -51,6 +51,17 @@ interface MainRepository {
     suspend fun getContracts(
     ):ArrayList<LoanContract>
 
+    suspend fun hasContract(
+        profileId: String
+    ):Boolean
+
+
+    suspend fun createContract(
+        profileId: String,
+        commitment:String,
+        signatureImg:String,
+    ):LoanContract
+
 
 
     fun getToken():String;

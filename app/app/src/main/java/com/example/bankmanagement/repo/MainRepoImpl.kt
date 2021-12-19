@@ -3,7 +3,6 @@ package com.example.bankmanagement.repo
 import com.example.bankmanagement.models.*
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
-import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
@@ -123,6 +122,23 @@ constructor(
         val contracts=response.map { loanContractDtoMapper.fromDto(it) }
         return  ArrayList(contracts)
 
+    }
+
+    override suspend fun hasContract(profileId: String): Boolean {
+        return apiService.hasContract(token = accessToken, profileId)
+    }
+
+    override suspend fun createContract(
+        profileId: String,
+        commitment: String,
+        signatureImg: String
+    ): LoanContract {
+        val response=apiService.createContract(token=accessToken, body=mapOf(
+            "loanProfile" to profileId,
+            "commitment" to commitment,
+            "signatureImg" to signatureImg,
+        ))
+        return loanContractDtoMapper.fromDto(response)
     }
 
 

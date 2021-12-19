@@ -15,6 +15,7 @@ abstract class Customer(
 
 ){
      abstract fun getType():CustomerType
+
 }
 
 data class ResidentCustomer(

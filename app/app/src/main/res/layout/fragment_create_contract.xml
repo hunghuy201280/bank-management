@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.create_contract.CreateContractViewModel" />
+
+        <variable
+            name="mainVM"
+            type="com.example.bankmanagement.view_models.MainViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="@dimen/_248sdp"
+        android:layout_height="@dimen/_197sdp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".view.create_contract.CreateContractFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/create_loan_contract" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/cornflower_blue"
+            android:text="@string/date_created" />
+
+        <include
+            layout="@layout/create_profile_text_row"
+            app:content="@{viewModel.loanProfile.loanApplicationNumber}"
+            app:header="@{@string/loan_profile_number}" />
+
+        <include
+            layout="@layout/create_profile_text_row"
+            app:content="@{mainVM.currentBranch.branchAddress}"
+            app:header="@{@string/branch_address}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_11sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_77sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/date_created"
+                android:textColor="@color/cornflower_blue" />
+
+            <TextView
+                bindCommonDate="@{null}"
+                android:layout_width="@dimen/_77sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                tools:text="HSVV.21.21.21" />
+        </LinearLayout>
+
+        <include
+            layout="@layout/create_profile_text_row"
+            app:content="@{mainVM.currentStaff.name}"
+            app:header="@{@string/branch_address}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_11sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_77sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/commitment"
+                android:textColor="@color/cornflower_blue" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/DashboardEditTextFilter"
+                android:layout_height="@dimen/_31sdp"
+                android:text="@={viewModel.commitment}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_11sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_77sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/signature_image"
+                android:textColor="@color/cornflower_blue" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/uploadSignature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/upload"
+                    android:textColor="@color/cornflower_blue"
+                    android:visibility="@{viewModel.signatureImg==null?View.VISIBLE:View.GONE}" />
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:visibility="@{viewModel.signatureImg!=null?View.VISIBLE:View.GONE}">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        bindImage="@{viewModel.signatureImg.toString()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:src="@drawable/ic_contract" />
+
+                    <ImageView
+                        android:id="@+id/deleteImage"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_alignParentEnd="true"
+                        android:onClick="@{()->viewModel.signatureImageRemoved()}"
+                        android:src="@color/cornflower_blue"
+
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelButton"
+                style="@style/DashboardActionButton"
+                android:text="@string/cancel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                style="@style/DashboardActionButton"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:onClick="@{(v)->viewModel.onContractCreated(v)}"
+                android:text="@string/save" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
