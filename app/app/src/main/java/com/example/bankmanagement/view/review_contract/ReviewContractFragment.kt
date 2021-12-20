@@ -1,36 +1,29 @@
 package com.example.bankmanagement.view.review_contract
 
-import android.net.Uri
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import android.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentReviewContractBinding
-import com.example.bankmanagement.databinding.FragmentReviewProfileBinding
 import com.example.bankmanagement.models.DisburseCertificate
-import com.example.bankmanagement.models.IncomeType
 import com.example.bankmanagement.models.LiquidationDecision
-import com.example.bankmanagement.models.PaymentReceipt
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
-import com.example.bankmanagement.view.create_profile.ProofOfIncomeImageAdapter
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
-import com.example.bankmanagement.view.review_profile.ReviewProfileUICallback
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.review_contract.ReviewContractViewModel
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, ReviewContractViewModel>(),
+class ReviewContractFragment :
+    BaseFragment<FragmentReviewContractBinding, ReviewContractViewModel>(),
     ReviewContractUICallback {
 
 
@@ -52,16 +45,14 @@ class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, Revi
                 }
             })
 
-    override fun viewModelClass(): Class<ReviewContractViewModel> = ReviewContractViewModel::class.java
+    override fun viewModelClass(): Class<ReviewContractViewModel> =
+        ReviewContractViewModel::class.java
 
 
     override fun initViewModel(viewModel: ReviewContractViewModel) {
-        binding.viewModel=viewModel
-        binding.mainVM=mainVM
+        binding.viewModel = viewModel
+        binding.mainVM = mainVM
         viewModel.init(this)
-
-
-
     }
 
     override fun initView() {
@@ -70,15 +61,36 @@ class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, Revi
 //            ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
 //        binding.proofOfIncomeTypeDropDown.adapter=proofOfIncomeTypeAdapter
 
-        binding.disburseCertRV.adapter=disburseAdapter
-        disburseAdapter.submitList(viewModel.loanContract.disburseCertificates)
-        binding.paymentRV.adapter=receiptAdapter
-        receiptAdapter.submitList(viewModel.loanContract.getLiquidationDecisions())
+        binding.disburseCertRV.adapter = disburseAdapter
+        binding.paymentRV.adapter = receiptAdapter
+
+        initPieChart()
+    }
+
+    private fun initPieChart() {
+        val totalPaid = viewModel.totalPayment.value?.toFloat() ?: 0f
+        val totalUnpaid = viewModel.totalDisburse.value?.toFloat() ?: 0f - totalPaid
+        val valueList = mutableListOf(
+            PieEntry(totalPaid, getString(R.string.paid)),
+            PieEntry(totalUnpaid, getString(R.string.unpaid))
+        )
+        //Fill the chart
+        val pieDataSet = PieDataSet(valueList, "")
+        //Chart style
+        pieDataSet.sliceSpace = 0.1f
+        pieDataSet.colors = mutableListOf(
+            ContextCompat.getColor(requireContext(), R.color.paid),
+            ContextCompat.getColor(requireContext(), R.color.unpaid)
+        )
+        pieDataSet.valueTextColor = Color.TRANSPARENT
+        val pieData = PieData(pieDataSet)
+        binding.pieChart.data = pieData
+        binding.pieChart.legend.isEnabled = false
+        binding.pieChart.description.isEnabled = false
+        binding.pieChart.setDrawEntryLabels(false)
     }
 
     override fun initData() {
-
-
 
     }
 
@@ -98,6 +110,13 @@ class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, Revi
 //                override fun onNothingSelected(parent: AdapterView<*>?) {
 //                }
 //            }
+        viewModel.disburseCertificateList.observe(this) {
+            disburseAdapter.submitList(it)
+        }
+
+        viewModel.liquidationApplicationList.observe(this) {
+            receiptAdapter.submitList(it)
+        }
     }
 
     override fun onBack() {
@@ -105,7 +124,7 @@ class ReviewContractFragment  : BaseFragment<FragmentReviewContractBinding, Revi
     }
 
     override fun showCreateContractDialogFragment() {
-        CreateContractFragment().show(childFragmentManager,TAG)
+        CreateContractFragment().show(childFragmentManager, TAG)
     }
 
 

@@ -99,5 +99,9 @@
     <string name="payment_receipt_list">Payment receipt list</string>
     <string name="receipt_number">Receipt number</string>
     <string name="there_is_no_data_for_chart">There is no data for chart</string>
+    <string name="chart">Chart</string>
+    <string name="paid">Paid</string>
+    <string name="unpaid">Unpaid</string>
+    <string name="total">Total</string>
 
 </resources>

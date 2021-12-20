@@ -44,6 +44,9 @@
     <color name="_FBD536">#FBD536</color>
     <color name="radicalRed">#FD2B70</color>
 
+    <!--Chart-->
+    <color name="paid">#FAC02C</color>
+    <color name="unpaid">#1EB4FD</color>
 
     <color name="grayText">#777777</color>
     <color name="extraAdjust">#40693B</color>
