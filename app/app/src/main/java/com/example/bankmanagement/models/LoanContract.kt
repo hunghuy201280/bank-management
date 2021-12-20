@@ -15,17 +15,30 @@ data class LoanContract(
     val contractNumber: String,
     val disburseCertificates: List<DisburseCertificate>,
     val liquidationApplications: List<LiquidationApplication>
-){
+) {
     fun getDate(): DateTime {
         return DateTime.parse(createdAt);
     }
-    fun getSignatureImage(): Uri {
-        return  Uri.parse( "${AppConfigs.baseUrl}images/$signatureImg")
-    }
-    fun getLiquidationDecisions():List<LiquidationDecision>{
-        val temp=ArrayList(liquidationApplications)
 
-        return temp.filter { it.decision!=null }.map { it.decision!! }
+    fun getSignatureImage(): Uri {
+        return Uri.parse("${AppConfigs.baseUrl}images/$signatureImg")
+    }
+
+    fun getLiquidationDecisions(): List<LiquidationDecision> {
+        val temp = ArrayList(liquidationApplications)
+
+        return temp.filter { it.decision != null }.map { it.decision!! }
+    }
+
+    fun getPaid(): Double {
+        val temp = ArrayList(liquidationApplications)
+        return temp.filter { it.decision != null }.map { it.decision!! }.sumOf { it.amount }
+    }
+
+    fun getUnPaid(): Double {
+        val temp = ArrayList(liquidationApplications)
+        return loanProfile.moneyToLoan - temp.filter { it.decision != null }.map { it.decision!! }
+            .sumOf { it.amount }
     }
 }
 
