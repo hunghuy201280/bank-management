@@ -22,35 +22,255 @@
 
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".view.review_contract.ReviewContractFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/loan_contract" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_95sdp"
+            android:background="@drawable/bg_header_radius_bottom_left" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            tools:context=".view.review_contract.ReviewContractFragment">
+
+            <TextView
+                style="@style/TextTitleH2SemiBold"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/loan_contract" />
 
             <LinearLayout
-                android:layout_width="0dp"
-
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/DashboardCardViewBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_63sdp"
+                        android:layout_marginHorizontal="@dimen/_8sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        card_view:cardCornerRadius="@dimen/_3sdp"
+                        card_view:cardElevation="@dimen/_2sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/_8sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/TextTitleH2SemiBold"
+                                android:text="@string/customer_info"
+                                android:textColor="@color/secondaryText" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/_8sdp"
+                                android:baselineAligned="false"
+                                android:orientation="horizontal">
+
+                                <include
+                                    layout="@layout/create_profile_text_row"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    app:alignStart="@{true}"
+                                    app:content="@{viewModel.loanContract.loanProfile.customer.name}"
+                                    app:header="@{@string/customer_name}" />
+
+                                <include
+                                    layout="@layout/create_profile_text_row"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    app:alignStart="@{false}"
+                                    app:content="@{viewModel.loanContract.loanProfile.customer.email}"
+                                    app:header="@{@string/email}" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:baselineAligned="false"
+                                android:orientation="horizontal">
+
+                                <include
+                                    layout="@layout/create_profile_text_row"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    app:alignStart="@{true}"
+                                    app:content="@{viewModel.loanContract.loanProfile.customer.type.typeName}"
+                                    app:header="@{@string/customer_type}" />
+
+                                <include
+                                    layout="@layout/create_profile_text_row"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    app:alignStart="@{false}"
+                                    app:content="@{viewModel.loanContract.loanProfile.customer.phoneNumber}"
+                                    app:header="@{@string/phone_number}" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/_8sdp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:layout_gravity="center">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_76sdp"
+                                    android:layout_height="@dimen/_76sdp"
+                                    android:src="@drawable/image_empty_state" />
+
+                                <TextView
+                                    style="@style/TextTitleH2SemiBold"
+                                    android:layout_marginTop="@dimen/_8sdp"
+                                    android:text="@string/there_is_no_data_for_chart" />
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.card.MaterialCardView
+                                style="@style/DashboardCardViewBackground"
+                                android:layout_width="match_parent"
+                                android:layout_marginVertical="@dimen/default_margin"
+                                android:layout_marginHorizontal="@dimen/_8sdp"
+                                card_view:cardCornerRadius="@dimen/_3sdp"
+                                card_view:cardElevation="@dimen/_2sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            style="@style/TextTitleH2SemiBold"
+                                            android:layout_centerInParent="true"
+                                            android:layout_marginTop="@dimen/_8sdp"
+                                            android:text="@string/disburse_certificate_list"
+                                            android:textColor="@color/secondaryText" />
+
+                                        <com.google.android.material.button.MaterialButton
+                                            style="@style/DashboardActionButton"
+                                            android:layout_width="@dimen/_30sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginTop="@dimen/_4sdp"
+                                            android:layout_marginEnd="@dimen/_8sdp"
+                                            android:gravity="center"
+                                            android:onClick="@{(v)->viewModel.onDisburseAdded(v)}"
+                                            android:text="@string/add" />
+                                    </RelativeLayout>
+
+                                    <include layout="@layout/item_loan_contract_disburse_header" />
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/disburseCertRV"
+                                        style="@style/AppRecyclerView"
+                                        android:layout_height="@dimen/_52sdp"
+                                        tools:itemCount="2"
+                                        tools:listitem="@layout/item_loan_contract_disburse_item" />
+
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                style="@style/DashboardCardViewBackground"
+                                android:layout_width="match_parent"
+                                android:layout_marginHorizontal="@dimen/_8sdp"
+                                card_view:cardCornerRadius="@dimen/_3sdp"
+                                card_view:cardElevation="@dimen/_2sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            style="@style/TextTitleH2SemiBold"
+                                            android:layout_centerInParent="true"
+                                            android:layout_marginTop="@dimen/_8sdp"
+                                            android:text="@string/payment_receipt_list"
+                                            android:textColor="@color/secondaryText" />
+
+                                        <com.google.android.material.button.MaterialButton
+                                            style="@style/DashboardActionButton"
+                                            android:layout_width="@dimen/_30sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginTop="@dimen/_4sdp"
+                                            android:layout_marginEnd="@dimen/_8sdp"
+                                            android:gravity="center"
+                                            android:onClick="@{(v)->viewModel.onPaymentReceiptAdded(v)}"
+                                            android:text="@string/add" />
+                                    </RelativeLayout>
+
+                                    <include layout="@layout/item_loan_contract_payment_receipt_header" />
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/paymentRV"
+                                        style="@style/AppRecyclerView"
+                                        android:layout_height="@dimen/_52sdp"
+                                        tools:itemCount="2"
+                                        tools:listitem="@layout/item_loan_contract_disburse_item" />
+
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/DashboardCardViewBackground"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/_182sdp"
+                    android:layout_height="@dimen/_263sdp"
                     android:layout_marginHorizontal="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/_4sdp"
                     card_view:cardCornerRadius="@dimen/_3sdp"
-
                     card_view:cardElevation="@dimen/_2sdp">
 
                     <LinearLayout
@@ -59,261 +279,117 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/customer_info" />
+                            style="@style/TextTitleH2SemiBold"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="@string/loan_contract_detail" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider"
+                            android:background="@color/divider" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal">
+                            android:layout_marginHorizontal="@dimen/default_margin"
+                            android:orientation="vertical"
+                            android:paddingVertical="@dimen/_4sdp">
 
                             <include
                                 layout="@layout/create_profile_text_row"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                app:content="@{viewModel.loanContract.loanProfile.customer.name}"
-                                app:header="@{@string/customer_name}" />
+                                app:alignStart="@{true}"
+                                app:content="@{viewModel.loanContract.loanProfile.loanApplicationNumber}"
+                                app:header="@{@string/loan_profile_number}" />
 
                             <include
                                 layout="@layout/create_profile_text_row"
-                                android:layout_width="0dp"
+                                app:alignStart="@{true}"
+                                app:content="@{viewModel.loanContract.contractNumber}"
+                                app:header="@{@string/contract_number}" />
+
+
+                            <include
+                                layout="@layout/create_profile_text_row"
+                                app:alignStart="@{true}"
+                                app:content="@{viewModel.loanContract.loanProfile.loanType.name}"
+                                app:header="@{@string/loan_type}" />
+
+                            <include
+                                layout="@layout/create_profile_text_row"
+                                app:alignStart="@{true}"
+                                app:content="@{viewModel.loanContract.loanProfile.moneyToLoan + `$`}"
+                                app:header="@{@string/money_to_loan}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                app:content="@{viewModel.loanContract.loanProfile.customer.email}"
-                                app:header="@{@string/email}" />
+                                android:layout_marginVertical="@dimen/_4sdp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/TextTitleH3Regular"
+                                    android:layout_width="@dimen/_70sdp"
+                                    android:text="@string/date_created"
+                                    android:textColor="@color/cornflower_blue" />
+
+                                <TextView
+                                    style="@style/TextTitleH3Regular"
+                                    bindCommonDate="@{viewModel.loanContract.createdAt}"
+                                    android:layout_width="@dimen/_75sdp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textColor="@color/secondaryText"
+                                    tools:text="HSVV.21.21.21" />
+                            </LinearLayout>
+
+                            <include
+                                layout="@layout/create_profile_text_row"
+                                app:alignStart="@{true}"
+                                app:content="@{String.valueOf(viewModel.loanContract.loanProfile.loanDuration)}"
+                                app:header="@{@string/loan_duration}" />
+
+                            <include
+                                layout="@layout/create_profile_text_row"
+                                app:alignStart="@{true}"
+                                app:content="@{viewModel.loanContract.loanProfile.staff.name}"
+                                app:header="@{@string/staff_in_charge}" />
+
+                            <include
+                                layout="@layout/create_profile_text_row"
+                                app:alignStart="@{true}"
+                                app:content="@{viewModel.loanContract.loanProfile.approver.name}"
+                                app:header="@{@string/bod_in_charge}" />
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:baselineAligned="false"
-                            android:orientation="horizontal">
+                            android:layout_marginHorizontal="@dimen/default_margin"
+                            android:orientation="vertical">
 
-                            <include
-                                layout="@layout/create_profile_text_row"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                app:content="@{viewModel.loanContract.loanProfile.customer.id}"
-                                app:header="@{@string/customer_id}" />
+                            <TextView
+                                style="@style/TextTitleH3Regular"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:text="@string/contract_signature"
+                                android:textColor="@color/cornflower_blue" />
 
-                            <include
-                                layout="@layout/create_profile_text_row"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                app:content="@{viewModel.loanContract.loanProfile.customer.phoneNumber}"
-                                app:header="@{@string/phone_number}" />
+                            <ImageView
+                                android:id="@+id/imageView"
+                                bindImage="@{viewModel.loanContract.signatureImage.toString()}"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_gravity="center_horizontal"
+                                android:scaleType="centerCrop"
+                                tools:src="@drawable/ic_contract" />
+
                         </LinearLayout>
+
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/cornflower_blue" />
-
-                    <LinearLayout
-                        android:layout_width="@dimen/_193sdp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.card.MaterialCardView
-                            style="@style/DashboardCardViewBackground"
-                            android:layout_marginHorizontal="@dimen/default_margin"
-                            card_view:cardCornerRadius="@dimen/_3sdp"
-                            card_view:cardElevation="@dimen/_2sdp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                        >
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerInParent="true"
-                                        android:text="@string/disburse_certificate_list" />
-
-                                    <com.google.android.material.button.MaterialButton
-                                        style="@style/DashboardActionButton"
-                                        android:layout_alignParentEnd="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginBottom="@dimen/_8sdp"
-                                        android:onClick="@{(v)->viewModel.onDisburseAdded(v)}"
-                                        android:text="@string/add" />
-                                </RelativeLayout>
-                                <include
-                                    layout="@layout/item_loan_contract_disburse_header"
-                                    />
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/disburseCertRV"
-                                    style="@style/AppRecyclerView"
-                                    tools:itemCount="2"
-                                    tools:listitem="@layout/item_loan_contract_disburse_item"/>
-
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-                        <com.google.android.material.card.MaterialCardView
-                            style="@style/DashboardCardViewBackground"
-                            android:layout_marginHorizontal="@dimen/default_margin"
-                            card_view:cardCornerRadius="@dimen/_3sdp"
-                            card_view:cardElevation="@dimen/_2sdp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                        >
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerInParent="true"
-                                        android:text="@string/payment_receipt_list" />
-
-                                    <com.google.android.material.button.MaterialButton
-                                        style="@style/DashboardActionButton"
-                                        android:layout_alignParentEnd="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginBottom="@dimen/_8sdp"
-                                        android:onClick="@{(v)->viewModel.onPaymentReceiptAdded(v)}"
-                                        android:text="@string/add" />
-                                </RelativeLayout>
-                                <include
-                                    layout="@layout/item_loan_contract_payment_receipt_header"
-                                    />
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/paymentRV"
-                                    style="@style/AppRecyclerView"
-                                    tools:itemCount="2"
-                                    tools:listitem="@layout/item_loan_contract_disburse_item"/>
-
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/DashboardCardViewBackground"
-                android:layout_width="@dimen/_182sdp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/default_margin"
-                card_view:cardCornerRadius="@dimen/_3sdp"
-                card_view:cardElevation="@dimen/_2sdp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/loan_contract_detail" />
-
-                    <include
-                        layout="@layout/create_profile_text_row"
-                        app:content="@{viewModel.loanContract.loanProfile.loanApplicationNumber}"
-                        app:header="@{@string/loan_profile_number}" />
-
-                    <include
-                        layout="@layout/create_profile_text_row"
-                        app:content="@{viewModel.loanContract.contractNumber}"
-                        app:header="@{@string/contract_number}" />
-
-
-                    <include
-                        layout="@layout/create_profile_text_row"
-                        app:content="@{viewModel.loanContract.loanProfile.loanType.name}"
-                        app:header="@{@string/loan_type}" />
-
-                    <include
-                        layout="@layout/create_profile_text_row"
-                        app:content="@{viewModel.loanContract.loanProfile.moneyToLoan + `$`}"
-                        app:header="@{@string/money_to_loan}" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_11sdp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="@dimen/_77sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/date_created"
-                            android:textColor="@color/cornflower_blue" />
-
-                        <TextView
-                            bindCommonDate="@{viewModel.loanContract.createdAt}"
-                            android:layout_width="@dimen/_77sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            tools:text="HSVV.21.21.21" />
-                    </LinearLayout>
-
-                    <include
-                        layout="@layout/create_profile_text_row"
-                        app:content="@{String.valueOf(viewModel.loanContract.loanProfile.loanDuration)}"
-                        app:header="@{@string/loan_duration}" />
-
-                    <include
-                        layout="@layout/create_profile_text_row"
-                        app:content="@{viewModel.loanContract.loanProfile.staff.name}"
-                        app:header="@{@string/staff_in_charge}" />
-
-                    <include
-                        layout="@layout/create_profile_text_row"
-                        android:text="@string/bod_in_charge"
-                        app:content="@{viewModel.loanContract.loanProfile.approver.name}"
-                        app:header="@{@string/bod_in_charge}" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_11sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/TextTitleH3Regular"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:text="@string/contract_signature"
-                            android:textColor="@color/cornflower_blue" />
-
-                        <ImageView
-                            android:id="@+id/imageView"
-                            bindImage="@{viewModel.loanContract.signatureImage.toString()}"
-                            android:layout_width="@dimen/_120sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:scaleType="centerCrop"
-                            tools:src="@drawable/ic_contract" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
-    </LinearLayout>
+
+    </FrameLayout>
 </layout>

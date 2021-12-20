@@ -3,6 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.Gravity" />
+        <variable
+            name="alignStart"
+            type="Boolean" />
         <variable
             name="header"
             type="String" />
@@ -14,22 +18,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_11sdp"
+        android:layout_marginVertical="@dimen/_4sdp"
+        android:gravity="@{alignStart ? Gravity.START : Gravity.END}"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/_77sdp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            style="@style/TextTitleH3Regular"
+            android:layout_width="@dimen/_70sdp"
             android:text="@{header}"
             tools:text="Header"
-
             android:textColor="@color/cornflower_blue" />
 
         <TextView
-            android:layout_width="@dimen/_77sdp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            style="@style/TextTitleH3Regular"
+            android:textColor="@color/secondaryText"
+            android:layout_width="@dimen/_75sdp"
             tools:text="HSVV.21.21.21"
             android:text="@{content==null?`Unknown`:content}"
 

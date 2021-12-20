@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_8sdp"
     android:layout_marginHorizontal="@dimen/_8sdp">
 
     <TextView
@@ -11,10 +10,12 @@
 
     <TextView
         style="@style/ContractListTableTextHeader"
+        android:gravity="center_horizontal"
         android:text="@string/amount" />
 
     <TextView
         style="@style/ContractListTableTextHeader"
+        android:gravity="end"
         android:text="@string/date_created" />
 
 

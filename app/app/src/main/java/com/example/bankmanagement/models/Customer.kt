@@ -72,6 +72,13 @@ enum class CustomerType(val value: Int) {
     @SerializedName("2")
     Resident(2);
 
+    fun getTypeName(): String {
+        return when (this) {
+            Business -> "Business"
+            Resident -> "Resident"
+        }
+    }
+
     companion object {
         private val map = CustomerType.values().associateBy(CustomerType::value)
         fun fromInt(type: Int): CustomerType = map[type]!!

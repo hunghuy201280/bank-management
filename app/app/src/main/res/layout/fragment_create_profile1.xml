@@ -119,20 +119,6 @@
             android:visibility="@{viewModel.isEmpty ? View.VISIBLE : View.GONE}" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/previousButton"
-            style="@style/DashboardActionButton"
-            android:layout_width="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:backgroundTint="@color/white"
-            android:text="@string/previous_button"
-            android:textColor="@color/cornflower_blue"
-            app:strokeColor="@color/cornflower_blue"
-            app:strokeWidth="2px" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
             style="@style/DashboardActionButton"
             android:layout_marginEnd="@dimen/default_margin"

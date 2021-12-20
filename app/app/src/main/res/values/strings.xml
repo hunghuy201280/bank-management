@@ -65,6 +65,7 @@
     <string name="save">Save</string>
     <string name="customer_info">Customer info</string>
     <string name="customer_id">Customer ID</string>
+    <string name="customer_type">Customer Type</string>
     <string name="loan_profile_detail">Loan profile detail</string>
     <string name="reset_filter">Reset Filter</string>
     <string name="signature">Signature</string>
@@ -97,5 +98,6 @@
     <string name="amount">Amount</string>
     <string name="payment_receipt_list">Payment receipt list</string>
     <string name="receipt_number">Receipt number</string>
+    <string name="there_is_no_data_for_chart">There is no data for chart</string>
 
 </resources>

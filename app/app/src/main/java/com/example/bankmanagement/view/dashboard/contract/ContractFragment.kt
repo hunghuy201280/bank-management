@@ -9,7 +9,9 @@ import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentContractBinding
 import com.example.bankmanagement.models.LoanContract
+import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanType
+import com.example.bankmanagement.view.dashboard.contract.adapter.ContractItemClickListener
 import com.example.bankmanagement.view_models.dashboard.contract.ContractViewModel
 import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
@@ -23,10 +25,16 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
     override val viewModel: ContractViewModel by viewModels()
 
     private val contractAdapter = ContractAdapter(
-        itemClickListener = object : BaseItemClickListener<LoanContract> {
-            override fun onItemClick(adapterPosition: Int, item: LoanContract) {
+        rootClickListener = object : BaseItemClickListener<LoanContract> {
+            override fun onItemClick(adapterPosition: Int, item: LoanContract) {}
+        },
+        contractClickListener = object : ContractItemClickListener {
+            override fun onContractNumberClick(item: LoanContract) {
                 viewModel.reviewLoanContractArgs.value = item
                 findNavController().navigate(R.id.action_dashboardFragment_to_reviewContractFragment)
+            }
+
+            override fun onLoanNumberClick(item: LoanProfile) {
             }
         }
     );

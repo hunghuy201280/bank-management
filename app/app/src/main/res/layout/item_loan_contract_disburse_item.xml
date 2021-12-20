@@ -22,11 +22,13 @@
 
         <TextView
             style="@style/ContractListTableTextItem"
+            android:gravity="center_horizontal"
             android:text="@{`$`+ String.valueOf(item.amount)}"
             tools:text="$100.0" />
 
         <TextView
             style="@style/ContractListTableTextItem"
+            android:gravity="end"
             bindCommonDate="@{item.createdAt}"
             tools:text="21/12/2021" />
 
