@@ -45,17 +45,22 @@ constructor(
         return@map it.getLiquidationDecisions()
     }
 
-    val totalDisburse = Transformations.map(disburseCertificateList) {
-        return@map it.sumOf { disburse -> disburse.amount }
+    val totalDisburse = Transformations.map(loanContract) {
+        return@map it.getDisburseAmount()
     }
 
-    val totalPayment = Transformations.map(liquidationApplicationList) {
-        return@map it.sumOf { liquidation -> liquidation.amount }
+    val unPaid= Transformations.map(loanContract) {
+        return@map it.getUnPaid()
+    }
+
+    val totalPayment = Transformations.map(loanContract) {
+        return@map it.getPaid()
     }
 
     val containChartData = Transformations.map(loanContract) {
-        return@map !disburseCertificateList.value.isNullOrEmpty()
-                && !liquidationApplicationList.value.isNullOrEmpty()
+        val result=it.disburseCertificates.isNotEmpty() && it.getLiquidationDecisions().isNotEmpty()
+        return@map result
+
     }
     //endregion
 

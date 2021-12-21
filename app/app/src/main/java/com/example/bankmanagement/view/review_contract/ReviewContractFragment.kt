@@ -68,23 +68,28 @@ class ReviewContractFragment :
     }
 
     private fun initPieChart() {
-        val totalPaid = viewModel.totalPayment.value?.toFloat() ?: 0f
-        val totalUnpaid = viewModel.totalDisburse.value?.toFloat() ?: 0f - totalPaid
-        val valueList = mutableListOf(
-            PieEntry(totalPaid, getString(R.string.paid)),
-            PieEntry(totalUnpaid, getString(R.string.unpaid))
-        )
-        //Fill the chart
-        val pieDataSet = PieDataSet(valueList, "")
-        //Chart style
-        pieDataSet.sliceSpace = 0.1f
-        pieDataSet.colors = mutableListOf(
-            ContextCompat.getColor(requireContext(), R.color.paid),
-            ContextCompat.getColor(requireContext(), R.color.unpaid)
-        )
-        pieDataSet.valueTextColor = Color.TRANSPARENT
-        val pieData = PieData(pieDataSet)
-        binding.pieChart.data = pieData
+        viewModel.loanContract.observe(this,{
+            val totalPaid = viewModel.totalPayment.value?.toFloat() ?: 0f
+            val totalUnpaid = viewModel.unPaid.value?.toFloat()?:0f;
+            val valueList = mutableListOf(
+                PieEntry(totalPaid, getString(R.string.paid)),
+                PieEntry(totalUnpaid, getString(R.string.unpaid))
+            )
+
+            //Fill the chart
+            val pieDataSet = PieDataSet(valueList, "")   //Chart style
+            pieDataSet.sliceSpace = 0.1f
+            pieDataSet.colors = mutableListOf(
+                ContextCompat.getColor(requireContext(), R.color.paid),
+                ContextCompat.getColor(requireContext(), R.color.unpaid)
+            )
+            pieDataSet.valueTextColor = Color.TRANSPARENT
+            val pieData = PieData(pieDataSet)
+            binding.pieChart.data = pieData
+        });
+
+
+
         binding.pieChart.legend.isEnabled = false
         binding.pieChart.description.isEnabled = false
         binding.pieChart.setDrawEntryLabels(false)

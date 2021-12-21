@@ -37,8 +37,11 @@ data class LoanContract(
 
     fun getUnPaid(): Double {
         val temp = ArrayList(liquidationApplications)
-        return loanProfile.moneyToLoan - temp.filter { it.decision != null }.map { it.decision!! }
+        return getDisburseAmount() - temp.filter { it.decision != null }.map { it.decision!! }
             .sumOf { it.amount }
+    }
+    fun getDisburseAmount():Double{
+        return disburseCertificates.sumOf { it.amount }
     }
 }
 

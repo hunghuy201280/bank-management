@@ -248,7 +248,7 @@
                                             style="@style/TextTitleH2Regular"
                                             android:layout_weight="1"
                                             android:gravity="end"
-                                            price="@{viewModel.totalDisburse - viewModel.totalPayment}" />
+                                            price="@{viewModel.unPaid}" />
 
 
                                     </LinearLayout>
