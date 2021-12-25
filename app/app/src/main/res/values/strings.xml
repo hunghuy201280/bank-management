@@ -71,6 +71,9 @@
     <string name="signature">Signature</string>
     <string name="loan_profile">Loan profile</string>
     <string name="current_balance">Current balance</string>
+    <string name="pending">pending</string>
+    <string name="done">done</string>
+    <string name="rejected">rejected</string>
 
     <!--Contract-->
     <string name="find_contract_via">Find contract via</string>

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/bg_outline.xml" value="0.2015625" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/bg_spinner_border.xml" value="0.3123076923076923" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/bg_spinner_item_border.xml" value="0.3123076923076923" />
@@ -57,11 +58,23 @@
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_sign_in.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/layout_loan_contract_list_table_header.xml" value="0.259375" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/layout_loan_contract_list_table_item.xml" value="0.259375" />
+        <entry key="app/src/main/res/drawable/bg_status_done.xml" value="0.2546875" />
+        <entry key="app/src/main/res/drawable/bg_status_pending.xml" value="0.2546875" />
+        <entry key="app/src/main/res/drawable/bg_status_reject.xml" value="0.2546875" />
+        <entry key="app/src/main/res/drawable/bg_status_rejected.xml" value="0.2546875" />
         <entry key="app/src/main/res/layout/create_profile_3_text_view.xml" value="0.7246467225574219" />
         <entry key="app/src/main/res/layout/create_profile_text_row.xml" value="0.22780797101449277" />
+        <entry key="app/src/main/res/layout/fragment_contract.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/fragment_create_contract.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/fragment_review_contract.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/fragment_review_profile.xml" value="0.41141234155533646" />
+        <entry key="app/src/main/res/layout/fragment_review_profile.xml" value="1.0" />
+        <entry key="app/src/main/res/layout/item_loan_contract_disburse_header.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/item_loan_contract_disburse_item.xml" value="0.7146745283132799" />
+        <entry key="app/src/main/res/layout/item_loan_contract_payment_receipt_header.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/item_loan_contract_payment_receipt_item.xml" value="0.3344370860927152" />
+        <entry key="app/src/main/res/layout/item_loan_contract_table_item.xml" value="1.2819599500212322" />
+        <entry key="app/src/main/res/layout/item_loan_profile_table_item.xml" value="0.29190751445086704" />
       </map>
     </option>
   </component>

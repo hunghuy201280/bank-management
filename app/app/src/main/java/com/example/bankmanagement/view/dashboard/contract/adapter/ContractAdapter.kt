@@ -31,7 +31,6 @@ class ContractAdapter(
         val binding = (holder.binding as ItemLoanContractTableItemBinding);
 
         initListener(binding, item)
-        setTextSpan(binding, item)
     }
 
     private fun initListener(binding: ItemLoanContractTableItemBinding, item: LoanContract) {
@@ -42,20 +41,6 @@ class ContractAdapter(
         binding.loanNumberTv.setOnClickListener {
             contractClickListener?.onLoanNumberClick(item.loanProfile)
         }
-    }
-
-    private fun setTextSpan(binding: ItemLoanContractTableItemBinding, item: LoanContract) {
-        //region ContractNumberTv
-        val contractNumberSpan = SpannableString(item.contractNumber)
-        contractNumberSpan.setSpan(UnderlineSpan(), 0, item.contractNumber.length, 0)
-        binding.contractNumberTv.text = contractNumberSpan
-        //endregion
-
-        //region LoanNumberTv
-        val loanNumberSpan = SpannableString(item.loanProfile.loanApplicationNumber)
-        loanNumberSpan.setSpan(UnderlineSpan(), 0, item.loanProfile.loanApplicationNumber.length, 0)
-        binding.loanNumberTv.text = loanNumberSpan
-        //endregion
     }
 
     class DiffCallback : DiffUtil.ItemCallback<LoanContract>() {

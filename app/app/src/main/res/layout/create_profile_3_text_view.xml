@@ -28,7 +28,11 @@
         <TextView
             style="@style/TextTitleH3Regular"
             android:layout_marginBottom="@dimen/_2sdp"
+            android:justificationMode="inter_word"
+            android:textColor="@color/secondaryText"
+            android:maxWidth="@dimen/_95sdp"
             android:text="@{content==null?`Unknown`:content,default=`Unknown`}"
+            tools:targetApi="o"
             tools:text="Content" />
 
     </LinearLayout>

@@ -1,10 +1,5 @@
 package com.example.bankmanagement.view.create_profile
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,17 +8,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
-import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
-import com.example.bankmanagement.base.viewmodel.BaseViewModel
 import com.example.bankmanagement.databinding.FragmentCreateProfile1Binding
 import com.example.bankmanagement.models.Customer
-import com.example.bankmanagement.view_models.MainViewModel
-import com.example.bankmanagement.view_models.clockin.ClockInOutViewModel
 import com.example.bankmanagement.view_models.create_profile.CreateProfile1ViewModel
 import com.example.bankmanagement.view_models.create_profile.CreateProfileViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import com.example.bankmanagement.utils.Utils
-import com.example.bankmanagement.view.dashboard.profile.ProfileAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

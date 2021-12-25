@@ -6,15 +6,19 @@ import android.os.Build
 import android.text.Editable
 import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.UnderlineSpan
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.bumptech.glide.Glide
+import com.example.bankmanagement.BankApplication
+import com.example.bankmanagement.R
+import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.utils.Utils
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
@@ -98,6 +102,35 @@ fun getPriceSpannable(price: Double?): SpannableString? {
     return null
 }
 
+@BindingAdapter("isLinkText")
+fun setLinkTextStyle(textView: TextView?, isLinkText: Boolean) {
+    if (!isLinkText) return
+    val span = SpannableString(textView?.text)
+    span.setSpan(UnderlineSpan(), 0, textView?.text!!.length, 0)
+    textView.text = span
+    textView.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.blue_link))
+}
+
+@BindingAdapter("statusSpan")
+fun setStatusSpan(textView: TextView?, status: LoanStatus) {
+    when (status) {
+        LoanStatus.Pending -> {
+            textView?.text = BankApplication.context!!.resources.getString(R.string.pending)
+            textView?.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.textPending))
+            textView?.background = ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_pending)
+        }
+        LoanStatus.Done -> {
+            textView?.text = BankApplication.context!!.resources.getString(R.string.done)
+            textView?.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.textDone))
+            textView?.background = ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_done)
+        }
+        LoanStatus.Rejected -> {
+            textView?.text = BankApplication.context!!.resources.getString(R.string.rejected)
+            textView?.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.textReject))
+            textView?.background = ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_reject)
+        }
+    }
+}
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bindTime")
 fun bindTime(textView: TextView, date: String?) {

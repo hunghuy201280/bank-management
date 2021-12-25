@@ -17,6 +17,8 @@
 
         <TextView
             style="@style/ContractListTableTextItem"
+            isLinkText="@{true}"
+            android:layout_weight="2"
             android:text="@{item.paymentReceipt.receiptNumber}"
             tools:text="Cert number" />
 

@@ -1,4 +1,4 @@
-package com.example.bankmanagement.view.dashboard.profile
+package com.example.bankmanagement.view.dashboard.profile.adapter
 
 import com.example.bankmanagement.base.adapter.BaseBindingListAdapter
 import com.example.bankmanagement.models.LoanProfile
@@ -8,10 +8,13 @@ import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.ItemLoanProfileTableItemBinding
 
-class ProfileAdapter(itemClickListener: BaseItemClickListener<LoanProfile>) : BaseBindingListAdapter<LoanProfile>(
-DiffCallback(),
+class ProfileAdapter(
+    itemClickListener: BaseItemClickListener<LoanProfile>,
+    val profileItemClickListener: ProfileItemClickListener
+) : BaseBindingListAdapter<LoanProfile>(
+    DiffCallback(),
     itemClickListener = itemClickListener
-){
+) {
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_loan_profile_table_item;
@@ -20,10 +23,13 @@ DiffCallback(),
     override fun onBindViewHolder(holder: BaseBindingViewHolder<LoanProfile>, position: Int) {
         val item = getItem(position);
         holder.bindItem(item);
-        val binding  = (holder.binding as ItemLoanProfileTableItemBinding);
+        val binding = (holder.binding as ItemLoanProfileTableItemBinding);
 
-
+        binding.loanNumberTv.setOnClickListener {
+            profileItemClickListener.onLoanNumberClick(item)
+        }
     }
+
     class DiffCallback : DiffUtil.ItemCallback<LoanProfile>() {
         override fun areItemsTheSame(
             oldItem: LoanProfile,
