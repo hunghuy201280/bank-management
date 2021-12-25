@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -16,307 +17,339 @@
             type="com.example.bankmanagement.view_models.MainViewModel" />
 
         <import type="com.example.bankmanagement.models.StaffRole" />
+
         <import type="com.example.bankmanagement.models.LoanStatus" />
 
     </data>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/_10sdp"
-        tools:context=".view.review_profile.ReviewProfileFragment">
+        android:layout_height="match_parent">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_95sdp"
+            android:background="@drawable/bg_header_radius_bottom_left" />
 
-        <TextView
-
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="false"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/loan_profile" />
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/titleTextView"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="@dimen/_19sdp"
-            android:orientation="horizontal">
+            android:paddingHorizontal="@dimen/_10sdp"
+            tools:context=".view.review_profile.ReviewProfileFragment">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/customerInfoCard"
-                android:layout_width="@dimen/_106sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_11sdp"
 
-                >
+            <TextView
+                android:id="@+id/titleTextView"
+                style="@style/TextTitleH2SemiBold"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/loan_profile" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:text="@string/customer_info" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:background="@color/black" />
-
-                    <include
-                        layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.loanProfile.customer.name}"
-                        app:header="@{@string/customer_name}" />
-
-                    <include
-                        layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.loanProfile.customer.id}"
-                        app:header="@{@string/customer_id}" />
-
-                    <include
-                        layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.loanProfile.customer.phoneNumber}"
-                        app:header="@{@string/phone_number}" />
-
-                    <include
-                        layout="@layout/create_profile_3_text_view"
-                        app:content="@{viewModel.loanProfile.customer.email}"
-                        app:header="@{@string/email}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_11sdp"
-                android:layout_marginTop="@dimen/_11sdp">
+                android:layout_below="@id/titleTextView"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                   <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:orientation="horizontal">
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_marginStart="@dimen/_32sdp"
-                           android:text="@string/loan_profile_detail" />
-                       <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/ic_contract"
-                           android:onClick="@{(v)->viewModel.deleteProfile(v)}"
-                           />
-                   </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:background="@color/black" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/customerInfoCard"
+                    style="@style/DashboardCardViewBackground"
+                    android:layout_width="@dimen/_106sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    card_view:cardCornerRadius="@dimen/_3sdp"
+                    card_view:cardElevation="@dimen/_2sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextTitleH2SemiBold"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="@string/customer_info"
+                            android:textColor="@color/secondaryText" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider"
+                            android:background="@color/divider" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:orientation="vertical">
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.loanApplicationNumber}"
-                                app:header="@{@string/loan_id}" />
+                                app:content="@{viewModel.loanProfile.customer.name}"
+                                app:header="@{@string/customer_name}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.staff.name}"
-                                app:header="@{@string/staff_name}" />
+                                app:content="@{viewModel.loanProfile.customer.type.typeName}"
+                                app:header="@{@string/customer_type}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.loanType.name}"
-                                app:header="@{@string/loan_type}" />
+                                app:content="@{viewModel.loanProfile.customer.phoneNumber}"
+                                app:header="@{@string/phone_number}" />
 
                             <include
                                 layout="@layout/create_profile_3_text_view"
-                                app:content="@{String.valueOf(viewModel.loanProfile.moneyToLoan)}"
-                                app:header="@{@string/money_to_loan}" />
+                                app:content="@{viewModel.loanProfile.customer.email}"
+                                app:header="@{@string/email}" />
 
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.loanStatus.name}"
-                                app:header="@{@string/status}" />
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{String.valueOf(viewModel.loanProfile.loanDuration)}"
-                                app:header="@{@string/loan_duration}" />
                         </LinearLayout>
 
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DashboardCardViewBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_18sdp"
+                    card_view:cardCornerRadius="@dimen/_3sdp"
+                    card_view:cardElevation="@dimen/_2sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_45sdp"
-                            android:orientation="vertical">
+                            android:layout_marginStart="@dimen/default_margin"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextTitleH2SemiBold"
+                                android:text="@string/loan_profile_detail"
+                                android:textColor="@color/secondaryText" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:onClick="@{(v)->viewModel.deleteProfile(v)}"
+                                android:src="@drawable/ic_garbage" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider"
+                            android:background="@color/divider" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/default_margin"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/date_created"
-                                    android:textColor="@color/cornflower_blue"
-                                    tools:text="Header" />
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanProfile.loanApplicationNumber}"
+                                    app:header="@{@string/loan_id}" />
 
-                                <TextView
-                                    bindCommonDate="@{viewModel.loanProfile.createdAt}"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    tools:text="Content" />
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanProfile.staff.name}"
+                                    app:header="@{@string/staff_name}" />
 
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanProfile.loanType.name}"
+                                    app:header="@{@string/loan_type}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{String.valueOf(viewModel.loanProfile.moneyToLoan)}"
+                                    app:header="@{@string/money_to_loan}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanProfile.loanStatus.name}"
+                                    app:header="@{@string/status}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{String.valueOf(viewModel.loanProfile.loanDuration)}"
+                                    app:header="@{@string/loan_duration}" />
                             </LinearLayout>
 
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.benefitFromLoan}"
-                                app:header="@{@string/benefit_from_loan}" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_45sdp"
+                                android:orientation="vertical">
 
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.expectedSourceMoneyToRepay}"
-                                app:header="@{@string/expected_source_money_to_repay}" />
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanProfile.collateral}"
-                                app:header="@{@string/collateral}" />
+                                    <TextView
+                                        style="@style/TextTitleH3Regular"
+                                        android:layout_marginVertical="@dimen/_2sdp"
+                                        android:text="@string/date_created"
+                                        android:textColor="@color/cornflower_blue"
+                                        tools:text="Header" />
 
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{String.valueOf(viewModel.loanProfile.loanDuration)}"
-                                app:header="@{@string/loan_duration}" />
+                                    <TextView
+                                        style="@style/TextTitleH3Regular"
+                                        bindCommonDate="@{viewModel.loanProfile.createdAt}"
+                                        android:layout_marginBottom="@dimen/_2sdp"
+                                        tools:text="Content" />
+
+                                </LinearLayout>
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanProfile.benefitFromLoan}"
+                                    app:header="@{@string/benefit_from_loan}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanProfile.expectedSourceMoneyToRepay}"
+                                    app:header="@{@string/expected_source_money_to_repay}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanProfile.collateral}"
+                                    app:header="@{@string/collateral}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{String.valueOf(viewModel.loanProfile.loanDuration)}"
+                                    app:header="@{@string/loan_duration}" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_45sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/TextTitleH3Regular"
+                                    android:layout_marginVertical="@dimen/_2sdp"
+                                    android:text="@string/proof_of_income"
+                                    android:textColor="@color/cornflower_blue" />
+
+                                <Spinner
+                                    android:id="@+id/proofOfIncomeTypeDropDown"
+
+                                    android:layout_width="@dimen/_123sdp"
+                                    android:layout_height="wrap_content" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/proofOfIncomeRV"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_44sdp"
+                                    android:nestedScrollingEnabled="false"
+                                    android:orientation="horizontal"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    tools:itemCount="10"
+                                    tools:listitem="@layout/item_image" />
+                            </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_45sdp"
-                            android:orientation="vertical">
+                            android:layout_marginStart="@dimen/default_margin"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
 
-                            <TextView
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="@dimen/_4sdp">
+
+                                <TextView
+                                    style="@style/TextTitleH3Regular"
+                                    android:layout_marginVertical="@dimen/_2sdp"
+                                    android:text="@string/signature"
+                                    android:textColor="@color/cornflower_blue" />
+
+                                <ImageView
+                                    android:id="@+id/imageView"
+                                    bindImage="@{viewModel.loanProfile.signatureImage.toString()}"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:scaleType="centerCrop"
+                                    tools:src="@drawable/ic_contract" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/proof_of_income"
-                                android:textColor="@color/cornflower_blue" />
-
-                            <Spinner
-                                android:id="@+id/proofOfIncomeTypeDropDown"
-
-                                android:layout_width="@dimen/_123sdp"
-                                android:layout_height="wrap_content" />
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/proofOfIncomeRV"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_44sdp"
-                                android:nestedScrollingEnabled="false"
+                                android:layout_gravity="bottom"
+                                android:layout_marginEnd="@dimen/_8sdp"
                                 android:orientation="horizontal"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                tools:itemCount="10"
-                                tools:listitem="@layout/item_image" />
+                                android:paddingBottom="@dimen/_4sdp"
+                                android:visibility="@{mainVM.currentStaff.roleName==StaffRole.Director.name() &amp;&amp; viewModel.loanProfile.loanStatus == LoanStatus.Pending ?View.VISIBLE:View.GONE}">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/rejectButton"
+                                    style="@style/RejectButton"
+                                    android:layout_marginEnd="@dimen/default_margin"
+                                    android:onClick="@{()->viewModel.rejectProfile()}"
+                                    android:text="@string/reject" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/approveButton"
+                                    style="@style/ApproveButton"
+                                    android:layout_width="wrap_content"
+                                    android:onClick="@{()->viewModel.approveProfile()}"
+                                    android:text="@string/approve" />
+                            </LinearLayout>
+
                         </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/signature"
-                            android:textColor="@color/cornflower_blue" />
-
-                        <ImageView
-                            android:id="@+id/imageView"
-                            bindImage="@{viewModel.loanProfile.signatureImage.toString()}"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:scaleType="centerCrop"
-                            tools:src="@drawable/ic_contract" />
 
                     </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <LinearLayout
+            </LinearLayout>
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:orientation="horizontal"
-                        android:visibility="@{mainVM.currentStaff.roleName==StaffRole.Director.name() &amp;&amp; viewModel.loanProfile.loanStatus == LoanStatus.Pending ?View.VISIBLE:View.GONE}">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createContractButton"
+                style="@style/DashboardActionButton"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:onClick="@{(v)->viewModel.showCreateContractDialog(v)}"
+                android:text="@string/create_contract"
+                android:visibility="@{viewModel.loanProfile.loanStatus== LoanStatus.Done &amp;&amp; viewModel.hasContract==false ?View.VISIBLE:View.GONE}"
+                tools:ignore="RelativeOverlap" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/rejectButton"
-                            style="@style/ButtonDefault"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_24sdp"
-                            android:layout_gravity="center"
-                            android:elevation="0dp"
-                            android:onClick="@{()->viewModel.rejectProfile()}"
-                            android:text="@string/reject"
-                            android:textSize="@dimen/_8ssp"
-                            app:backgroundTint="@color/radicalRed"
-                            app:cornerRadius="@dimen/_6sdp" />
+        </RelativeLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/approveButton"
-                            style="@style/ButtonDefault"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_24sdp"
-                            android:layout_gravity="center"
-                            android:elevation="0dp"
-                            android:onClick="@{()->viewModel.approveProfile()}"
-                            android:text="@string/approve"
-                            android:textSize="@dimen/_8ssp"
-                            app:backgroundTint="@android:color/holo_green_light"
-                            app:cornerRadius="@dimen/_6sdp" />
-                    </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/createContractButton"
-            style="@style/ButtonDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_24sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:elevation="0dp"
-            android:text="@string/create_contract"
-            android:textSize="@dimen/_8ssp"
-            android:onClick="@{(v)->viewModel.showCreateContractDialog(v)}"
-            android:visibility="@{viewModel.loanProfile.loanStatus== LoanStatus.Done &amp;&amp; viewModel.hasContract==false ?View.VISIBLE:View.GONE}"
-            app:backgroundTint="@color/radicalRed"
-            app:cornerRadius="@dimen/_6sdp" />
-
-    </RelativeLayout>
 
 </layout>

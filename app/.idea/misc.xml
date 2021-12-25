@@ -60,6 +60,11 @@
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/fragment_sign_in.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/layout_loan_contract_list_table_header.xml" value="0.259375" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/layout_loan_contract_list_table_item.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/create_profile_3_text_view.xml" value="0.7246467225574219" />
+        <entry key="app/src/main/res/layout/create_profile_text_row.xml" value="0.22780797101449277" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22780797101449277" />
+        <entry key="app/src/main/res/layout/fragment_review_contract.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_review_profile.xml" value="0.41141234155533646" />
       </map>
     </option>
   </component>
