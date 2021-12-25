@@ -99,6 +99,14 @@
         <item name="android:outlineProvider">bounds</item>
         <item name="android:elevation">@dimen/_2sdp</item>
     </style>
+
+    <style name="RejectButton" parent="DashboardActionButton">
+        <item name="backgroundTint">@color/btnReject</item>
+    </style>
+
+    <style name="ApproveButton" parent="RejectButton">
+        <item name="backgroundTint">@color/btnApprove</item>
+    </style>
     
     <style name="DashboardCardViewBackground">
         <item name="android:layout_height">wrap_content</item>
