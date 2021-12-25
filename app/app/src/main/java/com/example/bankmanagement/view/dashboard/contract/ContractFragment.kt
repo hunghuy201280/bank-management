@@ -1,5 +1,6 @@
 package com.example.bankmanagement.view.dashboard.contract
 
+import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.viewModels
@@ -18,7 +19,7 @@ import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel>(),BaseUserView {
+class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel>(), BaseUserView {
 
     override fun layoutRes(): Int = R.layout.fragment_contract
 
@@ -44,7 +45,7 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
 
     override fun initViewModel(viewModel: ContractViewModel) {
         viewModel.init(this)
-        binding.viewModel=viewModel
+        binding.viewModel = viewModel
     }
 
     override fun initView() {
@@ -57,7 +58,6 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
 
     override fun initData() {
         binding.loanContractRV.adapter = contractAdapter;
-        viewModel.getContract()
     }
 
     override fun initAction() {
@@ -81,9 +81,12 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
             }
         viewModel.loanType.observe(this, {
             binding.loanTypeDropDown.setSelection(LoanType.values().indexOf(it), true)
-        });
+        })
         //endregion
+
+
     }
+
 
 
 }

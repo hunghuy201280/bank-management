@@ -20,6 +20,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding,BaseViewModel>()
     private val tabSettings= arrayListOf<Map<String,Any>>(
         mapOf("name" to "Contract", "icon" to R.drawable.ic_contract),
         mapOf("name" to "Profile", "icon" to R.drawable.ic_contract),
+        mapOf("name" to "Application", "icon" to R.drawable.ic_contract),
     );
 
 

@@ -9,7 +9,7 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentReviewContractBinding
 import com.example.bankmanagement.models.DisburseCertificate
-import com.example.bankmanagement.models.LiquidationDecision
+import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
 import com.example.bankmanagement.view_models.MainViewModel

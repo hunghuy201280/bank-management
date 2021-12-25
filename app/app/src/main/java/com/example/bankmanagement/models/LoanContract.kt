@@ -2,6 +2,8 @@ package com.example.bankmanagement.models
 
 import android.net.Uri
 import com.example.bankmanagement.constants.AppConfigs
+import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
+import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import org.joda.time.DateTime
 
 
@@ -53,27 +55,7 @@ data class DisburseCertificate(
     val createdAt: String,
 )
 
-data class LiquidationApplication(
-    val id: String,
-    val loanContract: String,
-    val reason: String,
-    val amount: Double,
-    val status: LoanStatus,
-    val signatureImg: String,
-    val createdAt: String,
-    val applicationNumber: String,
-    val decision: LiquidationDecision? = null,
-)
 
-data class LiquidationDecision(
-    val id: String,
-    val reason: String,
-    val amount: Double,
-    val BODSignature: String,
-    val createdAt: String,
-    val decisionNumber: String,
-    val paymentReceipt: PaymentReceipt? = null,
-)
 
 data class PaymentReceipt(
     val id: String,

@@ -4,6 +4,8 @@ import com.example.bankmanagement.constants.AppConfigs
 import com.example.bankmanagement.repo.ApiService
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.MainRepositoryImpl
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationDecisionDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_contract.*

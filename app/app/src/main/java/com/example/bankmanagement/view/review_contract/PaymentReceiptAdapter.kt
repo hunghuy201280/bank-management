@@ -7,7 +7,7 @@ import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.ItemLoanContractDisburseItemBinding
 import com.example.bankmanagement.databinding.ItemLoanContractPaymentReceiptItemBinding
-import com.example.bankmanagement.models.LiquidationDecision
+import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 
 class PaymentReceiptAdapter(itemClickListener: BaseItemClickListener<LiquidationDecision>) : BaseBindingListAdapter<LiquidationDecision>(
 DiffCallback(),

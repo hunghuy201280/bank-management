@@ -2,6 +2,7 @@ package com.example.bankmanagement.repo.dtos.loan_contract
 
 
 import com.example.bankmanagement.models.LoanStatus
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.google.gson.annotations.SerializedName
 
@@ -27,29 +28,7 @@ data class DisburseCertificateDto(
     val createdAt: String,
 )
 
-data class LiquidationApplicationDto(
-    @SerializedName("_id")
-    val id: String,
-    val loanContract: String,
-    val reason: String,
-    val amount: Double,
-    val status: LoanStatus,
-    val signatureImg: String,
-    val createdAt: String,
-    val applicationNumber: String,
-    val decision: LiquidationDecisionDto? = null,
-)
 
-data class LiquidationDecisionDto(
-    @SerializedName("_id")
-    val id: String,
-    val reason: String,
-    val amount: Double,
-    val BODSignature: String,
-    val createdAt: String,
-    val decisionNumber: String,
-    val paymentReceipt: PaymentReceiptDto? = null,
-)
 
 data class PaymentReceiptDto(
     @SerializedName("_id")

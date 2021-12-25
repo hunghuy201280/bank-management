@@ -103,5 +103,7 @@
     <string name="paid">Paid</string>
     <string name="unpaid">Unpaid</string>
     <string name="total">Total</string>
+    <string name="find_application_via">Find application via</string>
+    <string name="application_type">Application type</string>
 
 </resources>

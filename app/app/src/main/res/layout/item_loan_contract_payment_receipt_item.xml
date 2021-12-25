@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.example.bankmanagement.models.LiquidationDecision" />
+            type="com.example.bankmanagement.models.application.liquidation.LiquidationDecision" />
     </data>
 
 

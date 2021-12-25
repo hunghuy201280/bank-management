@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.bankmanagement.models.LoanContract" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp">
+
+        <TextView
+            android:id="@+id/contractNumberTv"
+            style="@style/ContractListTableTextItem"
+            android:paddingVertical="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_2sdp"
+            android:text="@{item.contractNumber}"
+            android:textColor="@color/blue_link"
+            tools:ignore="RtlSymmetry"
+            tools:text="Contract number" />
+
+        <TextView
+            android:id="@+id/loanNumberTv"
+            style="@style/ContractListTableTextItem"
+            android:paddingVertical="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_2sdp"
+            android:text="@{item.loanProfile.loanApplicationNumber}"
+            android:textColor="@color/blue_link"
+            tools:ignore="RtlSymmetry"
+            tools:text="Profile number" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.loanProfile.staff.name}"
+            tools:text="Staff in charges" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.loanProfile.approver.name}"
+            tools:text="BOD in charges" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            bindCommonDate="@{item.createdAt}"
+            tools:text="Date created" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.loanProfile.loanType.getName()}"
+            tools:text="Loan type" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{`$` + item.loanProfile.moneyToLoan}"
+            tools:text="Money to loan" />
+
+    </LinearLayout>
+
+</layout>

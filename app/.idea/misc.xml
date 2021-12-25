@@ -19,8 +19,9 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/create_profile_text_row.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/dialog_loading.xml" value="0.30104166666666665" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/dialog_message.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_application.xml" value="0.7277716794731065" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_clock_in_out.xml" value="0.29453015427769985" />
-        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_contract.xml" value="0.1" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_contract.xml" value="0.5" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_create_contract.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_create_profile1.xml" value="0.4454482279360667" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_create_profile2.xml" value="0.55703125" />
@@ -34,6 +35,8 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_review_profile.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_sign_in.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_vertical_tabbar.xml" value="0.35572916666666665" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_application_table_header.xml" value="0.55703125" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_application_table_item.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_disburse_header.xml" value="0.484375" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_disburse_item.xml" value="0.484375" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_payment_receipt_header.xml" value="0.484375" />

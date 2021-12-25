@@ -1,6 +1,7 @@
 package com.example.bankmanagement.repo.dtos.loan_contract
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.utils.ModelMapper
 
@@ -79,68 +80,7 @@ class DisburseCertificateDtoMapper : ModelMapper<DisburseCertificateDto, Disburs
 
 }
 
-class LiquidationApplicationDtoMapper
-    (private val decisionDtoMapper: LiquidationDecisionDtoMapper) :
-    ModelMapper<LiquidationApplicationDto, LiquidationApplication> {
-    override fun fromDto(dto: LiquidationApplicationDto): LiquidationApplication {
-        return LiquidationApplication(
-            id = dto.id,
-            loanContract = dto.loanContract,
-            reason = dto.reason,
-            amount = dto.amount,
-            status = dto.status,
-            signatureImg = dto.signatureImg,
-            createdAt = dto.createdAt,
-            applicationNumber = dto.applicationNumber,
-            decision = dto.decision?.let { decisionDtoMapper.fromDto(it) },
-        )
-    }
 
-    override fun toDto(model: LiquidationApplication): LiquidationApplicationDto {
-        return LiquidationApplicationDto(
-            id = model.id,
-            loanContract = model.loanContract,
-            reason = model.reason,
-            amount = model.amount,
-            status = model.status,
-            signatureImg = model.signatureImg,
-            createdAt = model.createdAt,
-            applicationNumber = model.applicationNumber,
-            decision = model.decision?.let { decisionDtoMapper.toDto(it) },
-        )
-    }
-
-}
-
-class LiquidationDecisionDtoMapper
-constructor(
-    private val paymentReceiptDtoMapper: PaymentReceiptDtoMapper
-) : ModelMapper<LiquidationDecisionDto, LiquidationDecision> {
-    override fun fromDto(dto: LiquidationDecisionDto): LiquidationDecision {
-        return LiquidationDecision(
-            id = dto.id,
-            reason = dto.reason,
-            amount = dto.amount,
-            BODSignature = dto.BODSignature,
-            createdAt = dto.createdAt,
-            decisionNumber = dto.decisionNumber,
-            paymentReceipt = dto.paymentReceipt?.let { paymentReceiptDtoMapper.fromDto(it) },
-        )
-    }
-
-    override fun toDto(model: LiquidationDecision): LiquidationDecisionDto {
-        return LiquidationDecisionDto(
-            id = model.id,
-            reason = model.reason,
-            amount = model.amount,
-            BODSignature = model.BODSignature,
-            createdAt = model.createdAt,
-            decisionNumber = model.decisionNumber,
-            paymentReceipt = model.paymentReceipt?.let { paymentReceiptDtoMapper.toDto(it) },
-        )
-    }
-
-}
 
 class PaymentReceiptDtoMapper : ModelMapper<PaymentReceiptDto, PaymentReceipt> {
     override fun fromDto(dto: PaymentReceiptDto): PaymentReceipt {
