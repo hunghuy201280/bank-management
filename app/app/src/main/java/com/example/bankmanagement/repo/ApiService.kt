@@ -1,5 +1,6 @@
 package com.example.bankmanagement.repo
 
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
 import com.example.bankmanagement.repo.dtos.customer.GetCustomerResponse
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
@@ -107,5 +108,14 @@ interface ApiService {
         ) token: String,
         @Body body: Map<String, Any>,
     ):LoanContractDto
+
+
+
+    @GET("exemption_applications")
+    suspend fun getExemptionApplications(
+        @Header(
+            "Authorization",
+        ) token: String,
+    ): ArrayList<ExemptionApplicationDto>
 
 }

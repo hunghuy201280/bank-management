@@ -1,14 +1,21 @@
 package com.example.bankmanagement.models.application.exemption
 
-import com.example.bankmanagement.repo.dtos.loan_contract.PaymentReceiptDto
+import com.example.bankmanagement.models.application.BaseDecision
 import com.google.gson.annotations.SerializedName
 
 data class ExemptionDecision(
     @SerializedName("_id")
-    val id: String,
-    val reason: String,
-    val amount: Double,
-    val BODSignature: String,
-    val createdAt: String,
-    val decisionNumber: String,
+    override val id: String,
+    override val reason: String,
+    override val amount: Double,
+    override val BODSignature: String,
+    override val createdAt: String,
+    override val decisionNumber: String,
+) : BaseDecision(
+    id = id,
+    reason = reason,
+    amount = amount,
+    BODSignature = BODSignature,
+    createdAt = createdAt,
+    decisionNumber = decisionNumber,
 )

@@ -1,6 +1,7 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
@@ -64,7 +65,13 @@ interface MainRepository {
 
 
 
-    fun getToken():String;
+    suspend fun getExemptionApplications(
+    ):ArrayList<ExemptionApplication>
+
+
+
+
+    fun getToken():String
 
 
 

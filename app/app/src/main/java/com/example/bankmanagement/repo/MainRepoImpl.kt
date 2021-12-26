@@ -1,6 +1,8 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
@@ -28,6 +30,7 @@ constructor(
     private val apiService: ApiService,
     private var accessToken: String = "",
     private val loanContractDtoMapper: LoanContractDtoMapper,
+    private val exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
     ) : MainRepository {
 
 
@@ -139,6 +142,12 @@ constructor(
             "signatureImg" to signatureImg,
         ))
         return loanContractDtoMapper.fromDto(response)
+    }
+
+    override suspend fun getExemptionApplications(): ArrayList<ExemptionApplication> {
+        val response=apiService.getExemptionApplications(accessToken)
+        return ArrayList(response.map { exemptionApplicationDtoMapper.fromDto(it) })
+
     }
 
 

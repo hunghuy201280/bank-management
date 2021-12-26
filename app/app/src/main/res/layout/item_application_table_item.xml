@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.example.bankmanagement.models.LoanContract" />
+            type="com.example.bankmanagement.models.application.BaseApplication" />
     </data>
 
 
@@ -20,29 +20,29 @@
             style="@style/ContractListTableTextItem"
             android:paddingVertical="@dimen/_2sdp"
             android:paddingEnd="@dimen/_2sdp"
-            android:text="@{item.contractNumber}"
+            android:text="@{item.loanContract}"
             android:textColor="@color/blue_link"
             tools:ignore="RtlSymmetry"
-            tools:text="Contract number" />
+            tools:text="HD.21.21.21" />
 
         <TextView
             android:id="@+id/loanNumberTv"
             style="@style/ContractListTableTextItem"
             android:paddingVertical="@dimen/_2sdp"
             android:paddingEnd="@dimen/_2sdp"
-            android:text="@{item.loanProfile.loanApplicationNumber}"
+            android:text="@{item.applicationNumber}"
             android:textColor="@color/blue_link"
             tools:ignore="RtlSymmetry"
-            tools:text="Profile number" />
+            tools:text="HD.21.21.21" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.loanProfile.staff.name}"
-            tools:text="Staff in charges" />
+            android:text="@{item.status.name}"
+            tools:text="Done" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.loanProfile.approver.name}"
+            applicationType="@{item}"
             tools:text="BOD in charges" />
 
         <TextView
@@ -52,12 +52,10 @@
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{item.loanProfile.loanType.getName()}"
             tools:text="Loan type" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:text="@{`$` + item.loanProfile.moneyToLoan}"
             tools:text="Money to loan" />
 
     </LinearLayout>

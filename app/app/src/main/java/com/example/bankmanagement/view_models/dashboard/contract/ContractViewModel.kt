@@ -57,7 +57,10 @@ constructor(
 
     init {
         getContract()
+
     }
+
+
 
     fun getContract() {
         viewModelScope.launch(Dispatchers.IO) {

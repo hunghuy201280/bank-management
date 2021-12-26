@@ -15,6 +15,9 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.bumptech.glide.Glide
+import com.example.bankmanagement.models.application.BaseApplication
+import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.utils.Utils
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
@@ -48,6 +51,15 @@ fun setDurationFromDateTime(view: TextView,time: String?) {
         TimeUnit.MILLISECONDS.toMinutes(diff) % TimeUnit.HOURS.toMinutes(1),
     )
     view.text="$hms mins worked so far today";
+
+}
+@BindingAdapter("applicationType")
+fun setApplicationType(view: TextView,application: BaseApplication) {
+   view.text=when(application.javaClass){
+       ExemptionApplication::javaClass->"Exemption Application"
+       LiquidationApplication::javaClass->"Liquidation Application"
+       else->throw Exception("Unknown class ${application.javaClass}")
+   }
 
 }
 

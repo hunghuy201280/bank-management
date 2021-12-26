@@ -4,6 +4,8 @@ import com.example.bankmanagement.constants.AppConfigs
 import com.example.bankmanagement.repo.ApiService
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.MainRepositoryImpl
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionDecisionDtoMapper
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationDecisionDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
@@ -73,6 +75,20 @@ class RepoModule {
 
     @Singleton
     @Provides
+    fun provideExemptionDecisionDtoMapper(): ExemptionDecisionDtoMapper {
+        return ExemptionDecisionDtoMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideExemptionApplicationDtoMapper(
+        decisionDtoMapper: ExemptionDecisionDtoMapper
+    ): ExemptionApplicationDtoMapper {
+        return ExemptionApplicationDtoMapper(decisionDtoMapper)
+    }
+
+    @Singleton
+    @Provides
     fun provideLoanContractDtoMapper(
         disburseCertificateDtoMapper: DisburseCertificateDtoMapper,
         liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
@@ -135,6 +151,7 @@ class RepoModule {
         profileDtoMapper: LoanProfileDtoMapper,
         customerDtoMapper: CustomerDtoMapper,
         loanContractDtoMapper: LoanContractDtoMapper,
+        exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
     ): MainRepository {
         return MainRepositoryImpl(
             apiService = apiService,
@@ -142,7 +159,8 @@ class RepoModule {
             staffDtoMapper = staffDtoMapper,
             profileMapper = profileDtoMapper,
             customerDtoMapper = customerDtoMapper,
-            loanContractDtoMapper = loanContractDtoMapper
-        );
+            loanContractDtoMapper = loanContractDtoMapper,
+            exemptionApplicationDtoMapper = exemptionApplicationDtoMapper,
+        )
     }
 }

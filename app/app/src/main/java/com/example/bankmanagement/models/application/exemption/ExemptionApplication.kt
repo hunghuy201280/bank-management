@@ -1,18 +1,29 @@
 package com.example.bankmanagement.models.application.exemption
 
 import com.example.bankmanagement.models.LoanStatus
+import com.example.bankmanagement.models.application.BaseApplication
 import com.google.gson.annotations.SerializedName
 
 data class ExemptionApplication(
     @SerializedName("_id")
-    val id: String,
-    val loanContract: String,
-    val reason: String,
-    val amount: Double,
-    val status: LoanStatus,
-    val signatureImg: String,
-    val createdAt: String,
-    val applicationNumber: String,
-    val decision: ExemptionDecision? = null,
+    override val id: String,
+    override val loanContract: String,
+    override val reason: String,
+    override val amount: Double,
+    override val status: LoanStatus,
+    override val signatureImg: String,
+    override val createdAt: String,
+    override val applicationNumber: String,
+    override val decision: ExemptionDecision? = null,
+) : BaseApplication(
+    id = id,
+    loanContract = loanContract,
+    reason = reason,
+    amount = amount,
+    status = status,
+    signatureImg = signatureImg,
+    createdAt = createdAt,
+    applicationNumber = applicationNumber,
+    decision = decision,
 )
 

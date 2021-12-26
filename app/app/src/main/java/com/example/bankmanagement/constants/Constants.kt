@@ -9,6 +9,7 @@ const val STATE_KEY_APPLICATION_CONTRACT_NUMBER="application.key.contract_number
 const val STATE_KEY_APPLICATION_PROFILE_NUMBER="application.key.profile_number"
 const val STATE_KEY_APPLICATION_STATUS="application.key.status"
 const val STATE_KEY_APPLICATION_TYPE="application.key.type"
+const val STATE_KEY_APPLICATION_EXEMPTION="application.key.exemption"
 
 //#endregion
 
