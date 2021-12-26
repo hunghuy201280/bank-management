@@ -11,7 +11,7 @@
 
     <TextView
         style="@style/ContractListTableTextHeader"
-        android:text="@string/loan_profile_number" />
+        android:text="@string/application_number" />
 
     <TextView
         style="@style/ContractListTableTextHeader"

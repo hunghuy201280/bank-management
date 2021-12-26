@@ -209,13 +209,13 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <include layout="@layout/item_loan_contract_table_header" />
+                    <include layout="@layout/item_application_table_header" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/loanContractRV"
+                        android:id="@+id/applicationRV"
                         style="@style/AppRecyclerView"
                         tools:itemCount="10"
-                        tools:listitem="@layout/item_loan_contract_table_item" />
+                        tools:listitem="@layout/item_application_table_item" />
                 </LinearLayout>
 
 

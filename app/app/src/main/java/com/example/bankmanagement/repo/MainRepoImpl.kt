@@ -150,6 +150,11 @@ constructor(
 
     }
 
+    override suspend fun getContract(contractId: String?, contractNumber: String?): LoanContract {
+        val response=apiService.getLoanContract(token = accessToken,contractId=contractId, contractNumber = contractNumber)
+        return loanContractDtoMapper.fromDto(response)
+    }
+
 
     override fun getToken(): String = accessToken;
 }

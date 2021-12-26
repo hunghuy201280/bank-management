@@ -108,5 +108,6 @@
     <string name="total">Total</string>
     <string name="find_application_via">Find application via</string>
     <string name="application_type">Application type</string>
+    <string name="application_number">Application number</string>
 
 </resources>

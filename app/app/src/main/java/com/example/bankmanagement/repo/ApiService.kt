@@ -80,8 +80,8 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        @Path(value="id",encoded = true) profileId:String,
-        )
+        @Path(value = "id", encoded = true) profileId: String,
+    )
 
 
     @GET("loan_contracts?sortBy=createdAt:desc")
@@ -96,8 +96,8 @@ interface ApiService {
         @Header(
             "Authorization",
         ) token: String,
-        @Path(value="id",encoded = true) profileId:String,
-        ): Boolean
+        @Path(value = "id", encoded = true) profileId: String,
+    ): Boolean
 
 
     @POST("loan_contracts")
@@ -107,8 +107,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-    ):LoanContractDto
-
+    ): LoanContractDto
 
 
     @GET("exemption_applications")
@@ -117,5 +116,15 @@ interface ApiService {
             "Authorization",
         ) token: String,
     ): ArrayList<ExemptionApplicationDto>
+
+
+    @GET("loan_contracts/one")
+    suspend fun getLoanContract(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Query("_id") contractId: String?=null,
+        @Query("contractNumber") contractNumber:String?=null,
+        ): LoanContractDto
 
 }

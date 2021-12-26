@@ -2,12 +2,10 @@ package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
-import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
-import retrofit2.http.QueryMap
 import java.io.File
 
 
@@ -67,6 +65,11 @@ interface MainRepository {
 
     suspend fun getExemptionApplications(
     ):ArrayList<ExemptionApplication>
+
+    suspend fun getContract(
+        contractId:String?=null,
+        contractNumber:String?=null,
+    ):LoanContract
 
 
 

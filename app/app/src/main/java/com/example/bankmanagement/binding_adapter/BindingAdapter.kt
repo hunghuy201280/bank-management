@@ -48,29 +48,30 @@ import java.util.concurrent.TimeUnit
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("durationFromTime")
-fun setDurationFromDateTime(view: TextView,time: String?) {
-   if(time==null)return;
+fun setDurationFromDateTime(view: TextView, time: String?) {
+    if (time == null) return;
     val date = dateFromISOString(time);
-    val diff=Date().time-date.time;
+    val diff = Date().time - date.time;
     val hms = String.format(
         "%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff),
         TimeUnit.MILLISECONDS.toMinutes(diff) % TimeUnit.HOURS.toMinutes(1),
     )
-    view.text="$hms mins worked so far today";
+    view.text = "$hms mins worked so far today";
 
 }
+
 @BindingAdapter("applicationType")
-fun setApplicationType(view: TextView,application: BaseApplication) {
-   view.text=when(application.javaClass){
-       ExemptionApplication::javaClass->"Exemption Application"
-       LiquidationApplication::javaClass->"Liquidation Application"
-       else->throw Exception("Unknown class ${application.javaClass}")
-   }
+fun setApplicationType(view: TextView, application: BaseApplication) {
+    view.text = when (application) {
+        is ExemptionApplication -> "Exemption Application"
+        is LiquidationApplication -> "Liquidation Application"
+        else -> throw Exception("Unknown class ${application.javaClass}")
+    }
 
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun dateFromISOString(isoString:String):Date{
+fun dateFromISOString(isoString: String): Date {
     val timeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
 
     val offsetDateTime: OffsetDateTime =
@@ -79,6 +80,7 @@ fun dateFromISOString(isoString:String):Date{
     val date = Date.from(Instant.from(offsetDateTime))
     return date;
 }
+
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bindDate")
 fun bindDate(textView: TextView, dateParam: String?) {
@@ -86,7 +88,7 @@ fun bindDate(textView: TextView, dateParam: String?) {
     val d = Date()
 
     val dayOfTheWeek: String = sdf.format(dateParam?.let { dateFromISOString(it) } ?: d)
-    textView.text=dayOfTheWeek;
+    textView.text = dayOfTheWeek;
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -121,7 +123,7 @@ fun setLinkTextStyle(textView: TextView, isLinkText: Boolean) {
     if (!isLinkText) return
     textView.paintFlags = textView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
-   textView.setTextColor(ContextCompat.getColorStateList(textView.context, R.color.blue_link))
+    textView.setTextColor(ContextCompat.getColorStateList(textView.context, R.color.blue_link))
 }
 
 @BindingAdapter("statusSpan")
@@ -129,21 +131,40 @@ fun setStatusSpan(textView: TextView?, status: LoanStatus) {
     when (status) {
         LoanStatus.Pending -> {
             textView?.text = BankApplication.context!!.resources.getString(R.string.pending)
-            textView?.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.textPending))
-            textView?.background = ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_pending)
+            textView?.setTextColor(
+                ContextCompat.getColorStateList(
+                    BankApplication.context!!,
+                    R.color.textPending
+                )
+            )
+            textView?.background =
+                ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_pending)
         }
         LoanStatus.Done -> {
             textView?.text = BankApplication.context!!.resources.getString(R.string.done)
-            textView?.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.textDone))
-            textView?.background = ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_done)
+            textView?.setTextColor(
+                ContextCompat.getColorStateList(
+                    BankApplication.context!!,
+                    R.color.textDone
+                )
+            )
+            textView?.background =
+                ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_done)
         }
         LoanStatus.Rejected -> {
             textView?.text = BankApplication.context!!.resources.getString(R.string.rejected)
-            textView?.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.textReject))
-            textView?.background = ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_reject)
+            textView?.setTextColor(
+                ContextCompat.getColorStateList(
+                    BankApplication.context!!,
+                    R.color.textReject
+                )
+            )
+            textView?.background =
+                ContextCompat.getDrawable(BankApplication.context!!, R.drawable.bg_status_reject)
         }
     }
 }
+
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bindTime")
 fun bindTime(textView: TextView, date: String?) {
@@ -153,6 +174,7 @@ fun bindTime(textView: TextView, date: String?) {
     val dayOfTheWeek: String = sdf.format(date?.let { dateFromISOString(it) } ?: d)
     textView.text = dayOfTheWeek;
 }
+
 @BindingAdapter("bindImage")
 fun bindImage(imageView: ImageView, uri: String?) {
     uri?.let {
@@ -168,15 +190,17 @@ fun bindImage(imageView: ImageView, uri: String?) {
     }
 
 }
+
 @BindingAdapter("bindDateTime")
 fun bindDateTime(textView: TextView, dateTime: DateTime?) {
-    if(dateTime==null) {
+    if (dateTime == null) {
         textView.text = ""
         return
     }
-    val dateString="${dateTime.dayOfMonth().asString}/${dateTime.monthOfYear().asString}/${dateTime.year().asString}";
+    val dateString =
+        "${dateTime.dayOfMonth().asString}/${dateTime.monthOfYear().asString}/${dateTime.year().asString}";
 
-    textView.text=dateString;
+    textView.text = dateString;
 
 }
 
@@ -251,6 +275,7 @@ fun setLongInTextView(tv: TextView, dbl: Long?) {
     }//catch
 
 }//setLongInTextView
+
 @InverseBindingAdapter(attribute = "app:text")
 fun getLongFromTextView(editText: TextView): Long? {
 
@@ -262,8 +287,6 @@ fun getLongFromTextView(editText: TextView): Long? {
 
 }//getLongFromTextView
 //endregion
-
-
 
 
 @BindingAdapter("textAttrChanged")
