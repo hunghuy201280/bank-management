@@ -17,12 +17,14 @@
 
         <TextView
             style="@style/ContractListTableTextItem"
+            android:layout_weight="2"
+            isLinkText="@{true}"
             android:text="@{item.certNumber}"
             tools:text="Cert number" />
 
         <TextView
             style="@style/ContractListTableTextItem"
-            android:gravity="center_horizontal"
+            android:gravity="start"
             android:text="@{`$`+ String.valueOf(item.amount)}"
             tools:text="$100.0" />
 

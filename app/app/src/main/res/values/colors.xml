@@ -29,6 +29,14 @@
     <color name="btnReject">#EA2134</color>
     <color name="btnApprove">#55D05B</color>
 
+    <!-- Status -->
+    <color name="bgDone">#DEEFD6</color>
+    <color name="textDone">#6EAD52</color>
+    <color name="bgPending">#FFF7BD</color>
+    <color name="textPending">#DFBB30</color>
+    <color name="bgReject">#F9DDD7</color>
+    <color name="textReject">#E07873</color>
+
     <!-- Others -->
     <color name="textPrimary">#333333</color>
     <color name="textSecondary">#B8B8B8</color>

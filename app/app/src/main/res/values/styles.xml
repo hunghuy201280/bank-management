@@ -152,6 +152,13 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="StatusTextView" parent="ContractListTableTextItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">0</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">@dimen/_4sdp</item>
+    </style>
+
     <style name="Widget.Theme.BankManagement.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>

@@ -10,6 +10,8 @@ import com.example.bankmanagement.databinding.FragmentProfileBinding
 import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
+import com.example.bankmanagement.view.dashboard.profile.adapter.ProfileAdapter
+import com.example.bankmanagement.view.dashboard.profile.adapter.ProfileItemClickListener
 import com.example.bankmanagement.view_models.dashboard.profile.ProfileViewModel
 import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
@@ -28,6 +30,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
                 viewModel.reviewLoanProfileArgs.value = item;
                 findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
             }
+        },
+        profileItemClickListener = object : ProfileItemClickListener {
+            override fun onLoanNumberClick(item: LoanProfile) {
+
+            }
+
         }
     );
 
