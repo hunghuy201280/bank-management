@@ -13,69 +13,74 @@ interface MainRepository {
     suspend fun getBranchInfo(
         branchCode: String
     ): BranchInfo
+
     suspend fun login(
         email: String,
         password: String,
-        branchId:String,
-    ): Pair<Staff,ClockInOutResponse>
+        branchId: String,
+    ): Pair<Staff, ClockInOutResponse>
 
     suspend fun clockIn()
     suspend fun clockOut()
 
-    suspend fun getClockInOutTime():ClockInOutResponse
+    suspend fun getClockInOutTime(): ClockInOutResponse
 
     suspend fun getLoanProfiles(
 
-    ):ArrayList<LoanProfile>
+    ): ArrayList<LoanProfile>
 
     suspend fun searchCustomers(
         query: Map<String, Any>,
 
-        ):ArrayList<Customer>
+        ): ArrayList<Customer>
 
 
     suspend fun createLoanProfile(
         data: CreateLoanProfileData
-        ):LoanProfileDto
+    ): LoanProfileDto
 
     suspend fun upFiles(
         files: List<File>
-        ):UpFileResp
+    ): UpFileResp
 
     suspend fun updateLoanStatus(
         status: LoanStatus,
-        profileId:String,
+        profileId: String,
     )
 
     suspend fun getContracts(
-    ):ArrayList<LoanContract>
+        customerPhone: String? = null,
+        contractNumber: String? = null,
+        staffName: String? = null,
+        approver: String? = null,
+        loanType: LoanType? = null,
+        createdAt: String? = null,
+        profileNumber: String? = null,
+        moneyToLoan: Double? = null,
+    ): ArrayList<LoanContract>
 
     suspend fun hasContract(
         profileId: String
-    ):Boolean
+    ): Boolean
 
 
     suspend fun createContract(
         profileId: String,
-        commitment:String,
-        signatureImg:String,
-    ):LoanContract
-
+        commitment: String,
+        signatureImg: String,
+    ): LoanContract
 
 
     suspend fun getExemptionApplications(
-    ):ArrayList<ExemptionApplication>
+    ): ArrayList<ExemptionApplication>
 
     suspend fun getContract(
-        contractId:String?=null,
-        contractNumber:String?=null,
-    ):LoanContract
+        contractId: String? = null,
+        contractNumber: String? = null,
+    ): LoanContract
 
 
-
-
-    fun getToken():String
-
+    fun getToken(): String
 
 
 }

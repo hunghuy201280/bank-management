@@ -15,8 +15,8 @@ data class LoanContractDto(
     val signatureImg: String,
     val createdAt: String,
     val contractNumber: String,
-    val disburseCertificates: List<DisburseCertificateDto>,
-    val liquidationApplications: List<LiquidationApplicationDto>
+    val disburseCertificates: List<DisburseCertificateDto>?,
+    val liquidationApplications: List<LiquidationApplicationDto>?,
 )
 
 data class DisburseCertificateDto(

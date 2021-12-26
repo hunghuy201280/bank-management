@@ -14,6 +14,7 @@ import com.example.bankmanagement.repo.dtos.sign_in.SignInData
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
 import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
 import com.example.bankmanagement.utils.Utils
+import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -31,7 +32,7 @@ constructor(
     private var accessToken: String = "",
     private val loanContractDtoMapper: LoanContractDtoMapper,
     private val exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
-    ) : MainRepository {
+) : MainRepository {
 
 
     override suspend fun getBranchInfo(branchCode: String): BranchInfo {
@@ -120,10 +121,29 @@ constructor(
         )
     }
 
-    override suspend fun getContracts(): ArrayList<LoanContract> {
-        val response = apiService.getLoanContracts(token = accessToken)
-        val contracts=response.map { loanContractDtoMapper.fromDto(it) }
-        return  ArrayList(contracts)
+    override suspend fun getContracts(
+        customerPhone: String?,
+        contractNumber: String?,
+        staffName: String?,
+        approver: String?,
+        loanType: LoanType?,
+        createdAt: String?,
+        profileNumber: String?,
+        moneyToLoan: Double?
+    ): ArrayList<LoanContract> {
+        val response = apiService.getLoanContracts(
+            token = accessToken,
+            customerPhone = customerPhone,
+            contractNumber = contractNumber,
+            staffName = staffName,
+            approver = approver,
+            loanType = loanType?.value,
+            createdAt = createdAt,
+            profileNumber = profileNumber,
+            moneyToLoan = moneyToLoan,
+            )
+        val contracts = response.map { loanContractDtoMapper.fromDto(it) }
+        return ArrayList(contracts)
 
     }
 
@@ -136,22 +156,28 @@ constructor(
         commitment: String,
         signatureImg: String
     ): LoanContract {
-        val response=apiService.createContract(token=accessToken, body=mapOf(
-            "loanProfile" to profileId,
-            "commitment" to commitment,
-            "signatureImg" to signatureImg,
-        ))
+        val response = apiService.createContract(
+            token = accessToken, body = mapOf(
+                "loanProfile" to profileId,
+                "commitment" to commitment,
+                "signatureImg" to signatureImg,
+            )
+        )
         return loanContractDtoMapper.fromDto(response)
     }
 
     override suspend fun getExemptionApplications(): ArrayList<ExemptionApplication> {
-        val response=apiService.getExemptionApplications(accessToken)
+        val response = apiService.getExemptionApplications(accessToken)
         return ArrayList(response.map { exemptionApplicationDtoMapper.fromDto(it) })
 
     }
 
     override suspend fun getContract(contractId: String?, contractNumber: String?): LoanContract {
-        val response=apiService.getLoanContract(token = accessToken,contractId=contractId, contractNumber = contractNumber)
+        val response = apiService.getLoanContract(
+            token = accessToken,
+            contractId = contractId,
+            contractNumber = contractNumber
+        )
         return loanContractDtoMapper.fromDto(response)
     }
 

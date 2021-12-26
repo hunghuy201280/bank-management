@@ -1,6 +1,5 @@
 package com.example.bankmanagement.view_models.dashboard.profile
 
-import android.app.DatePickerDialog
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -50,12 +49,7 @@ constructor(
         }
     }
 
-    fun testApi() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val res = mainRepo.getContracts();
-            Log.d(TAG, "TEST API RES: $res");
-        }
-    }
+
 
     fun resetFilter() {
         getProfiles();

@@ -95,6 +95,7 @@ class Utils {
         ) {
             val dialog =
                 MaterialDialog(context).noAutoDismiss().customView(R.layout.app_alert_dialog)
+
             dialog.findViewById<TextView>(R.id.title).text = title
             dialog.findViewById<TextView>(R.id.body).text = body
             dialog.findViewById<MaterialButton>(R.id.cancelButton).apply {

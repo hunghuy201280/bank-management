@@ -1,5 +1,6 @@
 package com.example.bankmanagement.repo
 
+import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
 import com.example.bankmanagement.repo.dtos.customer.GetCustomerResponse
@@ -84,11 +85,21 @@ interface ApiService {
     )
 
 
-    @GET("loan_contracts?sortBy=createdAt:desc")
+    @GET("loan_contracts")
     suspend fun getLoanContracts(
         @Header(
             "Authorization",
         ) token: String,
+        @Query("sortBy") sortBy:String="createdAt:desc",
+        @Query("customerPhone") customerPhone:String?=null,
+        @Query("contractNumber") contractNumber:String?=null,
+        @Query("staffName") staffName:String?=null,
+        @Query("approver") approver:String?=null,
+        @Query("loanType") loanType:Int?=null,
+        @Query("createdAt") createdAt:String?=null,
+        @Query("profileNumber") profileNumber:String?=null,
+        @Query("moneyToLoan") moneyToLoan:Double?=null,
+
     ): ArrayList<LoanContractDto>
 
     @GET("loan_profiles/has_contract/{id}")

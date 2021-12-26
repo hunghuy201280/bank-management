@@ -1,6 +1,8 @@
 package com.example.bankmanagement.repo.dtos.loan_contract
 
-import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.DisburseCertificate
+import com.example.bankmanagement.models.LoanContract
+import com.example.bankmanagement.models.PaymentReceipt
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.utils.ModelMapper
@@ -21,16 +23,16 @@ class LoanContractDtoMapper
             signatureImg = dto.signatureImg,
             createdAt = dto.createdAt,
             contractNumber = dto.contractNumber,
-            disburseCertificates = dto.disburseCertificates.map {
+            disburseCertificates = dto.disburseCertificates?.map {
                 disburseCertificateDtoMapper.fromDto(
                     it
                 )
-            },
-            liquidationApplications = dto.liquidationApplications.map {
+            } ?: listOf(),
+            liquidationApplications = dto.liquidationApplications?.map {
                 liquidationApplicationDtoMapper.fromDto(
                     it
                 )
-            },
+            } ?: listOf(),
         )
     }
 
@@ -79,7 +81,6 @@ class DisburseCertificateDtoMapper : ModelMapper<DisburseCertificateDto, Disburs
     }
 
 }
-
 
 
 class PaymentReceiptDtoMapper : ModelMapper<PaymentReceiptDto, PaymentReceipt> {

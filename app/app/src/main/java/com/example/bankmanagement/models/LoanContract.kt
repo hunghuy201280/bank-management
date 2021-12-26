@@ -15,8 +15,8 @@ data class LoanContract(
     val signatureImg: String,
     val createdAt: String,
     val contractNumber: String,
-    val disburseCertificates: List<DisburseCertificate>,
-    val liquidationApplications: List<LiquidationApplication>
+    val disburseCertificates: List<DisburseCertificate> =  listOf(),
+    val liquidationApplications: List<LiquidationApplication> = listOf(),
 ) {
     fun getDate(): DateTime {
         return DateTime.parse(createdAt);
