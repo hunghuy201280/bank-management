@@ -73,13 +73,27 @@ constructor(
         return response;
     }
 
-    override suspend fun getLoanProfiles(): ArrayList<LoanProfile> {
-        val response = apiService.getLoanProfiles(accessToken);
+    override suspend fun getLoanProfiles(
+        profileNumber: String?,
+        customerName: String?,
+        moneyToLoan: Double?,
+        loanType: LoanType?,
+        createdAt: String?,
+        loanStatus: LoanStatus?
+    ): ArrayList<LoanProfile> {
+        val response = apiService.getLoanProfiles(accessToken,
+            profileNumber=profileNumber,
+                    customerName=customerName,
+                    moneyToLoan=moneyToLoan,
+                    loanType= loanType?.value,
+                    createdAt=createdAt,
+                    loanStatus=loanStatus?.value,
+            );
         return ArrayList(
             response.map
             {
                 profileMapper.fromDto(it)
-            });
+            })
     }
 
     override suspend fun searchCustomers(query: Map<String, Any>): ArrayList<Customer> {

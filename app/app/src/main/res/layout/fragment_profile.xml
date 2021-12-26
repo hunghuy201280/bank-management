@@ -87,11 +87,11 @@
 
                             <TextView
                                 style="@style/DashboardTextContentNormal"
-                                android:text="@string/loan_id" />
+                                android:text="@string/loan_profile_number" />
 
                             <com.google.android.material.textfield.TextInputEditText
                                 style="@style/DashboardEditTextFilter"
-                                android:text="@={viewModel.loanId}" />
+                                android:text="@={viewModel.loanNumber}" />
 
                         </LinearLayout>
 

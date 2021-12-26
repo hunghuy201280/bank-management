@@ -26,7 +26,12 @@ interface MainRepository {
     suspend fun getClockInOutTime(): ClockInOutResponse
 
     suspend fun getLoanProfiles(
-
+        profileNumber: String? = null,
+        customerName: String? = null,
+        moneyToLoan: Double? = null,
+        loanType: LoanType? = null,
+        createdAt: String? = null,
+        loanStatus: LoanStatus? = null,
     ): ArrayList<LoanProfile>
 
     suspend fun searchCustomers(

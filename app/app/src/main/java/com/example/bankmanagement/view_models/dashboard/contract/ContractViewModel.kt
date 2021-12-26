@@ -111,62 +111,10 @@ constructor(
             } catch (e: HttpException) {
                 loanContracts.postValue(null)
             }
-//            _getContracts();
-//            if (loanType.value == LoanType.All &&
-//                profileNumber.value.isNullOrBlank() &&
-//                staffInCharge.value.isNullOrBlank() &&
-//                BODInCharge.value.isNullOrBlank() &&
-//                moneyToLoan.value == null &&
-//                dateCreated.value == null &&
-//                phoneNumber.value.isNullOrBlank()&&
-//                contractNumber.value.isNullOrBlank()
-//            ) {
-//                return@launch
-//            }
-//
-//            val result = loanContracts.value?.filter {
-//                val _loanType =
-//                    if (loanType.value == null || loanType.value == LoanType.All) true else loanType.value == it.loanProfile.loanType
-//
-//                val _profileNumber = if (profileNumber.value.isNullOrBlank()) true
-//                else it.loanProfile.loanApplicationNumber.contains(profileNumber.value!!)
-//
-//                val _staffInCharge = if (staffInCharge.value.isNullOrBlank()) true
-//                else it.loanProfile.staff.name.contains(staffInCharge.value!!)
-//
-//                val _BODInCharge = if (BODInCharge.value.isNullOrBlank()) true
-//                else it.loanProfile.approver?.name?.contains(BODInCharge.value!!) ?: false
-//
-//                val _moneyToLoan =
-//                    if (moneyToLoan.value == null) true else moneyToLoan.value == it.loanProfile.moneyToLoan
-//
-//                val _dateCreated =
-//                    if (dateCreated.value == null) true else dateCreated.value!!.toLocalDate()
-//                        .isEqual(it.getDate().toLocalDate())
-//
-//                val _phoneNumber = if (phoneNumber.value.isNullOrBlank()) true
-//                else it.loanProfile.customer.phoneNumber.contains(phoneNumber.value!!)
-//
-//                val _contractNumber = if (contractNumber.value.isNullOrBlank()) true
-//                else it.contractNumber.contains(contractNumber.value!!)
-//
-//                val predicateRes =
-//                    _loanType &&
-//                            _profileNumber &&
-//                            _staffInCharge &&
-//                            _BODInCharge &&
-//                            _moneyToLoan &&
-//                            _dateCreated &&
-//                            _contractNumber
-//                predicateRes
-//            }
-
 
         }
     }
 
-//    fun onCreateClicked() {
-//        uiCallback?.onCreateClicked()
-//    }
+
 
 }

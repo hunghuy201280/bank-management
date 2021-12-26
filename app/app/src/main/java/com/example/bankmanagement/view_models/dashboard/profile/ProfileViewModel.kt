@@ -18,6 +18,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
+import retrofit2.HttpException
 import java.util.*
 import javax.inject.Inject
 
@@ -33,7 +35,7 @@ constructor(
     val selectedLoanType = MutableLiveData<LoanType>(LoanType.All)
     val customerName = MutableLiveData<String>()
     val moneyToLoan = MutableLiveData<Double>()
-    val loanId = MutableLiveData<String>()
+    val loanNumber = MutableLiveData<String>()
     val dateCreated = MutableLiveData<DateTime>()
     val loanStatus = MutableLiveData<LoanStatus>(LoanStatus.All)
     val loanProfiles = MutableLiveData<List<LoanProfile>>(listOf())
@@ -50,13 +52,12 @@ constructor(
     }
 
 
-
     fun resetFilter() {
         getProfiles();
         selectedLoanType.value = LoanType.All
         customerName.value = null
         moneyToLoan.value = null
-        loanId.value = null
+        loanNumber.value = null
         dateCreated.value = null
         loanStatus.value = LoanStatus.All
         loanProfiles.value = null
@@ -79,51 +80,21 @@ constructor(
 
     fun onFindClicked() {
         viewModelScope.launch(Dispatchers.IO) {
-            _getProfiles();
-            if (selectedLoanType.value == null &&
-                customerName.value.isNullOrBlank() &&
-                moneyToLoan.value == null &&
-                loanId.value.isNullOrBlank() &&
-                dateCreated.value == null &&
-                loanStatus.value == null
-            ) {
-                return@launch
+
+            try {
+                val result = mainRepo.getLoanProfiles(
+                    profileNumber = loanNumber.value,
+                    customerName = customerName.value,
+                    moneyToLoan = moneyToLoan.value,
+                    loanType = if (selectedLoanType.value == LoanType.All) null else selectedLoanType.value,
+                    createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                    loanStatus = if (loanStatus.value == LoanStatus.All) null else loanStatus.value,
+                )
+                loanProfiles.postValue(result);
+
+            } catch (e: HttpException) {
+                loanProfiles.postValue(null)
             }
-            Log.d(
-                TAG, "${selectedLoanType.value}  &&\n" +
-                        "                ${customerName.value}  &&\n" +
-                        "                ${moneyToLoan.value}  &&\n" +
-                        "                ${loanId.value}  &&\n" +
-                        "                ${dateCreated.value}  &&\n" +
-                        "                ${loanStatus.value}"
-            );
-            val result = loanProfiles.value?.filter {
-                val _loanType =
-                    if (selectedLoanType.value == null || selectedLoanType.value == LoanType.All) true else selectedLoanType.value == it.loanType
-
-                val _customerName = if (customerName.value.isNullOrBlank()) true
-                else it.customer.name.contains(customerName.value!!)
-
-                val _moneyToLoan =
-                    if (moneyToLoan.value == null) true else moneyToLoan.value == it.moneyToLoan
-
-                val _loanId =
-                    if (loanId.value.isNullOrBlank()) true else it.loanApplicationNumber.contains(
-                        loanId.value!!
-                    )
-                val _dateCreated =
-                    if (dateCreated.value == null) true else dateCreated.value!!.toLocalDate()
-                        .isEqual(it.getDate().toLocalDate())
-                val _loanStatus =
-                    if (loanStatus.value == null || loanStatus.value == LoanStatus.All) true else loanStatus.value == it.loanStatus
-
-                val predicateRes =
-                    _loanType && _customerName && _moneyToLoan && _loanId && _dateCreated && _loanStatus
-                predicateRes
-            }
-
-            loanProfiles.postValue(result);
-
         }
     }
 
