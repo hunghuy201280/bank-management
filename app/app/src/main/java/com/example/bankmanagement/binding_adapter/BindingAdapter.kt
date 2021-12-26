@@ -1,10 +1,12 @@
 package com.example.bankmanagement.binding_adapter
 
+import android.graphics.Paint
 import android.icu.text.NumberFormat
 import android.net.Uri
 import android.os.Build
 import android.text.Editable
 import android.text.SpannableString
+import android.text.Spanned
 import android.text.TextWatcher
 import android.text.style.UnderlineSpan
 import android.util.Log
@@ -115,12 +117,11 @@ fun getPriceSpannable(price: Double?): SpannableString? {
 }
 
 @BindingAdapter("isLinkText")
-fun setLinkTextStyle(textView: TextView?, isLinkText: Boolean) {
+fun setLinkTextStyle(textView: TextView, isLinkText: Boolean) {
     if (!isLinkText) return
-    val span = SpannableString(textView?.text)
-    span.setSpan(UnderlineSpan(), 0, textView?.text!!.length, 0)
-    textView.text = span
-    textView.setTextColor(ContextCompat.getColorStateList(BankApplication.context!!, R.color.blue_link))
+    textView.paintFlags = textView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+
+   textView.setTextColor(ContextCompat.getColorStateList(textView.context, R.color.blue_link))
 }
 
 @BindingAdapter("statusSpan")
