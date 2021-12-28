@@ -23,6 +23,7 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.models.application.extension.ExtensionApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.utils.Utils
 import org.joda.time.DateTime
@@ -63,8 +64,9 @@ fun setDurationFromDateTime(view: TextView, time: String?) {
 @BindingAdapter("applicationType")
 fun setApplicationType(view: TextView, application: BaseApplication) {
     view.text = when (application) {
-        is ExemptionApplication -> "Exemption Application"
-        is LiquidationApplication -> "Liquidation Application"
+        is ExemptionApplication -> "Exemption"
+        is LiquidationApplication -> "Liquidation"
+        is ExtensionApplication -> "Extension"
         else -> throw Exception("Unknown class ${application.javaClass}")
     }
 

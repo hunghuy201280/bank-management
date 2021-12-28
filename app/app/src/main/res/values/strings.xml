@@ -109,5 +109,10 @@
     <string name="find_application_via">Find application via</string>
     <string name="application_type">Application type</string>
     <string name="application_number">Application number</string>
+    <string name="application_list">Application list</string>
+    <string name="liquidation_application">Liquidation application</string>
+    <string name="exemption_application">Exemtion application</string>
+    <string name="extension_application">Extension application</string>
+    <string name="create_">Create</string>
 
 </resources>

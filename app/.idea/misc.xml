@@ -17,11 +17,12 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/app_complete_dialog.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/app_loading_dialog.xml" value="0.53359375" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/app_notify_dialog.xml" value="0.55703125" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/application_popup.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/create_loan_step_count.xml" value="0.37135416666666665" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/create_profile_text_row.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/dialog_loading.xml" value="0.30104166666666665" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/dialog_message.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_application.xml" value="0.7277716794731065" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_application.xml" value="0.5372093023255814" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_clock_in_out.xml" value="0.29453015427769985" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_contract.xml" value="0.5" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_create_contract.xml" value="0.55703125" />
@@ -50,6 +51,7 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/layout_loan_contract_list_table_item.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/list_item.xml" value="0.37135416666666665" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/spacing_horizontal.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/menu/application_popup.xml" value="0.55703125" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/drawable/bg_button_left_corner_10dp.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/drawable/text_input_edittext_filter_bg.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/hieuv/StudioProjects/bank-management/app/app/src/main/res/layout/activity_main.xml" value="0.15625" />

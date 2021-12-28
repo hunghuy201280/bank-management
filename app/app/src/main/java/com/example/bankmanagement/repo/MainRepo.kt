@@ -1,7 +1,10 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.models.application.extension.ExtensionApplication
+import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
@@ -77,7 +80,40 @@ interface MainRepository {
 
 
     suspend fun getExemptionApplications(
+        limit: Int?=null,
+        skip: Int?=null,
+        applicationNumber: String?=null,
+        contractNumber: String?=null,
+        status: LoanStatus?=null,
+        createdAt: String?=null,
     ): ArrayList<ExemptionApplication>
+
+    suspend fun getLiquidationApplications(
+        limit: Int?=null,
+        skip: Int?=null,
+        applicationNumber: String?=null,
+        contractNumber: String?=null,
+        status: LoanStatus?=null,
+        createdAt: String?=null,
+    ): ArrayList<LiquidationApplication>
+
+    suspend fun getExtensionApplications(
+        limit: Int?=null,
+        skip: Int?=null,
+        applicationNumber: String?=null,
+        contractNumber: String?=null,
+        status: LoanStatus?=null,
+        createdAt: String?=null,
+    ): ArrayList<ExtensionApplication>
+
+    suspend fun getApplications(
+        limit: Int?=null,
+        skip: Int?=null,
+        applicationNumber: String?=null,
+        contractNumber: String?=null,
+        status: LoanStatus?=null,
+        createdAt: String?=null,
+    ): ArrayList<BaseApplication>
 
     suspend fun getContract(
         contractId: String? = null,

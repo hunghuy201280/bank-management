@@ -6,6 +6,8 @@ import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.MainRepositoryImpl
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionDecisionDtoMapper
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionDecisionDtoMapper
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationDecisionDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
@@ -78,6 +80,11 @@ class RepoModule {
     fun provideExemptionDecisionDtoMapper(): ExemptionDecisionDtoMapper {
         return ExemptionDecisionDtoMapper()
     }
+    @Singleton
+    @Provides
+    fun provideExtensionDecisionDtoMapper(): ExtensionDecisionDtoMapper {
+        return ExtensionDecisionDtoMapper()
+    }
 
     @Singleton
     @Provides
@@ -85,6 +92,13 @@ class RepoModule {
         decisionDtoMapper: ExemptionDecisionDtoMapper
     ): ExemptionApplicationDtoMapper {
         return ExemptionApplicationDtoMapper(decisionDtoMapper)
+    }
+    @Singleton
+    @Provides
+    fun provideExtensionApplicationDtoMapper(
+        decisionDtoMapper: ExtensionDecisionDtoMapper
+    ): ExtensionApplicationDtoMapper {
+        return ExtensionApplicationDtoMapper(decisionDtoMapper)
     }
 
     @Singleton
@@ -152,6 +166,8 @@ class RepoModule {
         customerDtoMapper: CustomerDtoMapper,
         loanContractDtoMapper: LoanContractDtoMapper,
         exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
+        liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
+        extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
     ): MainRepository {
         return MainRepositoryImpl(
             apiService = apiService,
@@ -161,6 +177,9 @@ class RepoModule {
             customerDtoMapper = customerDtoMapper,
             loanContractDtoMapper = loanContractDtoMapper,
             exemptionApplicationDtoMapper = exemptionApplicationDtoMapper,
-        )
+            liquidationApplicationDtoMapper=liquidationApplicationDtoMapper,
+            extensionApplicationDtoMapper= extensionApplicationDtoMapper,
+
+            )
     }
 }

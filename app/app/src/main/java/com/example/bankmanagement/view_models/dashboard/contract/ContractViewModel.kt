@@ -17,6 +17,7 @@ import com.example.bankmanagement.utils.listener.ValueCallBack
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import retrofit2.HttpException
@@ -94,6 +95,7 @@ constructor(
     }
 
     fun onFindClicked() {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = mainRepo.getContracts(
@@ -107,11 +109,16 @@ constructor(
                     customerPhone = phoneNumber.value
                 )
                 loanContracts.postValue(result);
-
             } catch (e: HttpException) {
                 loanContracts.postValue(null)
             }
+            finally {
+                withContext(Dispatchers.Main){
+                    showLoading(false)
 
+                }
+
+            }
         }
     }
 

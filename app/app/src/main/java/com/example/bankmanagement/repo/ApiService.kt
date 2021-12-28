@@ -1,6 +1,8 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
 import com.example.bankmanagement.repo.dtos.customer.GetCustomerResponse
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
@@ -131,7 +133,43 @@ interface ApiService {
         @Header(
             "Authorization",
         ) token: String,
-    ): ArrayList<ExemptionApplicationDto>
+        @Query("limit") limit: Int? = null,
+        @Query("skip") skip: Int? = null,
+        @Query("applicationNumber") applicationNumber: String? = null,
+        @Query("contractNumber") contractNumber: String? = null,
+        @Query("status") status: Int? = null,
+        @Query("createdAt") createdAt: String?=null,
+        @Query("sortBy") sortBy: String = "createdAt:desc",
+        ): ArrayList<ExemptionApplicationDto>
+
+    @GET("liquidation_applications")
+    suspend fun getLiquidationApplications(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Query("limit") limit: Int? = null,
+        @Query("skip") skip: Int? = null,
+        @Query("applicationNumber") applicationNumber: String? = null,
+        @Query("contractNumber") contractNumber: String? = null,
+        @Query("status") status: Int? = null,
+        @Query("createdAt") createdAt: String?=null,
+        @Query("sortBy") sortBy: String = "createdAt:desc",
+        ): ArrayList<LiquidationApplicationDto>
+
+    @GET("extension_applications")
+    suspend fun getExtensionApplications(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Query("limit") limit: Int? = null,
+        @Query("skip") skip: Int? = null,
+        @Query("applicationNumber") applicationNumber: String? = null,
+        @Query("contractNumber") contractNumber: String? = null,
+        @Query("status") status: Int? = null,
+        @Query("status") duration: Long? = null,
+        @Query("createdAt") createdAt: String?=null,
+        @Query("sortBy") sortBy: String = "createdAt:desc",
+        ): ArrayList<ExtensionApplicationDto>
 
 
     @GET("loan_contracts/one")

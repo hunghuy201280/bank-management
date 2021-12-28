@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/liquidation_application"
+        android:title="@string/liquidation_application"/>
+
+    <item
+        android:id="@+id/exemption_application"
+        android:title="@string/exemption_application"/>
+
+    <item
+        android:id="@+id/extension_application"
+        android:title="@string/extension_application"/>
+
+</menu>

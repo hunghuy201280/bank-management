@@ -6,10 +6,10 @@ package com.example.bankmanagement.constants
 //#region APPLICATION
 const val STATE_KEY_APPLICATION_DATE_CREATED="application.key.date_created"
 const val STATE_KEY_APPLICATION_CONTRACT_NUMBER="application.key.contract_number"
-const val STATE_KEY_APPLICATION_PROFILE_NUMBER="application.key.profile_number"
+const val STATE_KEY_APPLICATION_NUMBER="application.key.number"
 const val STATE_KEY_APPLICATION_STATUS="application.key.status"
 const val STATE_KEY_APPLICATION_TYPE="application.key.type"
-const val STATE_KEY_APPLICATION_EXEMPTION="application.key.exemption"
+const val STATE_KEY_APPLICATION_LIST="application.key.application_list"
 
 //#endregion
 

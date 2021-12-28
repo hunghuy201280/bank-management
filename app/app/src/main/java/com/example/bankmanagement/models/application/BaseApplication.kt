@@ -13,3 +13,12 @@ abstract class BaseApplication(
     open val applicationNumber: String,
     open val decision: BaseDecision? = null,
 )
+
+
+enum class ApplicationType(
+    value:Int
+){
+    Liquidation(1),
+    Exemption(2),
+    Extension(3),
+}

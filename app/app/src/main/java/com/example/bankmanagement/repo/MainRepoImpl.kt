@@ -1,8 +1,13 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.models.application.extension.ExtensionApplication
+import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
@@ -14,7 +19,6 @@ import com.example.bankmanagement.repo.dtos.sign_in.SignInData
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
 import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
 import com.example.bankmanagement.utils.Utils
-import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -32,6 +36,8 @@ constructor(
     private var accessToken: String = "",
     private val loanContractDtoMapper: LoanContractDtoMapper,
     private val exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
+    private val liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
+    private val extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
 ) : MainRepository {
 
 
@@ -81,14 +87,15 @@ constructor(
         createdAt: String?,
         loanStatus: LoanStatus?
     ): ArrayList<LoanProfile> {
-        val response = apiService.getLoanProfiles(accessToken,
-            profileNumber=profileNumber,
-                    customerName=customerName,
-                    moneyToLoan=moneyToLoan,
-                    loanType= loanType?.value,
-                    createdAt=createdAt,
-                    loanStatus=loanStatus?.value,
-            );
+        val response = apiService.getLoanProfiles(
+            accessToken,
+            profileNumber = profileNumber,
+            customerName = customerName,
+            moneyToLoan = moneyToLoan,
+            loanType = loanType?.value,
+            createdAt = createdAt,
+            loanStatus = loanStatus?.value,
+        );
         return ArrayList(
             response.map
             {
@@ -155,7 +162,7 @@ constructor(
             createdAt = createdAt,
             profileNumber = profileNumber,
             moneyToLoan = moneyToLoan,
-            )
+        )
         val contracts = response.map { loanContractDtoMapper.fromDto(it) }
         return ArrayList(contracts)
 
@@ -180,10 +187,100 @@ constructor(
         return loanContractDtoMapper.fromDto(response)
     }
 
-    override suspend fun getExemptionApplications(): ArrayList<ExemptionApplication> {
-        val response = apiService.getExemptionApplications(accessToken)
+    override suspend fun getExemptionApplications(
+        limit: Int?,
+        skip: Int?,
+        applicationNumber: String?,
+        contractNumber: String?,
+        status: LoanStatus?,
+        createdAt: String?
+    ): ArrayList<ExemptionApplication> {
+        val response = apiService.getExemptionApplications(
+            accessToken,
+            limit = limit,
+            skip = skip,
+            applicationNumber = applicationNumber,
+            contractNumber = contractNumber,
+            status = status?.value,
+            createdAt = createdAt,
+        )
         return ArrayList(response.map { exemptionApplicationDtoMapper.fromDto(it) })
 
+    }
+
+    override suspend fun getLiquidationApplications(
+        limit: Int?,
+        skip: Int?,
+        applicationNumber: String?,
+        contractNumber: String?,
+        status: LoanStatus?,
+        createdAt: String?
+    ): ArrayList<LiquidationApplication> {
+        val response = apiService.getLiquidationApplications(
+            accessToken,
+            limit = limit,
+            skip = skip,
+            applicationNumber = applicationNumber,
+            contractNumber = contractNumber,
+            status = status?.value,
+            createdAt = createdAt,
+        )
+        return ArrayList(response.map { liquidationApplicationDtoMapper.fromDto(it) })
+    }
+
+    override suspend fun getExtensionApplications(
+        limit: Int?,
+        skip: Int?,
+        applicationNumber: String?,
+        contractNumber: String?,
+        status: LoanStatus?,
+        createdAt: String?
+    ): ArrayList<ExtensionApplication> {
+        val response = apiService.getExtensionApplications(
+            accessToken,
+            limit = limit,
+            skip = skip,
+            applicationNumber = applicationNumber,
+            contractNumber = contractNumber,
+            status = status?.value,
+            createdAt = createdAt,
+        )
+        return ArrayList(response.map { extensionApplicationDtoMapper.fromDto(it) })
+    }
+
+    override suspend fun getApplications(
+        limit: Int?,
+        skip: Int?,
+        applicationNumber: String?,
+        contractNumber: String?,
+        status: LoanStatus?,
+        createdAt: String?
+    ): ArrayList<BaseApplication> {
+        val exemptions = getExemptionApplications(
+            limit = limit,
+            skip = skip,
+            applicationNumber = applicationNumber,
+            contractNumber = contractNumber,
+            status = status,
+            createdAt = createdAt,
+        )
+        val liquidations = getLiquidationApplications(
+            limit = limit,
+            skip = skip,
+            applicationNumber = applicationNumber,
+            contractNumber = contractNumber,
+            status = status,
+            createdAt = createdAt,
+        )
+        val extensions=getExtensionApplications(
+            limit = limit,
+            skip = skip,
+            applicationNumber = applicationNumber,
+            contractNumber = contractNumber,
+            status = status,
+            createdAt = createdAt,
+        )
+        return ArrayList(exemptions + liquidations + extensions)
     }
 
     override suspend fun getContract(contractId: String?, contractNumber: String?): LoanContract {

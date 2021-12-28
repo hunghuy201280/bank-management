@@ -4,13 +4,13 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.constants.*
 import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.models.LoanStatus
-import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.models.application.ApplicationType
+import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
@@ -21,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -39,22 +40,24 @@ constructor(
 
     val dateCreated = state.getLiveData<DateTime>(STATE_KEY_APPLICATION_DATE_CREATED,null)
     val contractNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_CONTRACT_NUMBER,null)
-    val profileNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_PROFILE_NUMBER,null)
+    val applicationNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_NUMBER,null)
     val status = state.getLiveData<LoanStatus>(STATE_KEY_APPLICATION_STATUS,LoanStatus.All)
     //val type = state.getLiveData<LoanStatus>(STATE_KEY_APPLICATION_STATUS,LoanStatus.All)
-    val exemptions = state.getLiveData<ArrayList<ExemptionApplication>>(
-        STATE_KEY_APPLICATION_EXEMPTION,
+    val applications = state.getLiveData<ArrayList<BaseApplication>>(
+        STATE_KEY_APPLICATION_LIST,
         arrayListOf())
 
 
     init {
-        loadExemptions()
+        loadApplications()
     }
 
-    fun loadExemptions(){
+    fun loadApplications(){
         viewModelScope.launch(Dispatchers.IO) {
-            val res=mainRepo.getExemptionApplications()
-            exemptions.postValue(res)
+            val exemptions=mainRepo.getApplications()
+            val result= arrayListOf<BaseApplication>()
+            result.addAll(exemptions)
+            applications.postValue(result)
         }
     }
 
@@ -72,6 +75,7 @@ constructor(
             }
             catch (e:HttpException){
                 Log.d(TAG, "Contract number clicked: ${e.response()?.errorBody()?.string()} ");
+
                 withContext(Dispatchers.Main){
                     showLoading(false)
                 }
@@ -91,9 +95,42 @@ constructor(
 
 
     fun onFindClicked(){
+        showLoading(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = mainRepo.getApplications(
+                    contractNumber = contractNumber.value,
+                    status = if (status.value == LoanStatus.All) null else status.value,
+                    applicationNumber=applicationNumber.value,
+                    createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                )
+                val newList= ArrayList<BaseApplication>()
+                newList.addAll(result)
+                applications.postValue(newList)
+            } catch (e: HttpException) {
+                applications.postValue(null)
+            }
+            finally {
+                withContext(Dispatchers.Main){
+                    showLoading(false)
+
+                }
+
+            }
+        }
 
     }
     fun resetFilter(){
+        loadApplications()
+        dateCreated.value=null
+        contractNumber.value=null
+        applicationNumber.value=null
+        status.value=LoanStatus.All
+
+    }
+
+
+    fun onCreateClicked(type: ApplicationType){
 
     }
 
