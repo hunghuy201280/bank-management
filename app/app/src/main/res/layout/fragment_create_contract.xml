@@ -20,6 +20,8 @@
         android:layout_width="@dimen/_248sdp"
         android:layout_height="@dimen/_197sdp"
         android:background="@color/white"
+        android:paddingStart="@dimen/_11sdp"
+
         android:orientation="vertical"
         tools:context=".view.create_contract.CreateContractFragment">
 
@@ -37,22 +39,25 @@
 
         <include
             layout="@layout/create_profile_text_row"
+            app:alignStart="@{true}"
+
             app:content="@{viewModel.loanProfile.loanApplicationNumber}"
             app:header="@{@string/loan_profile_number}" />
 
         <include
             layout="@layout/create_profile_text_row"
+            app:alignStart="@{true}"
+
             app:content="@{mainVM.currentBranch.branchAddress}"
             app:header="@{@string/branch_address}" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_11sdp"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="@dimen/_77sdp"
+                android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/date_created"
@@ -68,13 +73,14 @@
 
         <include
             layout="@layout/create_profile_text_row"
+            app:alignStart="@{true}"
+
             app:content="@{mainVM.currentStaff.name}"
             app:header="@{@string/branch_address}" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_11sdp"
             android:orientation="horizontal">
 
             <TextView
@@ -93,7 +99,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_11sdp"
             android:orientation="horizontal">
 
             <TextView

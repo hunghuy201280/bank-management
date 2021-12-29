@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.bankmanagement.models.application.BaseApplication" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".view.dashboard.application.ReviewApplicationDialogFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                applicationType="@{item}"
+                isTitle="@{true}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/hello_blank_fragment"
+                tools:text="Liquidation application detail" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_contract" />
+
+        </RelativeLayout>
+
+        <include
+            layout="@layout/create_profile_text_row"
+            app:alignStart="@{true}"
+            app:content="@{item.loanContract}"
+            app:header="@{@string/contract_number}" />
+        <include
+            layout="@layout/create_profile_text_row"
+            app:alignStart="@{true}"
+            app:content="@{item.applicationNumber}"
+            app:header="@{@string/application_number}" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_4sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextTitleH3Regular"
+                android:layout_width="@dimen/_70sdp"
+                android:text="@string/date_created"
+                android:textColor="@color/cornflower_blue" />
+
+            <TextView
+                style="@style/TextTitleH3Regular"
+                bindCommonDate="@{item.createdAt}"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/secondaryText"
+                tools:text="HSVV.21.21.21" />
+        </LinearLayout>
+
+        <include
+            layout="@layout/create_profile_text_row"
+            app:alignStart="@{true}"
+            app:content="@{item.reason}"
+            app:header="@{@string/reason}" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_4sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextTitleH3Regular"
+                android:layout_width="@dimen/_70sdp"
+                android:text="@string/status"
+                android:textColor="@color/cornflower_blue" />
+
+            <TextView
+                style="@style/TextTitleH3Regular"
+                statusSpan="@{item.status}"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/secondaryText"
+                tools:text="HSVV.21.21.21" />
+        </LinearLayout>
+
+        <include
+            layout="@layout/create_profile_text_row"
+            app:alignStart="@{true}"
+            app:content="@{String.valueOf(item.amount)}"
+            app:header="@{@string/amount}" />
+
+        <TextView
+            style="@style/TextTitleH3Regular"
+            android:layout_width="@dimen/_70sdp"
+            android:text="@string/signature_image"
+            android:textColor="@color/cornflower_blue" />
+        <ImageView
+            android:id="@+id/imageView"
+            bindImage="@{item.signatureImage.toString()}"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_contract" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/DashboardActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_gravity="center"
+            android:text="@string/back" />
+    </LinearLayout>
+</layout>

@@ -28,7 +28,11 @@ DiffCallback(),
         val item = getItem(position);
         holder.bindItem(item);
         val binding  = (holder.binding as ItemSearchCustomerResultBinding);
-        binding.selectedCustomer= selectedCustomerPosition?.let { getItem(it) };
+        binding.selectedCustomer= selectedCustomerPosition?.let {
+            if(it<0)
+                return
+            getItem(it)
+        }
 
     }
     class DiffCallback : DiffUtil.ItemCallback<Customer>() {

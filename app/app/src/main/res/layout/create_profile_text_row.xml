@@ -13,6 +13,7 @@
         <variable
             name="content"
             type="String" />
+
     </data>
 
     <LinearLayout
@@ -26,6 +27,7 @@
             style="@style/TextTitleH3Regular"
             android:layout_width="@dimen/_70sdp"
             android:text="@{header}"
+
             tools:text="Header"
             android:textColor="@color/cornflower_blue" />
 

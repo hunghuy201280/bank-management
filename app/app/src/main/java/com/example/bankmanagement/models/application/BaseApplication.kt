@@ -1,6 +1,9 @@
 package com.example.bankmanagement.models.application
 
+import android.net.Uri
+import com.example.bankmanagement.constants.AppConfigs
 import com.example.bankmanagement.models.LoanStatus
+import java.io.Serializable
 
 abstract class BaseApplication(
     open val id: String,
@@ -12,7 +15,10 @@ abstract class BaseApplication(
     open val createdAt: String,
     open val applicationNumber: String,
     open val decision: BaseDecision? = null,
-)
+):Serializable{
+    fun getSignatureImage(): Uri {
+        return Uri.parse("${AppConfigs.baseUrl}images/$signatureImg")}
+}
 
 
 enum class ApplicationType(

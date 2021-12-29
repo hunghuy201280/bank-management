@@ -25,6 +25,9 @@ class ApplicationAdapter(
         binding.contractNumberTv.setOnClickListener {
             applicationItemClickListener.onContractClicked(item.loanContract)
         }
+        binding.root.setOnClickListener{
+            applicationItemClickListener.onApplicationCliced(item)
+        }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<BaseApplication>() {

@@ -21,10 +21,11 @@ import android.view.MenuItem
 import android.widget.PopupMenu
 import com.example.bankmanagement.R
 import com.example.bankmanagement.models.application.ApplicationType
+import com.example.bankmanagement.models.application.BaseApplication
 
 
 @AndroidEntryPoint
-class ApplicationFragment: BaseFragment<FragmentApplicationBinding, ApplicationViewModel>(),
+class ApplicationFragment : BaseFragment<FragmentApplicationBinding, ApplicationViewModel>(),
     ApplicationUICallback {
 
     override fun layoutRes(): Int = R.layout.fragment_application
@@ -37,9 +38,14 @@ class ApplicationFragment: BaseFragment<FragmentApplicationBinding, ApplicationV
             override fun onContractClicked(item: String) {
                 viewModel.onContractNumberClicked(contractNumber = item)
             }
+
+            override fun onApplicationCliced(item: BaseApplication) {
+                val reviewFrags = ReviewApplicationDialogFragment(item)
+                reviewFrags.show(childFragmentManager,ReviewApplicationDialogFragment.TAG)
+            }
         },
 
-    );
+        );
 
     override fun viewModelClass(): Class<ApplicationViewModel> = ApplicationViewModel::class.java
 
@@ -48,7 +54,7 @@ class ApplicationFragment: BaseFragment<FragmentApplicationBinding, ApplicationV
         viewModel.init(this)
         binding.viewModel = viewModel
 
-        viewModel.applications.observe(this,{
+        viewModel.applications.observe(this, {
             applicationAdapter.submitList(it.toList())
         })
 
@@ -58,9 +64,13 @@ class ApplicationFragment: BaseFragment<FragmentApplicationBinding, ApplicationV
     }
 
     override fun initView() {
-        binding.applicationRV.adapter=applicationAdapter
+        binding.applicationRV.adapter = applicationAdapter
 
-        val loanStatusesAdapter = CustomSpinnerAdapter(requireContext(), com.example.bankmanagement.R.layout.list_item, LoanStatus.getValues())
+        val loanStatusesAdapter = CustomSpinnerAdapter(
+            requireContext(),
+            com.example.bankmanagement.R.layout.list_item,
+            LoanStatus.getValues()
+        )
         binding.applicationStatusDropdown.adapter = loanStatusesAdapter
 
     }
@@ -86,16 +96,16 @@ class ApplicationFragment: BaseFragment<FragmentApplicationBinding, ApplicationV
                 }
             }
 
-        binding.createButton.setOnClickListener{
-            val popup = PopupMenu(context,binding.createButton,Gravity.END)
+        binding.createButton.setOnClickListener {
+            val popup = PopupMenu(context, binding.createButton, Gravity.END)
             popup.menuInflater
                 .inflate(R.menu.application_popup, popup.menu)
 
             popup.setOnMenuItemClickListener {
-                val type=when(it.itemId){
-                    R.id.liquidation_application->ApplicationType.Liquidation
-                    R.id.exemption_application->ApplicationType.Exemption
-                    R.id.extension_application->ApplicationType.Extension
+                val type = when (it.itemId) {
+                    R.id.liquidation_application -> ApplicationType.Liquidation
+                    R.id.exemption_application -> ApplicationType.Exemption
+                    R.id.extension_application -> ApplicationType.Extension
                     else -> throw Exception("Unknow menu item $it")
                 }
                 viewModel.onCreateClicked(type)

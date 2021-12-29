@@ -5,6 +5,7 @@ import com.example.bankmanagement.constants.AppConfigs
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import org.joda.time.DateTime
+import java.io.Serializable
 
 
 data class LoanContract(
@@ -17,7 +18,7 @@ data class LoanContract(
     val contractNumber: String,
     val disburseCertificates: List<DisburseCertificate> =  listOf(),
     val liquidationApplications: List<LiquidationApplication> = listOf(),
-) {
+):Serializable {
     fun getDate(): DateTime {
         return DateTime.parse(createdAt);
     }
@@ -53,7 +54,7 @@ data class DisburseCertificate(
     val certNumber: String,
     val amount: Double,
     val createdAt: String,
-)
+):Serializable
 
 
 
@@ -62,4 +63,4 @@ data class PaymentReceipt(
     val amount: Double,
     val createdAt: String,
     val receiptNumber: String,
-)
+):Serializable

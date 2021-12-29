@@ -114,5 +114,6 @@
     <string name="exemption_application">Exemtion application</string>
     <string name="extension_application">Extension application</string>
     <string name="create_">Create</string>
+    <string name="reason">Reason</string>
 
 </resources>

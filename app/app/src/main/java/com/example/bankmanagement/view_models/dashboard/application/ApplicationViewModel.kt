@@ -2,6 +2,7 @@ package com.example.bankmanagement.view_models.dashboard.application
 
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
@@ -41,15 +42,17 @@ constructor(
     val dateCreated = state.getLiveData<DateTime>(STATE_KEY_APPLICATION_DATE_CREATED,null)
     val contractNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_CONTRACT_NUMBER,null)
     val applicationNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_NUMBER,null)
-    val status = state.getLiveData<LoanStatus>(STATE_KEY_APPLICATION_STATUS,LoanStatus.All)
+    val status = state.getLiveData(STATE_KEY_APPLICATION_STATUS,LoanStatus.All)
     //val type = state.getLiveData<LoanStatus>(STATE_KEY_APPLICATION_STATUS,LoanStatus.All)
     val applications = state.getLiveData<ArrayList<BaseApplication>>(
         STATE_KEY_APPLICATION_LIST,
         arrayListOf())
+   // val applications = MutableLiveData<ArrayList<BaseApplication>>(arrayListOf())
 
 
     init {
         loadApplications()
+
     }
 
     fun loadApplications(){

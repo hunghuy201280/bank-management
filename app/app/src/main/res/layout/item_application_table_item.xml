@@ -52,6 +52,7 @@
         <TextView
             style="@style/ContractListTableTextItem"
             applicationType="@{item}"
+            isTitle="@{false}"
             tools:text="Application type" />
 
         <TextView

@@ -36,7 +36,7 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
             override fun onItemClick(adapterPosition: Int, item: Uri) {
                 viewModel.proofOfIncomeDeleted(adapterPosition);
             }
-        });
+        })
 
     override fun viewModelClass(): Class<CreateProfileViewModel> =
         CreateProfileViewModel::class.java;
@@ -140,7 +140,9 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
 
     private val pickProofOfIncomeImages =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uri: List<Uri>? ->
-            uri?.let { viewModel.proofOfIncomesAdded(it); }
+            uri?.let {
+                viewModel.proofOfIncomesAdded(it);
+            }
         }
 
     private val pickSignatureImage =
@@ -149,7 +151,7 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
         }
 
     override fun onNextClick() {
-        findNavController().navigate(R.id.action_createProfile2Fragment_to_createProfile3Fragment);
+        findNavController().navigate(R.id.action_createProfile2Fragment_to_createProfile3Fragment)
     }
 
 

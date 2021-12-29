@@ -10,6 +10,7 @@ import android.text.Spanned
 import android.text.TextWatcher
 import android.text.style.UnderlineSpan
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -47,6 +48,13 @@ import java.util.concurrent.TimeUnit
 //
 //}
 
+@BindingAdapter("layout_width")
+fun setLayoutWidth(view: View, width: Float) {
+    val layoutParams= view.layoutParams
+    layoutParams.width = width.toInt()
+    view.layoutParams = layoutParams
+}
+
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("durationFromTime")
 fun setDurationFromDateTime(view: TextView, time: String?) {
@@ -61,15 +69,15 @@ fun setDurationFromDateTime(view: TextView, time: String?) {
 
 }
 
-@BindingAdapter("applicationType")
-fun setApplicationType(view: TextView, application: BaseApplication) {
+@BindingAdapter("applicationType","isTitle")
+fun setApplicationType(view: TextView, application: BaseApplication,isTitle:Boolean?) {
     view.text = when (application) {
         is ExemptionApplication -> "Exemption"
         is LiquidationApplication -> "Liquidation"
         is ExtensionApplication -> "Extension"
         else -> throw Exception("Unknown class ${application.javaClass}")
     }
-
+    view.text=view.text.toString()+ if(isTitle == true) " application detail" else "";
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
