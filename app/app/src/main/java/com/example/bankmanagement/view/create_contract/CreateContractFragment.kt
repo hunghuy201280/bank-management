@@ -76,4 +76,6 @@ class CreateContractFragment : DialogFragment() ,CreateContractUICallBack{
 
     override fun showLoading(show: Boolean) {
     }
+
+
 }

@@ -10,14 +10,14 @@ class ExemptionApplicationDtoMapper
     ModelMapper<ExemptionApplicationDto, ExemptionApplication> {
     override fun fromDto(dto: ExemptionApplicationDto): ExemptionApplication {
         return ExemptionApplication(
-            id = dto.id,
-            loanContract = dto.loanContract,
-            reason = dto.reason,
-            amount = dto.amount,
-            status = dto.status,
-            signatureImg = dto.signatureImg,
-            createdAt = dto.createdAt,
-            applicationNumber = dto.applicationNumber,
+            id = dto.id!!,
+            loanContract = dto.loanContract!!,
+            reason = dto.reason!!,
+            amount = dto.amount!!,
+            status = dto.status!!,
+            signatureImg = dto.signatureImg!!,
+            createdAt = dto.createdAt!!,
+            applicationNumber = dto.applicationNumber!!,
             decision = dto.decision?.let { decisionDtoMapper.fromDto(it) },
         )
     }

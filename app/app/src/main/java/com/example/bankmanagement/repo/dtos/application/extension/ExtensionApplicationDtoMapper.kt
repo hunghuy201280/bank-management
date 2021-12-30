@@ -10,16 +10,16 @@ class ExtensionApplicationDtoMapper
     ModelMapper<ExtensionApplicationDto, ExtensionApplication> {
     override fun fromDto(dto: ExtensionApplicationDto): ExtensionApplication {
         return ExtensionApplication(
-            id = dto.id,
-            loanContract = dto.loanContract,
-            reason = dto.reason,
-            amount = dto.amount,
-            status = dto.status,
-            signatureImg = dto.signatureImg,
-            createdAt = dto.createdAt,
-            applicationNumber = dto.applicationNumber,
+            id = dto.id!!,
+            loanContract = dto.loanContract!!,
+            reason = dto.reason!!,
+            amount = dto.amount!!,
+            status = dto.status!!,
+            signatureImg = dto.signatureImg!!,
+            createdAt = dto.createdAt!!,
+            applicationNumber = dto.applicationNumber!!,
             decision = dto.decision?.let { decisionDtoMapper.fromDto(it) },
-            duration = dto.duration
+            duration = dto.duration!!,
         )
     }
 

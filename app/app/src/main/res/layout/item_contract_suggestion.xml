@@ -1,0 +1,16 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.bankmanagement.models.LoanContract" />
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@{item.contractNumber}"
+        android:textAppearance="?attr/textAppearanceSubtitle1" />
+</layout>

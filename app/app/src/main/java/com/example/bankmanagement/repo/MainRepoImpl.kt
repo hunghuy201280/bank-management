@@ -5,8 +5,11 @@ import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
@@ -272,7 +275,7 @@ constructor(
             status = status,
             createdAt = createdAt,
         )
-        val extensions=getExtensionApplications(
+        val extensions = getExtensionApplications(
             limit = limit,
             skip = skip,
             applicationNumber = applicationNumber,
@@ -290,6 +293,48 @@ constructor(
             contractNumber = contractNumber
         )
         return loanContractDtoMapper.fromDto(response)
+    }
+
+    override suspend fun createLiquidation(liquidationApplication: LiquidationApplicationDto) {
+        val body = mapOf(
+            "loanContract" to liquidationApplication.loanContract!!,
+            "amount" to liquidationApplication.amount!!,
+            "signatureImg" to liquidationApplication.signatureImg!!,
+            "reason" to liquidationApplication.reason!!,
+        )
+        apiService.createLiquidationApp(
+            token = accessToken,
+            body = body
+        )
+    }
+
+    override suspend fun createExemption(exemptionApplicationDto: ExemptionApplicationDto) {
+
+        val body = mapOf(
+            "loanContract" to exemptionApplicationDto.loanContract!!,
+            "amount" to exemptionApplicationDto.amount!!,
+            "signatureImg" to exemptionApplicationDto.signatureImg!!,
+            "reason" to exemptionApplicationDto.reason!!,
+        )
+        apiService.createExemptionApp(
+            token = accessToken,
+            body = body
+        )
+    }
+
+    override suspend fun createExtension(extensionApplicationDto: ExtensionApplicationDto) {
+        val body = mapOf(
+            "loanContract" to extensionApplicationDto.loanContract!!,
+            "amount" to extensionApplicationDto.amount!!,
+            "signatureImg" to extensionApplicationDto.signatureImg!!,
+            "reason" to extensionApplicationDto.reason!!,
+            "duration" to extensionApplicationDto.duration!!,
+        )
+        apiService.createExtensionApp(
+            token = accessToken,
+            body = body
+        )
+
     }
 
 

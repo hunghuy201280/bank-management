@@ -6,15 +6,15 @@ import com.google.gson.annotations.SerializedName
 
 data class ExtensionApplicationDto(
     @SerializedName("_id")
-    val id: String,
-    val loanContract: String,
-    val reason: String,
-    val amount: Double,
-    val status: LoanStatus,
-    val signatureImg: String,
-    val createdAt: String,
-    val applicationNumber: String,
+    val id: String? = null,
+    val loanContract: String? = null,
+    val reason: String? = null,
+    val amount: Double? = null,
+    val status: LoanStatus? = null,
+    val signatureImg: String? = null,
+    val createdAt: String? = null,
+    val applicationNumber: String? = null,
     val decision: ExtensionDecisionDto? = null,
-    val duration:Long,
+    val duration:Long? = null,
 )
 

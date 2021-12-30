@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.example.bankmanagement.BankApplication
 import com.example.bankmanagement.R
 import com.example.bankmanagement.models.LoanStatus
+import com.example.bankmanagement.models.application.ApplicationType
 import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
@@ -79,6 +80,7 @@ fun setApplicationType(view: TextView, application: BaseApplication,isTitle:Bool
     }
     view.text=view.text.toString()+ if(isTitle == true) " application detail" else "";
 }
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun dateFromISOString(isoString: String): Date {

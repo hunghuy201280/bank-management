@@ -5,6 +5,9 @@ import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
@@ -119,6 +122,16 @@ interface MainRepository {
         contractId: String? = null,
         contractNumber: String? = null,
     ): LoanContract
+
+    suspend fun createLiquidation(
+         liquidationApplication: LiquidationApplicationDto
+    )
+    suspend fun createExemption(
+         exemptionApplicationDto: ExemptionApplicationDto
+    )
+    suspend fun createExtension(
+        extensionApplicationDto: ExtensionApplicationDto
+    )
 
 
     fun getToken(): String

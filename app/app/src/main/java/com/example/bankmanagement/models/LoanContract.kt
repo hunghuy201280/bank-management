@@ -19,6 +19,10 @@ data class LoanContract(
     val disburseCertificates: List<DisburseCertificate> =  listOf(),
     val liquidationApplications: List<LiquidationApplication> = listOf(),
 ):Serializable {
+    override fun toString(): String {
+        return contractNumber
+    }
+
     fun getDate(): DateTime {
         return DateTime.parse(createdAt);
     }

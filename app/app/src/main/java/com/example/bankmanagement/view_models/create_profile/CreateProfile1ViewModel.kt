@@ -41,7 +41,6 @@ constructor(
                     mainRepo.searchCustomers(query = mapOf("name" to query, "isStartWith" to true));
                 customers.postValue(result);
 
-                println("Customer loaded $result");
 
             } catch (e: HttpException) {
                 customers.postValue(arrayListOf())

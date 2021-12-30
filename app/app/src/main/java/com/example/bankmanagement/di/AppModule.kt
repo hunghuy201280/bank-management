@@ -1,22 +1,14 @@
 package com.example.bankmanagement.di
 
-import android.content.Context
-import androidx.fragment.app.FragmentFactory
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.models.LoanProfile
-import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
-import com.example.bankmanagement.repo.dtos.sign_in.SignInResponse
 import com.example.bankmanagement.utils.ValueWrapper
+import com.example.bankmanagement.view.create_application.CreateApplicationFragmentArgs
 import com.example.bankmanagement.view.create_contract.CreateContractFragmentArgs
-import com.example.bankmanagement.view.dashboard.DashboardViewPagerAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.android.scopes.ActivityScoped
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -26,35 +18,27 @@ import javax.inject.Singleton
 class AppModule {
 
 
-
-
-
     @Provides
     @Singleton
     @ClockedInOut
-    fun provideClockedOut():ClockInOutResponse = ClockInOutResponse();
+    fun provideClockedOut(): ClockInOutResponse = ClockInOutResponse();
 
 
     @Provides
     @Singleton
     @ReviewLoanProfileArgs
-    fun provideReviewProfileArgs():ValueWrapper<LoanProfile?> = ValueWrapper(value = null);
+    fun provideReviewProfileArgs(): ValueWrapper<LoanProfile?> = ValueWrapper(value = null);
 
     @Provides
     @Singleton
     @ReviewLoanContractArgs
-    fun provideReviewLoanContractArgs():ValueWrapper<LoanContract?> = ValueWrapper(value = null);
+    fun provideReviewLoanContractArgs(): ValueWrapper<LoanContract?> = ValueWrapper(value = null);
 
     @Provides
     @Singleton
     @CreateContractArgs
-    fun provideCreateContractArgs():ValueWrapper<CreateContractFragmentArgs?> = ValueWrapper(value = null);
-
-
-
-
-
-
+    fun provideCreateContractArgs(): ValueWrapper<CreateContractFragmentArgs?> =
+        ValueWrapper(value = null);
 
 
 
@@ -74,7 +58,6 @@ class AppModule {
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
     annotation class CreateContractArgs
-
 
 
 

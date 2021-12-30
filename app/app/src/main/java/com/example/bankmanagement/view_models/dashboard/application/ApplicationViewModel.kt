@@ -134,7 +134,7 @@ constructor(
 
 
     fun onCreateClicked(type: ApplicationType){
-
+        uiCallback?.onCreateClicked(type)
     }
 
 

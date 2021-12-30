@@ -9,14 +9,14 @@ class LiquidationApplicationDtoMapper
     ModelMapper<LiquidationApplicationDto, LiquidationApplication> {
     override fun fromDto(dto: LiquidationApplicationDto): LiquidationApplication {
         return LiquidationApplication(
-            id = dto.id,
-            loanContract = dto.loanContract,
-            reason = dto.reason,
-            amount = dto.amount,
-            status = dto.status,
-            signatureImg = dto.signatureImg,
-            createdAt = dto.createdAt,
-            applicationNumber = dto.applicationNumber,
+            id = dto.id!!,
+            loanContract = dto.loanContract!!,
+            reason = dto.reason!!,
+            amount = dto.amount!!,
+            status = dto.status!!,
+            signatureImg = dto.signatureImg!!,
+            createdAt = dto.createdAt!!,
+            applicationNumber = dto.applicationNumber!!,
             decision = dto.decision?.let { decisionDtoMapper.fromDto(it) },
         )
     }

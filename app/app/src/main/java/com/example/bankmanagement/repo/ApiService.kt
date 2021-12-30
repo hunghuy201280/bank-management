@@ -138,9 +138,9 @@ interface ApiService {
         @Query("applicationNumber") applicationNumber: String? = null,
         @Query("contractNumber") contractNumber: String? = null,
         @Query("status") status: Int? = null,
-        @Query("createdAt") createdAt: String?=null,
+        @Query("createdAt") createdAt: String? = null,
         @Query("sortBy") sortBy: String = "createdAt:desc",
-        ): ArrayList<ExemptionApplicationDto>
+    ): ArrayList<ExemptionApplicationDto>
 
     @GET("liquidation_applications")
     suspend fun getLiquidationApplications(
@@ -152,9 +152,9 @@ interface ApiService {
         @Query("applicationNumber") applicationNumber: String? = null,
         @Query("contractNumber") contractNumber: String? = null,
         @Query("status") status: Int? = null,
-        @Query("createdAt") createdAt: String?=null,
+        @Query("createdAt") createdAt: String? = null,
         @Query("sortBy") sortBy: String = "createdAt:desc",
-        ): ArrayList<LiquidationApplicationDto>
+    ): ArrayList<LiquidationApplicationDto>
 
     @GET("extension_applications")
     suspend fun getExtensionApplications(
@@ -167,9 +167,9 @@ interface ApiService {
         @Query("contractNumber") contractNumber: String? = null,
         @Query("status") status: Int? = null,
         @Query("status") duration: Long? = null,
-        @Query("createdAt") createdAt: String?=null,
+        @Query("createdAt") createdAt: String? = null,
         @Query("sortBy") sortBy: String = "createdAt:desc",
-        ): ArrayList<ExtensionApplicationDto>
+    ): ArrayList<ExtensionApplicationDto>
 
 
     @GET("loan_contracts/one")
@@ -180,5 +180,35 @@ interface ApiService {
         @Query("_id") contractId: String? = null,
         @Query("contractNumber") contractNumber: String? = null,
     ): LoanContractDto
+
+
+    @POST("liquidation_applications")
+    @JvmSuppressWildcards
+    suspend fun createLiquidationApp(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+    )
+
+    @POST("exemption_applications")
+    @JvmSuppressWildcards
+    suspend fun createExemptionApp(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+
+        )
+
+    @POST("extension_applications")
+    @JvmSuppressWildcards
+    suspend fun createExtensionApp(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+
+        )
 
 }
