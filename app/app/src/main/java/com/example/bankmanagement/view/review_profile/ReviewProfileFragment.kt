@@ -10,6 +10,7 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentReviewProfileBinding
 import com.example.bankmanagement.models.IncomeType
+import com.example.bankmanagement.utils.helper.LoanProfilePDFGenerator
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.create_profile.ProofOfIncomeImageAdapter
 import com.example.bankmanagement.view_models.MainViewModel
@@ -79,6 +80,12 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
             }
+
+
+        //test pdf
+        binding.titleTextView.setOnClickListener{
+            LoanProfilePDFGenerator().generatePDF(viewModel.loanProfile.value!!)
+        }
     }
 
     override fun onBack() {

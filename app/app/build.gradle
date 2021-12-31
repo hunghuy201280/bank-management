@@ -139,6 +139,8 @@ dependencies {
     //lottie
     implementation 'com.airbnb.android:lottie:4.2.1'
 
+    //itext pdf
+    implementation "com.itextpdf:itext7-core:7.1.7"
 
 }
 kapt {
