@@ -21,8 +21,8 @@ class ProfileAdapter(
     }
 
     override fun onBindViewHolder(holder: BaseBindingViewHolder<LoanProfile>, position: Int) {
-        val item = getItem(position);
-        holder.bindItem(item);
+        val item = getItem(position)
+        holder.bindItem(item)
         val binding = (holder.binding as ItemLoanProfileTableItemBinding);
 
         binding.loanNumberTv.setOnClickListener {

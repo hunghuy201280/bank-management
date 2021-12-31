@@ -106,8 +106,23 @@ constructor(
             })
     }
 
-    override suspend fun searchCustomers(query: Map<String, Any>): ArrayList<Customer> {
-        val response = apiService.searchCustomer(query = query, token = accessToken);
+    override suspend fun searchCustomers(
+        name: String?,
+        phoneNumber: String?,
+        customerType: CustomerType?,
+        email: String?,
+        identityNumber: String?,
+        isStartWith: Boolean
+    ): ArrayList<Customer> {
+        val response = apiService.searchCustomer(
+            name = name,
+            phoneNumber = phoneNumber,
+            customerType = customerType?.value,
+            email = email,
+            identityNumber = identityNumber,
+            isStartWith = isStartWith,
+            token = accessToken
+        )
 
         return ArrayList(response.data.map { customerDtoMapper.fromDto(it) })
 
@@ -341,7 +356,7 @@ constructor(
         apiService.approveExtension(
             accessToken,
             mapOf(
-                "applicationId" to applicationId ,
+                "applicationId" to applicationId,
                 "BODSignature" to BODSignature,
             )
         )
@@ -351,7 +366,7 @@ constructor(
         apiService.approveExemption(
             accessToken,
             mapOf(
-                "applicationId" to applicationId ,
+                "applicationId" to applicationId,
                 "BODSignature" to BODSignature,
             )
         )
@@ -361,7 +376,7 @@ constructor(
         apiService.approveLiquidation(
             accessToken,
             mapOf(
-                "applicationId" to applicationId ,
+                "applicationId" to applicationId,
                 "BODSignature" to BODSignature,
             )
         )
@@ -371,7 +386,7 @@ constructor(
         apiService.rejectExtension(
             accessToken,
             mapOf(
-                "applicationId" to applicationId ,
+                "applicationId" to applicationId,
             )
         )
     }
@@ -380,7 +395,7 @@ constructor(
         apiService.rejectExemption(
             accessToken,
             mapOf(
-                "applicationId" to applicationId ,
+                "applicationId" to applicationId,
             )
         )
     }
@@ -389,7 +404,7 @@ constructor(
         apiService.rejectLiquidation(
             accessToken,
             mapOf(
-                "applicationId" to applicationId ,
+                "applicationId" to applicationId,
             )
         )
     }

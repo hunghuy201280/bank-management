@@ -48,6 +48,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     override fun initViewModel(viewModel: ProfileViewModel) {
         binding.viewModel = viewModel;
         viewModel.init(this)
+        viewModel.loanProfiles.observe(this, {
+            profileAdapter.submitList(it)
+        })
     }
 
     override fun initView() {
@@ -62,15 +65,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
         //region Loan status dropdown
         val loanStatuses = LoanStatus.getValues();
-        val loanStatusesAdapter = CustomSpinnerAdapter(requireContext(), R.layout.list_item, loanStatuses)
+        val loanStatusesAdapter =
+            CustomSpinnerAdapter(requireContext(), R.layout.list_item, loanStatuses)
         binding.loanStatusDropdown.adapter = loanStatusesAdapter
 
         //endregion
     }
 
     override fun initData() {
-        binding.loanProfileRV.adapter = profileAdapter;
-        viewModel.getProfiles()
+        binding.loanProfileRV.adapter = profileAdapter
     }
 
     override fun initAction() {
@@ -103,9 +106,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
                 }
             }
 
-        viewModel.loanProfiles.observe(this, {
-            profileAdapter.submitList(it)
-        });
         viewModel.selectedLoanType.observe(this, {
             binding.loanTypeDropDown.setSelection(LoanType.values().indexOf(it), true)
         });

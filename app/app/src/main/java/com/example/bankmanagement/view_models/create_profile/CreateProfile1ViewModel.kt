@@ -6,15 +6,11 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
-import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.Customer
 import com.example.bankmanagement.repo.MainRepository
-import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
-import com.example.bankmanagement.view.clockin.ClockInOutUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
@@ -38,7 +34,7 @@ constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result =
-                    mainRepo.searchCustomers(query = mapOf("name" to query, "isStartWith" to true));
+                    mainRepo.searchCustomers(name = query, isStartWith = true)
                 customers.postValue(result);
 
 

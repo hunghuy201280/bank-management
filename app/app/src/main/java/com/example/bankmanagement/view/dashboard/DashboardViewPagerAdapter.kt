@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bankmanagement.view.dashboard.application.ApplicationFragment
 import com.example.bankmanagement.view.dashboard.contract.ContractFragment
+import com.example.bankmanagement.view.dashboard.customer.CustomerFragment
 import com.example.bankmanagement.view.dashboard.profile.ProfileFragment
 
 class DashboardViewPagerAdapter(
@@ -15,15 +16,15 @@ class DashboardViewPagerAdapter(
     val fragments= listOf<Fragment>(
         ContractFragment(),
         ProfileFragment(),
-        ApplicationFragment()
+        ApplicationFragment(),
+        CustomerFragment(),
     )
     override fun createFragment(position: Int): Fragment {
-        // Return a NEW fragment instance in createFragment(int)
         if(position<fragments.size){
           return  fragments[position];
         }
         else{
-            throw Exception("[$TAG] Error: Exceed Fragment count");
+            throw Exception("[$TAG] Error: Exceed Fragment count")
 
         }
 //        return when(position){

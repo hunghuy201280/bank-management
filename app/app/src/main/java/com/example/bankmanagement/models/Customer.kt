@@ -1,6 +1,7 @@
 package com.example.bankmanagement.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 abstract class Customer(
@@ -13,8 +14,8 @@ abstract class Customer(
     open val phoneNumber: String,
     open val email: String?,
 
-){
-     abstract fun getType():CustomerType
+    ) : Serializable {
+    abstract fun getType(): CustomerType
 
 }
 
@@ -27,16 +28,16 @@ data class ResidentCustomer(
     override val identityNumber: String,
     override val identityCardCreatedDate: String,
     override val phoneNumber: String,
-    override val email: String?=null,
+    override val email: String? = null,
 
     ) : Customer(
-    id=id,
-    name=name,
-    address=address,
-    identityNumber=identityNumber,
-    identityCardCreatedDate=identityCardCreatedDate,
-    phoneNumber=phoneNumber,
-    email=email
+    id = id,
+    name = name,
+    address = address,
+    identityNumber = identityNumber,
+    identityCardCreatedDate = identityCardCreatedDate,
+    phoneNumber = phoneNumber,
+    email = email
 
 ) {
     override fun getType(): CustomerType = CustomerType.Resident
@@ -51,15 +52,15 @@ data class BusinessCustomer(
     override val identityNumber: String,
     override val identityCardCreatedDate: String,
     override val phoneNumber: String,
-    override val email: String?=null,
+    override val email: String? = null,
 ) : Customer(
-    id=id,
-    name=name,
-    address=address,
-    identityNumber=identityNumber,
-    identityCardCreatedDate=identityCardCreatedDate,
-    phoneNumber=phoneNumber,
-    email=email
+    id = id,
+    name = name,
+    address = address,
+    identityNumber = identityNumber,
+    identityCardCreatedDate = identityCardCreatedDate,
+    phoneNumber = phoneNumber,
+    email = email
 ) {
     override fun getType(): CustomerType = CustomerType.Business
 
@@ -70,17 +71,21 @@ enum class CustomerType(val value: Int) {
     Business(1),
 
     @SerializedName("2")
-    Resident(2);
+    Resident(2),
+
+    @SerializedName("-1")
+    All(-1);
 
     fun getTypeName(): String {
         return when (this) {
             Business -> "Business"
             Resident -> "Resident"
+            All -> "All"
         }
     }
 
     companion object {
-        private val map = CustomerType.values().associateBy(CustomerType::value)
-        fun fromInt(type: Int): CustomerType = map[type]!!
+        fun getValues(): List<String> = values().dropLast(1).map { it.getTypeName() }
+        fun getFilterValues(): List<String> = values().map { it.getTypeName() }
     }
 }

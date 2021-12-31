@@ -21,6 +21,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding,BaseViewModel>()
         mapOf("name" to "Contract", "icon" to R.drawable.ic_contract),
         mapOf("name" to "Profile", "icon" to R.drawable.ic_contract),
         mapOf("name" to "Application", "icon" to R.drawable.ic_contract),
+        mapOf("name" to "Customer", "icon" to R.drawable.ic_contract),
     );
 
 
@@ -43,8 +44,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding,BaseViewModel>()
         val dashboardViewPagerAdapter = DashboardViewPagerAdapter(this)
         binding.pager.adapter=dashboardViewPagerAdapter;
         VerticalTabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-            tab.text = tabSettings[position]["name"] as String;
-            tab.setIcon(tabSettings[position]["icon"] as Int);
+            tab.text = tabSettings[position]["name"] as String
+            tab.setIcon(tabSettings[position]["icon"] as Int)
         }.attach()
     }
 

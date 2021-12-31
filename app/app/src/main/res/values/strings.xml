@@ -115,5 +115,9 @@
     <string name="extension_application">Extension application</string>
     <string name="create_">Create</string>
     <string name="reason">Reason</string>
+    <string name="identity_number">Identity number</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="find_customer_via">Find customer via</string>
+    <string name="customer_list">Customer list</string>
 
 </resources>

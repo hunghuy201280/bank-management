@@ -1,5 +1,6 @@
 package com.example.bankmanagement.repo
 
+import com.example.bankmanagement.models.CustomerType
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
@@ -58,7 +59,12 @@ interface ApiService {
         @Header(
             "Authorization",
         ) token: String,
-        @QueryMap query: Map<String, Any>,
+        @Query("name") name: String? = null,
+        @Query("phoneNumber") phoneNumber: String? = null,
+        @Query("customerType") customerType: Int? = null,
+        @Query("email") email: String? = null,
+        @Query("identityNumber") identityNumber: String? = null,
+        @Query("isStartWith") isStartWith: Boolean = false,
     ): GetCustomerResponse
 
     @POST("loan_profiles/")
@@ -208,7 +214,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        )
+    )
 
     @POST("liquidation_applications/decision")
     @JvmSuppressWildcards
@@ -217,7 +223,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        ):LiquidationApplicationDto
+    ): LiquidationApplicationDto
 
 
     @POST("exemption_applications/decision")
@@ -227,7 +233,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        ):ExemptionApplicationDto
+    ): ExemptionApplicationDto
 
 
     @POST("extension_applications/decision")
@@ -237,7 +243,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        ):ExtensionApplicationDto
+    ): ExtensionApplicationDto
 
     @POST("liquidation_applications/reject")
     @JvmSuppressWildcards
@@ -246,7 +252,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        )
+    )
 
 
     @POST("exemption_applications/reject")
@@ -256,7 +262,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        )
+    )
 
 
     @POST("extension_applications/reject")
@@ -266,6 +272,6 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
-        )
+    )
 
 }

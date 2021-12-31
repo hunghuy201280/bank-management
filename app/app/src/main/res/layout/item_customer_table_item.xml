@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.bankmanagement.models.Customer" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_2sdp">
+
+        <TextView
+            android:id="@+id/loanNumberTv"
+            style="@style/ContractListTableTextItem"
+            isLinkText="@{true}"
+            android:text="@{item.name}"
+            tools:text="Hung Huy" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.identityNumber}"
+            tools:text="1234567890" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.type.name()}"
+            tools:text="Business" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.email,default=`Unknown`}"
+            tools:text="hunghuy1@gmail.com" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:text="@{item.phoneNumber}"
+            tools:text="0909999333" />
+
+
+
+    </LinearLayout>
+</layout>

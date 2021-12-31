@@ -41,7 +41,12 @@ interface MainRepository {
     ): ArrayList<LoanProfile>
 
     suspend fun searchCustomers(
-        query: Map<String, Any>,
+        name:String?=null,
+        phoneNumber:String?=null,
+        customerType:CustomerType?=null,
+        email:String?=null,
+        identityNumber:String?=null,
+        isStartWith:Boolean=false,
 
         ): ArrayList<Customer>
 
