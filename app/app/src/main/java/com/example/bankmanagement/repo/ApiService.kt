@@ -208,7 +208,64 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Body body: Map<String, Any>,
+        )
 
+    @POST("liquidation_applications/decision")
+    @JvmSuppressWildcards
+    suspend fun approveLiquidation(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+        ):LiquidationApplicationDto
+
+
+    @POST("exemption_applications/decision")
+    @JvmSuppressWildcards
+    suspend fun approveExemption(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+        ):ExemptionApplicationDto
+
+
+    @POST("extension_applications/decision")
+    @JvmSuppressWildcards
+    suspend fun approveExtension(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+        ):ExtensionApplicationDto
+
+    @POST("liquidation_applications/reject")
+    @JvmSuppressWildcards
+    suspend fun rejectLiquidation(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+        )
+
+
+    @POST("exemption_applications/reject")
+    @JvmSuppressWildcards
+    suspend fun rejectExemption(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+        )
+
+
+    @POST("extension_applications/reject")
+    @JvmSuppressWildcards
+    suspend fun rejectExtension(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
         )
 
 }

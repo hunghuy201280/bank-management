@@ -67,7 +67,7 @@ class CreateProfile3Fragment (private val TAG: String = "CreateProfile3Fragment"
 
         //region proof of income type adapter
         val proofOfIncomeTypeAdapter =
-            CustomSpinnerAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
+            CustomSpinnerAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.getName() });
         binding.proofOfIncomeTypeDropDown.adapter=proofOfIncomeTypeAdapter
         //endregion
     }

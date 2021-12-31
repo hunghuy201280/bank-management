@@ -69,16 +69,17 @@ class Utils {
         fun showCompleteDialog(
             context: Context,
             mainText: String = "Completed",
-            onDismiss: View.OnClickListener?
+            onDismiss: View.OnClickListener?=null,
         ) {
             val dialog =
                 MaterialDialog(context).noAutoDismiss().customView(R.layout.app_complete_dialog)
             dialog.findViewById<TextView>(R.id.completeTextView).text = mainText
             Timer().schedule(2000) {
+
+                dialog.dismiss()
                 GlobalScope.launch(Dispatchers.Main) {
                     onDismiss?.onClick(dialog.view)
                 }
-                dialog.dismiss()
             }
             dialog.show()
 

@@ -27,7 +27,6 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 
-
 @HiltViewModel
 class ApplicationViewModel
 @Inject
@@ -39,15 +38,16 @@ constructor(
 ) : BaseUiViewModel<ApplicationUICallback>() {
     private val TAG: String = "ApplicationViewModel"
 
-    val dateCreated = state.getLiveData<DateTime>(STATE_KEY_APPLICATION_DATE_CREATED,null)
-    val contractNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_CONTRACT_NUMBER,null)
-    val applicationNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_NUMBER,null)
-    val status = state.getLiveData(STATE_KEY_APPLICATION_STATUS,LoanStatus.All)
-    //val type = state.getLiveData<LoanStatus>(STATE_KEY_APPLICATION_STATUS,LoanStatus.All)
+    val dateCreated = state.getLiveData<DateTime>(STATE_KEY_APPLICATION_DATE_CREATED, null)
+    val contractNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_CONTRACT_NUMBER, null)
+    val applicationNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_NUMBER, null)
+    val status = state.getLiveData(STATE_KEY_APPLICATION_STATUS, LoanStatus.All)
+    val type = state.getLiveData<ApplicationType>(STATE_KEY_APPLICATION_TYPE,ApplicationType.All)
     val applications = state.getLiveData<ArrayList<BaseApplication>>(
         STATE_KEY_APPLICATION_LIST,
-        arrayListOf())
-   // val applications = MutableLiveData<ArrayList<BaseApplication>>(arrayListOf())
+        arrayListOf()
+    )
+    // val applications = MutableLiveData<ArrayList<BaseApplication>>(arrayListOf())
 
 
     init {
@@ -55,31 +55,30 @@ constructor(
 
     }
 
-    fun loadApplications(){
+    fun loadApplications() {
         viewModelScope.launch(Dispatchers.IO) {
-            val exemptions=mainRepo.getApplications()
-            val result= arrayListOf<BaseApplication>()
+            val exemptions = mainRepo.getApplications()
+            val result = arrayListOf<BaseApplication>()
             result.addAll(exemptions)
             applications.postValue(result)
         }
     }
 
-    fun onContractNumberClicked(contractNumber:String){
+    fun onContractNumberClicked(contractNumber: String) {
         showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
-            try{
-                val res=mainRepo.getContract(contractNumber=contractNumber)
+            try {
+                val res = mainRepo.getContract(contractNumber = contractNumber)
                 reviewLoanContractArgs.value = res
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     showLoading(false)
 
                     uiCallback?.onContractNumberClicked()
                 }
-            }
-            catch (e:HttpException){
+            } catch (e: HttpException) {
                 Log.d(TAG, "Contract number clicked: ${e.response()?.errorBody()?.string()} ");
 
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     showLoading(false)
                 }
             }
@@ -97,24 +96,54 @@ constructor(
     }
 
 
-    fun onFindClicked(){
+    fun onFindClicked() {
         showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = mainRepo.getApplications(
-                    contractNumber = contractNumber.value,
-                    status = if (status.value == LoanStatus.All) null else status.value,
-                    applicationNumber=applicationNumber.value,
-                    createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
-                )
-                val newList= ArrayList<BaseApplication>()
+                var result: List<BaseApplication> = listOf()
+                when (type.value) {
+                    ApplicationType.Extension -> {
+                        result = mainRepo.getExtensionApplications(
+                            contractNumber = contractNumber.value,
+                            status = if (status.value == LoanStatus.All) null else status.value,
+                            applicationNumber = applicationNumber.value,
+                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                        )
+
+                    }
+                    ApplicationType.Liquidation -> {
+                        result = mainRepo.getLiquidationApplications(
+                            contractNumber = contractNumber.value,
+                            status = if (status.value == LoanStatus.All) null else status.value,
+                            applicationNumber = applicationNumber.value,
+                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                        )
+                    }
+                    ApplicationType.Exemption -> {
+                        result = mainRepo.getExemptionApplications(
+                            contractNumber = contractNumber.value,
+                            status = if (status.value == LoanStatus.All) null else status.value,
+                            applicationNumber = applicationNumber.value,
+                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                        )
+                    }
+                    else -> {
+                        result = mainRepo.getApplications(
+                            contractNumber = contractNumber.value,
+                            status = if (status.value == LoanStatus.All) null else status.value,
+                            applicationNumber = applicationNumber.value,
+                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                        )
+                    }
+                }
+
+                val newList = ArrayList<BaseApplication>()
                 newList.addAll(result)
                 applications.postValue(newList)
             } catch (e: HttpException) {
                 applications.postValue(null)
-            }
-            finally {
-                withContext(Dispatchers.Main){
+            } finally {
+                withContext(Dispatchers.Main) {
                     showLoading(false)
 
                 }
@@ -123,20 +152,20 @@ constructor(
         }
 
     }
-    fun resetFilter(){
-        loadApplications()
-        dateCreated.value=null
-        contractNumber.value=null
-        applicationNumber.value=null
-        status.value=LoanStatus.All
 
+    fun resetFilter() {
+        loadApplications()
+        dateCreated.value = null
+        contractNumber.value = null
+        applicationNumber.value = null
+        status.value = LoanStatus.All
+        type.value = ApplicationType.All
     }
 
 
-    fun onCreateClicked(type: ApplicationType){
+    fun onCreateClicked(type: ApplicationType) {
         uiCallback?.onCreateClicked(type)
     }
-
 
 
 }

@@ -47,12 +47,14 @@
                 android:layout_weight="1" />
 
 
-            <TextView
+
+
+            <TextClock
                 style="@style/TextPoppins.Regular.Wrap"
-                bindTime="@{null}"
+                android:format12Hour="h:mm"
                 android:textColor="@color/primaryText"
-                tools:text="12:04"
-                android:textSize="@dimen/H3" />
+                android:textSize="@dimen/H3"
+                tools:text="09:00" />
 
             <View
                 android:layout_width="0.7dp"

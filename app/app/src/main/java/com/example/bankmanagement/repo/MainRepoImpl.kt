@@ -337,6 +337,63 @@ constructor(
 
     }
 
+    override suspend fun approveExtension(applicationId: String, BODSignature: String) {
+        apiService.approveExtension(
+            accessToken,
+            mapOf(
+                "applicationId" to applicationId ,
+                "BODSignature" to BODSignature,
+            )
+        )
+    }
+
+    override suspend fun approveExemption(applicationId: String, BODSignature: String) {
+        apiService.approveExemption(
+            accessToken,
+            mapOf(
+                "applicationId" to applicationId ,
+                "BODSignature" to BODSignature,
+            )
+        )
+    }
+
+    override suspend fun approveLiquidation(applicationId: String, BODSignature: String) {
+        apiService.approveLiquidation(
+            accessToken,
+            mapOf(
+                "applicationId" to applicationId ,
+                "BODSignature" to BODSignature,
+            )
+        )
+    }
+
+    override suspend fun rejectExtension(applicationId: String) {
+        apiService.rejectExtension(
+            accessToken,
+            mapOf(
+                "applicationId" to applicationId ,
+            )
+        )
+    }
+
+    override suspend fun rejectExemption(applicationId: String) {
+        apiService.rejectExemption(
+            accessToken,
+            mapOf(
+                "applicationId" to applicationId ,
+            )
+        )
+    }
+
+    override suspend fun rejectLiquidation(applicationId: String) {
+        apiService.rejectLiquidation(
+            accessToken,
+            mapOf(
+                "applicationId" to applicationId ,
+            )
+        )
+    }
+
 
     override fun getToken(): String = accessToken;
 }

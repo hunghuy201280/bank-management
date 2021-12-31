@@ -8,14 +8,28 @@
         <variable
             name="item"
             type="com.example.bankmanagement.models.application.BaseApplication" />
+
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.review_application.ReviewApplicationViewModel" />
+
+        <variable
+            name="mainVM"
+            type="com.example.bankmanagement.view_models.MainViewModel" />
+
+        <import type="com.example.bankmanagement.models.StaffRole" />
+        <import type="com.example.bankmanagement.models.LoanStatus" />
+        <import type="android.view.View" />
+
     </data>
 
     <LinearLayout
         android:layout_width="@dimen/_250sdp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white"
-        tools:context=".view.dashboard.application.ReviewApplicationDialogFragment">
+        android:orientation="vertical"
+        tools:context=".view.dashboard.application.review_application.ReviewApplicationDialogFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,11 +57,13 @@
             app:alignStart="@{true}"
             app:content="@{item.loanContract}"
             app:header="@{@string/contract_number}" />
+
         <include
             layout="@layout/create_profile_text_row"
             app:alignStart="@{true}"
             app:content="@{item.applicationNumber}"
             app:header="@{@string/application_number}" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,6 +124,7 @@
             android:layout_width="@dimen/_70sdp"
             android:text="@string/signature_image"
             android:textColor="@color/cornflower_blue" />
+
         <ImageView
             android:id="@+id/imageView"
             bindImage="@{item.signatureImage.toString()}"
@@ -121,9 +138,33 @@
             style="@style/DashboardActionButton"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_10sdp"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_gravity="center"
+            android:onClick="@{()->viewModel.onBack()}"
+            android:visibility="@{mainVM.currentStaff.roleName  == StaffRole.Director.name()?View.VISIBLE:View.GONE}"
             android:text="@string/back" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="@{mainVM.currentStaff.roleName==StaffRole.Director.name() &amp;&amp; viewModel.application.status == LoanStatus.Pending ?View.VISIBLE:View.GONE}">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rejectButton"
+                style="@style/RejectButton"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:onClick="@{(v)->viewModel.rejectApplication(v)}"
+                android:text="@string/reject" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/approveButton"
+                style="@style/ApproveButton"
+                android:layout_width="wrap_content"
+                android:onClick="@{(v)->viewModel.approveApplication(v)}"
+                android:text="@string/approve" />
+        </LinearLayout>
     </LinearLayout>
 </layout>

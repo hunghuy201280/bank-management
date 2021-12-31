@@ -93,6 +93,7 @@ constructor(
                             loanContract = loanContract.value!!.id,
                         )
                     )
+                    else -> {}
                 }
                 Log.d(TAG, "Create application result: $newContract")
                 withContext(Dispatchers.Main) {
@@ -100,7 +101,7 @@ constructor(
                         v.context,
                         mainText = "application created successfully",
                         onDismiss = {
-                            uiCallback?.dismissDialog()
+                            uiCallback?.dismissDialog(true)
                         })
                 }
             } catch (e: HttpException) {

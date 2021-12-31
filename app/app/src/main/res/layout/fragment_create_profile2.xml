@@ -124,7 +124,7 @@
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     style="@style/CreateProfileEditText"
-                                    bindDate="@{null}"
+                                    bindCommonDate="@{null}"
                                     android:enabled="false"
                                     android:textColor="@color/primaryText" />
 

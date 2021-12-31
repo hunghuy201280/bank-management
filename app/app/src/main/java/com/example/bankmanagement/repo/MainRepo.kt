@@ -83,39 +83,39 @@ interface MainRepository {
 
 
     suspend fun getExemptionApplications(
-        limit: Int?=null,
-        skip: Int?=null,
-        applicationNumber: String?=null,
-        contractNumber: String?=null,
-        status: LoanStatus?=null,
-        createdAt: String?=null,
+        limit: Int? = null,
+        skip: Int? = null,
+        applicationNumber: String? = null,
+        contractNumber: String? = null,
+        status: LoanStatus? = null,
+        createdAt: String? = null,
     ): ArrayList<ExemptionApplication>
 
     suspend fun getLiquidationApplications(
-        limit: Int?=null,
-        skip: Int?=null,
-        applicationNumber: String?=null,
-        contractNumber: String?=null,
-        status: LoanStatus?=null,
-        createdAt: String?=null,
+        limit: Int? = null,
+        skip: Int? = null,
+        applicationNumber: String? = null,
+        contractNumber: String? = null,
+        status: LoanStatus? = null,
+        createdAt: String? = null,
     ): ArrayList<LiquidationApplication>
 
     suspend fun getExtensionApplications(
-        limit: Int?=null,
-        skip: Int?=null,
-        applicationNumber: String?=null,
-        contractNumber: String?=null,
-        status: LoanStatus?=null,
-        createdAt: String?=null,
+        limit: Int? = null,
+        skip: Int? = null,
+        applicationNumber: String? = null,
+        contractNumber: String? = null,
+        status: LoanStatus? = null,
+        createdAt: String? = null,
     ): ArrayList<ExtensionApplication>
 
     suspend fun getApplications(
-        limit: Int?=null,
-        skip: Int?=null,
-        applicationNumber: String?=null,
-        contractNumber: String?=null,
-        status: LoanStatus?=null,
-        createdAt: String?=null,
+        limit: Int? = null,
+        skip: Int? = null,
+        applicationNumber: String? = null,
+        contractNumber: String? = null,
+        status: LoanStatus? = null,
+        createdAt: String? = null,
     ): ArrayList<BaseApplication>
 
     suspend fun getContract(
@@ -124,13 +124,47 @@ interface MainRepository {
     ): LoanContract
 
     suspend fun createLiquidation(
-         liquidationApplication: LiquidationApplicationDto
+        liquidationApplication: LiquidationApplicationDto
     )
+
     suspend fun createExemption(
-         exemptionApplicationDto: ExemptionApplicationDto
+        exemptionApplicationDto: ExemptionApplicationDto
     )
+
     suspend fun createExtension(
         extensionApplicationDto: ExtensionApplicationDto
+    )
+
+
+    suspend fun approveExtension(
+        applicationId: String,
+        BODSignature: String,
+    )
+
+
+    suspend fun approveExemption(
+        applicationId: String,
+        BODSignature: String,
+    )
+
+
+    suspend fun approveLiquidation(
+        applicationId: String,
+        BODSignature: String,
+    )
+
+    suspend fun rejectExtension(
+        applicationId: String,
+    )
+
+
+    suspend fun rejectExemption(
+        applicationId: String,
+    )
+
+
+    suspend fun rejectLiquidation(
+        applicationId: String,
     )
 
 

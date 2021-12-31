@@ -120,99 +120,133 @@
                 android:layout_marginStart="@dimen/_11sdp"
                 android:layout_marginTop="@dimen/_8sdp">
 
-                <LinearLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextTitleH2SemiBold"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:text="@string/loan_profile_detail" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2px"
-                        android:background="@color/divider" />
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextTitleH2SemiBold"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:text="@string/loan_profile_detail" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2px"
+                            android:background="@color/divider" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{mainVM.currentStaff.name}"
-                                app:header="@{@string/staff_name}" />
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.selectedLoanType.name()}"
-                                app:header="@{@string/loan_type}" />
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.moneyToLoan.toString()}"
-                                app:header="@{@string/money_to_loan}" />
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.loanDuration.toString()}"
-                                app:header="@{@string/loan_duration}" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_45sdp"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/_15sdp"
+                                android:orientation="vertical">
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{mainVM.currentStaff.name}"
+                                    app:header="@{@string/staff_name}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.selectedLoanType.name()}"
+                                    app:header="@{@string/loan_type}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.moneyToLoan.toString()}"
+                                    app:header="@{@string/money_to_loan}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.loanDuration.toString()}"
+                                    app:header="@{@string/loan_duration}" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_45sdp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        style="@style/TextTitleH3Regular"
+                                        android:layout_marginBottom="@dimen/_4sdp"
+                                        android:text="@string/date_created"
+                                        android:textColor="@color/cornflower_blue"
+                                        tools:text="Header" />
+
+                                    <TextView
+                                        style="@style/TextTitleH3Regular"
+                                        bindCommonDate="@{null}"
+                                        android:textColor="@color/secondaryText"
+
+                                        android:layout_marginBottom="@dimen/_4sdp"
+                                        tools:text="Content" />
+
+                                </LinearLayout>
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.benefitFromLoan}"
+                                    app:header="@{@string/benefit_from_loan}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.expectedSourceMoneyToRepay}"
+                                    app:header="@{@string/expected_source_money_to_repay}" />
+
+                                <include
+                                    layout="@layout/create_profile_3_text_view"
+                                    app:content="@{viewModel.collateral}"
+                                    app:header="@{@string/collateral}" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_45sdp"
                                 android:orientation="vertical">
 
                                 <TextView
                                     style="@style/TextTitleH3Regular"
                                     android:layout_marginBottom="@dimen/_4sdp"
-                                    android:text="@string/date_created"
-                                    android:textColor="@color/cornflower_blue"
-                                    tools:text="Header" />
+                                    android:text="@string/proof_of_income"
+                                    android:textColor="@color/cornflower_blue" />
 
-                                <TextView
-                                    style="@style/TextTitleH3Regular"
-                                    bindCommonDate="@{null}"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    tools:text="Content" />
+                                <Spinner
+                                    android:id="@+id/proofOfIncomeTypeDropDown"
+                                    style="@style/DashboardSpinnerFilter"
+                                    android:layout_marginBottom="@dimen/_4sdp" />
 
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/proofOfIncomeRV"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_44sdp"
+                                    android:nestedScrollingEnabled="false"
+                                    android:orientation="horizontal"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    tools:itemCount="10"
+                                    tools:listitem="@layout/item_image" />
                             </LinearLayout>
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.benefitFromLoan}"
-                                app:header="@{@string/benefit_from_loan}" />
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.expectedSourceMoneyToRepay}"
-                                app:header="@{@string/expected_source_money_to_repay}" />
-
-                            <include
-                                layout="@layout/create_profile_3_text_view"
-                                app:content="@{viewModel.collateral}"
-                                app:header="@{@string/collateral}" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_45sdp"
+                            android:layout_marginStart="@dimen/_15sdp"
                             android:orientation="vertical">
 
                             <TextView
@@ -221,45 +255,18 @@
                                 android:text="@string/proof_of_income"
                                 android:textColor="@color/cornflower_blue" />
 
-                            <Spinner
-                                android:id="@+id/proofOfIncomeTypeDropDown"
-                                style="@style/DashboardSpinnerFilter"
-                                android:layout_marginBottom="@dimen/_4sdp" />
+                            <ImageView
+                                android:id="@+id/imageView"
+                                bindImage="@{viewModel.signatureImage.toString()}"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:scaleType="centerCrop"
+                                tools:src="@drawable/ic_contract" />
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/proofOfIncomeRV"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_44sdp"
-                                android:nestedScrollingEnabled="false"
-                                android:orientation="horizontal"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                tools:itemCount="10"
-                                tools:listitem="@layout/item_image" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/TextTitleH3Regular"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:text="@string/proof_of_income"
-                            android:textColor="@color/cornflower_blue" />
-
-                        <ImageView
-                            android:id="@+id/imageView"
-                            bindImage="@{viewModel.signatureImage.toString()}"
-                            android:layout_width="@dimen/_120sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:scaleType="centerCrop"
-                            tools:src="@drawable/ic_contract" />
-
-                    </LinearLayout>
-                </LinearLayout>
+                </ScrollView>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/nextButton"

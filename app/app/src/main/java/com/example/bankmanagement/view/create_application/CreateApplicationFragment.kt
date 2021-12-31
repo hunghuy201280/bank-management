@@ -28,7 +28,7 @@ data class CreateApplicationFragmentArgs(
 )
 
 @AndroidEntryPoint
-class CreateApplicationFragment(private val type: ApplicationType) : DialogFragment(),
+class CreateApplicationFragment(private val type: ApplicationType,private val refreshData:()->Unit) : DialogFragment(),
     CreateApplicationUICallback {
 
     companion object {
@@ -115,9 +115,12 @@ class CreateApplicationFragment(private val type: ApplicationType) : DialogFragm
         _binding = null
     }
 
-    override fun dismissDialog() {
-        findNavController().popBackStack()
 
+    override fun dismissDialog(refresh: Boolean) {
+        if(refresh){
+            this.refreshData()
+        }
+        dismiss()
     }
 
     override fun showLoading(show: Boolean) {

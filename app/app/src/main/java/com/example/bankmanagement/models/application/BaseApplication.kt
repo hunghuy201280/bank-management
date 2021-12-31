@@ -3,6 +3,7 @@ package com.example.bankmanagement.models.application
 import android.net.Uri
 import com.example.bankmanagement.constants.AppConfigs
 import com.example.bankmanagement.models.LoanStatus
+import com.example.bankmanagement.models.LoanType
 import java.io.Serializable
 
 abstract class BaseApplication(
@@ -27,4 +28,12 @@ enum class ApplicationType(
     Liquidation(1),
     Exemption(2),
     Extension(3),
+    All(-1),
+    ;
+    companion object {
+
+        fun getValues():List<String> = values().dropLast(1).map { it.name }
+        fun getFilterValues():List<String> = values().map { it.name }
+
+    }
 }

@@ -52,7 +52,7 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
     override fun initView() {
         binding.proofOfIncomeRV.adapter = proofOfIncomeAdapter;
         val proofOfIncomeTypeAdapter =
-            CustomSpinnerAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
+            CustomSpinnerAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.getName() })
         binding.proofOfIncomeTypeDropDown.adapter=proofOfIncomeTypeAdapter
 
     }

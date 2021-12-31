@@ -14,6 +14,7 @@ import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.view.create_application.CreateApplicationFragment
 import com.example.bankmanagement.view.dashboard.application.adapter.ApplicationAdapter
 import com.example.bankmanagement.view.dashboard.application.adapter.ApplicationItemClickListener
+import com.example.bankmanagement.view.dashboard.application.review_application.ReviewApplicationDialogFragment
 import com.example.bankmanagement.view_models.dashboard.application.ApplicationViewModel
 import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
@@ -36,7 +37,7 @@ class ApplicationFragment : BaseFragment<FragmentApplicationBinding, Application
             }
 
             override fun onApplicationCliced(item: BaseApplication) {
-                val reviewFrags = ReviewApplicationDialogFragment(item)
+                val reviewFrags = ReviewApplicationDialogFragment(item,viewModel::onFindClicked)
                 reviewFrags.show(childFragmentManager, ReviewApplicationDialogFragment.TAG)
             }
         },
@@ -57,18 +58,32 @@ class ApplicationFragment : BaseFragment<FragmentApplicationBinding, Application
         viewModel.status.observe(this, {
             binding.applicationStatusDropdown.setSelection(LoanStatus.values().indexOf(it), true)
         })
+        viewModel.type.observe(this, {
+            binding.applicationTypeDropdown.setSelection(ApplicationType.values().indexOf(it), true)
+        })
     }
 
     override fun initView() {
+
         binding.applicationRV.adapter = applicationAdapter
 
+        //#region status dropdown
         val loanStatusesAdapter = CustomSpinnerAdapter(
             requireContext(),
             R.layout.list_item,
             LoanStatus.getValues()
         )
         binding.applicationStatusDropdown.adapter = loanStatusesAdapter
+        //#endregion
 
+        //#region app type dropdown
+        val applicationType = CustomSpinnerAdapter(
+            requireContext(),
+            R.layout.list_item,
+            ApplicationType.getFilterValues()
+        )
+        binding.applicationTypeDropdown.adapter = applicationType
+        //#endregion
     }
 
     override fun initData() {
@@ -86,6 +101,20 @@ class ApplicationFragment : BaseFragment<FragmentApplicationBinding, Application
                     id: Long
                 ) {
                     viewModel.status.value = LoanStatus.values()[position]
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+            }
+        binding.applicationTypeDropdown.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.type.value = ApplicationType.values()[position]
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -118,7 +147,7 @@ class ApplicationFragment : BaseFragment<FragmentApplicationBinding, Application
     }
 
     override fun onCreateClicked(type: ApplicationType) {
-        CreateApplicationFragment(type).show(childFragmentManager,CreateApplicationFragment.TAG)
+        CreateApplicationFragment(type, refreshData = viewModel::onFindClicked).show(childFragmentManager,CreateApplicationFragment.TAG)
     }
 
 

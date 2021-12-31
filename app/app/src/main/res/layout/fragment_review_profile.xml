@@ -145,6 +145,7 @@
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_marginStart="@dimen/_8sdp"
                                 android:onClick="@{(v)->viewModel.deleteProfile(v)}"
+                                android:visibility="@{viewModel.hasContract==false ?View.VISIBLE:View.GONE}"
                                 android:src="@drawable/ic_garbage" />
                         </LinearLayout>
 
