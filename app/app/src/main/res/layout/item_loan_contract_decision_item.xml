@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.bankmanagement.models.application.BaseDecision" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp">
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:layout_weight="2"
+            isLinkText="@{true}"
+            android:text="@{item.decisionNumber}"
+            tools:text="Cert number" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:gravity="start"
+            android:text="@{`$`+ String.valueOf(item.amount)}"
+            tools:text="$100.0" />
+
+        <TextView
+            style="@style/ContractListTableTextItem"
+            android:gravity="end"
+            bindCommonDate="@{item.createdAt}"
+            tools:text="21/12/2021" />
+
+
+    </LinearLayout>
+
+</layout>

@@ -41,6 +41,16 @@ constructor(
         return@map it.disburseCertificates
     }
 
+    val extensionDecisions = Transformations.map(loanContract) {
+        return@map it.getExtensionDecisions()
+    }
+    val exemptionDecisions = Transformations.map(loanContract) {
+        return@map it.getExemptionDecisions()
+    }
+    val liquidationDecisions = Transformations.map(loanContract) {
+        return@map it.getLiquidationDecisions()
+    }
+
     val liquidationApplicationList = Transformations.map(loanContract) {
         return@map it.getLiquidationDecisions()
     }
@@ -60,7 +70,6 @@ constructor(
     val containChartData = Transformations.map(loanContract) {
         val result=it.disburseCertificates.isNotEmpty() && it.getLiquidationDecisions().isNotEmpty()
         return@map result
-
     }
     //endregion
 

@@ -2,6 +2,8 @@ package com.example.bankmanagement.repo.dtos.loan_contract
 
 
 import com.example.bankmanagement.models.LoanStatus
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.google.gson.annotations.SerializedName
@@ -15,8 +17,10 @@ data class LoanContractDto(
     val signatureImg: String,
     val createdAt: String,
     val contractNumber: String,
-    val disburseCertificates: List<DisburseCertificateDto>?,
-    val liquidationApplications: List<LiquidationApplicationDto>?,
+    val disburseCertificates: List<DisburseCertificateDto>,
+    val liquidationApplications: List<LiquidationApplicationDto>,
+    val exemptionApplications: List<ExemptionApplicationDto>,
+    val extensionApplications: List<ExtensionApplicationDto>,
 )
 
 data class DisburseCertificateDto(

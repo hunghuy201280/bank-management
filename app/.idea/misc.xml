@@ -39,7 +39,7 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_my.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_review_application_dialog.xml" value="0.7107180020811654" />
-        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_review_contract.xml" value="0.75" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_review_contract.xml" value="0.3918813427010148" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_review_profile.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_sign_in.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/fragment_vertical_tabbar.xml" value="0.35572916666666665" />
@@ -48,6 +48,8 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_contract_suggestion.xml" value="0.4921875" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_customer_table_header.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_customer_table_item.xml" value="0.55703125" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_decision_header.xml" value="0.51328125" />
+        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_decision_item.xml" value="0.51328125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_disburse_header.xml" value="0.484375" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_disburse_item.xml" value="0.484375" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/item_loan_contract_payment_receipt_header.xml" value="0.484375" />
@@ -97,5 +99,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.522372528616025" />
+      </ProjectState>
+    </option>
   </component>
 </project>

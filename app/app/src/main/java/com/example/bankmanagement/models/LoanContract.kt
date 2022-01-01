@@ -2,8 +2,15 @@ package com.example.bankmanagement.models
 
 import android.net.Uri
 import com.example.bankmanagement.constants.AppConfigs
+import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.models.application.exemption.ExemptionDecision
+import com.example.bankmanagement.models.application.extension.ExtensionApplication
+import com.example.bankmanagement.models.application.extension.ExtensionDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
+import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import org.joda.time.DateTime
 import java.io.Serializable
 
@@ -18,6 +25,8 @@ data class LoanContract(
     val contractNumber: String,
     val disburseCertificates: List<DisburseCertificate> =  listOf(),
     val liquidationApplications: List<LiquidationApplication> = listOf(),
+    val exemptionApplications: List<ExemptionApplication>,
+    val extensionApplications: List<ExtensionApplication>,
 ):Serializable {
     override fun toString(): String {
         return contractNumber
@@ -33,6 +42,16 @@ data class LoanContract(
 
     fun getLiquidationDecisions(): List<LiquidationDecision> {
         val temp = ArrayList(liquidationApplications)
+
+        return temp.filter { it.decision != null }.map { it.decision!! }
+    }
+    fun getExtensionDecisions(): List<ExtensionDecision> {
+        val temp = ArrayList(extensionApplications)
+
+        return temp.filter { it.decision != null }.map { it.decision!! }
+    }
+    fun getExemptionDecisions(): List<ExemptionDecision> {
+        val temp = ArrayList(exemptionApplications)
 
         return temp.filter { it.decision != null }.map { it.decision!! }
     }

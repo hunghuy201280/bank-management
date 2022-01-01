@@ -9,6 +9,8 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentReviewContractBinding
 import com.example.bankmanagement.models.DisburseCertificate
+import com.example.bankmanagement.models.application.BaseDecision
+import com.example.bankmanagement.models.application.extension.ExtensionDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
@@ -45,6 +47,31 @@ class ReviewContractFragment :
                 }
             })
 
+    private val extensionAdapter =
+        DecisionAdapter(
+            itemClickListener = object : BaseItemClickListener<BaseDecision> {
+                override fun onItemClick(adapterPosition: Int, item: BaseDecision) {
+                }
+
+            }
+        )
+    private val exemptionAdapter =
+        DecisionAdapter(
+            itemClickListener = object : BaseItemClickListener<BaseDecision> {
+                override fun onItemClick(adapterPosition: Int, item: BaseDecision) {
+                }
+
+            }
+        )
+    private val liquidationAdapter =
+        DecisionAdapter(
+            itemClickListener = object : BaseItemClickListener<BaseDecision> {
+                override fun onItemClick(adapterPosition: Int, item: BaseDecision) {
+                }
+
+            }
+        )
+
     override fun viewModelClass(): Class<ReviewContractViewModel> =
         ReviewContractViewModel::class.java
 
@@ -56,21 +83,20 @@ class ReviewContractFragment :
     }
 
     override fun initView() {
-//        binding.proofOfIncomeRV.adapter = proofOfIncomeAdapter;
-//        val proofOfIncomeTypeAdapter =
-//            ArrayAdapter(requireContext(), R.layout.list_item, IncomeType.values().map { it.name });
-//        binding.proofOfIncomeTypeDropDown.adapter=proofOfIncomeTypeAdapter
 
         binding.disburseCertRV.adapter = disburseAdapter
         binding.paymentRV.adapter = receiptAdapter
+        binding.extensionRV.adapter=extensionAdapter
+        binding.exemptionRV.adapter=exemptionAdapter
+        binding.liquidationRV.adapter=liquidationAdapter
 
         initPieChart()
     }
 
     private fun initPieChart() {
-        viewModel.loanContract.observe(this,{
+        viewModel.loanContract.observe(this, {
             val totalPaid = viewModel.totalPayment.value?.toFloat() ?: 0f
-            val totalUnpaid = viewModel.unPaid.value?.toFloat()?:0f;
+            val totalUnpaid = viewModel.unPaid.value?.toFloat() ?: 0f;
             val valueList = mutableListOf(
                 PieEntry(totalPaid, getString(R.string.paid)),
                 PieEntry(totalUnpaid, getString(R.string.unpaid))
@@ -101,20 +127,7 @@ class ReviewContractFragment :
 
     override fun initAction() {
 
-//        binding.proofOfIncomeTypeDropDown.onItemSelectedListener =
-//            object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(
-//                    parent: AdapterView<*>?,
-//                    view: View?,
-//                    position: Int,
-//                    id: Long
-//                ) {
-//                    viewModel.currentIncomeType.value = IncomeType.values()[position];
-//                }
-//
-//                override fun onNothingSelected(parent: AdapterView<*>?) {
-//                }
-//            }
+
         viewModel.disburseCertificateList.observe(this) {
             disburseAdapter.submitList(it)
         }
@@ -122,6 +135,16 @@ class ReviewContractFragment :
         viewModel.liquidationApplicationList.observe(this) {
             receiptAdapter.submitList(it)
         }
+
+        viewModel.extensionDecisions.observe(this,{
+            extensionAdapter.submitList(it)
+        })
+        viewModel.exemptionDecisions.observe(this,{
+            exemptionAdapter.submitList(it)
+        })
+        viewModel.liquidationDecisions.observe(this,{
+            liquidationAdapter.submitList(it)
+        })
     }
 
     override fun onBack() {

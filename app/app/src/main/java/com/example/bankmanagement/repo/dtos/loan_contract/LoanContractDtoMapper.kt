@@ -3,6 +3,9 @@ package com.example.bankmanagement.repo.dtos.loan_contract
 import com.example.bankmanagement.models.DisburseCertificate
 import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.models.PaymentReceipt
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
+import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionDecisionDtoMapper
+import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.utils.ModelMapper
@@ -11,7 +14,9 @@ class LoanContractDtoMapper
     (
     private val disburseCertificateDtoMapper: DisburseCertificateDtoMapper,
     private val liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
-    private val loanProfileDtoMapper: LoanProfileDtoMapper
+    private val loanProfileDtoMapper: LoanProfileDtoMapper,
+    private val extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
+    private val exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
 
 ) : ModelMapper<LoanContractDto, LoanContract> {
     override fun fromDto(dto: LoanContractDto): LoanContract {
@@ -23,16 +28,29 @@ class LoanContractDtoMapper
             signatureImg = dto.signatureImg,
             createdAt = dto.createdAt,
             contractNumber = dto.contractNumber,
-            disburseCertificates = dto.disburseCertificates?.map {
+            disburseCertificates = dto.disburseCertificates.map {
                 disburseCertificateDtoMapper.fromDto(
                     it
                 )
-            } ?: listOf(),
-            liquidationApplications = dto.liquidationApplications?.map {
+            },
+            liquidationApplications = dto.liquidationApplications.map {
                 liquidationApplicationDtoMapper.fromDto(
                     it
                 )
-            } ?: listOf(),
+            },
+
+            extensionApplications = dto.extensionApplications.map {
+                extensionApplicationDtoMapper.fromDto(
+                    it
+                )
+            },
+            exemptionApplications = dto.exemptionApplications.map {
+                exemptionApplicationDtoMapper.fromDto(
+                    it
+                )
+            },
+
+
         )
     }
 
@@ -55,7 +73,18 @@ class LoanContractDtoMapper
                     it
                 )
             },
+            extensionApplications = model.extensionApplications.map {
+                extensionApplicationDtoMapper.toDto(
+                    it
+                )
+            },
+            exemptionApplications = model.exemptionApplications.map {
+                exemptionApplicationDtoMapper.toDto(
+                    it
+                )
+            },
         )
+
     }
 }
 

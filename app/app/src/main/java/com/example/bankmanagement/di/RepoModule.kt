@@ -80,6 +80,7 @@ class RepoModule {
     fun provideExemptionDecisionDtoMapper(): ExemptionDecisionDtoMapper {
         return ExemptionDecisionDtoMapper()
     }
+
     @Singleton
     @Provides
     fun provideExtensionDecisionDtoMapper(): ExtensionDecisionDtoMapper {
@@ -93,6 +94,7 @@ class RepoModule {
     ): ExemptionApplicationDtoMapper {
         return ExemptionApplicationDtoMapper(decisionDtoMapper)
     }
+
     @Singleton
     @Provides
     fun provideExtensionApplicationDtoMapper(
@@ -107,11 +109,15 @@ class RepoModule {
         disburseCertificateDtoMapper: DisburseCertificateDtoMapper,
         liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
         loanProfileDtoMapper: LoanProfileDtoMapper,
+        extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
+        exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper
     ): LoanContractDtoMapper {
         return LoanContractDtoMapper(
             disburseCertificateDtoMapper,
             liquidationApplicationDtoMapper,
-            loanProfileDtoMapper
+            loanProfileDtoMapper,
+            extensionApplicationDtoMapper = extensionApplicationDtoMapper,
+            exemptionApplicationDtoMapper = exemptionApplicationDtoMapper,
         )
     }
 
@@ -177,8 +183,8 @@ class RepoModule {
             customerDtoMapper = customerDtoMapper,
             loanContractDtoMapper = loanContractDtoMapper,
             exemptionApplicationDtoMapper = exemptionApplicationDtoMapper,
-            liquidationApplicationDtoMapper=liquidationApplicationDtoMapper,
-            extensionApplicationDtoMapper= extensionApplicationDtoMapper,
+            liquidationApplicationDtoMapper = liquidationApplicationDtoMapper,
+            extensionApplicationDtoMapper = extensionApplicationDtoMapper,
 
             )
     }
