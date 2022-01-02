@@ -23,7 +23,8 @@ class CustomerViewModel
 @Inject
 constructor(
     private val mainRepo: MainRepository,
-    @AppModule.ReviewLoanProfileArgs val reviewLoanProfileArgs: ValueWrapper<LoanProfile>,
+    @AppModule.ReviewCustomerArgs val reviewCustomerArgs: ValueWrapper<Customer>,
+
     val state: SavedStateHandle,
 ) : BaseUiViewModel<CustomerUICallback>() {
     private val TAG: String = "CustomerViewModel";

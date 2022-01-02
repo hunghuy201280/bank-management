@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentCustomerBinding
@@ -28,8 +29,8 @@ class CustomerFragment : BaseFragment<FragmentCustomerBinding, CustomerViewModel
     private val customerAdapter = CustomerAdapter(
         itemClickListener = object : BaseItemClickListener<Customer> {
             override fun onItemClick(adapterPosition: Int, item: Customer) {
-//                viewModel.reviewLoanProfileArgs.value = item;
-//                findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
+                viewModel.reviewCustomerArgs.value = item;
+                findNavController().navigate(R.id.action_dashboardFragment_to_reviewCustomerFragment)
             }
         },
 

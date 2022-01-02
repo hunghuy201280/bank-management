@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.review_customer.ReviewCustomerViewModel" />
+
+        <variable
+            name="mainVM"
+            type="com.example.bankmanagement.view_models.MainViewModel" />
+
+        <import type="com.example.bankmanagement.models.StaffRole" />
+
+        <import type="com.example.bankmanagement.models.LoanStatus" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DashboardCardViewBackground"
+                    android:layout_width="@dimen/_92sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    card_view:cardCornerRadius="@dimen/_3sdp"
+                    card_view:cardElevation="@dimen/_2sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/past_year" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            price="@{viewModel.lastYearLoan}"
+                            tools:text="$ 1200" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/this_year" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="$ 1200"
+                            price="@{viewModel.thisYearLoan}"
+
+                            />
+
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DashboardCardViewBackground"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    card_view:cardCornerRadius="@dimen/_3sdp"
+                    card_view:cardElevation="@dimen/_2sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                style="@style/TextTitleH2SemiBold"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:text="@string/recent_contracts"
+                                android:textColor="@color/secondaryText" />
+
+
+                        </RelativeLayout>
+
+                        <include layout="@layout/item_review_customer_recent_contracts_header" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recentContractsRV"
+                            style="@style/AppRecyclerView"
+                            android:layout_height="@dimen/_52sdp"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/item_review_customer_recent_contracts_item" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp" />
+            <LinearLayout
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextTitleH2Regular"
+                        android:text="@string/total"
+                        android:textColor="@color/cornflower_blue" />
+
+                    <TextView
+                        style="@style/TextTitleH2Regular"
+                        price="@{viewModel.totalLoan}"
+                        android:layout_weight="1"
+                        tools:text="1230"
+                        android:gravity="end" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/_6sdp"
+                        android:layout_height="@dimen/_6sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:background="@drawable/bg_chart_legend_paid" />
+
+                    <TextView
+                        style="@style/TextTitleH2Regular"
+                        android:text="@string/paid"
+                        android:textColor="@color/cornflower_blue" />
+
+                    <TextView
+                        style="@style/TextTitleH2Regular"
+                        price="@{viewModel.paid}"
+                        tools:text="1230"
+
+                        android:layout_weight="1"
+                        android:gravity="end" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/_6sdp"
+                        android:layout_height="@dimen/_6sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:background="@drawable/bg_chart_legend_unpaid" />
+
+                    <TextView
+                        style="@style/TextTitleH2Regular"
+                        android:text="@string/unpaid"
+                        android:textColor="@color/cornflower_blue" />
+
+                    <TextView
+                        style="@style/TextTitleH2Regular"
+                        price="@{viewModel.unPaid}"
+                        android:layout_weight="1"
+                        tools:text="1230"
+
+                        android:gravity="end" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/_246sdp"
+            android:layout_height="match_parent"
+            android:background="@color/cornflower_blue" />
+
+    </LinearLayout>
+
+</layout>

@@ -27,7 +27,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding,BaseViewModel>()
 
     override fun layoutRes(): Int=R.layout.fragment_dashboard
 
-    override val viewModel: BaseViewModel=MainViewModel()
+    override val viewModel: BaseViewModel=object: BaseViewModel() {}
 
     private val mainViewModel: MainViewModel by activityViewModels()
 

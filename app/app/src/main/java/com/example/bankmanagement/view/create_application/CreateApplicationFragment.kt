@@ -23,9 +23,6 @@ import com.example.bankmanagement.view_models.create_application.CreateApplicati
 import dagger.hilt.android.AndroidEntryPoint
 
 
-data class CreateApplicationFragmentArgs(
-    val loanContract: LoanContract,
-)
 
 @AndroidEntryPoint
 class CreateApplicationFragment(private val type: ApplicationType,private val refreshData:()->Unit) : DialogFragment(),

@@ -2,9 +2,9 @@ package com.example.bankmanagement.di
 
 import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.models.LoanProfile
+import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.utils.ValueWrapper
-import com.example.bankmanagement.view.create_application.CreateApplicationFragmentArgs
 import com.example.bankmanagement.view.create_contract.CreateContractFragmentArgs
 import dagger.Module
 import dagger.Provides
@@ -38,7 +38,13 @@ class AppModule {
     @Singleton
     @CreateContractArgs
     fun provideCreateContractArgs(): ValueWrapper<CreateContractFragmentArgs?> =
-        ValueWrapper(value = null);
+        ValueWrapper(value = null)
+
+    @Provides
+    @Singleton
+    @ReviewCustomerArgs
+    fun provideReviewCustomerArgs(): ValueWrapper<Customer?> =
+        ValueWrapper(value = null)
 
 
 
@@ -54,6 +60,10 @@ class AppModule {
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
     annotation class ReviewLoanContractArgs
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class ReviewCustomerArgs
 
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)

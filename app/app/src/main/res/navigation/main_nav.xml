@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_reviewContractFragment"
             app:destination="@id/reviewContractFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_reviewCustomerFragment"
+            app:destination="@id/reviewCustomerFragment" />
     </fragment>
     <fragment
         android:id="@+id/createProfile1Fragment"
@@ -79,11 +82,20 @@
         android:id="@+id/reviewProfileFragment"
         android:name="com.example.bankmanagement.view.review_profile.ReviewProfileFragment"
         android:label="ReviewProfileFragment"
-        tools:layout="@layout/fragment_review_profile" />
+        tools:layout="@layout/fragment_review_profile"
+
+        />
     <fragment
         android:id="@+id/reviewContractFragment"
 
         android:name="com.example.bankmanagement.view.review_contract.ReviewContractFragment"
         android:label="ReviewContractFragment"
         tools:layout="@layout/fragment_review_contract" />
+    <fragment
+        android:id="@+id/reviewCustomerFragment"
+        android:name="com.example.bankmanagement.view.review_customer.ReviewCustomerFragment"
+        android:label="ReviewCustomerFragment"
+        tools:layout="@layout/fragment_review_customer"
+
+        />
 </navigation>

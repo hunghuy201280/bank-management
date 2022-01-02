@@ -34,6 +34,11 @@ class Utils {
 
     companion object {
 
+        fun logError(tag:String,e:HttpException){
+            Log.d(tag, "Error happened: ${e.response()?.errorBody()?.string()} ")
+
+        }
+
         fun isValidEmail(target: CharSequence?): Boolean {
             return if (TextUtils.isEmpty(target)) {
                 false
