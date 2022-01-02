@@ -1,24 +1,20 @@
 package com.example.bankmanagement.view_models.dashboard.customer
 
-import android.view.View
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.constants.*
 import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.customer.Customer
+import com.example.bankmanagement.models.customer.CustomerType
 import com.example.bankmanagement.repo.MainRepository
-import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
-import com.example.bankmanagement.utils.listener.ValueCallBack
-import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
+import com.example.bankmanagement.view.dashboard.customer.CustomerUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 import retrofit2.HttpException
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -29,7 +25,7 @@ constructor(
     private val mainRepo: MainRepository,
     @AppModule.ReviewLoanProfileArgs val reviewLoanProfileArgs: ValueWrapper<LoanProfile>,
     val state: SavedStateHandle,
-) : BaseUiViewModel<ProfileUICallback>() {
+) : BaseUiViewModel<CustomerUICallback>() {
     private val TAG: String = "CustomerViewModel";
 
     val customerName = state.getLiveData<String>(STATE_KEY_CUSTOMER_NAME)
@@ -47,6 +43,7 @@ constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _getCustomers()
         }
+
     }
 
 
@@ -64,6 +61,9 @@ constructor(
     private suspend fun _getCustomers() {
         val result = mainRepo.searchCustomers()
         customers.postValue(result)
+        val temp=mainRepo.getCustomerDetail(customerId = result.first().id)
+
+        println(temp)
 
     }
 
@@ -78,7 +78,7 @@ constructor(
                     customerType = if (customerType.value == CustomerType.All) null else customerType.value,
                     email = email.value,
                     identityNumber = identityNumber.value,
-                    )
+                )
                 customers.postValue(result);
 
             } catch (e: HttpException) {
@@ -87,8 +87,8 @@ constructor(
         }
     }
 
-    fun onCreateClicked() {
-        uiCallback?.onCreateClicked()
+    fun onCreateClicked(type: CustomerType) {
+        uiCallback?.onCreateClicked(type)
     }
 
 }

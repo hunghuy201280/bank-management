@@ -26,11 +26,21 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.schedule
+import android.text.TextUtils
+import android.util.Patterns
 
 
 class Utils {
 
     companion object {
+
+        fun isValidEmail(target: CharSequence?): Boolean {
+            return if (TextUtils.isEmpty(target)) {
+                false
+            } else {
+                Patterns.EMAIL_ADDRESS.matcher(target?:"").matches()
+            }
+        }
         fun showDatePicker(v: View,callback: ValueCallBack<DateTime>){
             val c = Calendar.getInstance()
             val initYear = c.get(Calendar.YEAR)

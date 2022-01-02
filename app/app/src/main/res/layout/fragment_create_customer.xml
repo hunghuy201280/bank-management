@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.create_customer.CreateCustomerViewModel" />
+
+
+        <import type="android.view.View" />
+
+        <import type="com.example.bankmanagement.models.customer.CustomerType" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="@dimen/_292sdp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+
+        tools:context=".view.create_contract.CreateCustomerFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@{`Add `+viewModel.type.name()+ ` customer` }"
+            tools:text="Add business customer" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/cornflower_blue"
+            android:text="@string/date_created" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+
+                    style="@style/DashboardTextContentNormal"
+                    android:text="@string/name" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/DashboardEditTextFilter"
+                    android:text="@={viewModel.name}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/DashboardTextContentNormal"
+
+                    android:text="@string/phone_number" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/DashboardEditTextFilter"
+                    android:text="@={viewModel.phoneNumber}" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+
+                    style="@style/DashboardTextContentNormal"
+                    android:text="@string/identity_number" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/DashboardEditTextFilter"
+                    android:text="@={viewModel.identityNumber}" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/DashboardTextContentNormal"
+
+                    android:text="@string/identity_card_created_date" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/DashboardEditTextFilter"
+                    bindDateTime="@{viewModel.identityCreatedDate}"
+                    android:focusable="false"
+                    android:onClick="@{(v)->viewModel.pickIdentityCreatedDate(v)}" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/DashboardTextContentNormal"
+                    android:text="@string/email_optional" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/DashboardEditTextFilter"
+                    android:text="@={viewModel.email}"
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.type==CustomerType.Resident?View.VISIBLE:View.INVISIBLE}"
+                tools:visibility="invisible"
+                >
+
+                <TextView
+                    style="@style/DashboardTextContentNormal"
+                    android:text="@string/date_of_birth" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/DashboardEditTextFilter"
+                    bindDateTime="@{viewModel.dateOfBirth}"
+                    android:focusable="false"
+                    android:onClick="@{(v)->viewModel.pickDob(v)}" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+
+                style="@style/DashboardTextContentNormal"
+                android:text="@string/address" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/DashboardEditTextFilter"
+                android:layout_width="match_parent"
+                android:text="@={viewModel.address}"
+
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.type==CustomerType.Resident?View.VISIBLE:View.GONE}"
+            tools:visibility="gone">
+
+            <TextView
+
+                style="@style/DashboardTextContentNormal"
+                android:text="@string/permanent_residence" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/DashboardEditTextFilter"
+                android:layout_width="match_parent"
+                android:text="@={viewModel.permanentResidence}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:visibility="@{viewModel.type==CustomerType.Business?View.VISIBLE:View.GONE}">
+
+            <TextView
+
+                style="@style/DashboardTextContentNormal"
+                android:text="@string/company_rules" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/DashboardEditTextFilter"
+                android:layout_width="match_parent"
+                android:text="@={viewModel.companyRules}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.type==CustomerType.Business?View.VISIBLE:View.GONE}">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    style="@style/DashboardTextContentNormal"
+                    android:text="@string/business_registration_certificate" />
+
+                <TextView
+                    android:id="@+id/pickBusinessCert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/upload"
+                    android:textColor="@color/cornflower_blue"
+                    android:visibility="@{viewModel.businessCert==null?View.VISIBLE:View.GONE}" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/_134sdp"
+                android:layout_gravity="center"
+                android:layout_height="@dimen/_50sdp"
+                android:visibility="@{viewModel.businessCert!=null?View.VISIBLE:View.GONE}">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    bindImage="@{viewModel.businessCert.toString()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/ic_contract" />
+
+                <ImageView
+                    android:id="@+id/deleteImage"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="@{()->viewModel.onBusinessCertRemoved()}"
+                    android:src="@color/cornflower_blue"
+
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:visibility="gone">-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="@dimen/_77sdp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_horizontal"-->
+        <!--                android:text="@string/signature_image"-->
+        <!--                android:textColor="@color/cornflower_blue" />-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/uploadSignature"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:layout_gravity="center_horizontal"-->
+        <!--                    android:text="@string/upload"-->
+        <!--                    android:textColor="@color/cornflower_blue"-->
+        <!--                    android:visibility="@{viewModel.signatureImg==null?View.VISIBLE:View.GONE}" />-->
+
+        <!--                <RelativeLayout-->
+        <!--                    android:layout_width="@dimen/_50sdp"-->
+        <!--                    android:layout_height="@dimen/_50sdp"-->
+        <!--                    android:visibility="@{viewModel.signatureImg!=null?View.VISIBLE:View.GONE}">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:id="@+id/imageView"-->
+        <!--                        bindImage="@{viewModel.signatureImg.toString()}"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:scaleType="centerCrop"-->
+        <!--                        tools:src="@drawable/ic_contract" />-->
+
+        <!--                    <ImageView-->
+        <!--                        android:id="@+id/deleteImage"-->
+        <!--                        android:layout_width="@dimen/_16sdp"-->
+        <!--                        android:layout_height="@dimen/_16sdp"-->
+        <!--                        android:layout_alignParentEnd="true"-->
+        <!--                        android:onClick="@{()->viewModel.signatureImageRemoved()}"-->
+        <!--                        android:src="@color/cornflower_blue"-->
+
+        <!--                        />-->
+        <!--                </RelativeLayout>-->
+        <!--            </LinearLayout>-->
+        <!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelButton"
+                style="@style/DashboardActionButton"
+                android:backgroundTint="@color/divider"
+                android:text="@string/cancel"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveButton"
+                style="@style/DashboardActionButton"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:onClick="@{(v)->viewModel.onCustomerAdded(v)}"
+                android:text="@string/save" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

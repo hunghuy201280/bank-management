@@ -123,5 +123,13 @@
     <string name="exemption_decisions">Exemption decisions</string>
     <string name="liquidation_decisions">Liquidation decisions</string>
     <string name="decision_number">Decision number</string>
+    <string name="resident_customer">Resident customer</string>
+    <string name="business_customer">Business customer</string>
+    <string name="email_optional">Email (optional)</string>
+    <string name="identity_card_created_date">Identity card created date</string>
+    <string name="address">Address</string>
+    <string name="permanent_residence">Permanent residence</string>
+    <string name="company_rules">Company rules</string>
+    <string name="business_registration_certificate">Business registration certificate</string>
 
 </resources>

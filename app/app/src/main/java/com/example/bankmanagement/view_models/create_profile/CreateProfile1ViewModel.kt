@@ -6,7 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
-import com.example.bankmanagement.models.Customer
+import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.repo.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

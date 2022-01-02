@@ -1,10 +1,10 @@
 package com.example.bankmanagement.repo
 
-import com.example.bankmanagement.models.CustomerType
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoResponse
+import com.example.bankmanagement.repo.dtos.customer.CustomerDetailDto
 import com.example.bankmanagement.repo.dtos.customer.GetCustomerResponse
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
@@ -273,5 +273,26 @@ interface ApiService {
         ) token: String,
         @Body body: Map<String, Any>,
     )
+
+    @POST("customers")
+    @JvmSuppressWildcards
+    suspend fun addCustomer(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any?>,
+    )
+
+
+    @GET("customers/details/{id}")
+    @JvmSuppressWildcards
+    suspend fun getCustomerDetail(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Path(value = "id", encoded = true) customerId: String,
+    ):CustomerDetailDto
+
+
 
 }

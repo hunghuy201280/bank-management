@@ -9,11 +9,11 @@
 
         <variable
             name="item"
-            type="com.example.bankmanagement.models.Customer" />
+            type="com.example.bankmanagement.models.customer.Customer" />
 
         <variable
             name="selectedCustomer"
-            type="com.example.bankmanagement.models.Customer" />
+            type="com.example.bankmanagement.models.customer.Customer" />
     </data>
 
     <LinearLayout

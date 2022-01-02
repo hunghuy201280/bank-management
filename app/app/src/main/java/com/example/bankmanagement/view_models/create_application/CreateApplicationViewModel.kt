@@ -27,7 +27,7 @@ class CreateApplicationViewModel
 constructor(
     private val mainRepo: MainRepository,
 ) : BaseUiViewModel<CreateApplicationUICallback>() {
-    private val TAG: String = "CreateContractViewModel";
+    private val TAG: String = "CreateApplicationViewModel";
     val reason = MutableLiveData<String>()
     val signatureImg = MutableLiveData<Uri>()
     val amount = MutableLiveData<Double>()
@@ -42,7 +42,7 @@ constructor(
             || amount.value == null
             || (applicationType == ApplicationType.Extension && duration.value == null));
 
-    fun onContractCreated(v: View) {
+    fun onApplicationCreated(v: View) {
 
         if (validateAction()) {
             Utils.showNotifyDialog(

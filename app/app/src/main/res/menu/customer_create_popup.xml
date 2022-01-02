@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/resident_customer"
+        android:title="@string/resident_customer"/>
+
+    <item
+        android:id="@+id/business_customer"
+        android:title="@string/business_customer"/>
+
+
+
+</menu>

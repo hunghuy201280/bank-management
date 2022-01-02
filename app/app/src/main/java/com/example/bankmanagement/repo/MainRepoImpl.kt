@@ -5,6 +5,9 @@ import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
+import com.example.bankmanagement.models.customer.Customer
+import com.example.bankmanagement.models.customer.CustomerDetail
+import com.example.bankmanagement.models.customer.CustomerType
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
@@ -12,6 +15,7 @@ import com.example.bankmanagement.repo.dtos.application.extension.ExtensionAppli
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
+import com.example.bankmanagement.repo.dtos.customer.CustomerDetailDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
@@ -26,6 +30,8 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import java.io.File
 
 
@@ -41,6 +47,8 @@ constructor(
     private val exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
     private val liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
     private val extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
+    private val customerDetailDtoMapper: CustomerDetailDtoMapper,
+
 ) : MainRepository {
 
 
@@ -408,6 +416,49 @@ constructor(
                 "applicationId" to applicationId,
             )
         )
+    }
+
+    override suspend fun addCustomer(
+        customerType: CustomerType,
+        name: String,
+        dateOfBirth: DateTime?,
+        address: String,
+        identityNumber: String,
+        identityCardCreatedDate: DateTime,
+        phoneNumber: String,
+        permanentResidence: String?,
+        businessRegistrationCertificate: String?,
+        companyRules: String?,
+        email: String?
+    ) {
+        assert(
+            if (customerType == CustomerType.Resident)
+                dateOfBirth != null && permanentResidence != null &&  businessRegistrationCertificate == null && companyRules == null
+            else
+                businessRegistrationCertificate != null && companyRules != null &&  dateOfBirth == null && permanentResidence == null,
+        )
+        apiService.addCustomer(
+            token = accessToken,
+            mapOf(
+                "customerType" to customerType.value,
+                "name" to name,
+                "dateOfBirth" to dateOfBirth?.toDateTime(DateTimeZone.UTC)?.toString(),
+                "address" to address,
+                "identityNumber" to identityNumber,
+                "identityCardCreatedDate" to identityCardCreatedDate.toDateTime(DateTimeZone.UTC)?.toString(),
+                "phoneNumber" to phoneNumber,
+                "permanentResidence" to permanentResidence,
+                "businessRegistrationCertificate" to businessRegistrationCertificate,
+                "companyRules" to companyRules,
+                "email" to email,
+            )
+        )
+
+    }
+
+    override suspend fun getCustomerDetail(customerId: String): CustomerDetail {
+        val result=apiService.getCustomerDetail(token=accessToken,customerId)
+        return customerDetailDtoMapper.fromDto(result)
     }
 
 

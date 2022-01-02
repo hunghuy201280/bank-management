@@ -1,4 +1,4 @@
-package com.example.bankmanagement.models
+package com.example.bankmanagement.models.customer
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

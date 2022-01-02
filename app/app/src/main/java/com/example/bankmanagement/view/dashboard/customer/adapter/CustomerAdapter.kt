@@ -6,7 +6,7 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.ItemCustomerTableItemBinding
-import com.example.bankmanagement.models.Customer
+import com.example.bankmanagement.models.customer.Customer
 
 class CustomerAdapter(
     itemClickListener: BaseItemClickListener<Customer>,

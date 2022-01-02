@@ -1,19 +1,17 @@
 package com.example.bankmanagement.view.dashboard.customer
 
+import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
+import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentCustomerBinding
-import com.example.bankmanagement.models.Customer
-import com.example.bankmanagement.models.CustomerType
-import com.example.bankmanagement.models.LoanProfile
+import com.example.bankmanagement.models.customer.Customer
+import com.example.bankmanagement.models.customer.CustomerType
+import com.example.bankmanagement.view.create_customer.CreateCustomerFragment
 import com.example.bankmanagement.view.dashboard.customer.adapter.CustomerAdapter
-import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
-import com.example.bankmanagement.view.dashboard.profile.adapter.ProfileAdapter
-import com.example.bankmanagement.view.dashboard.profile.adapter.ProfileItemClickListener
 import com.example.bankmanagement.view_models.dashboard.customer.CustomerViewModel
 import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
@@ -22,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CustomerFragment : BaseFragment<FragmentCustomerBinding, CustomerViewModel>(),
-    ProfileUICallback {
+    CustomerUICallback {
 
 
     private val TAG = "CustomerFragment";
@@ -91,10 +89,31 @@ class CustomerFragment : BaseFragment<FragmentCustomerBinding, CustomerViewModel
             binding.customerTypeDropdown.setSelection(CustomerType.values().indexOf(it), true)
         })
 
+        binding.createButton.setOnClickListener {
+            val popup = PopupMenu(context, binding.createButton, Gravity.END)
+            popup.menuInflater
+                .inflate(R.menu.customer_create_popup, popup.menu)
+
+            popup.setOnMenuItemClickListener {
+                val type = when (it.itemId) {
+                    R.id.business_customer -> CustomerType.Business
+                    R.id.resident_customer -> CustomerType.Resident
+                    else -> throw Exception("Unknow menu item $it")
+                }
+                viewModel.onCreateClicked(type)
+                true
+            }
+
+            popup.show() //showing pop
+
+        }
     }
 
-    override fun onCreateClicked() {
-        findNavController().navigate(R.id.action_dashboardFragment_to_createProfile1Fragment)
+
+    override fun onCreateClicked(type: CustomerType) {
+        CreateCustomerFragment(type, refreshData = viewModel::onFindClicked).show(childFragmentManager,
+            CreateCustomerFragment.TAG)
+
     }
 
 

@@ -189,7 +189,7 @@
                 android:id="@+id/saveButton"
                 style="@style/DashboardActionButton"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:onClick="@{(v)->viewModel.onContractCreated(v)}"
+                android:onClick="@{(v)->viewModel.onApplicationCreated(v)}"
                 android:text="@string/save" />
         </LinearLayout>
     </LinearLayout>

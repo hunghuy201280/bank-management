@@ -5,6 +5,9 @@ import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
+import com.example.bankmanagement.models.customer.Customer
+import com.example.bankmanagement.models.customer.CustomerDetail
+import com.example.bankmanagement.models.customer.CustomerType
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
@@ -12,6 +15,7 @@ import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
+import org.joda.time.DateTime
 import java.io.File
 
 
@@ -41,12 +45,12 @@ interface MainRepository {
     ): ArrayList<LoanProfile>
 
     suspend fun searchCustomers(
-        name:String?=null,
-        phoneNumber:String?=null,
-        customerType:CustomerType?=null,
-        email:String?=null,
-        identityNumber:String?=null,
-        isStartWith:Boolean=false,
+        name: String? = null,
+        phoneNumber: String? = null,
+        customerType: CustomerType? = null,
+        email: String? = null,
+        identityNumber: String? = null,
+        isStartWith: Boolean = false,
 
         ): ArrayList<Customer>
 
@@ -172,6 +176,25 @@ interface MainRepository {
         applicationId: String,
     )
 
+    suspend fun addCustomer(
+        customerType: CustomerType,
+        name: String,
+        dateOfBirth: DateTime? = null,
+        address: String,
+        identityNumber: String,
+        identityCardCreatedDate: DateTime,
+        phoneNumber: String,
+        permanentResidence: String? = null,
+        businessRegistrationCertificate: String? = null,
+        companyRules: String? = null,
+        email: String? = null,
+
+    )
+
+
+    suspend fun getCustomerDetail(
+        customerId: String,
+    ): CustomerDetail
 
     fun getToken(): String
 

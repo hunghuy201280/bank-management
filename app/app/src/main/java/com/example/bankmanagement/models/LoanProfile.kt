@@ -2,10 +2,9 @@ package com.example.bankmanagement.models
 
 
 import android.net.Uri
-import android.os.Parcelable
 import com.example.bankmanagement.constants.AppConfigs
+import com.example.bankmanagement.models.customer.Customer
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 import org.joda.time.DateTime
 
 data class LoanProfile(

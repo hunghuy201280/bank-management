@@ -11,7 +11,9 @@ import com.example.bankmanagement.repo.dtos.application.extension.ExtensionDecis
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationDecisionDtoMapper
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
+import com.example.bankmanagement.repo.dtos.customer.CustomerDetailDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
+import com.example.bankmanagement.repo.dtos.customer.StatisticDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_contract.*
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
@@ -51,6 +53,27 @@ class RepoModule {
     @Provides
     fun providePaymentReceiptMapper(): PaymentReceiptDtoMapper {
         return PaymentReceiptDtoMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCustomerDetailMapper(
+        loanContractDtoMapper: LoanContractDtoMapper,
+        customerDtoMapper: CustomerDtoMapper,
+        statisticDtoMapper: StatisticDtoMapper,
+    ): CustomerDetailDtoMapper {
+        return CustomerDetailDtoMapper(
+            loanContractDtoMapper = loanContractDtoMapper,
+            customerDtoMapper = customerDtoMapper,
+            statisticDtoMapper = statisticDtoMapper,
+        )
+    }
+    @Singleton
+    @Provides
+    fun providerStatisticDtoMapper(
+    ): StatisticDtoMapper {
+        return StatisticDtoMapper(
+        )
     }
 
     @Singleton
@@ -174,6 +197,7 @@ class RepoModule {
         exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
         liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
         extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
+        customerDetailDtoMapper: CustomerDetailDtoMapper,
     ): MainRepository {
         return MainRepositoryImpl(
             apiService = apiService,
@@ -185,7 +209,7 @@ class RepoModule {
             exemptionApplicationDtoMapper = exemptionApplicationDtoMapper,
             liquidationApplicationDtoMapper = liquidationApplicationDtoMapper,
             extensionApplicationDtoMapper = extensionApplicationDtoMapper,
-
-            )
+            customerDetailDtoMapper = customerDetailDtoMapper,
+        )
     }
 }

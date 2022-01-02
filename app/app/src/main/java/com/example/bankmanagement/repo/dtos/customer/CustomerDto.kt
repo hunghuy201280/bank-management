@@ -1,6 +1,6 @@
 package com.example.bankmanagement.repo.dtos.customer
 
-import com.example.bankmanagement.models.CustomerType
+import com.example.bankmanagement.models.customer.CustomerType
 import com.google.gson.annotations.SerializedName
 
 data class CustomerDto (
@@ -16,6 +16,6 @@ data class CustomerDto (
     val customerType: CustomerType,
     val businessRegistrationCertificate: String?=null,
     val companyRules: String?=null,
-
+    val email:String?=null,
     )
 

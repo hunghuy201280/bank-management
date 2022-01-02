@@ -1,6 +1,5 @@
 package com.example.bankmanagement.view_models.create_profile
 
-import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.view.View
@@ -8,15 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
-import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
-import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
-import com.example.bankmanagement.utils.Utils.Companion.getFileName
 import com.example.bankmanagement.utils.Utils.Companion.showNotifyDialog
 import com.example.bankmanagement.utils.Utils.Companion.uploadFile
-import com.example.bankmanagement.view.clockin.ClockInOutUICallback
 import com.example.bankmanagement.view.create_profile.CreateProfile2UICallback
 import com.example.bankmanagement.view.create_profile.CreateProfile3UICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,9 +20,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.lang.Exception
 import javax.inject.Inject
 
