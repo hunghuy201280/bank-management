@@ -49,10 +49,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/primaryBackground"
+                        android:orientation="horizontal"
                         android:paddingStart="@dimen/_16sdp"
                         android:paddingTop="@dimen/_8sdp"
-                        android:orientation="horizontal"
-                        android:background="@color/primaryBackground"
                         tools:ignore="RtlSymmetry">
 
                         <TextView
@@ -68,8 +68,8 @@
                             android:id="@+id/close_btn"
                             android:layout_width="@dimen/_9sdp"
                             android:layout_height="@dimen/_9sdp"
-                            android:layout_marginEnd="@dimen/_8sdp"
                             android:layout_gravity="top"
+                            android:layout_marginEnd="@dimen/_8sdp"
                             android:background="@drawable/ic_close_square" />
 
                     </LinearLayout>
@@ -522,8 +522,8 @@
                         <com.google.android.material.card.MaterialCardView
                             style="@style/DashboardCardViewBackground"
                             android:layout_width="0dp"
-                            android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginVertical="@dimen/_6sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginEnd="@dimen/_6sdp"
                             android:layout_weight="1"
                             card_view:cardCornerRadius="@dimen/_3sdp"
@@ -596,8 +596,8 @@
                         <com.google.android.material.card.MaterialCardView
                             style="@style/DashboardCardViewBackground"
                             android:layout_width="0dp"
-                            android:layout_marginStart="@dimen/_6sdp"
                             android:layout_marginVertical="@dimen/_6sdp"
+                            android:layout_marginStart="@dimen/_6sdp"
                             android:layout_marginEnd="@dimen/_8sdp"
                             android:layout_weight="1"
                             card_view:cardCornerRadius="@dimen/_3sdp"

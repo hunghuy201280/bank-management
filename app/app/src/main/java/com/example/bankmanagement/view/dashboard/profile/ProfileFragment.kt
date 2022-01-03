@@ -108,7 +108,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         });
         viewModel.loanStatus.observe(this, {
             binding.loanStatusDropdown.setSelection(LoanStatus.values().indexOf(it), true)
-        });
+        })
 
     }
 

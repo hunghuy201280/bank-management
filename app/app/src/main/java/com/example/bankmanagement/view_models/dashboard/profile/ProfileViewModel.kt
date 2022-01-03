@@ -42,7 +42,6 @@ constructor(
 
     init {
         getProfiles()
-        //testApi()
     }
 
     fun getProfiles() {
@@ -64,8 +63,8 @@ constructor(
     }
 
     private suspend fun _getProfiles() {
-        val profiles = mainRepo.getLoanProfiles();
-        loanProfiles.postValue(profiles);
+        val profiles = mainRepo.getLoanProfiles()
+        loanProfiles.postValue(profiles)
 
     }
 
