@@ -26,16 +26,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     override fun layoutRes(): Int = R.layout.fragment_profile
     private val profileAdapter = ProfileAdapter(
         itemClickListener = object : BaseItemClickListener<LoanProfile> {
-            override fun onItemClick(adapterPosition: Int, item: LoanProfile) {
-                viewModel.reviewLoanProfileArgs.value = item;
-                findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
-            }
+            override fun onItemClick(adapterPosition: Int, item: LoanProfile) {}
         },
         profileItemClickListener = object : ProfileItemClickListener {
             override fun onLoanNumberClick(item: LoanProfile) {
-
+                viewModel.reviewLoanProfileArgs.value = item;
+                findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
             }
-
         }
     );
 

@@ -66,6 +66,10 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
 
     override fun initAction() {
 
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding.proofOfIncomeTypeDropDown.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(

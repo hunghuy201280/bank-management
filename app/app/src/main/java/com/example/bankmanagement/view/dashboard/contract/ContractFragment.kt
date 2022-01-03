@@ -19,7 +19,7 @@ import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel>(), BaseUserView {
+class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel>(), ContractUICallback {
 
     override fun layoutRes(): Int = R.layout.fragment_contract
 
@@ -36,6 +36,8 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
             }
 
             override fun onLoanNumberClick(item: LoanProfile) {
+                viewModel.reviewLoanProfileArgs.value = item
+                findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
             }
         }
     );
@@ -87,6 +89,9 @@ class ContractFragment : BaseFragment<FragmentContractBinding, ContractViewModel
 
     }
 
+    override fun onLoanNumberClick() {
+        findNavController().navigate(R.id.action_dashboardFragment_to_reviewProfileFragment)
+    }
 
 
 }

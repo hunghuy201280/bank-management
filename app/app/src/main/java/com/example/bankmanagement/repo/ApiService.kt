@@ -115,6 +115,14 @@ interface ApiService {
 
         ): ArrayList<LoanContractDto>
 
+    @GET("loan_profiles/{loanProfileId}")
+    suspend fun getLoanProfile(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Path("loanProfileId") loanProfileId: String
+    ): LoanProfileDto
+
     @GET("loan_profiles/has_contract/{id}")
     suspend fun hasContract(
         @Header(

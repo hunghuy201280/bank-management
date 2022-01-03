@@ -31,7 +31,7 @@
 
     <style name="TextTitleH3Regular" parent="TextPoppins.Regular.Wrap">
         <item name="android:textSize">@dimen/H3</item>
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/secondaryText</item>
     </style>
 
     <style name="TextPoppins.SemiBold.Wrap" parent="TextAppearance.AppCompat">
@@ -98,6 +98,18 @@
         <item name="android:paddingVertical" tools:targetApi="o">0dp</item>
         <item name="android:outlineProvider">bounds</item>
         <item name="android:elevation">@dimen/_2sdp</item>
+    </style>
+
+    <style name="NegativeButton" parent="DashboardActionButton">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">@dimen/_40sdp</item>
+        <item name="backgroundTint">@color/alto</item>
+        <item name="android:textColor">@color/secondaryText</item>
+    </style>
+
+    <style name="PositiveButton" parent="DashboardActionButton">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">@dimen/_40sdp</item>
     </style>
 
     <style name="RejectButton" parent="DashboardActionButton">

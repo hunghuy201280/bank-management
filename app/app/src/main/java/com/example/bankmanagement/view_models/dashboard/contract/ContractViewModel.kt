@@ -1,5 +1,6 @@
 package com.example.bankmanagement.view_models.dashboard.contract
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -9,11 +10,13 @@ import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.constants.STATE_KEY_CONTRACT_LOAN_TYPE
 import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.LoanContract
+import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.utils.listener.ValueCallBack
+import com.example.bankmanagement.view.dashboard.contract.ContractUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,8 +33,9 @@ class ContractViewModel
 constructor(
     private val mainRepo: MainRepository,
     @AppModule.ReviewLoanContractArgs val reviewLoanContractArgs: ValueWrapper<LoanContract>,
+    @AppModule.ReviewLoanProfileArgs val reviewLoanProfileArgs: ValueWrapper<LoanProfile>,
     val state: SavedStateHandle,
-) : BaseUiViewModel<BaseUserView>() {
+) : BaseUiViewModel<ContractUICallback>() {
     private val TAG: String = "ApplicationViewModel"
 
     //region search
@@ -121,7 +125,5 @@ constructor(
             }
         }
     }
-
-
 
 }

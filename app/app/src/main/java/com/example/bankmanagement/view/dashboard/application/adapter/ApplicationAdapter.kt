@@ -2,9 +2,7 @@ package com.example.bankmanagement.view.dashboard.application.adapter
 import com.example.bankmanagement.base.adapter.BaseBindingListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bankmanagement.R
-import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.adapter.BaseBindingViewHolder
-import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.ItemApplicationTableItemBinding
 import com.example.bankmanagement.models.application.BaseApplication
 
@@ -26,7 +24,7 @@ class ApplicationAdapter(
             applicationItemClickListener.onContractClicked(item.loanContract)
         }
         binding.root.setOnClickListener{
-            applicationItemClickListener.onApplicationCliced(item)
+            applicationItemClickListener.onApplicationClicked(item)
         }
     }
 

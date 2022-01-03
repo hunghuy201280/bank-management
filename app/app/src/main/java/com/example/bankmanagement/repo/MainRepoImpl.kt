@@ -44,12 +44,13 @@ constructor(
     private val apiService: ApiService,
     private var accessToken: String = "",
     private val loanContractDtoMapper: LoanContractDtoMapper,
+    private val loanProfileDtoMapper: LoanProfileDtoMapper,
     private val exemptionApplicationDtoMapper: ExemptionApplicationDtoMapper,
     private val liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
     private val extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
     private val customerDetailDtoMapper: CustomerDetailDtoMapper,
 
-) : MainRepository {
+    ) : MainRepository {
 
 
     override suspend fun getBranchInfo(branchCode: String): BranchInfo {
@@ -319,6 +320,14 @@ constructor(
         return loanContractDtoMapper.fromDto(response)
     }
 
+    override suspend fun getLoanProfile(
+        loanProfileId: String?
+    ): LoanProfile {
+        val response =
+            apiService.getLoanProfile(token = accessToken, loanProfileId = loanProfileId!!)
+        return loanProfileDtoMapper.fromDto(response)
+    }
+
     override suspend fun createLiquidation(liquidationApplication: LiquidationApplicationDto) {
         val body = mapOf(
             "loanContract" to liquidationApplication.loanContract!!,
@@ -433,9 +442,9 @@ constructor(
     ) {
         assert(
             if (customerType == CustomerType.Resident)
-                dateOfBirth != null && permanentResidence != null &&  businessRegistrationCertificate == null && companyRules == null
+                dateOfBirth != null && permanentResidence != null && businessRegistrationCertificate == null && companyRules == null
             else
-                businessRegistrationCertificate != null && companyRules != null &&  dateOfBirth == null && permanentResidence == null,
+                businessRegistrationCertificate != null && companyRules != null && dateOfBirth == null && permanentResidence == null,
         )
         apiService.addCustomer(
             token = accessToken,
@@ -445,7 +454,8 @@ constructor(
                 "dateOfBirth" to dateOfBirth?.toDateTime(DateTimeZone.UTC)?.toString(),
                 "address" to address,
                 "identityNumber" to identityNumber,
-                "identityCardCreatedDate" to identityCardCreatedDate.toDateTime(DateTimeZone.UTC)?.toString(),
+                "identityCardCreatedDate" to identityCardCreatedDate.toDateTime(DateTimeZone.UTC)
+                    ?.toString(),
                 "phoneNumber" to phoneNumber,
                 "permanentResidence" to permanentResidence,
                 "businessRegistrationCertificate" to businessRegistrationCertificate,
@@ -457,7 +467,7 @@ constructor(
     }
 
     override suspend fun getCustomerDetail(customerId: String): CustomerDetail {
-        val result=apiService.getCustomerDetail(token=accessToken,customerId)
+        val result = apiService.getCustomerDetail(token = accessToken, customerId)
         return customerDetailDtoMapper.fromDto(result)
     }
 

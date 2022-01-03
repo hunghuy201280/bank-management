@@ -34,7 +34,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/default_margin"
             tools:context=".view.review_profile.ReviewProfileFragment">
 
 
@@ -119,7 +119,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/default_margin"
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_marginBottom="@dimen/_18sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
                     card_view:cardCornerRadius="@dimen/_3sdp"
                     card_view:cardElevation="@dimen/_2sdp">
 
@@ -145,8 +145,8 @@
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_marginStart="@dimen/_8sdp"
                                 android:onClick="@{(v)->viewModel.deleteProfile(v)}"
-                                android:visibility="@{viewModel.hasContract==false ?View.VISIBLE:View.GONE}"
-                                android:src="@drawable/ic_garbage" />
+                                android:src="@drawable/ic_garbage"
+                                android:visibility="@{viewModel.hasContract==false ?View.VISIBLE:View.GONE}" />
                         </LinearLayout>
 
                         <View
@@ -307,8 +307,8 @@
                                         <androidx.recyclerview.widget.RecyclerView
                                             android:id="@+id/proofOfIncomeRV"
                                             android:layout_width="match_parent"
-                                            android:layout_marginTop="@dimen/_4sdp"
                                             android:layout_height="@dimen/_44sdp"
+                                            android:layout_marginTop="@dimen/_4sdp"
                                             android:nestedScrollingEnabled="false"
                                             android:orientation="horizontal"
                                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -394,6 +394,25 @@
                 android:visibility="@{viewModel.loanProfile.loanStatus== LoanStatus.Done &amp;&amp; viewModel.hasContract==false ?View.VISIBLE:View.GONE}"
                 tools:ignore="RelativeOverlap" />
 
+            <LinearLayout
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:gravity="center_vertical"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_7sdp"
+                    android:layout_height="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:background="@drawable/ic_left_arrow" />
+
+                <TextView
+                    style="@style/TextTitleH2SemiBold"
+                    android:text="@string/back" />
+            </LinearLayout>
         </RelativeLayout>
 
     </FrameLayout>
