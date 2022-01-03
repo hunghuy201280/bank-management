@@ -6,5 +6,5 @@ import com.example.bankmanagement.models.application.BaseApplication
 
 interface ApplicationItemClickListener {
     fun onContractClicked(item: String)
-    fun onApplicationCliced(item:BaseApplication)
+    fun onApplicationClicked(item:BaseApplication)
 }

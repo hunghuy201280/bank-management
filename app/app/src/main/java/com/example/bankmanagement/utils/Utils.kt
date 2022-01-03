@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Handler
 import android.provider.OpenableColumns
+import android.text.Html
 import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -103,17 +104,17 @@ class Utils {
         fun showAlertDialog(
             context: Context,
             title: String = "Warning",
-            body: String = "This loan profile will be deleted permanently.\nDo you want to delete?",
+            body: String = "This loan profile will be deleted <b>permanently</b>.<br>Do you want to delete?",
             negativeText: String = "Cancel",
             positiveText: String = "OK",
             onPositiveClick: View.OnClickListener? = null,
             onNegativeClick: View.OnClickListener? = null,
         ) {
             val dialog =
-                MaterialDialog(context).noAutoDismiss().customView(R.layout.app_alert_dialog)
+                MaterialDialog(context).noAutoDismiss().apply { setContentView(R.layout.app_alert_dialog) }
 
             dialog.findViewById<TextView>(R.id.title).text = title
-            dialog.findViewById<TextView>(R.id.body).text = body
+            dialog.findViewById<TextView>(R.id.body).text = Html.fromHtml(body, Html.FROM_HTML_MODE_LEGACY)
             dialog.findViewById<MaterialButton>(R.id.cancelButton).apply {
                 text = negativeText
                 setOnClickListener {

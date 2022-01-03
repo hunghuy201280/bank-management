@@ -36,7 +36,7 @@ class ApplicationFragment : BaseFragment<FragmentApplicationBinding, Application
                 viewModel.onContractNumberClicked(contractNumber = item)
             }
 
-            override fun onApplicationCliced(item: BaseApplication) {
+            override fun onApplicationClicked(item: BaseApplication) {
                 val reviewFrags = ReviewApplicationDialogFragment(item,viewModel::onFindClicked)
                 reviewFrags.show(childFragmentManager, ReviewApplicationDialogFragment.TAG)
             }

@@ -127,6 +127,10 @@ class ReviewContractFragment :
 
     override fun initAction() {
 
+        binding.closeBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
         viewModel.disburseCertificateList.observe(this) {
             disburseAdapter.submitList(it)

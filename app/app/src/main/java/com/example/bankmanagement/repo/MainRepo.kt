@@ -132,6 +132,10 @@ interface MainRepository {
         contractNumber: String? = null,
     ): LoanContract
 
+    suspend fun getLoanProfile(
+        loanProfileId: String? = null
+    ): LoanProfile
+
     suspend fun createLiquidation(
         liquidationApplication: LiquidationApplicationDto
     )
