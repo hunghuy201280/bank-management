@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.review_customer.CustomerInfoViewModel" />
+
+        <variable
+            name="mainVM"
+            type="com.example.bankmanagement.view_models.MainViewModel" />
+
+        <import type="com.example.bankmanagement.models.StaffRole" />
+
+        <import type="com.example.bankmanagement.models.LoanStatus" />
+        <import type="com.example.bankmanagement.models.customer.CustomerType" />
+        <import type="com.example.bankmanagement.models.customer.ResidentCustomer" />
+        <import type="com.example.bankmanagement.models.customer.BusinessCustomer" />
+
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_88sdp"
+            android:background="@color/cornflower_blue"
+            />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <include
+                    layout="@layout/customer_info_text_row"
+                    app:header="@{@string/customer_type}"
+                    app:content="@{viewModel.customer.type.name()}"
+                    />
+                <include
+                    android:visibility="@{viewModel.customer.type == CustomerType.Resident?View.VISIBLE:View.GONE}"
+                    layout="@layout/customer_info_text_row"
+                    app:header="@{@string/date_of_birth}"
+                    app:content="@{viewModel.customer.type == CustomerType.Resident?((ResidentCustomer)viewModel.customer).getDOB():``}"
+                    />
+
+
+                <include
+                    layout="@layout/customer_info_text_row"
+                    app:header="@{@string/address}"
+                    app:content="@{viewModel.customer.address}"
+                    />
+                <include
+                    layout="@layout/customer_info_text_row"
+                    android:visibility="@{viewModel.customer.type == CustomerType.Resident?View.VISIBLE:View.GONE}"
+                    app:content="@{viewModel.customer.type == CustomerType.Resident?((ResidentCustomer)viewModel.customer).permanentResidence:``}"
+                    app:header="@{@string/permanent_residence}" />
+
+
+                <include
+                    layout="@layout/customer_info_text_row"
+                    app:header="@{@string/identity_number}"
+                    app:content="@{viewModel.customer.identityCardCreatedDateFormatted}"
+                    />
+                <include
+                    layout="@layout/customer_info_text_row"
+                    app:header="@{@string/phone_number}"
+                    app:content="@{viewModel.customer.phoneNumber}"
+                    />
+                <include
+                    layout="@layout/customer_info_text_row"
+                    app:header="@{@string/email}"
+                    app:content="@{viewModel.customer.email}"
+                    />
+
+
+                <include
+                    layout="@layout/customer_info_text_row"
+                    android:visibility="@{viewModel.customer.type == CustomerType.Business?View.VISIBLE:View.GONE}"
+                    app:content="@{viewModel.customer.type == CustomerType.Business? ((BusinessCustomer)viewModel.customer).companyRules:``}"
+                    app:header="@{@string/company_rules}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:visibility="@{viewModel.customer.type == CustomerType.Business?View.VISIBLE:View.GONE}"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        android:layout_width="wrap_content"
+                        android:text="@string/business_registration_certificate"
+                        tools:text="Identity card created date"
+                        />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        bindImage="@{viewModel.customer.type == CustomerType.Business? ((BusinessCustomer)viewModel.customer).getCert():``}"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:scaleType="centerCrop"
+                        tools:src="@drawable/ic_contract" />
+                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editButton"
+                    style="@style/DashboardActionButton"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_gravity="center_horizontal"
+
+                    android:text="@string/edit" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

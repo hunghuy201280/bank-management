@@ -148,6 +148,8 @@
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:orientation="vertical"
+                                    tools:visibility="gone"
+
                                     android:visibility="@{viewModel.containChartData ? View.GONE : View.VISIBLE}">
 
                                     <ImageView

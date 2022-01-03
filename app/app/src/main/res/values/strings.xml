@@ -134,5 +134,6 @@
     <string name="past_year">Past year</string>
     <string name="this_year">This year</string>
     <string name="recent_contracts">Recent contracts</string>
+    <string name="edit">Edit</string>
 
 </resources>

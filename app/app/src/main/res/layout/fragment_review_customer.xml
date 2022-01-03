@@ -59,9 +59,9 @@
                             android:text="@string/past_year" />
 
                         <TextView
+                            price="@{viewModel.lastYearLoan}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            price="@{viewModel.lastYearLoan}"
                             tools:text="$ 1200" />
 
                         <TextView
@@ -70,10 +70,10 @@
                             android:text="@string/this_year" />
 
                         <TextView
+                            price="@{viewModel.thisYearLoan}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="$ 1200"
-                            price="@{viewModel.thisYearLoan}"
 
                             />
 
@@ -121,10 +121,12 @@
                 </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
+
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp" />
+
             <LinearLayout
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
@@ -144,8 +146,8 @@
                         style="@style/TextTitleH2Regular"
                         price="@{viewModel.totalLoan}"
                         android:layout_weight="1"
-                        tools:text="1230"
-                        android:gravity="end" />
+                        android:gravity="end"
+                        tools:text="1230" />
 
 
                 </LinearLayout>
@@ -171,10 +173,10 @@
                     <TextView
                         style="@style/TextTitleH2Regular"
                         price="@{viewModel.paid}"
-                        tools:text="1230"
-
                         android:layout_weight="1"
-                        android:gravity="end" />
+
+                        android:gravity="end"
+                        tools:text="1230" />
 
 
                 </LinearLayout>
@@ -200,9 +202,9 @@
                         style="@style/TextTitleH2Regular"
                         price="@{viewModel.unPaid}"
                         android:layout_weight="1"
-                        tools:text="1230"
+                        android:gravity="end"
 
-                        android:gravity="end" />
+                        tools:text="1230" />
 
 
                 </LinearLayout>
@@ -211,10 +213,13 @@
 
         </LinearLayout>
 
-        <View
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/customer_fragment_container"
             android:layout_width="@dimen/_246sdp"
             android:layout_height="match_parent"
-            android:background="@color/cornflower_blue" />
+            android:background="@color/primaryBackground"
+            android:fitsSystemWindows="true" />
 
     </LinearLayout>
 

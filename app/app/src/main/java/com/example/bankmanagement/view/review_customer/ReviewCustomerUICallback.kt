@@ -6,5 +6,6 @@ import com.example.bankmanagement.models.Staff
 interface ReviewCustomerUICallback: BaseUserView {
    fun onBack();
    fun showCreateContractDialogFragment()
-
+   fun onEditCustomerInfo()
+   fun onViewCustomerInfo()
 }

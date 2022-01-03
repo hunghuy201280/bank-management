@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Handler
 import android.provider.OpenableColumns
 import android.util.Log
@@ -28,12 +29,25 @@ import java.util.*
 import kotlin.concurrent.schedule
 import android.text.TextUtils
 import android.util.Patterns
+import androidx.annotation.RequiresApi
+import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 
 class Utils {
 
     companion object {
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun dateFromISOString(isoString: String): Date {
+            val timeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
 
+            val offsetDateTime: OffsetDateTime =
+                OffsetDateTime.parse(isoString, timeFormatter)
+
+            val date = Date.from(Instant.from(offsetDateTime))
+            return date;
+        }
         fun logError(tag:String,e:HttpException){
             Log.d(tag, "Error happened: ${e.response()?.errorBody()?.string()} ")
 

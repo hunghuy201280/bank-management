@@ -7,17 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.adapter.BaseItemClickListener
-import com.example.bankmanagement.databinding.FragmentReviewContractBinding
 import com.example.bankmanagement.databinding.FragmentReviewCustomerBinding
-import com.example.bankmanagement.models.DisburseCertificate
-import com.example.bankmanagement.models.application.BaseDecision
-import com.example.bankmanagement.models.application.extension.ExtensionDecision
-import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
+import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
-import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
+import com.example.bankmanagement.view.review_customer.customer_info.CustomerInfoFragment
+import com.example.bankmanagement.view.review_customer.customer_info.EditCustomerInfoFragment
 import com.example.bankmanagement.view.review_profile.ReviewCustomerUICallback
 import com.example.bankmanagement.view_models.MainViewModel
-import com.example.bankmanagement.view_models.review_contract.ReviewContractViewModel
 import com.example.bankmanagement.view_models.review_customer.ReviewCustomerViewModel
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -38,6 +34,15 @@ class ReviewCustomerFragment :
     override val viewModel: ReviewCustomerViewModel by viewModels()
     val mainVM: MainViewModel by activityViewModels()
 
+    val recentContractsAdapter = RecentLoanContractAdapter(
+        itemClickListener = object : BaseItemClickListener<LoanContract> {
+            override fun onItemClick(adapterPosition: Int, item: LoanContract) {
+                viewModel.reviewLoanContractArgs.value = item
+                findNavController().navigate(R.id.action_reviewCustomerFragment_to_reviewContractFragment)
+
+            }
+        }
+    )
 
     override fun viewModelClass(): Class<ReviewCustomerViewModel> =
         ReviewCustomerViewModel::class.java
@@ -47,18 +52,35 @@ class ReviewCustomerFragment :
         binding.viewModel = viewModel
         binding.mainVM = mainVM
         viewModel.init(this)
+
+        viewModel.customerDetail.observe(this) {
+            recentContractsAdapter.submitList(it.recentContracts)
+        }
     }
 
     override fun initView() {
-
+        binding.recentContractsRV.adapter = recentContractsAdapter
 
         initPieChart()
+        initCustomerInfoFrag()
+    }
+
+    private fun initCustomerInfoFrag() {
+        viewModel.customerDetail.observe(this){
+            val newFragment = CustomerInfoFragment(this,it.customer)
+            val transaction = childFragmentManager.beginTransaction()
+
+            transaction.add(R.id.customer_fragment_container, newFragment)
+            transaction.commit()
+        }
+
+
     }
 
     private fun initPieChart() {
         viewModel.customerDetail.observe(this, {
             val totalPaid = it.statistics.paid.toFloat()
-            val totalUnpaid = it.statistics.unPaid.toFloat();
+            val totalUnpaid = it.statistics.unPaid.toFloat()
             val valueList = mutableListOf(
                 PieEntry(totalPaid, getString(R.string.paid)),
                 PieEntry(totalUnpaid, getString(R.string.unpaid))
@@ -74,6 +96,7 @@ class ReviewCustomerFragment :
             pieDataSet.valueTextColor = Color.TRANSPARENT
             val pieData = PieData(pieDataSet)
             binding.pieChart.data = pieData
+            binding.pieChart.invalidate()
         })
 
 
@@ -98,6 +121,24 @@ class ReviewCustomerFragment :
 
     override fun showCreateContractDialogFragment() {
         CreateContractFragment().show(childFragmentManager, TAG)
+    }
+
+    override fun onEditCustomerInfo() {
+        val newFragment = EditCustomerInfoFragment(this)
+        val transaction = childFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.customer_fragment_container, newFragment)
+        transaction.commit()
+    }
+
+    override fun onViewCustomerInfo() {
+        if (viewModel.customerDetail.value == null) return
+
+        val newFragment = CustomerInfoFragment(this, viewModel.customerDetail.value!!.customer)
+        val transaction = childFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.customer_fragment_container, newFragment)
+        transaction.commit()
     }
 
 

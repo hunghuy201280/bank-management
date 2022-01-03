@@ -28,6 +28,7 @@ import com.example.bankmanagement.models.application.exemption.ExemptionApplicat
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.utils.Utils
+import com.example.bankmanagement.utils.Utils.Companion.dateFromISOString
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -82,16 +83,7 @@ fun setApplicationType(view: TextView, application: BaseApplication,isTitle:Bool
 }
 
 
-@RequiresApi(Build.VERSION_CODES.O)
-fun dateFromISOString(isoString: String): Date {
-    val timeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
 
-    val offsetDateTime: OffsetDateTime =
-        OffsetDateTime.parse(isoString, timeFormatter)
-
-    val date = Date.from(Instant.from(offsetDateTime))
-    return date;
-}
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bindDate")

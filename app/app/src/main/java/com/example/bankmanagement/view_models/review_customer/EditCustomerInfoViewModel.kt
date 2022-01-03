@@ -7,6 +7,7 @@ import androidx.fragment.app.findFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
+import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.models.*
@@ -28,22 +29,22 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
-class ReviewCustomerViewModel
+class EditCustomerInfoViewModel
 @Inject
 constructor(
     private val mainRepo: MainRepository,
     @AppModule.ReviewCustomerArgs val reviewCustomerArgs: ValueWrapper<Customer>,
     @AppModule.ReviewLoanContractArgs val reviewLoanContractArgs: ValueWrapper<LoanContract>,
 
-    ) : BaseUiViewModel<ReviewCustomerUICallback>() {
-    private val TAG: String = "ReviewContractViewModel";
+    ) : BaseUiViewModel<BaseUserView>() {
+    private val TAG: String = "CustomerInfoViewModel";
 
     val customer: MutableLiveData<Customer> = MutableLiveData(reviewCustomerArgs.value)
 
     val customerDetail = MutableLiveData<CustomerDetail>()
 
     init {
-        loadData()
+        //loadData()
     }
 
     private fun loadData() {

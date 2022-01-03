@@ -1,7 +1,12 @@
 package com.example.bankmanagement.models.customer
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.example.bankmanagement.constants.AppConfigs
+import com.example.bankmanagement.utils.Utils.Companion.dateFromISOString
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.text.SimpleDateFormat
 
 
 abstract class Customer(
@@ -17,6 +22,12 @@ abstract class Customer(
     ) : Serializable {
     abstract fun getType(): CustomerType
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getIdentityCardCreatedDateFormatted(): String {
+        val sdf = SimpleDateFormat("dd/MM/yyyy");
+
+        return sdf.format(dateFromISOString(identityCardCreatedDate))
+    }
 }
 
 data class ResidentCustomer(
@@ -41,6 +52,13 @@ data class ResidentCustomer(
 
 ) {
     override fun getType(): CustomerType = CustomerType.Resident
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getDOB(): String {
+        val sdf = SimpleDateFormat("dd/MM/yyyy");
+
+        return sdf.format(dateFromISOString(dateOfBirth))
+    }
 }
 
 data class BusinessCustomer(
@@ -63,6 +81,8 @@ data class BusinessCustomer(
     email = email
 ) {
     override fun getType(): CustomerType = CustomerType.Business
+    fun getCert(): String = "${AppConfigs.baseUrl}images/$businessRegistrationCertificate"
+
 
 }
 
