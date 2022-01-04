@@ -36,19 +36,21 @@ import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 
+
+
 class Utils {
 
     companion object {
-        @RequiresApi(Build.VERSION_CODES.O)
-        fun dateFromISOString(isoString: String): Date {
-            val timeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
-
-            val offsetDateTime: OffsetDateTime =
-                OffsetDateTime.parse(isoString, timeFormatter)
-
-            val date = Date.from(Instant.from(offsetDateTime))
-            return date;
-        }
+//        @RequiresApi(Build.VERSION_CODES.O)
+//        fun dateFromISOString(isoString: String): Date {
+//            val timeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
+//
+//            val offsetDateTime: OffsetDateTime =
+//                OffsetDateTime.parse(isoString, timeFormatter)
+//
+//            val date = Date.from(Instant.from(offsetDateTime))
+//            return date;
+//        }
         fun logError(tag:String,e:HttpException){
             Log.d(tag, "Error happened: ${e.response()?.errorBody()?.string()} ")
 

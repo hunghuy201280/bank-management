@@ -299,8 +299,18 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Path(value = "id", encoded = true) customerId: String,
-    ):CustomerDetailDto
+    ): CustomerDetailDto
 
+
+    @PATCH("customers/{id}")
+    @JvmSuppressWildcards
+    suspend fun updateCustomer(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any?>,
+        @Path(value = "id", encoded = true) customerId: String,
+        )
 
 
 }

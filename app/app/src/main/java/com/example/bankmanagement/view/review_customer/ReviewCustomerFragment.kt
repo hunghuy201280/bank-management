@@ -69,7 +69,9 @@ class ReviewCustomerFragment :
         viewModel.customerDetail.observe(this){
             val newFragment = CustomerInfoFragment(this,it.customer)
             val transaction = childFragmentManager.beginTransaction()
-
+            for (fragment in childFragmentManager.fragments) {
+                transaction.remove(fragment)
+            }
             transaction.add(R.id.customer_fragment_container, newFragment)
             transaction.commit()
         }
@@ -124,7 +126,9 @@ class ReviewCustomerFragment :
     }
 
     override fun onEditCustomerInfo() {
-        val newFragment = EditCustomerInfoFragment(this)
+        if (viewModel.customerDetail.value == null) return
+
+        val newFragment = EditCustomerInfoFragment(this,viewModel.customerDetail.value!!.customer)
         val transaction = childFragmentManager.beginTransaction()
 
         transaction.replace(R.id.customer_fragment_container, newFragment)
@@ -139,6 +143,11 @@ class ReviewCustomerFragment :
 
         transaction.replace(R.id.customer_fragment_container, newFragment)
         transaction.commit()
+    }
+
+    override fun refreshData() {
+        viewModel.loadData()
+
     }
 
 

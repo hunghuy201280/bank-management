@@ -200,6 +200,22 @@ interface MainRepository {
         customerId: String,
     ): CustomerDetail
 
+    suspend fun updateCustomer(
+        id: String,
+        name: String?=null,
+        address: String?=null,
+        identityNumber: String?=null,
+        identityCardCreatedDate: String?=null,
+        phoneNumber: String?=null,
+        email: String?=null,
+        permanentResidence: String?=null,
+        dateOfBirth: String?=null,
+        businessRegistrationCertificate: String?=null,
+        companyRules: String?=null,
+        customerType: CustomerType,
+    )
+
+
     fun getToken(): String
 
 

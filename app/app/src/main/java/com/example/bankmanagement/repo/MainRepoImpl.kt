@@ -471,6 +471,43 @@ constructor(
         return customerDetailDtoMapper.fromDto(result)
     }
 
+    override suspend fun updateCustomer(
+        id: String,
+        name: String?,
+        address: String?,
+        identityNumber: String?,
+        identityCardCreatedDate: String?,
+        phoneNumber: String?,
+        email: String?,
+        permanentResidence: String?,
+        dateOfBirth: String?,
+        businessRegistrationCertificate: String?,
+        companyRules: String?,
+        customerType: CustomerType,
+    ) {
+        assert(
+            if (customerType == CustomerType.Resident)
+                businessRegistrationCertificate == null && companyRules == null
+            else
+                dateOfBirth == null && permanentResidence == null,
+        )
+        apiService.updateCustomer(
+            token = accessToken, customerId = id, body =
+            mapOf(
+                name.let { "name" to it },
+                address.let { "address" to it },
+                identityNumber.let { "identityNumber" to it },
+                identityCardCreatedDate.let { "identityCardCreatedDate" to it },
+                phoneNumber.let { "phoneNumber" to it },
+                email.let { "email" to it },
+                permanentResidence.let { "permanentResidence" to it },
+                dateOfBirth.let { "dateOfBirth" to it },
+                businessRegistrationCertificate.let { "businessRegistrationCertificate" to it },
+                companyRules.let { "companyRules" to it },
+            )
+        )
+    }
+
 
     override fun getToken(): String = accessToken;
 }

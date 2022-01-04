@@ -28,7 +28,7 @@ import com.example.bankmanagement.models.application.exemption.ExemptionApplicat
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
 import com.example.bankmanagement.utils.Utils
-import com.example.bankmanagement.utils.Utils.Companion.dateFromISOString
+import com.example.bankmanagement.utils.toLocalDate
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit
 
 @BindingAdapter("layout_width")
 fun setLayoutWidth(view: View, width: Float) {
-    val layoutParams= view.layoutParams
+    val layoutParams = view.layoutParams
     layoutParams.width = width.toInt()
     view.layoutParams = layoutParams
 }
@@ -61,7 +61,7 @@ fun setLayoutWidth(view: View, width: Float) {
 @BindingAdapter("durationFromTime")
 fun setDurationFromDateTime(view: TextView, time: String?) {
     if (time == null) return;
-    val date = dateFromISOString(time);
+    val date =time.toLocalDate();
     val diff = Date().time - date.time;
     val hms = String.format(
         "%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff),
@@ -71,18 +71,16 @@ fun setDurationFromDateTime(view: TextView, time: String?) {
 
 }
 
-@BindingAdapter("applicationType","isTitle")
-fun setApplicationType(view: TextView, application: BaseApplication,isTitle:Boolean?) {
+@BindingAdapter("applicationType", "isTitle")
+fun setApplicationType(view: TextView, application: BaseApplication, isTitle: Boolean?) {
     view.text = when (application) {
         is ExemptionApplication -> "Exemption"
         is LiquidationApplication -> "Liquidation"
         is ExtensionApplication -> "Extension"
         else -> throw Exception("Unknown class ${application.javaClass}")
     }
-    view.text=view.text.toString()+ if(isTitle == true) " application detail" else "";
+    view.text = view.text.toString() + if (isTitle == true) " application detail" else "";
 }
-
-
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -91,7 +89,7 @@ fun bindDate(textView: TextView, dateParam: String?) {
     val sdf = SimpleDateFormat("EEEE, dd MMMM");
     val d = Date()
 
-    val dayOfTheWeek: String = sdf.format(dateParam?.let { dateFromISOString(it) } ?: d)
+    val dayOfTheWeek: String = sdf.format(dateParam?.toLocalDate() ?: d)
     textView.text = dayOfTheWeek;
 }
 
@@ -101,7 +99,7 @@ fun bindCommonDate(textView: TextView, dateParam: String?) {
     val sdf = SimpleDateFormat("dd/MM/yyyy");
     val d = Date()
 
-    val dayOfTheWeek: String = sdf.format(dateParam?.let { dateFromISOString(it) } ?: d)
+    val dayOfTheWeek: String = sdf.format(dateParam?.toLocalDate() ?: d)
     textView.text = dayOfTheWeek;
 }
 
@@ -175,7 +173,7 @@ fun bindTime(textView: TextView, date: String?) {
     val sdf = SimpleDateFormat("HH:mm");
     val d = Date()
 
-    val dayOfTheWeek: String = sdf.format(date?.let { dateFromISOString(it) } ?: d)
+    val dayOfTheWeek: String = sdf.format(date?.toLocalDate() ?: d)
     textView.text = dayOfTheWeek;
 }
 

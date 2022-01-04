@@ -3,7 +3,7 @@ package com.example.bankmanagement.models.customer
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.bankmanagement.constants.AppConfigs
-import com.example.bankmanagement.utils.Utils.Companion.dateFromISOString
+import com.example.bankmanagement.utils.toLocalDate
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.text.SimpleDateFormat
@@ -26,7 +26,7 @@ abstract class Customer(
     fun getIdentityCardCreatedDateFormatted(): String {
         val sdf = SimpleDateFormat("dd/MM/yyyy");
 
-        return sdf.format(dateFromISOString(identityCardCreatedDate))
+        return sdf.format(identityCardCreatedDate.toLocalDate())
     }
 }
 
@@ -57,7 +57,7 @@ data class ResidentCustomer(
     fun getDOB(): String {
         val sdf = SimpleDateFormat("dd/MM/yyyy");
 
-        return sdf.format(dateFromISOString(dateOfBirth))
+        return sdf.format(dateOfBirth.toLocalDate())
     }
 }
 

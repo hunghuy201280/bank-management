@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.databinding.FragmentEditCustomerInfoBinding
+import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.view.review_profile.ReviewCustomerUICallback
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.review_customer.EditCustomerInfoViewModel
@@ -14,8 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class EditCustomerInfoFragment(
-    private val parent:ReviewCustomerUICallback
-) :
+    private val parent:ReviewCustomerUICallback,
+    private val customer: Customer,
+    ) :
     BaseFragment<FragmentEditCustomerInfoBinding, EditCustomerInfoViewModel>(),
     BaseUserView {
 
@@ -34,13 +36,12 @@ class EditCustomerInfoFragment(
     override fun initViewModel(viewModel: EditCustomerInfoViewModel) {
         binding.viewModel = viewModel
         binding.mainVM = mainVM
-        viewModel.init(this)
-
-        binding.root.setOnClickListener{
+        viewModel.init(parent)
+        viewModel.setInitialData(customer)
+        binding.cancelButton.setOnClickListener{
             parent.onViewCustomerInfo()
         }
-        viewModel.customerDetail.observe(this) {
-        }
+
     }
 
     override fun initView() {

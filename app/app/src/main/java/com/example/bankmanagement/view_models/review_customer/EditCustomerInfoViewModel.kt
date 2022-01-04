@@ -3,28 +3,25 @@ package com.example.bankmanagement.view_models.review_customer
 import android.net.Uri
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.findFragment
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
-import com.example.bankmanagement.di.AppModule
-import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.customer.BusinessCustomer
 import com.example.bankmanagement.models.customer.Customer
-import com.example.bankmanagement.models.customer.CustomerDetail
+import com.example.bankmanagement.models.customer.CustomerType
+import com.example.bankmanagement.models.customer.ResidentCustomer
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
-import com.example.bankmanagement.utils.ValueWrapper
-import com.example.bankmanagement.view.create_contract.CreateContractFragment
-import com.example.bankmanagement.view.create_contract.CreateContractFragmentArgs
-import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
+import com.example.bankmanagement.utils.listener.ValueCallBack
+import com.example.bankmanagement.utils.toLocalDateTime
+import com.example.bankmanagement.utils.toUtcISO
 import com.example.bankmanagement.view.review_profile.ReviewCustomerUICallback
-import com.example.bankmanagement.view.review_profile.ReviewProfileUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.joda.time.DateTime
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -33,65 +30,96 @@ class EditCustomerInfoViewModel
 @Inject
 constructor(
     private val mainRepo: MainRepository,
-    @AppModule.ReviewCustomerArgs val reviewCustomerArgs: ValueWrapper<Customer>,
-    @AppModule.ReviewLoanContractArgs val reviewLoanContractArgs: ValueWrapper<LoanContract>,
 
-    ) : BaseUiViewModel<BaseUserView>() {
+    ) : BaseUiViewModel<ReviewCustomerUICallback>() {
     private val TAG: String = "CustomerInfoViewModel";
 
-    val customer: MutableLiveData<Customer> = MutableLiveData(reviewCustomerArgs.value)
+    val customer = MutableLiveData<Customer>()
 
-    val customerDetail = MutableLiveData<CustomerDetail>()
 
-    init {
-        //loadData()
+    val type = MutableLiveData<CustomerType>()
+    val dateOfBirth = MutableLiveData<DateTime>()
+    val name = MutableLiveData<String>()
+    val phoneNumber = MutableLiveData<String>()
+    val email = MutableLiveData<String>()
+    val identityNumber = MutableLiveData<String>()
+    val identityCreatedDate = MutableLiveData<DateTime>()
+    val address = MutableLiveData<String>()
+    val permanentResidence = MutableLiveData<String>()
+    val companyRules = MutableLiveData<String>()
+    val businessCert = MutableLiveData<Uri>()
+
+    fun setInitialData(customer: Customer) {
+        this.customer.value = customer
+        type.value = customer.getType()
+        if (customer is ResidentCustomer) {
+            dateOfBirth.value = customer.dateOfBirth.toLocalDateTime()
+            permanentResidence.value = customer.permanentResidence
+
+        } else if (customer is BusinessCustomer) {
+
+            companyRules.value = customer.companyRules
+            businessCert.value = Uri.parse(customer.getCert())
+        }
+        name.value = customer.name
+        phoneNumber.value = customer.phoneNumber
+        email.value = customer.email
+        identityNumber.value = customer.identityNumber
+        identityCreatedDate.value =customer.identityCardCreatedDate.toLocalDateTime()
+        address.value = customer.address
     }
 
-    private fun loadData() {
-        showLoading(true)
+    fun pickDob(v: View) {
+        Utils.showDatePicker(v, callback = object : ValueCallBack<DateTime> {
+            override fun onValue(value: DateTime) {
+                dateOfBirth.postValue(value)
+            }
+        })
+    }
+
+    fun pickIdentityCreatedDate(v: View) {
+        Utils.showDatePicker(v, callback = object : ValueCallBack<DateTime> {
+            override fun onValue(value: DateTime) {
+                identityCreatedDate.postValue(value)
+            }
+        })
+    }
+
+    fun onSave(v: View) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = mainRepo.getCustomerDetail(customerId = customer.value!!.id)
-                customerDetail.postValue(result)
-
-            } catch (e: HttpException) {
-                Utils.logError(TAG, e)
-            }
-            finally {
-                withContext(Dispatchers.Main){
-                    showLoading(false)
+                val businessCertImg=businessCert.value?.let {
+                    Utils.uploadFile(v.context, listOf(it),mainRepo)
                 }
+
+                mainRepo.updateCustomer(
+                    id = customer.value!!.id,
+                    customerType = type.value!!,
+                    name=name.value,
+                address=address.value,
+                identityNumber=identityNumber.value,
+                identityCardCreatedDate=identityCreatedDate.value?.toUtcISO(),
+                phoneNumber=phoneNumber.value,
+                email=email.value,
+                permanentResidence=permanentResidence.value,
+                dateOfBirth=dateOfBirth.value?.toUtcISO(),
+                businessRegistrationCertificate= businessCertImg?.firstOrNull(),
+                companyRules=companyRules.value,
+                )
+                withContext(Dispatchers.Main) {
+                    Utils.showCompleteDialog(
+                        v.context,
+                        mainText = "Customer updated",
+                        onDismiss = {
+                            uiCallback?.refreshData()
+                            uiCallback?.onViewCustomerInfo()
+                        })
+                }
+            } catch (e: HttpException) {
+                Log.e(TAG, "Edit customer error: ${e.response()?.errorBody()?.string()}")
+
             }
         }
-    }
-
-    //region transform live data
-    val totalLoan = Transformations.map(customerDetail) {
-        return@map it.statistics.total
-    }
-    val paid = Transformations.map(customerDetail) {
-        return@map it.statistics.paid
-    }
-    val unPaid = Transformations.map(customerDetail) {
-        return@map it.statistics.unPaid
-    }
-
-    val lastYearLoan = Transformations.map(customerDetail) {
-        return@map it.statistics.lastYear
-    }
-    val thisYearLoan = Transformations.map(customerDetail) {
-        return@map it.statistics.thisYear
-    }
-
-
-    //endregion
-
-    fun onDisburseAdded(v: View) {
-
-    }
-
-    fun onPaymentReceiptAdded(v: View) {
-
     }
 
 }

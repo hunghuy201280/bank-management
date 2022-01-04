@@ -70,6 +70,11 @@
                 <include
                     layout="@layout/customer_info_text_row"
                     app:header="@{@string/identity_number}"
+                    app:content="@{viewModel.customer.identityNumber}"
+                    />
+                <include
+                    layout="@layout/customer_info_text_row"
+                    app:header="@{@string/identity_card_created_date}"
                     app:content="@{viewModel.customer.identityCardCreatedDateFormatted}"
                     />
                 <include

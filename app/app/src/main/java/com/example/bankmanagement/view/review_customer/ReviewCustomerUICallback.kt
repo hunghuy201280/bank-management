@@ -8,4 +8,5 @@ interface ReviewCustomerUICallback: BaseUserView {
    fun showCreateContractDialogFragment()
    fun onEditCustomerInfo()
    fun onViewCustomerInfo()
+   fun refreshData()
 }

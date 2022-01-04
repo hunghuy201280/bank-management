@@ -46,7 +46,7 @@ constructor(
         loadData()
     }
 
-    private fun loadData() {
+     fun loadData() {
         showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
