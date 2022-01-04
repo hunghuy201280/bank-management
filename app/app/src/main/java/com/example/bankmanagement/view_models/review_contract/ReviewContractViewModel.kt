@@ -85,4 +85,24 @@ constructor(
 
     }
 
+    fun refreshData(){
+        showLoading(true)
+        viewModelScope.launch (Dispatchers.IO){
+            try{
+                loanContract.postValue(
+                    mainRepo.getContract(contractId = loanContract.value!!.id)
+                )
+            }
+            catch (e:HttpException){
+                Log.e(TAG, "Refresh error: ${e.response()?.errorBody()?.string()}")
+
+            }
+            finally {
+                withContext(Dispatchers.Main){
+                    showLoading(false)
+                }
+            }
+        }
+    }
+
 }

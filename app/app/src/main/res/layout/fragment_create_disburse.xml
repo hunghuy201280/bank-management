@@ -102,7 +102,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addButton"
                 style="@style/PositiveButton"
-                android:onClick="@{() -> viewModel.onAdd()}"
+                android:onClick="@{(v) -> viewModel.onAdd(v)}"
                 android:text="@string/add" />
         </LinearLayout>
 

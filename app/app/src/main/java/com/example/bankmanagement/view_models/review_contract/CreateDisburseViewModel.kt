@@ -1,6 +1,7 @@
 package com.example.bankmanagement.view_models.review_contract
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
@@ -38,7 +39,8 @@ constructor(
         uiCallback?.dismissDialog()
     }
 
-    fun onAdd() {
+    fun onAdd(v: View) {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 mainRepo.createDisburseCertificate(
@@ -46,8 +48,28 @@ constructor(
                     remainingDisburseAmount = remainingDisburseAmount!!,
                     amount = amountString.value!!.toDouble()
                 )
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+
+                    Utils.showCompleteDialog(v.context, "Disburse certificate added!", onDismiss = {
+
+                        uiCallback?.dismissDialog(true)
+
+                    })
+                }
+
+
             } catch (e: HttpException) {
-                Log.e(TAG, "Create disburse certificate error: ${e.response()?.errorBody()?.string()}")
+                Log.e(
+                    TAG,
+                    "Create disburse certificate error: ${e.response()?.errorBody()?.string()}"
+                )
+            } finally {
+                withContext(Dispatchers.Main){
+                    showLoading(false)
+
+                }
+
             }
         }
     }

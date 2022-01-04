@@ -131,7 +131,7 @@ class ReviewContractFragment :
         binding.closeBtn.setOnClickListener {
             findNavController().popBackStack()
         }
-r
+
 
         viewModel.disburseCertificateList.observe(this) {
             disburseAdapter.submitList(it)
@@ -161,6 +161,6 @@ r
     }
 
     override fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double) {
-        CreateDisburseFragment(contractId, maxAmount).show(childFragmentManager, CreateDisburseFragment.TAG)
+        CreateDisburseFragment(contractId, maxAmount, refreshData =viewModel::refreshData).show(childFragmentManager, CreateDisburseFragment.TAG)
     }
 }

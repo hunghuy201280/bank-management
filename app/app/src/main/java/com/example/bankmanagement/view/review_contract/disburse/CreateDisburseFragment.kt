@@ -17,7 +17,11 @@ import kotlin.math.max
 
 
 @AndroidEntryPoint
-class CreateDisburseFragment(private val contractId: String, private val maxAmount: Double): DialogFragment(), CreateDisburseUICallback {
+class CreateDisburseFragment(
+    private val contractId: String,
+    private val maxAmount: Double,
+    private val refreshData:()->Unit,
+): DialogFragment(), CreateDisburseUICallback {
 
     companion object {
         val TAG = "CreateDisburseFragment"
@@ -70,7 +74,10 @@ class CreateDisburseFragment(private val contractId: String, private val maxAmou
         _binding = null
     }
 
-    override fun dismissDialog() {
+    override fun dismissDialog(refresh:Boolean) {
+        if(refresh){
+            refreshData()
+        }
         dismiss()
     }
 
