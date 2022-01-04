@@ -59,7 +59,7 @@ constructor(
         return@map it.getDisburseAmount()
     }
 
-    val unPaid= Transformations.map(loanContract) {
+    val unPaid = Transformations.map(loanContract) {
         return@map it.getUnPaid()
     }
 
@@ -68,15 +68,20 @@ constructor(
     }
 
     val containChartData = Transformations.map(loanContract) {
-        val result=it.disburseCertificates.isNotEmpty() || it.getLiquidationDecisions().isNotEmpty()
+        val result =
+            it.disburseCertificates.isNotEmpty() || it.getLiquidationDecisions().isNotEmpty()
         return@map result
     }
     //endregion
 
-    fun onDisburseAdded(v:View){
-
+    fun onDisburseAdded(v: View) {
+        uiCallback?.showCreateDisburseDialogFragment(
+            loanContract.value!!.id,
+            loanContract.value!!.getRemainingDisburseAmount()
+        )
     }
-    fun onPaymentReceiptAdded(v:View){
+
+    fun onPaymentReceiptAdded(v: View) {
 
     }
 

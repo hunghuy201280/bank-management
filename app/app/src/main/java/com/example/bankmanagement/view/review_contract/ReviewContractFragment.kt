@@ -13,6 +13,7 @@ import com.example.bankmanagement.models.application.BaseDecision
 import com.example.bankmanagement.models.application.extension.ExtensionDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
+import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.review_contract.ReviewContractViewModel
@@ -130,7 +131,7 @@ class ReviewContractFragment :
         binding.closeBtn.setOnClickListener {
             findNavController().popBackStack()
         }
-
+r
 
         viewModel.disburseCertificateList.observe(this) {
             disburseAdapter.submitList(it)
@@ -159,5 +160,7 @@ class ReviewContractFragment :
         CreateContractFragment().show(childFragmentManager, TAG)
     }
 
-
+    override fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double) {
+        CreateDisburseFragment(contractId, maxAmount).show(childFragmentManager, CreateDisburseFragment.TAG)
+    }
 }

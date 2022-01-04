@@ -195,6 +195,16 @@ interface ApiService {
         @Query("contractNumber") contractNumber: String? = null,
     ): LoanContractDto
 
+    @POST("disburse_certificates")
+    @JvmSuppressWildcards
+    suspend fun createDisburseCertificates(
+        @Header(
+            "Authorization"
+        ) token: String,
+        @Body body: Map<String, Any>
+    )
+
+
 
     @POST("liquidation_applications")
     @JvmSuppressWildcards

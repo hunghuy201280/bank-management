@@ -69,6 +69,10 @@ data class LoanContract(
     fun getDisburseAmount():Double{
         return disburseCertificates.sumOf { it.amount }
     }
+
+    fun getRemainingDisburseAmount(): Double {
+        return loanProfile.moneyToLoan - getDisburseAmount()
+    }
 }
 
 data class DisburseCertificate(

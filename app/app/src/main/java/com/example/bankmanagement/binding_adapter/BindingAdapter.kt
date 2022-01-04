@@ -103,18 +103,21 @@ fun bindCommonDate(textView: TextView, dateParam: String?) {
     textView.text = dayOfTheWeek;
 }
 
-@BindingAdapter("price")
-fun setTextPrice(textView: TextView?, price: Double?) {
+@BindingAdapter(requireAll = false, value = ["price", "prefix", "postfix"])
+fun setTextPrice(textView: TextView?, price: Double?, prefix: String?, postfix: String?) {
     if (textView == null) return
     val priceSpannable: SpannableString =
-        getPriceSpannable(price) ?: SpannableString("")
+        getPriceSpannable(price, prefix, postfix) ?: SpannableString("")
+
     textView.text = priceSpannable
 }
 
-fun getPriceSpannable(price: Double?): SpannableString? {
-    var s = "$ "
+fun getPriceSpannable(price: Double?, prefix: String?, postfix: String?): SpannableString? {
+    var s = "$"
     if (price != null) {
         s += NumberFormat.getNumberInstance(Locale.US).format(price)
+        prefix?.let { s = prefix + s }
+        postfix?.let { s+= postfix}
         return SpannableString(s)
     }
     return null
