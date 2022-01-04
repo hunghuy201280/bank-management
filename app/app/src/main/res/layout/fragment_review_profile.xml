@@ -129,11 +129,13 @@
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/default_margin"
-                            android:layout_marginTop="@dimen/_8sdp"
-                            android:orientation="horizontal">
+                            android:background="@color/white"
+                            android:orientation="horizontal"
+                            android:paddingStart="@dimen/default_margin"
+                            android:paddingTop="@dimen/_8sdp"
+                            tools:ignore="RtlSymmetry">
 
                             <TextView
                                 style="@style/TextTitleH2SemiBold"
@@ -398,9 +400,9 @@
                 android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:gravity="center_vertical"
-                android:layout_alignParentBottom="true"
                 android:orientation="horizontal">
 
                 <ImageView

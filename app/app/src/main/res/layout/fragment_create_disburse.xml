@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="maxAmount"
+            type="Double" />
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.review_contract.CreateDisburseViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_96sdp"
+        android:background="@drawable/bg_white_corner_5dp"
+        android:orientation="vertical">
+
+        <TextView
+            prefix="@{@string/new_disburse_certificate + ` (`}"
+            postfix="@{` ` + @string/left + `)`}"
+            price="@{maxAmount}"
+            style="@style/TextTitleH2SemiBold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="@dimen/_3sdp"
+            android:textColor="@color/secondaryText"
+            tools:text="New disburse certificate ($1200 left)" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextTitleH3Regular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/date_created"
+                android:textColor="@color/cornflower_blue" />
+
+            <TextView
+                style="@style/TextTitleH3Regular"
+                bindCommonDate="@{null}"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/secondaryText"
+                tools:text="21/12/2021" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextTitleH3Regular"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/amount"
+                android:textColor="@color/cornflower_blue" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/DashboardEditTextFilter"
+                android:text="@={viewModel.amountString}"
+                android:inputType="numberDecimal"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelButton"
+                style="@style/NegativeButton"
+                android:onClick="@{() -> viewModel.onCancel()}"
+                android:text="@string/cancel" />
+
+            <View
+                android:layout_width="@dimen/default_margin"
+                android:layout_height="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addButton"
+                style="@style/PositiveButton"
+                android:onClick="@{() -> viewModel.onAdd()}"
+                android:text="@string/add" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

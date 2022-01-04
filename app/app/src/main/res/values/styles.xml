@@ -32,6 +32,7 @@
     <style name="TextTitleH3Regular" parent="TextPoppins.Regular.Wrap">
         <item name="android:textSize">@dimen/H3</item>
         <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="TextPoppins.SemiBold.Wrap" parent="TextAppearance.AppCompat">
@@ -134,10 +135,11 @@
         <item name="android:textSize">@dimen/H4</item>
     </style>
 
-    <style name="DashboardEditTextFilter">
+    <style name="DashboardEditTextFilter" parent="TextTitleH3Regular">
         <item name="android:layout_width">@dimen/_130sdp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/_3sdp</item>
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:padding">@dimen/_2sdp</item>
         <item name="android:background">@drawable/text_input_edittext_filter_bg</item>
     </style>
 

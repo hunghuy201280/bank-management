@@ -17,6 +17,7 @@ import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationA
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDetailDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
+import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
@@ -326,6 +327,28 @@ constructor(
         val response =
             apiService.getLoanProfile(token = accessToken, loanProfileId = loanProfileId!!)
         return loanProfileDtoMapper.fromDto(response)
+    }
+
+    override suspend fun createDisburseCertificate(
+        contractId: String,
+        remainingDisburseAmount: Double,
+        amount: Double
+    ) {
+        val body = if (remainingDisburseAmount == amount) {
+            mapOf(
+                "loanContract" to contractId,
+                "isMax" to true
+            )
+        } else {
+            mapOf(
+                "loanContract" to contractId,
+                "amount" to amount
+            )
+        }
+        apiService.createDisburseCertificates(
+            token = accessToken,
+            body = body
+        )
     }
 
     override suspend fun createLiquidation(liquidationApplication: LiquidationApplicationDto) {

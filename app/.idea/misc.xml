@@ -63,18 +63,24 @@
         <entry key="app/src/main/res/drawable/bg_status_pending.xml" value="0.2546875" />
         <entry key="app/src/main/res/drawable/bg_status_reject.xml" value="0.2546875" />
         <entry key="app/src/main/res/drawable/bg_status_rejected.xml" value="0.2546875" />
+        <entry key="app/src/main/res/drawable/text_input_edittext_filter_bg.xml" value="0.2546875" />
         <entry key="app/src/main/res/layout/app_alert_dialog.xml" value="0.75" />
         <entry key="app/src/main/res/layout/create_profile_3_text_view.xml" value="0.7246467225574219" />
         <entry key="app/src/main/res/layout/create_profile_text_row.xml" value="0.22780797101449277" />
+        <entry key="app/src/main/res/layout/dialog_message.xml" value="0.2164855072463768" />
+        <entry key="app/src/main/res/layout/fragment_application.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/fragment_contract.xml" value="0.22418478260869565" />
+        <entry key="app/src/main/res/layout/fragment_create_application.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/fragment_create_contract.xml" value="0.22780797101449277" />
+        <entry key="app/src/main/res/layout/fragment_create_disburse.xml" value="0.4460802587442528" />
         <entry key="app/src/main/res/layout/fragment_create_profile1.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_create_profile3.xml" value="0.5079246369753675" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/fragment_dashboard_header.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.4613960951282416" />
         <entry key="app/src/main/res/layout/fragment_review_application_dialog.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/fragment_review_contract.xml" value="0.347413019995545" />
-        <entry key="app/src/main/res/layout/fragment_review_profile.xml" value="0.2577377602701182" />
+        <entry key="app/src/main/res/layout/fragment_review_profile.xml" value="0.5010940919037199" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/item_loan_contract_decision_header.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/item_loan_contract_decision_item.xml" value="0.2164855072463768" />
@@ -87,7 +93,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
