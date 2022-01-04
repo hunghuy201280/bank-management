@@ -29,7 +29,7 @@ class CustomerFragment : BaseFragment<FragmentCustomerBinding, CustomerViewModel
     private val customerAdapter = CustomerAdapter(
         itemClickListener = object : BaseItemClickListener<Customer> {
             override fun onItemClick(adapterPosition: Int, item: Customer) {
-                viewModel.reviewCustomerArgs.value = item;
+                viewModel.reviewCustomerArgs.value = item
                 findNavController().navigate(R.id.action_dashboardFragment_to_reviewCustomerFragment)
             }
         },
@@ -114,7 +114,10 @@ class CustomerFragment : BaseFragment<FragmentCustomerBinding, CustomerViewModel
     override fun onCreateClicked(type: CustomerType) {
         CreateCustomerFragment(type, refreshData = viewModel::onFindClicked).show(childFragmentManager,
             CreateCustomerFragment.TAG)
+    }
 
+    override fun reloadData() {
+        viewModel.getCustomers()
     }
 
 

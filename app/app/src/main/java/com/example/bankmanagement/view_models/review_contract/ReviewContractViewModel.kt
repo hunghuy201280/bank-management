@@ -68,7 +68,7 @@ constructor(
     }
 
     val containChartData = Transformations.map(loanContract) {
-        val result=it.disburseCertificates.isNotEmpty() && it.getLiquidationDecisions().isNotEmpty()
+        val result=it.disburseCertificates.isNotEmpty() || it.getLiquidationDecisions().isNotEmpty()
         return@map result
     }
     //endregion

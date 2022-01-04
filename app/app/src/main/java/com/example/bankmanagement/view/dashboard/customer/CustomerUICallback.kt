@@ -5,4 +5,5 @@ import com.example.bankmanagement.models.customer.CustomerType
 
 interface CustomerUICallback: BaseUserView {
     fun onCreateClicked(type: CustomerType)
+    fun reloadData()
 }

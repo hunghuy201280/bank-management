@@ -16,6 +16,7 @@ import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.utils.listener.ValueCallBack
+import com.example.bankmanagement.utils.toUtcISO
 import com.example.bankmanagement.view.dashboard.application.ApplicationUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -107,7 +108,7 @@ constructor(
                             contractNumber = contractNumber.value,
                             status = if (status.value == LoanStatus.All) null else status.value,
                             applicationNumber = applicationNumber.value,
-                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                            createdAt = dateCreated.value?.toUtcISO(),
                         )
 
                     }
@@ -116,7 +117,7 @@ constructor(
                             contractNumber = contractNumber.value,
                             status = if (status.value == LoanStatus.All) null else status.value,
                             applicationNumber = applicationNumber.value,
-                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                            createdAt = dateCreated.value?.toUtcISO(),
                         )
                     }
                     ApplicationType.Exemption -> {
@@ -124,7 +125,7 @@ constructor(
                             contractNumber = contractNumber.value,
                             status = if (status.value == LoanStatus.All) null else status.value,
                             applicationNumber = applicationNumber.value,
-                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                            createdAt = dateCreated.value?.toUtcISO(),
                         )
                     }
                     else -> {
@@ -132,7 +133,7 @@ constructor(
                             contractNumber = contractNumber.value,
                             status = if (status.value == LoanStatus.All) null else status.value,
                             applicationNumber = applicationNumber.value,
-                            createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                            createdAt = dateCreated.value?.toUtcISO(),
                         )
                     }
                 }

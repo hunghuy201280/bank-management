@@ -26,6 +26,7 @@ import com.example.bankmanagement.repo.dtos.sign_in.SignInData
 import com.example.bankmanagement.repo.dtos.sign_in.StaffDtoMapper
 import com.example.bankmanagement.repo.dtos.up_files.UpFileResp
 import com.example.bankmanagement.utils.Utils
+import com.example.bankmanagement.utils.toUtcISO
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -451,11 +452,10 @@ constructor(
             mapOf(
                 "customerType" to customerType.value,
                 "name" to name,
-                "dateOfBirth" to dateOfBirth?.toDateTime(DateTimeZone.UTC)?.toString(),
+                "dateOfBirth" to dateOfBirth?.toUtcISO(),
                 "address" to address,
                 "identityNumber" to identityNumber,
-                "identityCardCreatedDate" to identityCardCreatedDate.toDateTime(DateTimeZone.UTC)
-                    ?.toString(),
+                "identityCardCreatedDate" to identityCardCreatedDate.toUtcISO(),
                 "phoneNumber" to phoneNumber,
                 "permanentResidence" to permanentResidence,
                 "businessRegistrationCertificate" to businessRegistrationCertificate,

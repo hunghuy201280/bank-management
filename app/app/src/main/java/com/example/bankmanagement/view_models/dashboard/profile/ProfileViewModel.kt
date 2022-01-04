@@ -13,6 +13,7 @@ import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.utils.listener.ValueCallBack
+import com.example.bankmanagement.utils.toUtcISO
 import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -86,7 +87,7 @@ constructor(
                     customerName = customerName.value,
                     moneyToLoan = moneyToLoan.value,
                     loanType = if (selectedLoanType.value == LoanType.All) null else selectedLoanType.value,
-                    createdAt = dateCreated.value?.toDateTime(DateTimeZone.UTC)?.toString(),
+                    createdAt = dateCreated.value?.toUtcISO(),
                     loanStatus = if (loanStatus.value == LoanStatus.All) null else loanStatus.value,
                 )
                 loanProfiles.postValue(result);
