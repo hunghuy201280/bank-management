@@ -1,5 +1,6 @@
 package com.example.bankmanagement.utils
 
+import android.icu.text.NumberFormat
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import java.util.*
@@ -13,4 +14,8 @@ fun String.toLocalDateTime():DateTime{
 }
 fun String.toLocalDate(): Date {
     return DateTime.parse(this).toDateTime(DateTimeZone.getDefault()).toDate()
+}
+
+fun String.toMoney():String{
+        return NumberFormat.getNumberInstance(Locale.US).format(this)
 }

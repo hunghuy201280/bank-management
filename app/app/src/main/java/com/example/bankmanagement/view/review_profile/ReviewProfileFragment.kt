@@ -1,8 +1,10 @@
 package com.example.bankmanagement.view.review_profile
 
 import android.net.Uri
+import android.os.Build
 import android.view.View
 import android.widget.AdapterView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +20,7 @@ import com.example.bankmanagement.view_models.review_profile.ReviewProfileViewMo
 import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewProfileViewModel>(), ReviewProfileUICallback{
@@ -64,6 +67,7 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun initAction() {
 
         binding.backButton.setOnClickListener {
@@ -88,7 +92,9 @@ class ReviewProfileFragment : BaseFragment<FragmentReviewProfileBinding, ReviewP
 
         //test pdf
         binding.titleTextView.setOnClickListener{
-            LoanProfilePDFGenerator().generatePDF(viewModel.loanProfile.value!!)
+            GlobalScope.launch(Dispatchers.IO){
+                LoanProfilePDFGenerator(mainVM.currentBranch.value!!,context=requireContext()).generatePDF(viewModel.loanProfile.value!!)
+            }
         }
     }
 

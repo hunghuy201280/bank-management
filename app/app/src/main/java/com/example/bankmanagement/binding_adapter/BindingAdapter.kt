@@ -190,7 +190,7 @@ fun bindImage(imageView: ImageView, uri: String?) {
             .load(Uri.parse(uri))
             .centerCrop()
             .placeholder(circularProgressDrawable)
-            .into(imageView);
+            .into(imageView)
 
     }
 

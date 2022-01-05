@@ -4,8 +4,6 @@ import android.app.DatePickerDialog
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
-import android.os.Build
-import android.os.Handler
 import android.provider.OpenableColumns
 import android.text.Html
 import android.util.Log
@@ -23,34 +21,43 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.*
 import org.joda.time.DateTime
 import retrofit2.HttpException
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.schedule
 import android.text.TextUtils
 import android.util.Patterns
-import androidx.annotation.RequiresApi
-import java.time.Instant
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import android.graphics.BitmapFactory
 
-
+import android.graphics.Bitmap
+import android.icu.text.NumberFormat
+import java.io.*
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class Utils {
 
     companion object {
-//        @RequiresApi(Build.VERSION_CODES.O)
-//        fun dateFromISOString(isoString: String): Date {
-//            val timeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
-//
-//            val offsetDateTime: OffsetDateTime =
-//                OffsetDateTime.parse(isoString, timeFormatter)
-//
-//            val date = Date.from(Instant.from(offsetDateTime))
-//            return date;
-//        }
+        fun toddMMYYYY(input:String): String {
+            val sdf = SimpleDateFormat("dd/MM/yyyy");
+
+            return sdf.format(input.toLocalDate())
+        }
+
+        fun getBitmapFromURL(src: String?): Bitmap? {
+
+            return try {
+                val url = URL(src)
+                val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+                connection.setDoInput(true)
+                connection.connect()
+                val input: InputStream = connection.getInputStream()
+                BitmapFactory.decodeStream(input)
+            } catch (e: IOException) {
+                // Log exception
+                null
+            }
+        }
         fun logError(tag:String,e:HttpException){
             Log.d(tag, "Error happened: ${e.response()?.errorBody()?.string()} ")
 

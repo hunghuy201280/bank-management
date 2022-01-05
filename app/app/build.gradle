@@ -142,6 +142,8 @@ dependencies {
     //itext pdf
     implementation "com.itextpdf:itext7-core:7.1.7"
 
+    //ioutils
+    implementation("commons-io:commons-io:2.11.0")
 }
 kapt {
     correctErrorTypes = true
