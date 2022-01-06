@@ -137,5 +137,11 @@
     <string name="new_disburse_certificate">New disburse certificate</string>
     <string name="left">left</string>
     <string name="edit">Edit</string>
+    <string name="statistic">Statistic</string>
+    <string name="deposit">Deposit</string>
+    <string name="add_balance">Add balance</string>
+    <string name="total_disbursement">Total disbursement</string>
+    <string name="total_payment">Total payment</string>
+    <string name="revenue_by_type">Revenue by type</string>
 
 </resources>

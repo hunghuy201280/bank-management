@@ -4,6 +4,7 @@ import com.example.bankmanagement.constants.AppConfigs
 import com.example.bankmanagement.repo.ApiService
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.MainRepositoryImpl
+import com.example.bankmanagement.repo.dtos.admin.RevenueStatisticDtoMapper
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionDecisionDtoMapper
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDtoMapper
@@ -171,6 +172,12 @@ class RepoModule {
         return StaffDtoMapper()
     }
 
+    @Singleton
+    @Provides
+    fun provideRevenueMapper(): RevenueStatisticDtoMapper {
+        return RevenueStatisticDtoMapper()
+    }
+
 
     @Singleton
     @Provides
@@ -199,6 +206,7 @@ class RepoModule {
         liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
         extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
         customerDetailDtoMapper: CustomerDetailDtoMapper,
+        revenueStatisticDtoMapper: RevenueStatisticDtoMapper
     ): MainRepository {
         return MainRepositoryImpl(
             apiService = apiService,
@@ -212,6 +220,7 @@ class RepoModule {
             liquidationApplicationDtoMapper = liquidationApplicationDtoMapper,
             extensionApplicationDtoMapper = extensionApplicationDtoMapper,
             customerDetailDtoMapper = customerDetailDtoMapper,
+            revenueStatisticDtoMapper=revenueStatisticDtoMapper,
         )
     }
 }

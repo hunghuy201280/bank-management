@@ -1,6 +1,7 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.admin.RevenueStatistic
 import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
@@ -11,7 +12,6 @@ import com.example.bankmanagement.models.customer.CustomerType
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
-import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
@@ -64,10 +64,19 @@ interface MainRepository {
         files: List<File>
     ): UpFileResp
 
+    suspend fun sendMail(
+        file: File,
+        contractId: String,
+    )
+
     suspend fun updateLoanStatus(
         status: LoanStatus,
         profileId: String,
     )
+
+    suspend fun getRevenueStatistic(
+        year:Int
+    ):RevenueStatistic
 
     suspend fun getContracts(
         customerPhone: String? = null,
@@ -200,7 +209,7 @@ interface MainRepository {
         companyRules: String? = null,
         email: String? = null,
 
-    )
+        )
 
 
     suspend fun getCustomerDetail(
@@ -209,16 +218,16 @@ interface MainRepository {
 
     suspend fun updateCustomer(
         id: String,
-        name: String?=null,
-        address: String?=null,
-        identityNumber: String?=null,
-        identityCardCreatedDate: String?=null,
-        phoneNumber: String?=null,
-        email: String?=null,
-        permanentResidence: String?=null,
-        dateOfBirth: String?=null,
-        businessRegistrationCertificate: String?=null,
-        companyRules: String?=null,
+        name: String? = null,
+        address: String? = null,
+        identityNumber: String? = null,
+        identityCardCreatedDate: String? = null,
+        phoneNumber: String? = null,
+        email: String? = null,
+        permanentResidence: String? = null,
+        dateOfBirth: String? = null,
+        businessRegistrationCertificate: String? = null,
+        companyRules: String? = null,
         customerType: CustomerType,
     )
 

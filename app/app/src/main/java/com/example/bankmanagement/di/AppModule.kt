@@ -1,10 +1,12 @@
 package com.example.bankmanagement.di
 
+import com.example.bankmanagement.models.BranchInfo
 import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.models.LoanProfile
 import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.utils.ValueWrapper
+import com.example.bankmanagement.utils.helper.LoanContractPDFGenerator
 import com.example.bankmanagement.view.create_contract.CreateContractFragmentArgs
 import dagger.Module
 import dagger.Provides
@@ -40,13 +42,24 @@ class AppModule {
     fun provideCreateContractArgs(): ValueWrapper<CreateContractFragmentArgs?> =
         ValueWrapper(value = null)
 
+
     @Provides
     @Singleton
     @ReviewCustomerArgs
     fun provideReviewCustomerArgs(): ValueWrapper<Customer?> =
         ValueWrapper(value = null)
 
+    @Provides
+    @Singleton
+    fun provideCurrentBranch(): ValueWrapper<BranchInfo?> =
+        ValueWrapper(value = null)
 
+    @Provides
+    @Singleton
+    fun provideLoanContractPdfGenerator(
+        branchInfo: ValueWrapper<BranchInfo?>
+    ): LoanContractPDFGenerator =
+        LoanContractPDFGenerator(branchInfo = branchInfo.value!!)
 
 
     @Qualifier
@@ -68,7 +81,6 @@ class AppModule {
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
     annotation class CreateContractArgs
-
 
 
 }

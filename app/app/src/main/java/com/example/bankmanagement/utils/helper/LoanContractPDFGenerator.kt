@@ -33,11 +33,11 @@ import java.io.FileOutputStream
 import com.itextpdf.layout.element.AreaBreak
 
 
-class LoanContractPDFGenerator(val branchInfo: BranchInfo, val context: Context) :
+class LoanContractPDFGenerator(val branchInfo: BranchInfo) :
     PDFGenerator<LoanContract> {
     val titleStyle = Style().setTextAlignment(TextAlignment.CENTER)
 
-    fun getImage(link: String): Image? {
+    private fun getImage(link: String): Image {
         val bitmap = Utils.getBitmapFromURL(link)
 
         val stream = ByteArrayOutputStream()
@@ -45,12 +45,12 @@ class LoanContractPDFGenerator(val branchInfo: BranchInfo, val context: Context)
         val byteArray: ByteArray = stream.toByteArray()
         bitmap?.recycle()
         val imageData = ImageDataFactory.create(byteArray)
-        return Image(imageData)
+        return Image(imageData).setAutoScale(true)
 
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun generatePDF(input: LoanContract) {
+    override fun generatePDF(input: LoanContract, context: Context) :File{
         val profile=input.loanProfile
         val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             .toString()
@@ -86,6 +86,7 @@ class LoanContractPDFGenerator(val branchInfo: BranchInfo, val context: Context)
 
 
         document.close()
+        return file
     }
 
     private fun generatePolicies(contract: LoanContract, document: Document) {
@@ -163,7 +164,7 @@ class LoanContractPDFGenerator(val branchInfo: BranchInfo, val context: Context)
 
                     })
                 })
-                getImage(contract.getSignatureImage().toString())?.let {
+                getImage(contract.getSignatureImage().toString()).let {
                     this.add(it.setHorizontalAlignment(HorizontalAlignment.CENTER))
 
                 }
@@ -258,23 +259,26 @@ class LoanContractPDFGenerator(val branchInfo: BranchInfo, val context: Context)
         val proofTable = Table(2)
         for (i in IncomeType.values().indices) {
             val currentIncome = IncomeType.values()[i]
-            val item = input.proofOfIncome.find { it.imageType == currentIncome }
-            if (item != null) {
-                getImage(
-                    item.getUrl().toString()
-                )?.setHorizontalAlignment(HorizontalAlignment.CENTER)?.let {
-                    proofTable.addCell(Cell().apply {
-                        add(
-                            Paragraph(
-                                currentIncome.getName() + "\n"
-                            ).apply {
-                                setBold()
-                                setFontSize(15f)
-                            }
-                        )
-                        add(it)
-                    })
+            val item = input.proofOfIncome.filter { it.imageType == currentIncome }
+            if (item.isNotEmpty()) {
+                for(proof in item){
+                    getImage(
+                        proof.getUrl().toString()
+                    ).setHorizontalAlignment(HorizontalAlignment.CENTER)?.let {
+                        proofTable.addCell(Cell().apply {
+                            add(
+                                Paragraph(
+                                    currentIncome.getName() + "\n"
+                                ).apply {
+                                    setBold()
+                                    setFontSize(15f)
+                                }
+                            )
+                            add(it)
+                        })
+                    }
                 }
+
             }
 //            if (i % 4 == 0 || i % 4 == 1) {
 //                proofTable.addCell(Cell().apply {

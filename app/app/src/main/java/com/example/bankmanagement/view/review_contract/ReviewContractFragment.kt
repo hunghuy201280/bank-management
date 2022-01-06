@@ -12,10 +12,11 @@ import com.example.bankmanagement.base.adapter.BaseItemClickListener
 import com.example.bankmanagement.databinding.FragmentReviewContractBinding
 import com.example.bankmanagement.models.DisburseCertificate
 import com.example.bankmanagement.models.application.BaseDecision
-import com.example.bankmanagement.models.application.extension.ExtensionDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
+import com.example.bankmanagement.repo.MainRepository
+import com.example.bankmanagement.repo.MainRepositoryImpl
+import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.helper.LoanContractPDFGenerator
-import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
 import com.example.bankmanagement.view_models.MainViewModel
@@ -28,6 +29,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.FileOutputStream
 
 
 @AndroidEntryPoint
@@ -93,9 +96,9 @@ class ReviewContractFragment :
 
         binding.disburseCertRV.adapter = disburseAdapter
         binding.paymentRV.adapter = receiptAdapter
-        binding.extensionRV.adapter=extensionAdapter
-        binding.exemptionRV.adapter=exemptionAdapter
-        binding.liquidationRV.adapter=liquidationAdapter
+        binding.extensionRV.adapter = extensionAdapter
+        binding.exemptionRV.adapter = exemptionAdapter
+        binding.liquidationRV.adapter = liquidationAdapter
 
         initPieChart()
     }
@@ -131,10 +134,23 @@ class ReviewContractFragment :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun initData() {
 
-        //test pdf
-        binding.titleTextView.setOnClickListener{
-            GlobalScope.launch(Dispatchers.IO){
-                LoanContractPDFGenerator(mainVM.currentBranch.value!!,context=requireContext()).generatePDF(viewModel.loanContract.value!!)
+        binding.titleTextView.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO)
+            {
+                val pdfPath =
+                    LoanContractPDFGenerator(branchInfo = mainVM.currentBranch.value!!).generatePDF(
+                        viewModel.loanContract.value!!,
+                        requireContext()
+                    )
+//                try {
+//                    viewModel.mainRepo.sendMail(
+//                        file = pdfPath,
+//                        contractId = viewModel.loanContract.value!!.id
+//                    )
+//                }
+//                catch(e:HttpException){
+//                    println(e.response()?.errorBody()?.string())
+//                }
             }
         }
     }
@@ -154,13 +170,13 @@ class ReviewContractFragment :
             receiptAdapter.submitList(it)
         }
 
-        viewModel.extensionDecisions.observe(this,{
+        viewModel.extensionDecisions.observe(this, {
             extensionAdapter.submitList(it)
         })
-        viewModel.exemptionDecisions.observe(this,{
+        viewModel.exemptionDecisions.observe(this, {
             exemptionAdapter.submitList(it)
         })
-        viewModel.liquidationDecisions.observe(this,{
+        viewModel.liquidationDecisions.observe(this, {
             liquidationAdapter.submitList(it)
         })
     }
@@ -171,6 +187,9 @@ class ReviewContractFragment :
 
 
     override fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double) {
-        CreateDisburseFragment(contractId, maxAmount, refreshData =viewModel::refreshData).show(childFragmentManager, CreateDisburseFragment.TAG)
+        CreateDisburseFragment(contractId, maxAmount, refreshData = viewModel::refreshData).show(
+            childFragmentManager,
+            CreateDisburseFragment.TAG
+        )
     }
 }

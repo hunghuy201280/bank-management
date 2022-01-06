@@ -30,6 +30,7 @@ import android.graphics.BitmapFactory
 
 import android.graphics.Bitmap
 import android.icu.text.NumberFormat
+import com.example.bankmanagement.utils.Utils.Companion.getFileName
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
@@ -49,9 +50,9 @@ class Utils {
             return try {
                 val url = URL(src)
                 val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-                connection.setDoInput(true)
+                connection.doInput = true
                 connection.connect()
-                val input: InputStream = connection.getInputStream()
+                val input: InputStream = connection.inputStream
                 BitmapFactory.decodeStream(input)
             } catch (e: IOException) {
                 // Log exception
@@ -156,25 +157,29 @@ class Utils {
             dialog.show()
 
         }
+        fun openFileStream(context:Context,path:String):File{
+            val cacheDir = context.cacheDir;
+            val contentResolver = context.contentResolver;
+            val uriPath=Uri.parse(path)
+            val parcelFileDescriptor =
+                contentResolver.openFileDescriptor(uriPath, "r", null)
 
+            val inputStream = FileInputStream(parcelFileDescriptor?.fileDescriptor)
+            val file = File(cacheDir, contentResolver.getFileName(uriPath))
+            val outputStream = FileOutputStream(file)
+            inputStream.copyTo(outputStream)
+            return file
+        }
         suspend fun uploadFile(
             context: Context,
             uris: List<Uri>?,
             mainRepo: MainRepository
         ): List<String> {
             if (uris == null || uris.isEmpty()) return listOf();
-            val cacheDir = context.cacheDir;
-            val contentResolver = context.contentResolver;
+
 
             val files = uris.map {
-                val parcelFileDescriptor =
-                    contentResolver.openFileDescriptor(it, "r", null) ?: return listOf()
-
-                val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-                val file = File(cacheDir, contentResolver.getFileName(it))
-                val outputStream = FileOutputStream(file)
-                inputStream.copyTo(outputStream)
-                file
+                openFileStream(context,it.toString())
             }
             return try {
                 val urls = mainRepo.upFiles(files = files);

@@ -28,7 +28,7 @@ import javax.inject.Inject
 class ReviewContractViewModel
 @Inject
 constructor(
-    private val mainRepo: MainRepository,
+     val mainRepo: MainRepository,
     @AppModule.ReviewLoanContractArgs val reviewLoanContractArgs: ValueWrapper<LoanContract>,
 
     ) : BaseUiViewModel<ReviewContractUICallback>() {

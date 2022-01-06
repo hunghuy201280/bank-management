@@ -30,7 +30,7 @@ class DeviceCodeFragment : BaseFragment<FragmentDeviceCodeBinding, DeviceCodeVie
                 if (UserHelper.branchCode.isNullOrBlank() || UserHelper.branchCode!=it.branchCode) {
                     UserHelper.branchCode = it.branchCode
                 }
-                mainVM.currentBranch.value=it;
+                mainVM.setNewBranch(it)
                 navigateToSignIn()
             }
         })

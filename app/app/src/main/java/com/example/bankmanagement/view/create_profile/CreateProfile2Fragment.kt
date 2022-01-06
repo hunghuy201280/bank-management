@@ -2,6 +2,7 @@ package com.example.bankmanagement.view.create_profile
 
 import android.net.Uri
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -74,7 +75,6 @@ class CreateProfile2Fragment(private val TAG: String = "CreateProfile2Fragment")
         Log.d(TAG, "create adapter 2 ${proofOfIncomeTypeAdapter.count}");
 
         binding.proofOfIncomeTypeDropDown.adapter = proofOfIncomeTypeAdapter
-        // binding.proofOfIncomeTypeDropDown.setText(LoanType.values().first().name,false);
 
         //endregion
     }

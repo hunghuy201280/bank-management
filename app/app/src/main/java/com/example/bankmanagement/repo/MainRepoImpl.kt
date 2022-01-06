@@ -1,6 +1,7 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.admin.RevenueStatistic
 import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
@@ -8,6 +9,7 @@ import com.example.bankmanagement.models.application.liquidation.LiquidationAppl
 import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.models.customer.CustomerDetail
 import com.example.bankmanagement.models.customer.CustomerType
+import com.example.bankmanagement.repo.dtos.admin.RevenueStatisticDtoMapper
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDtoMapper
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
@@ -17,7 +19,6 @@ import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationA
 import com.example.bankmanagement.repo.dtos.branch_info.BranchInfoDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDetailDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
-import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
@@ -33,7 +34,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 import java.io.File
 
 
@@ -51,6 +51,7 @@ constructor(
     private val liquidationApplicationDtoMapper: LiquidationApplicationDtoMapper,
     private val extensionApplicationDtoMapper: ExtensionApplicationDtoMapper,
     private val customerDetailDtoMapper: CustomerDetailDtoMapper,
+    private val revenueStatisticDtoMapper: RevenueStatisticDtoMapper,
 
     ) : MainRepository {
 
@@ -163,6 +164,18 @@ constructor(
         return response;
 
     }
+    override suspend fun sendMail(file: File, contractId: String) {
+        val fileBody: RequestBody =
+            file.asRequestBody(Utils.getMimeType(file.absolutePath)?.toMediaTypeOrNull())
+        val part = MultipartBody.Part.createFormData(
+            "file",
+            file.name,
+            fileBody
+        );
+        apiService.sendMail(token = accessToken, contractId =contractId,file=part)
+    }
+
+
 
     override suspend fun updateLoanStatus(status: LoanStatus, profileId: String) {
         val response = apiService.updateLoanStatus(
@@ -170,6 +183,10 @@ constructor(
             profileId = profileId,
             body = mapOf("status" to status.value)
         )
+    }
+
+    override suspend fun getRevenueStatistic(year: Int): RevenueStatistic {
+        return revenueStatisticDtoMapper.fromDto(apiService.getRevenueStatistic(accessToken,year))
     }
 
     override suspend fun getContracts(
