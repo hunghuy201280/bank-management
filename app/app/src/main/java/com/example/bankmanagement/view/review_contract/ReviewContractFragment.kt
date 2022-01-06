@@ -169,9 +169,6 @@ class ReviewContractFragment :
         findNavController().popBackStack()
     }
 
-    override fun showCreateContractDialogFragment() {
-        CreateContractFragment().show(childFragmentManager, TAG)
-    }
 
     override fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double) {
         CreateDisburseFragment(contractId, maxAmount, refreshData =viewModel::refreshData).show(childFragmentManager, CreateDisburseFragment.TAG)

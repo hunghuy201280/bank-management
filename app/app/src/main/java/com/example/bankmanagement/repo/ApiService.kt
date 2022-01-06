@@ -84,7 +84,7 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Part images: List<MultipartBody.Part>
-    ): UpFileResp;
+    ): UpFileResp
 
 
     @PATCH("loan_profiles/status/{id}")
