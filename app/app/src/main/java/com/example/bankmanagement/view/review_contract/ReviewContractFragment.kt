@@ -1,6 +1,8 @@
 package com.example.bankmanagement.view.review_contract
 
 import android.graphics.Color
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -12,6 +14,7 @@ import com.example.bankmanagement.models.DisburseCertificate
 import com.example.bankmanagement.models.application.BaseDecision
 import com.example.bankmanagement.models.application.extension.ExtensionDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
+import com.example.bankmanagement.utils.helper.LoanContractPDFGenerator
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
@@ -22,6 +25,9 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -122,8 +128,15 @@ class ReviewContractFragment :
         binding.pieChart.setDrawEntryLabels(false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun initData() {
 
+        //test pdf
+        binding.titleTextView.setOnClickListener{
+            GlobalScope.launch(Dispatchers.IO){
+                LoanContractPDFGenerator(mainVM.currentBranch.value!!,context=requireContext()).generatePDF(viewModel.loanContract.value!!)
+            }
+        }
     }
 
     override fun initAction() {
