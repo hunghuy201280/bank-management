@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.example.bankmanagement.BankApplication
 import com.example.bankmanagement.R
 import com.example.bankmanagement.models.LoanStatus
+import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.models.application.ApplicationType
 import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.BaseDecision
@@ -65,7 +66,7 @@ fun setLayoutWidth(view: View, width: Float) {
 @BindingAdapter("durationFromTime")
 fun setDurationFromDateTime(view: TextView, time: String?) {
     if (time == null) return;
-    val date =time.toLocalDate();
+    val date = time.toLocalDate();
     val diff = Date().time - date.time;
     val hms = String.format(
         "%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff),
@@ -85,6 +86,21 @@ fun setApplicationType(view: TextView, application: BaseApplication, isTitle: Bo
     }
     view.text = view.text.toString() + if (isTitle == true) " application detail" else "";
 }
+
+@BindingAdapter("imageLoanType")
+fun setImageLoanType(view: ImageView, loanType: LoanType) {
+    when (loanType) {
+        LoanType.EachTime -> view.setBackgroundResource(R.drawable.ic_loan_type_each_time)
+        LoanType.CreditLine -> view.setBackgroundResource(R.drawable.ic_loan_type_credit_line)
+        LoanType.InvestmentProject -> view.setBackgroundResource(R.drawable.ic_loan_type_investment_project)
+        LoanType.Installment -> view.setBackgroundResource(R.drawable.ic_loan_type_installment)
+        LoanType.StandbyCreditLimit -> view.setBackgroundResource(R.drawable.ic_loan_type_standby_credit_limit)
+        LoanType.CapitalMeeting -> view.setBackgroundResource(R.drawable.ic_loan_type_capital_meeting)
+        LoanType.UnderOverdraftLimit -> view.setBackgroundResource(R.drawable.ic_loan_type_under_overdraft_limit)
+        LoanType.All -> {}
+    }
+}
+
 
 @BindingAdapter("decisionType", "isTitle")
 fun setDecisionType(view: TextView, decision: BaseDecision, isTitle: Boolean?) {
@@ -132,7 +148,7 @@ fun getPriceSpannable(price: Double?, prefix: String?, postfix: String?): Spanna
     if (price != null) {
         s += NumberFormat.getNumberInstance(Locale.US).format(price)
         prefix?.let { s = prefix + s }
-        postfix?.let { s+= postfix}
+        postfix?.let { s += postfix }
         return SpannableString(s)
     }
     return null

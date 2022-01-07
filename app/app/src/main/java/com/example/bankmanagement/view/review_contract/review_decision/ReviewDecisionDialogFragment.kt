@@ -59,7 +59,7 @@ constructor(
     }
 
     private fun initView() {
-        binding.addButton.visibility = if (decision is LiquidationDecision) View.VISIBLE else View.GONE
+
     }
 
     private fun initData() {

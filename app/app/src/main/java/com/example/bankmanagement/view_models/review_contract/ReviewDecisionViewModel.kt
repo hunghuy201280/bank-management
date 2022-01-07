@@ -39,28 +39,4 @@ constructor(
         uiCallback?.onBack()
     }
 
-    fun onAddPayment(v: View) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try{
-                when (decision.value) {
-                    is LiquidationDecision -> {
-                        mainRepo.createPayment(decisionId = (decision.value as LiquidationDecision).id)
-                    }
-                }
-
-                withContext(Dispatchers.Main){
-                    Utils.showCompleteDialog(v.context,"Add successfully", onDismiss = {
-                        uiCallback?.onBack(true)
-                    })
-                }
-            }
-            catch(e: HttpException){
-                Log.d(TAG, "Error happened: ${e.response()?.errorBody()?.string()} ");
-                withContext(Dispatchers.Main){
-                    Utils.showCompleteDialog(v.context,"Error")
-                }
-            }
-        }
-    }
-
 }
