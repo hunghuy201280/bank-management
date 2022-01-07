@@ -7,6 +7,7 @@ import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.utils.helper.LoanContractPDFGenerator
+import com.example.bankmanagement.utils.helper.SocketHelper
 import com.example.bankmanagement.view.create_contract.CreateContractFragmentArgs
 import dagger.Module
 import dagger.Provides
@@ -53,6 +54,10 @@ class AppModule {
     @Singleton
     fun provideCurrentBranch(): ValueWrapper<BranchInfo?> =
         ValueWrapper(value = null)
+
+    @Provides
+    @Singleton
+    fun provideSocketHelper(): SocketHelper=SocketHelper()
 
     @Provides
     @Singleton

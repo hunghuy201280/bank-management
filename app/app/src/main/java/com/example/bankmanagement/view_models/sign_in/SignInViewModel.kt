@@ -9,6 +9,7 @@ import com.example.bankmanagement.di.AppModule
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
 import com.example.bankmanagement.utils.ValueWrapper
+import com.example.bankmanagement.utils.helper.SocketHelper
 import com.example.bankmanagement.view.sign_in.SignInUiCallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +25,7 @@ class SignInViewModel
 constructor(
     private val mainRepo: MainRepository,
     @AppModule.ClockedInOut private val clockInOut:ClockInOutResponse,
-
+    private val socketHelper: SocketHelper,
     ) : BaseUiViewModel<SignInUiCallback>() {
     private val TAG: String = "DeviceCodeViewModel";
 
@@ -36,6 +37,8 @@ constructor(
     fun clockInToggled(){
         isClockInEnabled.value=!isClockInEnabled.value!!;
     }
+
+
 
     fun signIn(branchId:String){
         showLoading(true);
@@ -55,9 +58,9 @@ constructor(
 
                 Log.d(TAG, "Login successfully: $staff \n Token ${mainRepo.getToken()}");
                 withContext(Dispatchers.Main){
-                    showLoading(false);
+                    showLoading(false)
 
-                    uiCallback?.onLoggedIn(staff);
+                    uiCallback?.onLoggedIn(staff)
 
                 }
             }
