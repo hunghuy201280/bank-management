@@ -13,12 +13,6 @@ import com.example.bankmanagement.databinding.FragmentReviewContractBinding
 import com.example.bankmanagement.models.DisburseCertificate
 import com.example.bankmanagement.models.application.BaseDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
-import com.example.bankmanagement.repo.MainRepository
-import com.example.bankmanagement.repo.MainRepositoryImpl
-import com.example.bankmanagement.utils.Utils
-import com.example.bankmanagement.utils.helper.LoanContractPDFGenerator
-import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseFragment
-import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseDialogFragment
 import com.example.bankmanagement.view.review_contract.review_decision.ReviewDecisionDialogFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
@@ -29,11 +23,6 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.FileOutputStream
 
 
 @AndroidEntryPoint
@@ -176,6 +165,10 @@ class ReviewContractFragment :
 
 
     override fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double) {
-        CreateDisburseDialogFragment(contractId, maxAmount, refreshData =viewModel::refreshData).show(childFragmentManager, CreateDisburseDialogFragment.TAG)
+        CreateDisburseDialogFragment(
+            contractId,
+            maxAmount,
+            refreshData = viewModel::refreshData
+        ).show(childFragmentManager, CreateDisburseDialogFragment.TAG)
     }
 }
