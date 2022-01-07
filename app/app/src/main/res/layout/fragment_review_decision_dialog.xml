@@ -140,27 +140,11 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/ic_contract" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+        <com.google.android.material.button.MaterialButton
+            style="@style/NegativeButton"
+            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                style="@style/NegativeButton"
-                android:layout_gravity="center"
-                android:onClick="@{()->viewModel.onBack()}"
-                android:text="@string/back" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/addButton"
-                style="@style/PositiveButton"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/default_margin"
-                android:onClick="@{(v)->viewModel.onAddPayment(v)}"
-                android:text="@string/add" />
-
-        </LinearLayout>
+            android:onClick="@{()->viewModel.onBack()}"
+            android:text="@string/back" />
     </LinearLayout>
 </layout>
