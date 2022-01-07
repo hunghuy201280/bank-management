@@ -18,6 +18,9 @@ import com.example.bankmanagement.repo.MainRepositoryImpl
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.helper.LoanContractPDFGenerator
 import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseFragment
+import com.example.bankmanagement.view.create_contract.CreateContractFragment
+import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseDialogFragment
+import com.example.bankmanagement.view.review_contract.review_decision.ReviewDecisionDialogFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.review_contract.ReviewContractViewModel
@@ -48,12 +51,14 @@ class ReviewContractFragment :
         DisburseAdapter(
             object : BaseItemClickListener<DisburseCertificate> {
                 override fun onItemClick(adapterPosition: Int, item: DisburseCertificate) {
+
                 }
             })
     private val receiptAdapter =
         PaymentReceiptAdapter(
             object : BaseItemClickListener<LiquidationDecision> {
                 override fun onItemClick(adapterPosition: Int, item: LiquidationDecision) {
+
                 }
             })
 
@@ -61,24 +66,27 @@ class ReviewContractFragment :
         DecisionAdapter(
             itemClickListener = object : BaseItemClickListener<BaseDecision> {
                 override fun onItemClick(adapterPosition: Int, item: BaseDecision) {
+                    val reviewFragment = ReviewDecisionDialogFragment(item, viewModel::refreshData)
+                    reviewFragment.show(childFragmentManager, ReviewDecisionDialogFragment.TAG)
                 }
-
             }
         )
     private val exemptionAdapter =
         DecisionAdapter(
             itemClickListener = object : BaseItemClickListener<BaseDecision> {
                 override fun onItemClick(adapterPosition: Int, item: BaseDecision) {
+                    val reviewFragment = ReviewDecisionDialogFragment(item, viewModel::refreshData)
+                    reviewFragment.show(childFragmentManager, ReviewDecisionDialogFragment.TAG)
                 }
-
             }
         )
     private val liquidationAdapter =
         DecisionAdapter(
             itemClickListener = object : BaseItemClickListener<BaseDecision> {
                 override fun onItemClick(adapterPosition: Int, item: BaseDecision) {
+                    val reviewFragment = ReviewDecisionDialogFragment(item, viewModel::refreshData)
+                    reviewFragment.show(childFragmentManager, ReviewDecisionDialogFragment.TAG)
                 }
-
             }
         )
 
@@ -134,25 +142,6 @@ class ReviewContractFragment :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun initData() {
 
-        binding.titleTextView.setOnClickListener {
-            GlobalScope.launch(Dispatchers.IO)
-            {
-                val pdfPath =
-                    LoanContractPDFGenerator(branchInfo = mainVM.currentBranch.value!!).generatePDF(
-                        viewModel.loanContract.value!!,
-                        requireContext()
-                    )
-//                try {
-//                    viewModel.mainRepo.sendMail(
-//                        file = pdfPath,
-//                        contractId = viewModel.loanContract.value!!.id
-//                    )
-//                }
-//                catch(e:HttpException){
-//                    println(e.response()?.errorBody()?.string())
-//                }
-            }
-        }
     }
 
     override fun initAction() {
@@ -187,9 +176,6 @@ class ReviewContractFragment :
 
 
     override fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double) {
-        CreateDisburseFragment(contractId, maxAmount, refreshData = viewModel::refreshData).show(
-            childFragmentManager,
-            CreateDisburseFragment.TAG
-        )
+        CreateDisburseDialogFragment(contractId, maxAmount, refreshData =viewModel::refreshData).show(childFragmentManager, CreateDisburseDialogFragment.TAG)
     }
 }

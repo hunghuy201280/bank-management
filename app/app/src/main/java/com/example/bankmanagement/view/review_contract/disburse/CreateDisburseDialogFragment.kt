@@ -17,7 +17,7 @@ import kotlin.math.max
 
 
 @AndroidEntryPoint
-class CreateDisburseFragment(
+class CreateDisburseDialogFragment(
     private val contractId: String,
     private val maxAmount: Double,
     private val refreshData:()->Unit,

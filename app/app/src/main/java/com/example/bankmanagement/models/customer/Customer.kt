@@ -7,6 +7,8 @@ import com.example.bankmanagement.utils.toLocalDate
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 
 abstract class Customer(
@@ -18,8 +20,10 @@ abstract class Customer(
     open val identityCardCreatedDate: String,
     open val phoneNumber: String,
     open val email: String?,
+) : Serializable {
 
-    ) : Serializable {
+    val point: Int = (0..5000).random()
+
     abstract fun getType(): CustomerType
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -28,6 +32,20 @@ abstract class Customer(
 
         return sdf.format(identityCardCreatedDate.toLocalDate())
     }
+
+    fun getCustomerLevel(): String {
+        if (point >= 2000)
+            return "Gold"
+        else if (point >= 1000)
+            return "Silver"
+        else
+            return "Bronze"
+    }
+
+    fun getCustomerCode(): String {
+        return (id.substring(0,4) + id.substring(id.length - 4, id.length)).uppercase()
+    }
+
 }
 
 data class ResidentCustomer(

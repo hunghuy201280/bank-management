@@ -3,25 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_170sdp"
-    android:layout_height="@dimen/_108sdp"
+    android:layout_height="@dimen/_107sdp"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_white_corner_5dp"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextTitleH2SemiBold"
+        android:textColor="@color/secondaryText"
+        android:layout_marginVertical="@dimen/_4sdp"
         tools:text="Warning" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/cornflower_blue" />
+        android:layout_height="@dimen/divider"
+        android:background="@color/divider" />
 
     <TextView
         android:id="@+id/body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextTitleH3Regular"
+        android:layout_marginVertical="@dimen/_24sdp"
         android:textAlignment="center"
         tools:text="This loan profile will be deleted permanently.\nDo you want to delete?" />
 
@@ -33,24 +36,16 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/cancelButton"
-            style="@style/ButtonDefault"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:layout_gravity="center"
-            android:elevation="0dp"
-            android:text="@string/cancel"
-            android:textSize="@dimen/_8ssp"
-            app:cornerRadius="@dimen/_6sdp" />
+            style="@style/NegativeButton"
+            android:text="@string/cancel"/>
+
+        <View
+            android:layout_width="@dimen/default_margin"
+            android:layout_height="0dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/okButton"
-            style="@style/ButtonDefault"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:layout_gravity="center"
-            android:elevation="0dp"
-            android:text="@string/delete"
-            android:textSize="@dimen/_8ssp"
-            app:cornerRadius="@dimen/_6sdp" />
+            style="@style/PositiveButton"
+            android:text="@string/delete"/>
     </LinearLayout>
 </LinearLayout>

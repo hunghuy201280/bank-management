@@ -4,29 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_116sdp"
     android:layout_height="@dimen/_108sdp"
+    android:background="@drawable/bg_white_corner_5dp"
+    android:layout_gravity="center"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="@dimen/_48sdp"
         android:layout_height="@dimen/_48sdp"
-        android:src="@drawable/ic_contract"
-        />
+        android:layout_marginTop="@dimen/default_margin"
+        android:src="@drawable/image_success" />
+
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
+
     <TextView
         android:id="@+id/completeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Delete successfully!"
-        />
+        style="@style/TextTitleH3Regular"
+        tools:text="Delete successfully!" />
+
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
 </LinearLayout>

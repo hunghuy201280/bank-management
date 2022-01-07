@@ -2,6 +2,7 @@ package com.example.bankmanagement.view.review_customer.customer_info
 
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.transition.TransitionInflater
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.databinding.FragmentEditCustomerInfoBinding
@@ -41,12 +42,11 @@ class EditCustomerInfoFragment(
         binding.cancelButton.setOnClickListener{
             parent.onViewCustomerInfo()
         }
-
     }
 
     override fun initView() {
-
-
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
     }
 
 

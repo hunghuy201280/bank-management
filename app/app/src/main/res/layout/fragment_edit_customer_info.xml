@@ -26,12 +26,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/bg_primary_background_left_corner_30sdp"
+        android:orientation="vertical"
+        tools:layout_width="@dimen/_245sdp">
 
         <TextView
             style="@style/TextTitleH2SemiBold"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
             android:text="@{`Edit customer(`+viewModel.type.name+`)`}"
             android:textColor="@color/secondaryText"
             tools:text="Edit customer (Resident)" />
@@ -39,12 +41,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -52,16 +56,20 @@
                     android:text="@string/name" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/DashboardEditTextFilter"
+                    style="@style/CustomerEditText"
                     android:text="@={viewModel.name}"
 
                     />
             </LinearLayout>
 
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -69,7 +77,7 @@
                     android:text="@string/phone_number" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/DashboardEditTextFilter"
+                    style="@style/CustomerEditText"
                     android:text="@={viewModel.phoneNumber}"
 
                     />
@@ -79,12 +87,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
 
@@ -94,14 +105,18 @@
                     android:text="@string/identity_number" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/DashboardEditTextFilter"
+                    style="@style/CustomerEditText"
                     android:text="@={viewModel.identityNumber}" />
             </LinearLayout>
 
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -109,7 +124,7 @@
                     android:text="@string/identity_card_created_date" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/DashboardEditTextFilter"
+                    style="@style/CustomerEditText"
                     bindDateTime="@{viewModel.identityCreatedDate}"
                     android:focusable="false"
                     android:onClick="@{(v)->viewModel.pickIdentityCreatedDate(v)}" />
@@ -119,12 +134,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -132,16 +150,20 @@
                     android:text="@string/email_optional" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/DashboardEditTextFilter"
+                    style="@style/CustomerEditText"
                     android:text="@={viewModel.email}"
 
                     />
             </LinearLayout>
 
+            <Space
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:visibility="@{viewModel.type==CustomerType.Resident?View.VISIBLE:View.INVISIBLE}"
                 tools:visibility="invisible">
@@ -151,18 +173,20 @@
                     android:text="@string/date_of_birth" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="@style/DashboardEditTextFilter"
+                    style="@style/CustomerEditText"
                     bindDateTime="@{viewModel.dateOfBirth}"
                     android:focusable="false"
                     android:onClick="@{(v)->viewModel.pickDob(v)}" />
             </LinearLayout>
 
 
-
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:orientation="vertical">
 
             <TextView
@@ -171,7 +195,7 @@
                 android:text="@string/address" />
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/DashboardEditTextFilter"
+                style="@style/CustomerEditText"
                 android:layout_width="match_parent"
                 android:text="@={viewModel.address}"
 
@@ -182,12 +206,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:orientation="vertical"
             android:visibility="@{viewModel.type==CustomerType.Resident?View.VISIBLE:View.GONE}"
             tools:visibility="visible">
 
             <TextView
-
                 style="@style/DashboardTextContentNormal"
                 android:text="@string/permanent_residence" />
 
@@ -200,8 +225,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:orientation="vertical"
-
             android:visibility="@{viewModel.type==CustomerType.Business?View.VISIBLE:View.GONE}">
 
             <TextView
@@ -210,7 +236,7 @@
                 android:text="@string/company_rules" />
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/DashboardEditTextFilter"
+                style="@style/CustomerEditText"
                 android:layout_width="match_parent"
                 android:text="@={viewModel.companyRules}" />
         </LinearLayout>
@@ -223,29 +249,40 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp">
 
                 <TextView
-
                     style="@style/DashboardTextContentNormal"
                     android:text="@string/business_registration_certificate" />
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/pickBusinessCert"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/upload"
-                    android:textColor="@color/cornflower_blue"
-                    android:visibility="@{viewModel.businessCert==null?View.VISIBLE:View.GONE}" />
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.businessCert==null?View.VISIBLE:View.GONE}">
+
+                    <TextView
+                        style="@style/DashboardTextContentNormal"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:text="@string/upload"
+                        android:textColor="@color/blue_link" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:src="@drawable/ic_upload" />
+
+                </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="@dimen/_134sdp"
-                android:layout_gravity="center"
                 android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
                 android:visibility="@{viewModel.businessCert!=null?View.VISIBLE:View.GONE}">
 
                 <ImageView
@@ -258,10 +295,16 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton

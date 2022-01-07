@@ -110,7 +110,6 @@ constructor(
                             applicationNumber = applicationNumber.value,
                             createdAt = dateCreated.value?.toUtcISO(),
                         )
-
                     }
                     ApplicationType.Liquidation -> {
                         result = mainRepo.getLiquidationApplications(

@@ -42,7 +42,7 @@
                 <com.google.android.material.card.MaterialCardView
                     style="@style/DashboardCardViewBackground"
                     android:layout_width="@dimen/_92sdp"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_height="@dimen/_89sdp"
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginVertical="@dimen/default_margin"
                     card_view:cardCornerRadius="@dimen/_3sdp"
@@ -51,31 +51,37 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/past_year" />
+                            style="@style/TextTitleH2Regular"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:text="@string/past_year"
+                            android:textColor="@color/secondaryText" />
 
                         <TextView
+                            style="@style/TextTitleH2SemiBold"
                             price="@{viewModel.lastYearLoan}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:textColor="@color/secondaryText"
+                            android:textSize="@dimen/H0"
                             tools:text="$ 1200" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/this_year" />
+                            style="@style/TextTitleH2Regular"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:text="@string/this_year"
+                            android:textColor="@color/secondaryText" />
 
                         <TextView
+                            style="@style/TextTitleH2SemiBold"
                             price="@{viewModel.thisYearLoan}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="$ 1200"
-
-                            />
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:textColor="@color/secondaryText"
+                            android:textSize="@dimen/H0"
+                            tools:text="$ 1200" />
 
 
                     </LinearLayout>
@@ -84,6 +90,7 @@
                 <com.google.android.material.card.MaterialCardView
                     style="@style/DashboardCardViewBackground"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_89sdp"
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginVertical="@dimen/default_margin"
                     card_view:cardCornerRadius="@dimen/_3sdp"
@@ -122,90 +129,128 @@
 
             </LinearLayout>
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pieChart"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp" />
-
             <LinearLayout
-                android:layout_width="@dimen/_100sdp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/_133sdp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <TextView
-                        style="@style/TextTitleH2Regular"
-                        android:text="@string/total"
-                        android:textColor="@color/cornflower_blue" />
+                        style="@style/TextTitleH2SemiBold"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:textColor="@color/secondaryText"
+                        android:layout_gravity="start"
+                        android:text="@string/chart" />
 
-                    <TextView
-                        style="@style/TextTitleH2Regular"
-                        price="@{viewModel.totalLoan}"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        tools:text="1230" />
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pieChart"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp" />
 
+                    <LinearLayout
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextTitleH2Regular"
+                                android:text="@string/total"
+                                android:textColor="@color/cornflower_blue" />
+
+                            <TextView
+                                style="@style/TextTitleH2Regular"
+                                price="@{viewModel.totalLoan}"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                tools:text="1230" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/_4sdp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/_6sdp"
+                                android:layout_height="@dimen/_6sdp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:background="@drawable/bg_chart_legend_paid" />
+
+                            <TextView
+                                style="@style/TextTitleH2Regular"
+                                android:text="@string/paid"
+                                android:textColor="@color/cornflower_blue" />
+
+                            <TextView
+                                style="@style/TextTitleH2Regular"
+                                price="@{viewModel.paid}"
+                                android:layout_weight="1"
+
+                                android:gravity="end"
+                                tools:text="1230" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/_6sdp"
+                                android:layout_height="@dimen/_6sdp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:background="@drawable/bg_chart_legend_unpaid" />
+
+                            <TextView
+                                style="@style/TextTitleH2Regular"
+                                android:text="@string/unpaid"
+                                android:textColor="@color/cornflower_blue" />
+
+                            <TextView
+                                style="@style/TextTitleH2Regular"
+                                price="@{viewModel.unPaid}"
+                                android:layout_weight="1"
+                                android:gravity="end"
+
+                                tools:text="1230" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/_4sdp"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="@dimen/_6sdp"
-                        android:layout_height="@dimen/_6sdp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="@dimen/_4sdp"
-                        android:background="@drawable/bg_chart_legend_paid" />
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
 
                     <TextView
-                        style="@style/TextTitleH2Regular"
-                        android:text="@string/paid"
-                        android:textColor="@color/cornflower_blue" />
-
-                    <TextView
-                        style="@style/TextTitleH2Regular"
-                        price="@{viewModel.paid}"
-                        android:layout_weight="1"
-
-                        android:gravity="end"
-                        tools:text="1230" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="@dimen/_6sdp"
-                        android:layout_height="@dimen/_6sdp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="@dimen/_4sdp"
-                        android:background="@drawable/bg_chart_legend_unpaid" />
-
-                    <TextView
-                        style="@style/TextTitleH2Regular"
-                        android:text="@string/unpaid"
-                        android:textColor="@color/cornflower_blue" />
-
-                    <TextView
-                        style="@style/TextTitleH2Regular"
-                        price="@{viewModel.unPaid}"
-                        android:layout_weight="1"
-                        android:gravity="end"
-
-                        tools:text="1230" />
-
+                        style="@style/TextTitleH2SemiBold"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:textColor="@color/secondaryText"
+                        android:layout_gravity="start"
+                        android:text="@string/recent_service_used" />
 
                 </LinearLayout>
 
@@ -216,10 +261,9 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/customer_fragment_container"
-            android:layout_width="@dimen/_246sdp"
+            android:layout_width="@dimen/_245sdp"
             android:layout_height="match_parent"
-            android:background="@color/primaryBackground"
-            android:fitsSystemWindows="true" />
+            android:background="@drawable/bg_primary_background_left_corner_30sdp" />
 
     </LinearLayout>
 

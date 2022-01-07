@@ -24,9 +24,13 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.application.ApplicationType
 import com.example.bankmanagement.models.application.BaseApplication
+import com.example.bankmanagement.models.application.BaseDecision
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
+import com.example.bankmanagement.models.application.exemption.ExemptionDecision
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
+import com.example.bankmanagement.models.application.extension.ExtensionDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationApplication
+import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.toLocalDate
 import org.joda.time.DateTime
@@ -80,6 +84,17 @@ fun setApplicationType(view: TextView, application: BaseApplication, isTitle: Bo
         else -> throw Exception("Unknown class ${application.javaClass}")
     }
     view.text = view.text.toString() + if (isTitle == true) " application detail" else "";
+}
+
+@BindingAdapter("decisionType", "isTitle")
+fun setDecisionType(view: TextView, decision: BaseDecision, isTitle: Boolean?) {
+    view.text = when (decision) {
+        is ExemptionDecision -> "Exemption"
+        is LiquidationDecision -> "Liquidation"
+        is ExtensionDecision -> "Extension"
+        else -> throw Exception("Unknown class ${decision.javaClass}")
+    }
+    view.text = view.text.toString() + if (isTitle == true) " decision detail" else "";
 }
 
 

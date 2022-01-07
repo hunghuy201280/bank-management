@@ -38,21 +38,21 @@ constructor(
 
     //region transform live data
     val disburseCertificateList = Transformations.map(loanContract) {
-        return@map it.disburseCertificates
+        return@map it.disburseCertificates.reversed()
     }
 
     val extensionDecisions = Transformations.map(loanContract) {
-        return@map it.getExtensionDecisions()
+        return@map it.getExtensionDecisions().reversed()
     }
     val exemptionDecisions = Transformations.map(loanContract) {
-        return@map it.getExemptionDecisions()
+        return@map it.getExemptionDecisions().reversed()
     }
     val liquidationDecisions = Transformations.map(loanContract) {
-        return@map it.getLiquidationDecisions()
+        return@map it.getLiquidationDecisions().reversed()
     }
 
     val liquidationApplicationList = Transformations.map(loanContract) {
-        return@map it.getLiquidationDecisions()
+        return@map it.getLiquidationDecisions().reversed()
     }
 
     val totalDisburse = Transformations.map(loanContract) {

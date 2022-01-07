@@ -12,6 +12,8 @@ import com.example.bankmanagement.models.customer.CustomerType
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
+import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
+import com.example.bankmanagement.repo.dtos.loan_contract.PaymentReceiptDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.sign_in.ClockInOutResponse
@@ -154,6 +156,10 @@ interface MainRepository {
 
     suspend fun createLiquidation(
         liquidationApplication: LiquidationApplicationDto
+    )
+
+    suspend fun createPayment(
+        decisionId: String
     )
 
     suspend fun createExemption(

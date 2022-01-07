@@ -25,7 +25,7 @@
 
         <TextView
             style="@style/TextTitleH3Regular"
-            android:layout_width="@dimen/_60sdp"
+            android:layout_width="@dimen/_70sdp"
             android:text="@{header}"
             tools:text="@string/customer_name"
             android:textColor="@color/cornflower_blue" />

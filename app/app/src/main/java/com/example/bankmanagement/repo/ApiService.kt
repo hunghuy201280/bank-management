@@ -227,6 +227,15 @@ interface ApiService {
         @Body body: Map<String, Any>,
     )
 
+    @POST("payment_receipts")
+    @JvmSuppressWildcards
+    suspend fun createPayment(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Body body: Map<String, Any>,
+    )
+
     @POST("exemption_applications")
     @JvmSuppressWildcards
     suspend fun createExemptionApp(
