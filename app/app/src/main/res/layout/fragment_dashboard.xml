@@ -46,6 +46,7 @@
                     app:tabBackground="?attr/selectableItemBackground"
                     app:tabGravity="start"
                     app:tabInlineLabel="true"
+                    app:tabIndicatorColor="@color/cornflower_blue"
                     app:tabUnboundedRipple="false" />
 
 

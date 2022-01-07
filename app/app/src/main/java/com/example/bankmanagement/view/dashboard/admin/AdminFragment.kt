@@ -5,8 +5,16 @@ import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.databinding.FragmentAdminBinding
 import com.example.bankmanagement.view_models.dashboard.admin.AdminViewModel
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), BaseUserView {
@@ -38,6 +46,7 @@ class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), Base
     }
 
     override fun initView() {
+        initLineChart()
 //
 //        //region Loan type dropdown
 //        val loanTypes = LoanType.getFilterValues()
@@ -56,11 +65,43 @@ class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), Base
 //        //endregion
     }
 
+    fun initLineChart() {
+        val xAxisValues: List<String> = ArrayList(
+            Arrays.asList(
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+            )
+        )
+        binding.lineChart.xAxis.let {
+            it.valueFormatter = IndexAxisValueFormatter(xAxisValues)
+            it.position = XAxis.XAxisPosition.BOTTOM
+        }
+        binding.lineChart.xAxis.setDrawAxisLine(false)
+        binding.lineChart.xAxis.setDrawGridLines(false)
+//        binding.lineChart.axisRight.setGridDashedLine(DashPathEffect(floatArrayOf(1f, 1f), 0f))
+        binding.lineChart.axisRight.isEnabled = false
+        binding.lineChart.legend.isEnabled = false
+        binding.lineChart.description.isEnabled = false
+    }
+
     override fun initData() {
-        binding.revenueByTypeRV.adapter=revenueByTypeAdapter
+        binding.revenueByTypeRV.adapter = revenueByTypeAdapter
     }
 
     override fun initAction() {
+        viewModel.revenueStatistic.observe(this) {
+            initDataLineChart(it.revenueByMonth)
+        }
 //        binding.loanTypeDropDown.onItemSelectedListener =
 //            object : AdapterView.OnItemSelectedListener {
 //                override fun onItemSelected(
@@ -99,5 +140,31 @@ class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), Base
 
     }
 
+    private fun initDataLineChart(listValue: Map<String, Double>) {
+        val yValues = arrayListOf<Entry>()
+        listValue.values.forEachIndexed { index, value ->
+            yValues.add(Entry((index + 1).toFloat(), value.toFloat()))
+        }
+        val lineDataSet = LineDataSet(yValues, "Data Set 1")
+        lineDataSet.lineWidth = 2f
+        //Line and highlight color
+        lineDataSet.setCircleColor(R.color.cornflower_blue_chart_primary)
+        lineDataSet.color = R.color.cornflower_blue_chart_primary
 
+        //Fill color
+        lineDataSet.setDrawFilled(true)
+        lineDataSet.fillColor = R.color.cornflower_blue_chart_secondary
+
+        //Disable value in line
+        lineDataSet.setDrawValues(false)
+
+        //Set draw line curve
+        lineDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
+
+        val dataSet = arrayListOf<ILineDataSet>()
+        dataSet.add(lineDataSet)
+        val lineData = LineData(dataSet)
+        binding.lineChart.data = lineData
+        binding.lineChart.invalidate()
+    }
 }

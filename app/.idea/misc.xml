@@ -10,7 +10,6 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/bg_spinner_item_border.xml" value="0.3123076923076923" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/circle_active_background.xml" value="0.3875" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/circle_unactive_background.xml" value="0.3875" />
-        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/custom_tab_item.xml" value="0.5578125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/drawable/ic_arrow_down.xml" value="0.3123076923076923" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/activity_device_code.xml" value="0.29791666666666666" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
@@ -23,7 +22,6 @@
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/create_loan_step_count.xml" value="0.37135416666666665" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/create_profile_3_text_view.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/create_profile_text_row.xml" value="0.55703125" />
-        <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/custom_tab_item.xml" value="0.53359375" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/customer_info_text_row.xml" value="0.55703125" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/dialog_loading.xml" value="0.30104166666666665" />
         <entry key="..\:/Users/Huy/Documents/OOAD/bank-management/app/app/src/main/res/layout/dialog_message.xml" value="0.18541666666666667" />
@@ -101,8 +99,9 @@
         <entry key="app/src/main/res/layout/create_loan_text_row.xml" value="0.1203125" />
         <entry key="app/src/main/res/layout/create_profile_3_text_view.xml" value="0.7246467225574219" />
         <entry key="app/src/main/res/layout/create_profile_text_row.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/custom_tab_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/customer_info_text_row.xml" value="0.5801186943620178" />
-        <entry key="app/src/main/res/layout/fragment_admin.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_admin.xml" value="0.20972784435417932" />
         <entry key="app/src/main/res/layout/fragment_application.xml" value="0.21240942028985507" />
         <entry key="app/src/main/res/layout/fragment_contract.xml" value="0.46169354838709675" />
         <entry key="app/src/main/res/layout/fragment_create_application.xml" value="0.335" />

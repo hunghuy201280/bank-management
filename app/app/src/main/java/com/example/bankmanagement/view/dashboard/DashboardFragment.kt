@@ -21,9 +21,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
 
     private val tabSettings = arrayListOf<Map<String, Any>>(
         mapOf("name" to "Contract", "icon" to R.drawable.ic_contract),
-        mapOf("name" to "Profile", "icon" to R.drawable.ic_contract),
-        mapOf("name" to "Application", "icon" to R.drawable.ic_contract),
-        mapOf("name" to "Customer", "icon" to R.drawable.ic_contract),
+        mapOf("name" to "Profile", "icon" to R.drawable.ic_profile),
+        mapOf("name" to "Application", "icon" to R.drawable.ic_application),
+        mapOf("name" to "Customer", "icon" to R.drawable.ic_customer),
     )
 
 
@@ -62,7 +62,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
                 val view=tab.customView
                 val textView=view!!.findViewById<TextView>(R.id.titleTextView)
                 textView.apply {
-                    setTextColor(ContextCompat.getColor(context,R.color.cornflower_blue))
+                    setTextColor(ContextCompat.getColor(context,R.color.primaryText))
                     Utils.setTextViewDrawableColor(this,R.color.cornflower_blue)
                 }
 
@@ -73,8 +73,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
                 val view=tab.customView
                 val textView=view!!.findViewById<TextView>(R.id.titleTextView)
                 textView.apply {
-                    setTextColor(ContextCompat.getColor(context,R.color.black))
-                    Utils.setTextViewDrawableColor(this,R.color.black)
+                    setTextColor(ContextCompat.getColor(context,R.color.disableText))
+                    Utils.setTextViewDrawableColor(this,R.color.disableText)
                 }
             }
 
@@ -92,11 +92,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
 
                 //set initial style
                 if(position==0){
-                    setTextColor(ContextCompat.getColor(context,R.color.cornflower_blue))
+                    setTextColor(ContextCompat.getColor(context,R.color.primaryText))
                     Utils.setTextViewDrawableColor(this,R.color.cornflower_blue)
                 }else{
-                    setTextColor(ContextCompat.getColor(context,R.color.black))
-                    Utils.setTextViewDrawableColor(this,R.color.black)
+                    setTextColor(ContextCompat.getColor(context,R.color.disableText))
+                    Utils.setTextViewDrawableColor(this,R.color.disableText)
                 }
             }
             tab.customView = tabView
