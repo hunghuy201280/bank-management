@@ -44,7 +44,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
         val dashboardViewPagerAdapter = DashboardViewPagerAdapter(this)
         binding.pager.adapter = dashboardViewPagerAdapter
         VerticalTabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-            if(position<tabSettings.size-1){
+            if(position<tabSettings.size){
 
                     tab.text = tabSettings[position]["name"] as String
                     tab.setIcon(tabSettings[position]["icon"] as Int)
