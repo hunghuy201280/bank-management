@@ -18,8 +18,11 @@
         <import type="com.example.bankmanagement.models.StaffRole" />
 
         <import type="com.example.bankmanagement.models.LoanStatus" />
+
         <import type="com.example.bankmanagement.models.customer.CustomerType" />
+
         <import type="com.example.bankmanagement.models.customer.ResidentCustomer" />
+
         <import type="com.example.bankmanagement.models.customer.BusinessCustomer" />
 
 
@@ -30,36 +33,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <View
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_88sdp"
-            android:background="@color/cornflower_blue"
-            />
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="@dimen/_149sdp"
+                android:layout_height="@dimen/_68sdp"
+                android:background="@drawable/image_customer_card"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextTitleH2Medium"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="@{viewModel.customer.name}"
+                    android:textColor="@color/white"
+                    tools:text="Truong Hung Huy" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/point"
+                        style="@style/TextTitleH2SemiBold"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:text="@{String.valueOf(viewModel.customer.point)}"
+                        android:textColor="@color/white"
+                        tools:text="908" />
+
+                    <TextView
+                        style="@style/TextTitleH2Medium"
+                        android:text="@{` - ` + viewModel.customer.getCustomerLevel()}"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_123sdp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:background="@drawable/bg_white_corner_2dp">
+
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/TextTitleH2Medium"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/H4"
+                    android:text="@{viewModel.customer.getCustomerCode()}"
+                    tools:text="MH123456" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/_169sdp"
+            android:layout_marginHorizontal="@dimen/_8sdp">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <include
                     layout="@layout/customer_info_text_row"
-                    app:header="@{@string/customer_type}"
                     app:content="@{viewModel.customer.type.name()}"
-                    />
+                    app:header="@{@string/customer_type}" />
+
                 <include
+                    layout="@layout/customer_info_text_row"
                     android:visibility="@{viewModel.customer.type == CustomerType.Resident?View.VISIBLE:View.GONE}"
-                    layout="@layout/customer_info_text_row"
-                    app:header="@{@string/date_of_birth}"
                     app:content="@{viewModel.customer.type == CustomerType.Resident?((ResidentCustomer)viewModel.customer).getDOB():``}"
-                    />
+                    app:header="@{@string/date_of_birth}" />
 
 
                 <include
                     layout="@layout/customer_info_text_row"
-                    app:header="@{@string/address}"
                     app:content="@{viewModel.customer.address}"
-                    />
+                    app:header="@{@string/address}" />
+
                 <include
                     layout="@layout/customer_info_text_row"
                     android:visibility="@{viewModel.customer.type == CustomerType.Resident?View.VISIBLE:View.GONE}"
@@ -69,24 +133,23 @@
 
                 <include
                     layout="@layout/customer_info_text_row"
-                    app:header="@{@string/identity_number}"
                     app:content="@{viewModel.customer.identityNumber}"
-                    />
+                    app:header="@{@string/identity_number}" />
+
                 <include
                     layout="@layout/customer_info_text_row"
-                    app:header="@{@string/identity_card_created_date}"
                     app:content="@{viewModel.customer.identityCardCreatedDateFormatted}"
-                    />
+                    app:header="@{@string/identity_card_created_date}" />
+
                 <include
                     layout="@layout/customer_info_text_row"
-                    app:header="@{@string/phone_number}"
                     app:content="@{viewModel.customer.phoneNumber}"
-                    />
+                    app:header="@{@string/phone_number}" />
+
                 <include
                     layout="@layout/customer_info_text_row"
-                    app:header="@{@string/email}"
                     app:content="@{viewModel.customer.email}"
-                    />
+                    app:header="@{@string/email}" />
 
 
                 <include
@@ -98,34 +161,41 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/_2sdp"
-                    android:visibility="@{viewModel.customer.type == CustomerType.Business?View.VISIBLE:View.GONE}"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:orientation="vertical"
 
-                    android:orientation="vertical">
+                    android:visibility="@{viewModel.customer.type == CustomerType.Business?View.VISIBLE:View.GONE}">
 
                     <TextView
                         style="@style/TextTitleH3Regular"
-                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="@dimen/_2sdp"
                         android:text="@string/business_registration_certificate"
-                        tools:text="Identity card created date"
-                        />
+                        tools:text="Identity card created date" />
+
                     <ImageView
                         android:id="@+id/imageView"
                         bindImage="@{viewModel.customer.type == CustomerType.Business? ((BusinessCustomer)viewModel.customer).getCert():``}"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
                         tools:src="@drawable/ic_contract" />
                 </LinearLayout>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/editButton"
-                    style="@style/DashboardActionButton"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_gravity="center_horizontal"
-
-                    android:text="@string/edit" />
             </LinearLayout>
         </ScrollView>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/editButton"
+            style="@style/DashboardActionButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:text="@string/edit" />
 
     </LinearLayout>
 

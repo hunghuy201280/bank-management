@@ -126,7 +126,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            app:alignStart="@{false}"
+                                            app:alignStart="@{true}"
                                             app:content="@{viewModel.loanContract.loanProfile.customer.email}"
                                             app:header="@{@string/email}" />
                                     </LinearLayout>
@@ -151,7 +151,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            app:alignStart="@{false}"
+                                            app:alignStart="@{true}"
                                             app:content="@{viewModel.loanContract.loanProfile.customer.phoneNumber}"
                                             app:header="@{@string/phone_number}" />
                                     </LinearLayout>
@@ -439,28 +439,43 @@
                                         app:content="@{viewModel.loanContract.loanProfile.loanType.name}"
                                         app:header="@{@string/loan_type}" />
 
-                                    <include
-                                        layout="@layout/create_profile_text_row"
-                                        app:alignStart="@{true}"
-                                        app:content="@{viewModel.loanContract.loanProfile.moneyToLoan + `$`}"
-                                        app:header="@{@string/money_to_loan}" />
-
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginVertical="@dimen/_4sdp"
+                                        android:layout_marginVertical="@dimen/_2sdp"
                                         android:orientation="horizontal">
 
                                         <TextView
                                             style="@style/TextTitleH3Regular"
-                                            android:layout_width="@dimen/_70sdp"
+                                            android:layout_width="@dimen/_60sdp"
+                                            android:text="@string/money_to_loan"
+                                            android:textColor="@color/cornflower_blue" />
+
+                                        <TextView
+                                            style="@style/TextTitleH3Regular"
+                                            price="@{viewModel.loanContract.loanProfile.moneyToLoan}"
+                                            android:layout_width="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:textColor="@color/secondaryText"
+                                            tools:text="HSVV.21.21.21" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginVertical="@dimen/_2sdp"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            style="@style/TextTitleH3Regular"
+                                            android:layout_width="@dimen/_60sdp"
                                             android:text="@string/date_created"
                                             android:textColor="@color/cornflower_blue" />
 
                                         <TextView
                                             style="@style/TextTitleH3Regular"
                                             bindCommonDate="@{viewModel.loanContract.createdAt}"
-                                            android:layout_width="@dimen/_75sdp"
+                                            android:layout_width="wrap_content"
                                             android:layout_gravity="center_horizontal"
                                             android:textColor="@color/secondaryText"
                                             tools:text="HSVV.21.21.21" />
@@ -501,7 +516,7 @@
                                     <ImageView
                                         android:id="@+id/imageView"
                                         bindImage="@{viewModel.loanContract.signatureImage.toString()}"
-                                        android:layout_width="@dimen/_120sdp"
+                                        android:layout_width="@dimen/_140sdp"
                                         android:layout_height="@dimen/_50sdp"
                                         android:layout_gravity="center_horizontal"
                                         android:scaleType="centerCrop"

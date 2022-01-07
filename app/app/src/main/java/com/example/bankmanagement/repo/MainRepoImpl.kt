@@ -19,6 +19,7 @@ import com.example.bankmanagement.repo.dtos.customer.CustomerDetailDtoMapper
 import com.example.bankmanagement.repo.dtos.customer.CustomerDtoMapper
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDto
 import com.example.bankmanagement.repo.dtos.loan_contract.LoanContractDtoMapper
+import com.example.bankmanagement.repo.dtos.loan_contract.PaymentReceiptDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDto
 import com.example.bankmanagement.repo.dtos.loan_profiles.LoanProfileDtoMapper
@@ -362,6 +363,15 @@ constructor(
         apiService.createLiquidationApp(
             token = accessToken,
             body = body
+        )
+    }
+
+    override suspend fun createPayment(decisionId: String) {
+        apiService.createPayment(
+            token = accessToken,
+            body = mapOf(
+                "decisionId" to decisionId
+            )
         )
     }
 

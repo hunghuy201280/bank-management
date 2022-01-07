@@ -111,7 +111,7 @@ class Utils {
             onDismiss: View.OnClickListener?=null,
         ) {
             val dialog =
-                MaterialDialog(context).noAutoDismiss().customView(R.layout.app_complete_dialog)
+                MaterialDialog(context).noAutoDismiss().apply { setContentView(R.layout.app_complete_dialog) }
             dialog.findViewById<TextView>(R.id.completeTextView).text = mainText
             Timer().schedule(2000) {
 
