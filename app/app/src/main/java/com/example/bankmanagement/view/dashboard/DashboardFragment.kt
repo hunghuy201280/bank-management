@@ -9,6 +9,14 @@ import com.example.bankmanagement.view_models.MainViewModel
 import com.hanheldpos.ui.base.fragment.BaseFragment
 import io.secf4ult.verticaltablayout.VerticalTabLayoutMediator
 
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.example.bankmanagement.utils.Utils
+import io.secf4ult.verticaltablayout.VerticalTabLayout
+
+
 class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>() {
 
     private val tabSettings = arrayListOf<Map<String, Any>>(
@@ -34,6 +42,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
 
     override fun initView() {
 
+        initTabLayout()
+    }
+
+    private fun initTabLayout() {
         if (mainViewModel.currentStaff.value!! is BoardOfDirector) {
             tabSettings.add(
                 mapOf("name" to "Admin", "icon" to R.drawable.ic_contract),
@@ -43,13 +55,53 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
         binding.pager.isUserInputEnabled = false;
         val dashboardViewPagerAdapter = DashboardViewPagerAdapter(this)
         binding.pager.adapter = dashboardViewPagerAdapter
-        VerticalTabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-            if(position<tabSettings.size-1){
 
-                    tab.text = tabSettings[position]["name"] as String
-                    tab.setIcon(tabSettings[position]["icon"] as Int)
+        binding.tabLayout.addOnTabSelectedListener(object:VerticalTabLayout.OnTabSelectedListener<VerticalTabLayout.Tab>{
+            override fun onTabSelected(tab: VerticalTabLayout.Tab?) {
+                if(tab==null ||tab.customView==null) return
+                val view=tab.customView
+                val textView=view!!.findViewById<TextView>(R.id.titleTextView)
+                textView.apply {
+                    setTextColor(ContextCompat.getColor(context,R.color.cornflower_blue))
+                    Utils.setTextViewDrawableColor(this,R.color.cornflower_blue)
                 }
+
+            }
+
+            override fun onTabUnselected(tab: VerticalTabLayout.Tab?) {
+                if(tab==null ||tab.customView==null) return
+                val view=tab.customView
+                val textView=view!!.findViewById<TextView>(R.id.titleTextView)
+                textView.apply {
+                    setTextColor(ContextCompat.getColor(context,R.color.black))
+                    Utils.setTextViewDrawableColor(this,R.color.black)
+                }
+            }
+
+            override fun onTabReselected(tab: VerticalTabLayout.Tab?) {
+            }
+        })
+        VerticalTabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+
+            val tabView: View =
+                LayoutInflater.from(context).inflate(R.layout.custom_tab_item, null)
+            val textView=tabView.findViewById<TextView>(R.id.titleTextView)
+            textView.apply {
+                text=tabSettings[position]["name"] as String
+                setCompoundDrawablesWithIntrinsicBounds(tabSettings[position]["icon"] as Int, 0, 0, 0)
+
+                //set initial style
+                if(position==0){
+                    setTextColor(ContextCompat.getColor(context,R.color.cornflower_blue))
+                    Utils.setTextViewDrawableColor(this,R.color.cornflower_blue)
+                }else{
+                    setTextColor(ContextCompat.getColor(context,R.color.black))
+                    Utils.setTextViewDrawableColor(this,R.color.black)
+                }
+            }
+            tab.customView = tabView
         }.attach()
+
     }
 
     override fun initData() {

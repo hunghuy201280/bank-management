@@ -34,6 +34,16 @@ import com.example.bankmanagement.utils.Utils.Companion.getFileName
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
+import android.graphics.PorterDuff
+
+import androidx.core.content.ContextCompat
+
+import android.graphics.PorterDuffColorFilter
+
+import android.graphics.drawable.Drawable
+
+
+
 
 
 class Utils {
@@ -104,6 +114,17 @@ class Utils {
             dialog.show()
 
 
+        }
+        fun setTextViewDrawableColor(textView: TextView, color: Int) {
+            for (drawable in textView.compoundDrawables) {
+                if (drawable != null) {
+                    drawable.colorFilter =
+                        PorterDuffColorFilter(
+                            ContextCompat.getColor(textView.context, color),
+                            PorterDuff.Mode.SRC_IN
+                        )
+                }
+            }
         }
 
         fun showCompleteDialog(

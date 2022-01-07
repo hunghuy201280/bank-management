@@ -52,17 +52,20 @@ constructor(
             )
             return
         }
+        showLoading(true)
+        uiCallback?.dismissDialog()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val signatureUrl =
                     Utils.uploadFile(v.context, listOf(signatureImg.value!!), mainRepo)
                 if (signatureUrl.isEmpty()) {
                     withContext(Dispatchers.Main) {
+                        showLoading(false)
+
                         Utils.showCompleteDialog(
                             v.context,
                             mainText = "Error: signatureUrl is empty",
                             onDismiss = {
-                                uiCallback?.dismissDialog()
                             })
                     }
                     return@launch

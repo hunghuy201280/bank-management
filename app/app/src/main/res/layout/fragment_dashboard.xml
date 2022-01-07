@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="mainVM"
             type="com.example.bankmanagement.view_models.MainViewModel" />
@@ -31,53 +32,41 @@
 
             <LinearLayout
                 android:layout_width="@dimen/_75sdp"
+                android:layout_height="match_parent"
+                android:background="@color/primaryBackground"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
-<!--                <com.google.android.material.button.MaterialButton-->
-<!--                    android:id="@+id/contractButton"-->
-<!--                    android:background="@android:color/transparent"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    app:icon="@drawable/ic_contract"-->
-<!--                    android:layout_width="@dimen/_100sdp"-->
-<!--                    app:iconTint="@color/black"-->
-<!--                    android:layout_height="@dimen/_24sdp"-->
-<!--                    android:layout_marginTop="@dimen/space_8"-->
-<!--                    android:elevation="0dp"-->
-<!--                    android:text="@string/contract"-->
-<!--                    android:textSize="@dimen/_8ssp"-->
-<!--                    />-->
-<!--                <com.google.android.material.button.MaterialButton-->
-<!--                    android:id="@+id/profileButton"-->
-<!--                    android:background="@android:color/transparent"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    app:icon="@drawable/ic_contract"-->
-<!--                    android:layout_width="@dimen/_100sdp"-->
-<!--                    app:iconTint="@color/black"-->
-<!--                    android:layout_height="@dimen/_24sdp"-->
-<!--                    android:layout_marginTop="@dimen/space_8"-->
-<!--                    android:elevation="0dp"-->
-<!--                    android:text="@string/profile"-->
-<!--                    android:textSize="@dimen/_8ssp"-->
-<!--                    />-->
+
+                android:orientation="vertical">
+
                 <io.secf4ult.verticaltablayout.VerticalTabLayout
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@color/primaryBackground"
                     app:tabBackground="?attr/selectableItemBackground"
-                    app:tabInlineLabel="true"
-                    app:tabUnboundedRipple="false"
                     app:tabGravity="start"
-                    android:layout_height="wrap_content" />
+                    app:tabInlineLabel="true"
+                    app:tabUnboundedRipple="false" />
 
 
+                <!--                <q.rorbin.verticaltablayout.VerticalTabLayout-->
+<!--                    android:id="@+id/tabLayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/_8sdp"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    app:indicator_color="@color/cornflower_blue"-->
+<!--                    app:indicator_gravity="left"-->
+<!--                    app:tab_mode="scrollable"-->
+<!--                    android:layout_gravity="start"-->
+<!--                    />-->
             </LinearLayout>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
 

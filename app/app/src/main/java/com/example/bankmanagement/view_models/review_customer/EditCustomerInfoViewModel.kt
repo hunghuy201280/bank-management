@@ -86,6 +86,7 @@ constructor(
     }
 
     fun onSave(v: View) {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val businessCertImg=businessCert.value?.let {
@@ -107,6 +108,8 @@ constructor(
                 companyRules=companyRules.value,
                 )
                 withContext(Dispatchers.Main) {
+                    showLoading(false)
+
                     Utils.showCompleteDialog(
                         v.context,
                         mainText = "Customer updated",
@@ -117,8 +120,12 @@ constructor(
                 }
             } catch (e: HttpException) {
                 Log.e(TAG, "Edit customer error: ${e.response()?.errorBody()?.string()}")
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
 
+                }
             }
+
         }
     }
 
