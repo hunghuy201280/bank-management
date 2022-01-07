@@ -1,5 +1,6 @@
 package com.example.bankmanagement.repo
 
+import com.example.bankmanagement.repo.dtos.admin.RevenueStatisticDto
 import com.example.bankmanagement.repo.dtos.application.exemption.ExemptionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.extension.ExtensionApplicationDto
 import com.example.bankmanagement.repo.dtos.application.liquidation.LiquidationApplicationDto
@@ -84,7 +85,18 @@ interface ApiService {
             "Authorization",
         ) token: String,
         @Part images: List<MultipartBody.Part>
-    ): UpFileResp;
+    ): UpFileResp
+
+    @Multipart
+    @JvmSuppressWildcards
+    @POST("/loan_contracts/{id}/send_mail")
+    suspend fun sendMail(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Part file: MultipartBody.Part,
+        @Path(value = "id", encoded = true) contractId: String,
+    )
 
 
     @PATCH("loan_profiles/status/{id}")
@@ -332,4 +344,13 @@ interface ApiService {
         )
 
 
+    @GET("statistic")
+    @JvmSuppressWildcards
+    suspend fun getRevenueStatistic(
+        @Header(
+            "Authorization",
+        ) token: String,
+        @Query("year") createdAt: Int,
+
+        ): RevenueStatisticDto
 }

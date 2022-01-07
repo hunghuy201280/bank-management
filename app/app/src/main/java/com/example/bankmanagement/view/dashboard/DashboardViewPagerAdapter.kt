@@ -2,6 +2,7 @@ package com.example.bankmanagement.view.dashboard
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.bankmanagement.view.dashboard.admin.AdminFragment
 import com.example.bankmanagement.view.dashboard.application.ApplicationFragment
 import com.example.bankmanagement.view.dashboard.contract.ContractFragment
 import com.example.bankmanagement.view.dashboard.customer.CustomerFragment
@@ -18,6 +19,7 @@ class DashboardViewPagerAdapter(
         ProfileFragment(),
         ApplicationFragment(),
         CustomerFragment(),
+        AdminFragment(),
     )
     override fun createFragment(position: Int): Fragment {
         if(position<fragments.size){

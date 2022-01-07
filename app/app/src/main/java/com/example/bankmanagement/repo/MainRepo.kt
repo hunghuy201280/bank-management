@@ -1,6 +1,7 @@
 package com.example.bankmanagement.repo
 
 import com.example.bankmanagement.models.*
+import com.example.bankmanagement.models.admin.RevenueStatistic
 import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
 import com.example.bankmanagement.models.application.extension.ExtensionApplication
@@ -65,10 +66,19 @@ interface MainRepository {
         files: List<File>
     ): UpFileResp
 
+    suspend fun sendMail(
+        file: File,
+        contractId: String,
+    )
+
     suspend fun updateLoanStatus(
         status: LoanStatus,
         profileId: String,
     )
+
+    suspend fun getRevenueStatistic(
+        year:Int
+    ):RevenueStatistic
 
     suspend fun getContracts(
         customerPhone: String? = null,
@@ -205,7 +215,7 @@ interface MainRepository {
         companyRules: String? = null,
         email: String? = null,
 
-    )
+        )
 
 
     suspend fun getCustomerDetail(
@@ -214,16 +224,16 @@ interface MainRepository {
 
     suspend fun updateCustomer(
         id: String,
-        name: String?=null,
-        address: String?=null,
-        identityNumber: String?=null,
-        identityCardCreatedDate: String?=null,
-        phoneNumber: String?=null,
-        email: String?=null,
-        permanentResidence: String?=null,
-        dateOfBirth: String?=null,
-        businessRegistrationCertificate: String?=null,
-        companyRules: String?=null,
+        name: String? = null,
+        address: String? = null,
+        identityNumber: String? = null,
+        identityCardCreatedDate: String? = null,
+        phoneNumber: String? = null,
+        email: String? = null,
+        permanentResidence: String? = null,
+        dateOfBirth: String? = null,
+        businessRegistrationCertificate: String? = null,
+        companyRules: String? = null,
         customerType: CustomerType,
     )
 

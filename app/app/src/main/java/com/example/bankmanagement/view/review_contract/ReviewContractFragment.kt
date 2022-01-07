@@ -1,6 +1,8 @@
 package com.example.bankmanagement.view.review_contract
 
 import android.graphics.Color
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -11,7 +13,6 @@ import com.example.bankmanagement.databinding.FragmentReviewContractBinding
 import com.example.bankmanagement.models.DisburseCertificate
 import com.example.bankmanagement.models.application.BaseDecision
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
-import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.review_contract.disburse.CreateDisburseDialogFragment
 import com.example.bankmanagement.view.review_contract.review_decision.ReviewDecisionDialogFragment
 import com.example.bankmanagement.view.review_profile.ReviewContractUICallback
@@ -92,9 +93,9 @@ class ReviewContractFragment :
 
         binding.disburseCertRV.adapter = disburseAdapter
         binding.paymentRV.adapter = receiptAdapter
-        binding.extensionRV.adapter=extensionAdapter
-        binding.exemptionRV.adapter=exemptionAdapter
-        binding.liquidationRV.adapter=liquidationAdapter
+        binding.extensionRV.adapter = extensionAdapter
+        binding.exemptionRV.adapter = exemptionAdapter
+        binding.liquidationRV.adapter = liquidationAdapter
 
         initPieChart()
     }
@@ -127,6 +128,7 @@ class ReviewContractFragment :
         binding.pieChart.setDrawEntryLabels(false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun initData() {
 
     }
@@ -146,13 +148,13 @@ class ReviewContractFragment :
             receiptAdapter.submitList(it)
         }
 
-        viewModel.extensionDecisions.observe(this,{
+        viewModel.extensionDecisions.observe(this, {
             extensionAdapter.submitList(it)
         })
-        viewModel.exemptionDecisions.observe(this,{
+        viewModel.exemptionDecisions.observe(this, {
             exemptionAdapter.submitList(it)
         })
-        viewModel.liquidationDecisions.observe(this,{
+        viewModel.liquidationDecisions.observe(this, {
             liquidationAdapter.submitList(it)
         })
     }
@@ -161,11 +163,12 @@ class ReviewContractFragment :
         findNavController().popBackStack()
     }
 
-    override fun showCreateContractDialogFragment() {
-        CreateContractFragment().show(childFragmentManager, TAG)
-    }
 
     override fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double) {
-        CreateDisburseDialogFragment(contractId, maxAmount, refreshData =viewModel::refreshData).show(childFragmentManager, CreateDisburseDialogFragment.TAG)
+        CreateDisburseDialogFragment(
+            contractId,
+            maxAmount,
+            refreshData = viewModel::refreshData
+        ).show(childFragmentManager, CreateDisburseDialogFragment.TAG)
     }
 }

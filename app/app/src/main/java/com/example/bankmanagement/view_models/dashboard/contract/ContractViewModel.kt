@@ -15,10 +15,12 @@ import com.example.bankmanagement.models.LoanType
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
+import com.example.bankmanagement.utils.helper.SocketHelper
 import com.example.bankmanagement.utils.listener.ValueCallBack
 import com.example.bankmanagement.utils.toUtcISO
 import com.example.bankmanagement.view.dashboard.contract.ContractUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.socket.emitter.Emitter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,6 +37,7 @@ constructor(
     private val mainRepo: MainRepository,
     @AppModule.ReviewLoanContractArgs val reviewLoanContractArgs: ValueWrapper<LoanContract>,
     @AppModule.ReviewLoanProfileArgs val reviewLoanProfileArgs: ValueWrapper<LoanProfile>,
+    private val socketHelper: SocketHelper,
     val state: SavedStateHandle,
 ) : BaseUiViewModel<ContractUICallback>() {
     private val TAG: String = "ApplicationViewModel"
@@ -64,6 +67,10 @@ constructor(
 
     }
 
+
+    fun onTitleTap(){
+        socketHelper.getSocket().emit("testEvent",DateTime.now().toUtcISO())
+    }
 
     fun getContract() {
         viewModelScope.launch(Dispatchers.IO) {

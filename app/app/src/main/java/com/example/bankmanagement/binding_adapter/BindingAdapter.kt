@@ -203,7 +203,6 @@ fun bindImage(imageView: ImageView, uri: String?) {
         Glide
             .with(imageView)
             .load(Uri.parse(uri))
-            .centerCrop()
             .placeholder(circularProgressDrawable)
             .into(imageView)
 

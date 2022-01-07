@@ -16,6 +16,6 @@ fun String.toLocalDate(): Date {
     return DateTime.parse(this).toDateTime(DateTimeZone.getDefault()).toDate()
 }
 
-fun String.toMoney():String{
+fun Double.toMoney():String{
         return NumberFormat.getNumberInstance(Locale.US).format(this)
 }

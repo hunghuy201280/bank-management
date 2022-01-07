@@ -345,7 +345,7 @@
                                             bindImage="@{viewModel.loanProfile.signatureImage.toString()}"
                                             android:layout_width="@dimen/_120sdp"
                                             android:layout_height="@dimen/_50sdp"
-                                            android:scaleType="centerCrop"
+                                            android:scaleType="fitXY"
                                             tools:src="@drawable/ic_contract" />
 
                                     </LinearLayout>

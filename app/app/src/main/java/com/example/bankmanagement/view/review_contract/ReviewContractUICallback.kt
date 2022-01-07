@@ -5,6 +5,5 @@ import com.example.bankmanagement.models.Staff
 
 interface ReviewContractUICallback: BaseUserView {
    fun onBack();
-   fun showCreateContractDialogFragment()
    fun showCreateDisburseDialogFragment(contractId: String, maxAmount: Double)
 }

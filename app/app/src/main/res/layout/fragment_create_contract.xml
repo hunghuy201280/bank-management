@@ -156,7 +156,7 @@
 
 
                     <RelativeLayout
-                        android:layout_width="@dimen/_50sdp"
+                        android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_50sdp"
                         android:visibility="@{viewModel.signatureImg!=null?View.VISIBLE:View.GONE}">
 
@@ -165,7 +165,7 @@
                             bindImage="@{viewModel.signatureImg.toString()}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitXY"
                             tools:src="@drawable/ic_contract" />
 
                         <ImageView

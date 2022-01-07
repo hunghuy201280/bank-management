@@ -35,8 +35,13 @@
                 android:paddingBottom="@dimen/_8sdp">
 
                 <TextView
+                    android:id="@+id/titleTextView"
                     style="@style/DashboardHeaderH2"
-                    android:text="@string/find_contract_via" />
+                    android:onClick="@{()->viewModel.onTitleTap()}"
+                    android:text="@string/find_contract_via"
+
+                    />
+
 
                 <Space
                     android:layout_width="0dp"
