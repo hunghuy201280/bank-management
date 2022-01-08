@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
 import com.example.bankmanagement.di.AppModule
-import com.example.bankmanagement.models.DisburseCertificate
 import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
@@ -16,7 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -60,12 +58,24 @@ constructor(
 
 
             } catch (e: HttpException) {
+
                 Log.e(
                     TAG,
                     "Create disburse certificate error: ${e.response()?.errorBody()?.string()}"
                 )
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+
+                    Utils.showCompleteDialog(
+                        v.context,
+                        "Error: Unavailable balance at this branch!",
+                        onDismiss = {
+                        },
+                        isError = true
+                    )
+                }
             } finally {
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     showLoading(false)
 
                 }

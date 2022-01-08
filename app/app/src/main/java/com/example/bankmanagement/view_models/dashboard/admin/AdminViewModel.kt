@@ -62,6 +62,11 @@ constructor(
                     showLoading(false)
                 }
             }
+            finally {
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                }
+            }
         }
     }
 }

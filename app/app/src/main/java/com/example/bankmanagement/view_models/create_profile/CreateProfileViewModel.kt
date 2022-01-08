@@ -11,6 +11,7 @@ import com.example.bankmanagement.models.*
 import com.example.bankmanagement.models.customer.Customer
 import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.repo.dtos.loan_profiles.CreateLoanProfileData
+import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.Utils.Companion.showNotifyDialog
 import com.example.bankmanagement.utils.Utils.Companion.uploadFile
 import com.example.bankmanagement.view.create_profile.CreateProfile2UICallback
@@ -67,6 +68,7 @@ constructor(
     }
 
     fun onProfileCreated(view: View) {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             val proofOfIncomeData = arrayListOf<ProofOfIncomeRequest>();
             proofOfIncomes.value?.let { incomeMap ->
@@ -77,7 +79,7 @@ constructor(
                             imageType = item.key,
                             imageID = url
                         )
-                    });
+                    })
                 }
             }
             val signatureUrls =
@@ -112,13 +114,45 @@ constructor(
 
                 mainRepo.createLoanProfile(data = data);
                 withContext(Dispatchers.Main) {
-                    uiCallBack3?.onProfileCreated();
+                    showLoading(false)
+                    Utils.showCompleteDialog(
+                        view.context,
+                        "Loan profile created successfully",
+                        onDismiss = {
+
+                            uiCallBack3?.onProfileCreated()
+                        })
                 }
+
+
             } catch (e: HttpException) {
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                    Utils.showCompleteDialog(
+                        view.context,
+                        "Error: ${e.response()?.errorBody()?.string()}",
+                        onDismiss = {
+                        }, isError = true)
+                }
+
                 Log.d(TAG, "Error happened: ${e.response()?.errorBody()?.string()} ");
             } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                    Utils.showCompleteDialog(
+                        view.context,
+                        "Error: ${e.message}",
+                        onDismiss = {
+                        }, isError = true)
+                }
+
                 Log.d(TAG, "Create profile validate data error: ${e.message} ");
 
+            } finally {
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+
+                }
             }
         }
     }
