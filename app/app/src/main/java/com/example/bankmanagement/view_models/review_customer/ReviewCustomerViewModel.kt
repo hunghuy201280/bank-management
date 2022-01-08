@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.findFragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
@@ -41,6 +42,12 @@ constructor(
     val customer: MutableLiveData<Customer> = MutableLiveData(reviewCustomerArgs.value)
 
     val customerDetail = MutableLiveData<CustomerDetail>()
+
+    //region transform
+    val recentServiceList: LiveData<List<LoanType>> = Transformations.map(customerDetail) {
+        return@map it.recentContracts.map { contract -> contract.loanProfile.loanType }
+    }
+    //endregion
 
     init {
         loadData()

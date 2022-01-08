@@ -42,13 +42,18 @@ constructor(
     val revenueStatistic=MutableLiveData<RevenueStatistic>()
 
     init {
-        getStatistic()
+        getStatistic("2021")
     }
 
-    private fun getStatistic(){
+    fun getStatistic(year: String){
+        val yearInt = year.toInt()
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                val result=mainRepo.getRevenueStatistic(2021)
+                val result = mainRepo.getRevenueStatistic(yearInt)
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                }
                 revenueStatistic.postValue(result)
             }
             catch(e:HttpException){

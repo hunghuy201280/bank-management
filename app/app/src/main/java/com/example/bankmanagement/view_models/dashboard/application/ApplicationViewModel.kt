@@ -57,10 +57,14 @@ constructor(
     }
 
     fun loadApplications() {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             val exemptions = mainRepo.getApplications()
             val result = arrayListOf<BaseApplication>()
             result.addAll(exemptions)
+            withContext(Dispatchers.Main) {
+                showLoading(false)
+            }
             applications.postValue(result)
         }
     }

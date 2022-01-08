@@ -12,6 +12,7 @@ import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.view.create_contract.CreateContractFragment
 import com.example.bankmanagement.view.review_customer.customer_info.CustomerInfoFragment
 import com.example.bankmanagement.view.review_customer.customer_info.EditCustomerInfoFragment
+import com.example.bankmanagement.view.review_customer.customer_info.RecentServiceAdapter
 import com.example.bankmanagement.view.review_profile.ReviewCustomerUICallback
 import com.example.bankmanagement.view_models.MainViewModel
 import com.example.bankmanagement.view_models.review_customer.ReviewCustomerViewModel
@@ -44,6 +45,8 @@ class ReviewCustomerFragment :
         }
     )
 
+    val recentServiceAdapter = RecentServiceAdapter()
+
     override fun viewModelClass(): Class<ReviewCustomerViewModel> =
         ReviewCustomerViewModel::class.java
 
@@ -56,11 +59,15 @@ class ReviewCustomerFragment :
         viewModel.customerDetail.observe(this) {
             recentContractsAdapter.submitList(it.recentContracts)
         }
+
+        viewModel.recentServiceList.observe(this) {
+            recentServiceAdapter.submitList(it.subList(0, 3))
+        }
     }
 
     override fun initView() {
         binding.recentContractsRV.adapter = recentContractsAdapter
-
+        binding.recentServiceRv.adapter = recentServiceAdapter
         initPieChart()
         initCustomerInfoFrag()
     }

@@ -43,23 +43,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/primaryBackground"
+                    app:tabPaddingEnd="0dp"
                     app:tabBackground="?attr/selectableItemBackground"
                     app:tabGravity="start"
+                    app:tabIndicatorColor="@color/cornflower_blue"
                     app:tabInlineLabel="true"
                     app:tabUnboundedRipple="false" />
 
 
                 <!--                <q.rorbin.verticaltablayout.VerticalTabLayout-->
-<!--                    android:id="@+id/tabLayout"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="@dimen/_8sdp"-->
-<!--                    android:background="@android:color/transparent"-->
-<!--                    app:indicator_color="@color/cornflower_blue"-->
-<!--                    app:indicator_gravity="left"-->
-<!--                    app:tab_mode="scrollable"-->
-<!--                    android:layout_gravity="start"-->
-<!--                    />-->
+                <!--                    android:id="@+id/tabLayout"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="@dimen/_8sdp"-->
+                <!--                    android:background="@android:color/transparent"-->
+                <!--                    app:indicator_color="@color/cornflower_blue"-->
+                <!--                    app:indicator_gravity="left"-->
+                <!--                    app:tab_mode="scrollable"-->
+                <!--                    android:layout_gravity="start"-->
+                <!--                    />-->
             </LinearLayout>
 
             <androidx.viewpager2.widget.ViewPager2

@@ -23,6 +23,14 @@ interface ApiService {
         @Path("branchCode") branchCode: String
     ): BranchInfoResponse
 
+    @POST("branch_info/deposit/{branchCode}")
+    @JvmSuppressWildcards
+    suspend fun createDeposit(
+        @Header("Authorization") token: String,
+        @Path("branchCode") branchCode: String,
+        @Body body: Map<String, Any>
+    )
+
     @POST("staffs/login")
     suspend fun login(
         @Body body: SignInData
