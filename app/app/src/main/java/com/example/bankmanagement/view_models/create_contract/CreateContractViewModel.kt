@@ -48,6 +48,7 @@ constructor(
             )
             return
         }
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val signatureUrl =
@@ -72,6 +73,8 @@ constructor(
                 }
                 Log.d(TAG, "Create contract result: $newContract")
                 withContext(Dispatchers.Main) {
+                    showLoading(false)
+
                     Utils.showCompleteDialog(
                         v.context,
                         mainText = "Contract created successfully",
@@ -81,7 +84,17 @@ constructor(
                 }
             } catch (e: HttpException) {
                 Log.e(TAG, "Create contract error: ${e.response()?.errorBody()?.string()}")
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
 
+                    Utils.showCompleteDialog(
+                        v.context,
+                        mainText = "Error: An error has occurred, please try again",
+                        onDismiss = {
+                        },
+                        isError = true
+                    )
+                }
             }
         }
     }

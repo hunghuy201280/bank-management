@@ -1,17 +1,12 @@
 package com.example.bankmanagement.binding_adapter
 
-import android.app.Activity
 import android.graphics.Paint
 import android.icu.text.NumberFormat
 import android.net.Uri
 import android.os.Build
 import android.text.Editable
 import android.text.SpannableString
-import android.text.Spanned
 import android.text.TextWatcher
-import android.text.style.UnderlineSpan
-import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -24,7 +19,6 @@ import com.example.bankmanagement.BankApplication
 import com.example.bankmanagement.R
 import com.example.bankmanagement.models.LoanStatus
 import com.example.bankmanagement.models.LoanType
-import com.example.bankmanagement.models.application.ApplicationType
 import com.example.bankmanagement.models.application.BaseApplication
 import com.example.bankmanagement.models.application.BaseDecision
 import com.example.bankmanagement.models.application.exemption.ExemptionApplication
@@ -35,27 +29,15 @@ import com.example.bankmanagement.models.application.liquidation.LiquidationAppl
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.toLocalDate
-import com.google.android.material.internal.ContextUtils.getActivity
-import com.juliomarcos.ImageViewPopUpHelper
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
-import androidx.core.content.ContextCompat.startActivity
 
 import android.os.Bundle
 
-import android.graphics.Bitmap
-
-import com.example.bankmanagement.view.full_screen_image.FullScreenImage
-
 import android.content.Intent
-
-
-
+import com.example.bankmanagement.view.full_screen_image.FullScreenImage
 
 
 //@BindingAdapter("currentRole", "requireRole", requireAll = false)
@@ -70,23 +52,23 @@ import android.content.Intent
 //
 //}
 
-@BindingAdapter("reviewImage")
-fun setImageOnClick(view: ImageView, temp: Any?) {
-
-    val activity = Utils.getActivity(view.context)
-    view.setOnClickListener {
-       // ImageViewPopUpHelper.enablePopUpOnClick(activity!!, view)
-        val intent = Intent(activity, FullScreenImage::class.java)
-
-        view.buildDrawingCache()
-        val image: Bitmap = view.getDrawingCache()
-
-        val extras = Bundle()
-        extras.putParcelable("imagebitmap", image)
-        intent.putExtras(extras)
-        activity?.startActivity(intent)
-    }
-}
+//@BindingAdapter("reviewImage")
+//fun setImageOnClick(view: ImageView, temp: Any?) {
+//
+//    val activity = Utils.getActivity(view.context)
+//    view.setOnClickListener {
+//       // ImageViewPopUpHelper.enablePopUpOnClick(activity!!, view)
+//        val intent = Intent(activity, FullScreenImage::class.java)
+//
+//        view.buildDrawingCache()
+//        val image: Bitmap = view.getDrawingCache()
+//
+//        val extras = Bundle()
+//        extras.putParcelable("imagebitmap", image)
+//        intent.putExtras(extras)
+//        activity?.startActivity(intent)
+//    }
+//}
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -248,6 +230,19 @@ fun bindImage(imageView: ImageView, uri: String?) {
             .load(Uri.parse(uri))
             .placeholder(circularProgressDrawable)
             .into(imageView)
+
+        val activity = Utils.getActivity(imageView.context)
+        val image = uri
+
+        imageView.setOnClickListener {
+            val intent = Intent(activity, FullScreenImage::class.java)
+            val extras = Bundle()
+            extras.putString("imageLink", image)
+            intent.putExtras(extras)
+            activity?.startActivity(intent)
+        }
+
+
 
     }
 
