@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.bankmanagement.utils.Utils
 import io.secf4ult.verticaltablayout.VerticalTabLayout
 
@@ -48,7 +49,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
     private fun initTabLayout() {
         if (mainViewModel.currentStaff.value!! is BoardOfDirector) {
             tabSettings.add(
-                mapOf("name" to "Admin", "icon" to R.drawable.ic_contract),
+                mapOf("name" to "Admin", "icon" to R.drawable.ic_admin),
             )
         }
 
@@ -112,7 +113,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
     }
 
     override fun initAction() {
-
+        binding.logoutBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 

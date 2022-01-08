@@ -152,6 +152,9 @@ dependencies {
     implementation ('io.socket:socket.io-client:1.0.1') {
         exclude group: 'org.json', module: 'json'
     }
+
+    //barcode
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }
 kapt {
     correctErrorTypes = true

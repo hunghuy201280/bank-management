@@ -109,10 +109,12 @@
         <entry key="app/src/main/res/layout/fragment_create_customer.xml" value="0.5423331775806256" />
         <entry key="app/src/main/res/layout/fragment_create_deposit.xml" value="0.55" />
         <entry key="app/src/main/res/layout/fragment_create_disburse.xml" value="0.17527173913043478" />
+        <entry key="app/src/main/res/layout/fragment_create_profile1.xml" value="0.17300724637681159" />
+        <entry key="app/src/main/res/layout/fragment_create_profile2.xml" value="0.20380434782608695" />
         <entry key="app/src/main/res/layout/fragment_create_profile3.xml" value="0.1203125" />
         <entry key="app/src/main/res/layout/fragment_customer.xml" value="0.21240942028985507" />
         <entry key="app/src/main/res/layout/fragment_customer_info.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_edit_customer_info.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/fragment_review_application_dialog.xml" value="0.55" />
@@ -121,6 +123,7 @@
         <entry key="app/src/main/res/layout/fragment_review_decision_dialog.xml" value="0.7514563106796116" />
         <entry key="app/src/main/res/layout/fragment_review_profile.xml" value="1.076664609783447" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.21240942028985507" />
+        <entry key="app/src/main/res/layout/item_image.xml" value="0.55" />
         <entry key="app/src/main/res/layout/item_loan_contract_disburse_header.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/item_loan_contract_disburse_item.xml" value="0.7146745283132799" />
         <entry key="app/src/main/res/layout/item_loan_contract_payment_receipt_header.xml" value="0.22418478260869565" />
@@ -131,11 +134,12 @@
         <entry key="app/src/main/res/layout/item_revenue_by_type_table_item.xml" value="0.5274311937780878" />
         <entry key="app/src/main/res/layout/item_review_customer_recent_contracts_header.xml" value="0.21240942028985507" />
         <entry key="app/src/main/res/layout/item_review_customer_recent_contracts_item.xml" value="0.21240942028985507" />
+        <entry key="app/src/main/res/layout/item_search_customer_result.xml" value="0.5659259259259259" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.20380434782608695" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
