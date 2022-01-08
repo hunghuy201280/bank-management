@@ -86,7 +86,7 @@
                     android:autofillHints="emailAddress"
                     android:background="@null"
                     android:hint="@string/search_customer_via_name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPersonName"
                     android:paddingHorizontal="@dimen/_8sdp"
                     android:textColor="@color/secondaryText"
                     android:textCursorDrawable="@color/textSecondary"

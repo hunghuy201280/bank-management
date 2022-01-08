@@ -282,7 +282,7 @@
                     bindImage="@{viewModel.businessCert.toString()}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     tools:src="@drawable/ic_contract" />
 
                 <ImageView
@@ -291,7 +291,7 @@
                     android:layout_height="@dimen/_16sdp"
                     android:layout_alignParentEnd="true"
                     android:onClick="@{()->viewModel.onBusinessCertRemoved()}"
-                    android:src="@color/cornflower_blue"
+                    android:src="@drawable/ic_close_square"
 
                     />
             </RelativeLayout>

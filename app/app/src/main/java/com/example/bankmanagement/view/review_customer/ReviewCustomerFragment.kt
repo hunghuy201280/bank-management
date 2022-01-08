@@ -61,7 +61,12 @@ class ReviewCustomerFragment :
         }
 
         viewModel.recentServiceList.observe(this) {
-            recentServiceAdapter.submitList(it.subList(0, 3))
+            if(it.size<3) {
+                recentServiceAdapter.submitList(it.subList(0, it.size))
+            }
+            else{
+                recentServiceAdapter.submitList(it.subList(0, 3))
+            }
         }
     }
 

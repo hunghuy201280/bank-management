@@ -42,7 +42,6 @@ constructor(
     }
 
     fun getCustomers() {
-        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             _getCustomers()
         }
@@ -67,9 +66,7 @@ constructor(
             showLoading(false)
         }
         customers.postValue(result)
-        val temp=mainRepo.getCustomerDetail(customerId = result.first().id)
 
-        println(temp)
 
     }
 

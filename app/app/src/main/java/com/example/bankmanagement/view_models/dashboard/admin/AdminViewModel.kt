@@ -47,7 +47,6 @@ constructor(
 
     fun getStatistic(year: String){
         val yearInt = year.toInt()
-        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try{
                 val result = mainRepo.getRevenueStatistic(yearInt)

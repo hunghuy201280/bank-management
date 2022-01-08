@@ -47,7 +47,6 @@ constructor(
     }
 
     fun getProfiles() {
-        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _getProfiles()
@@ -95,7 +94,6 @@ constructor(
 
     fun onFindClicked() {
 
-        showLoading(true)
 
         viewModelScope.launch(Dispatchers.IO) {
 

@@ -174,7 +174,7 @@
                             android:layout_height="@dimen/_16sdp"
                             android:layout_alignParentEnd="true"
                             android:onClick="@{()->viewModel.signatureImageRemoved()}"
-                            android:src="@color/cornflower_blue"
+                            android:src="@drawable/ic_close_square"
 
                             />
                     </RelativeLayout>

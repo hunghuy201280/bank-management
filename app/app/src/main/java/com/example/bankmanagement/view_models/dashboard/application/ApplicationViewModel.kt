@@ -57,7 +57,6 @@ constructor(
     }
 
     fun loadApplications() {
-        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val apiResult = mainRepo.getApplications()
@@ -112,7 +111,6 @@ constructor(
     }
 
     fun onFindClicked() {
-        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 var result: List<BaseApplication> = listOf()

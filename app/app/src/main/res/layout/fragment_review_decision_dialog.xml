@@ -138,7 +138,7 @@
             android:layout_height="@dimen/_47sdp"
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="@dimen/default_margin"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             tools:src="@drawable/ic_contract" />
 
         <com.google.android.material.button.MaterialButton

@@ -73,7 +73,6 @@ constructor(
     }
 
     fun getContract() {
-        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _getContracts()
@@ -118,7 +117,6 @@ constructor(
     }
 
     fun onFindClicked() {
-        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = mainRepo.getContracts(
