@@ -68,18 +68,26 @@ constructor(
     }
 
 
-    fun onTitleTap(){
-        socketHelper.getSocket().emit("testEvent",DateTime.now().toUtcISO())
+    fun onTitleTap() {
+        socketHelper.getSocket().emit("testEvent", DateTime.now().toUtcISO())
     }
 
     fun getContract() {
         showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
-            _getContracts()
-            restoreState()
-            withContext(Dispatchers.Main) {
-                showLoading(false)
+            try {
+                _getContracts()
+                restoreState()
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                }
             }
+
+
         }
     }
 
@@ -126,9 +134,8 @@ constructor(
                 loanContracts.postValue(result);
             } catch (e: HttpException) {
                 loanContracts.postValue(null)
-            }
-            finally {
-                withContext(Dispatchers.Main){
+            } finally {
+                withContext(Dispatchers.Main) {
                     showLoading(false)
 
                 }

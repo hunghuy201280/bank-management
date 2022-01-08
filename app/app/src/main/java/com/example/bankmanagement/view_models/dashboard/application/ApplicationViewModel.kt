@@ -2,7 +2,6 @@ package com.example.bankmanagement.view_models.dashboard.application
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.bankmanagement.base.viewmodel.BaseUiViewModel
@@ -16,14 +15,15 @@ import com.example.bankmanagement.repo.MainRepository
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.ValueWrapper
 import com.example.bankmanagement.utils.listener.ValueCallBack
+import com.example.bankmanagement.utils.toLocalDateTime
 import com.example.bankmanagement.utils.toUtcISO
 import com.example.bankmanagement.view.dashboard.application.ApplicationUICallback
+import com.juliomarcos.ImageViewPopUpHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -43,7 +43,7 @@ constructor(
     val contractNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_CONTRACT_NUMBER, null)
     val applicationNumber = state.getLiveData<String>(STATE_KEY_APPLICATION_NUMBER, null)
     val status = state.getLiveData(STATE_KEY_APPLICATION_STATUS, LoanStatus.All)
-    val type = state.getLiveData<ApplicationType>(STATE_KEY_APPLICATION_TYPE,ApplicationType.All)
+    val type = state.getLiveData<ApplicationType>(STATE_KEY_APPLICATION_TYPE, ApplicationType.All)
     val applications = state.getLiveData<ArrayList<BaseApplication>>(
         STATE_KEY_APPLICATION_LIST,
         arrayListOf()
@@ -59,13 +59,19 @@ constructor(
     fun loadApplications() {
         showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val exemptions = mainRepo.getApplications()
-            val result = arrayListOf<BaseApplication>()
-            result.addAll(exemptions)
-            withContext(Dispatchers.Main) {
-                showLoading(false)
+            try {
+                val apiResult = mainRepo.getApplications()
+                val result = arrayListOf<BaseApplication>()
+                result.addAll(sortApplications(apiResult))
+
+                applications.postValue(result)
+            } catch (e: Exception) {
+                Log.d(TAG, "Load application error: ${e.message}")
+            } finally {
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                }
             }
-            applications.postValue(result)
         }
     }
 
@@ -100,6 +106,10 @@ constructor(
         })
     }
 
+    fun sortApplications(input: List<BaseApplication>): List<BaseApplication> {
+        return input.sortedByDescending { it.createdAt.toLocalDateTime() }
+
+    }
 
     fun onFindClicked() {
         showLoading(true)
@@ -142,7 +152,7 @@ constructor(
                 }
 
                 val newList = ArrayList<BaseApplication>()
-                newList.addAll(result)
+                newList.addAll(sortApplications(result))
                 applications.postValue(newList)
             } catch (e: HttpException) {
                 applications.postValue(null)

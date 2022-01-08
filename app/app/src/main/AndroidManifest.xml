@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.full_screen_image.FullScreenImage"
+            android:screenOrientation="landscape">
+
+        </activity>
+
         <activity android:name=".view.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="landscape"/>

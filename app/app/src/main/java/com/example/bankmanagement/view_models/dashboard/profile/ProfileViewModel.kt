@@ -49,7 +49,19 @@ constructor(
     fun getProfiles() {
         showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
-            _getProfiles();
+            try {
+                _getProfiles()
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+
+                }
+            }
+            catch (e:Exception){
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+
+                }
+            }
         }
     }
 
@@ -67,9 +79,7 @@ constructor(
 
     private suspend fun _getProfiles() {
         val profiles = mainRepo.getLoanProfiles()
-        withContext(Dispatchers.Main) {
-            showLoading(false)
-        }
+
         loanProfiles.postValue(profiles)
 
     }
@@ -84,6 +94,9 @@ constructor(
 
 
     fun onFindClicked() {
+
+        showLoading(true)
+
         viewModelScope.launch(Dispatchers.IO) {
 
             try {
@@ -96,9 +109,16 @@ constructor(
                     loanStatus = if (loanStatus.value == LoanStatus.All) null else loanStatus.value,
                 )
                 loanProfiles.postValue(result);
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
 
+                }
             } catch (e: HttpException) {
                 loanProfiles.postValue(null)
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+
+                }
             }
         }
     }

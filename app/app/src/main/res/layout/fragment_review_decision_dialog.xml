@@ -132,8 +132,9 @@
 
         <ImageView
             android:id="@+id/imageView"
-            bindImage="@{item.BODSignature.toString()}"
+            bindImage="@{item.getSignatureImage().toString()}"
             android:layout_width="@dimen/_120sdp"
+            reviewImage="@{null}"
             android:layout_height="@dimen/_47sdp"
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="@dimen/default_margin"

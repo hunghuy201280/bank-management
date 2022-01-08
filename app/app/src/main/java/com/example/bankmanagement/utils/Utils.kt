@@ -43,12 +43,15 @@ import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.media.Image
 import android.widget.ImageView
+import android.content.ContextWrapper
+
+import android.app.Activity
 
 
 class Utils {
 
     companion object {
-        fun toddMMYYYY(input:String): String {
+        fun toddMMYYYY(input: String): String {
             val sdf = SimpleDateFormat("dd/MM/yyyy");
 
             return sdf.format(input.toLocalDate())
@@ -68,7 +71,8 @@ class Utils {
                 null
             }
         }
-        fun logError(tag:String,e:HttpException){
+
+        fun logError(tag: String, e: HttpException) {
             Log.d(tag, "Error happened: ${e.response()?.errorBody()?.string()} ")
 
         }
@@ -77,10 +81,11 @@ class Utils {
             return if (TextUtils.isEmpty(target)) {
                 false
             } else {
-                Patterns.EMAIL_ADDRESS.matcher(target?:"").matches()
+                Patterns.EMAIL_ADDRESS.matcher(target ?: "").matches()
             }
         }
-        fun showDatePicker(v: View,callback: ValueCallBack<DateTime>){
+
+        fun showDatePicker(v: View, callback: ValueCallBack<DateTime>) {
             val c = Calendar.getInstance()
             val initYear = c.get(Calendar.YEAR)
             val initMonth = c.get(Calendar.MONTH)
@@ -88,7 +93,7 @@ class Utils {
 
 
             val dpd = DatePickerDialog(v.context, { _, year, monthOfYear, dayOfMonth ->
-                val result= DateTime(year,monthOfYear+1,dayOfMonth,0,0)
+                val result = DateTime(year, monthOfYear + 1, dayOfMonth, 0, 0)
                 callback.onValue(result)
             }, initYear, initMonth, initDay)
 
@@ -114,6 +119,7 @@ class Utils {
 
 
         }
+
         fun setTextViewDrawableColor(textView: TextView, color: Int) {
             for (drawable in textView.compoundDrawables) {
                 if (drawable != null) {
@@ -126,18 +132,26 @@ class Utils {
             }
         }
 
+        fun getActivity(context: Context?): Activity? {
+            if (context == null) return null
+            if (context is Activity) return context
+            return if (context is ContextWrapper) getActivity(context.baseContext) else null
+        }
+
         fun showCompleteDialog(
             context: Context,
             mainText: String = "Completed",
-            onDismiss: View.OnClickListener?=null,
-            isError:Boolean=false
+            onDismiss: View.OnClickListener? = null,
+            isError: Boolean = false
         ) {
 
             val dialog =
-                MaterialDialog(context).noAutoDismiss().apply { setContentView(R.layout.app_complete_dialog) }
+                MaterialDialog(context).noAutoDismiss()
+                    .apply { setContentView(R.layout.app_complete_dialog) }
             dialog.findViewById<TextView>(R.id.completeTextView).text = mainText
-            if(isError){
-                dialog.findViewById<ImageView>(R.id.iconImgView).setImageResource(R.drawable.ic_error)
+            if (isError) {
+                dialog.findViewById<ImageView>(R.id.iconImgView)
+                    .setImageResource(R.drawable.ic_error)
             }
 
             Timer().schedule(2000) {
@@ -161,10 +175,12 @@ class Utils {
             onNegativeClick: View.OnClickListener? = null,
         ) {
             val dialog =
-                MaterialDialog(context).noAutoDismiss().apply { setContentView(R.layout.app_alert_dialog) }
+                MaterialDialog(context).noAutoDismiss()
+                    .apply { setContentView(R.layout.app_alert_dialog) }
 
             dialog.findViewById<TextView>(R.id.title).text = title
-            dialog.findViewById<TextView>(R.id.body).text = Html.fromHtml(body, Html.FROM_HTML_MODE_LEGACY)
+            dialog.findViewById<TextView>(R.id.body).text =
+                Html.fromHtml(body, Html.FROM_HTML_MODE_LEGACY)
             dialog.findViewById<MaterialButton>(R.id.cancelButton).apply {
                 text = negativeText
                 setOnClickListener {
@@ -183,10 +199,11 @@ class Utils {
             dialog.show()
 
         }
-        fun openFileStream(context:Context,path:String):File{
+
+        fun openFileStream(context: Context, path: String): File {
             val cacheDir = context.cacheDir;
             val contentResolver = context.contentResolver;
-            val uriPath=Uri.parse(path)
+            val uriPath = Uri.parse(path)
             val parcelFileDescriptor =
                 contentResolver.openFileDescriptor(uriPath, "r", null)
 
@@ -196,6 +213,7 @@ class Utils {
             inputStream.copyTo(outputStream)
             return file
         }
+
         suspend fun uploadFile(
             context: Context,
             uris: List<Uri>?,
@@ -205,7 +223,7 @@ class Utils {
 
 
             val files = uris.map {
-                openFileStream(context,it.toString())
+                openFileStream(context, it.toString())
             }
             return try {
                 val urls = mainRepo.upFiles(files = files);

@@ -27,7 +27,7 @@ class CreateApplicationViewModel
 constructor(
     private val mainRepo: MainRepository,
 ) : BaseUiViewModel<CreateApplicationUICallback>() {
-    private val TAG: String = "CreateApplicationViewModel";
+    private val TAG: String = "CreateApplicationViewModel"
     val reason = MutableLiveData<String>()
     val signatureImg = MutableLiveData<Uri>()
     val amount = MutableLiveData<Double>()
@@ -106,9 +106,10 @@ constructor(
 
                     Utils.showCompleteDialog(
                         v.context,
-                        mainText = "application created successfully",
+                        mainText = "Application created successfully",
                         onDismiss = {
-                            uiCallback?.refreshData()
+                            uiCallback?.dismissDialog()
+                            uiCallback?.refreshDataCallback()
                         })
                 }
             } catch (e: HttpException) {

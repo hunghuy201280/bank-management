@@ -145,5 +145,6 @@
     <string name="total_payment">Total payment</string>
     <string name="revenue_by_type">Revenue by type</string>
     <string name="recent_service_used">Recent service used</string>
+    <string name="extension_duration">Extension duration</string>
 
 </resources>

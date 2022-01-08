@@ -18,6 +18,9 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             bindImage="@{imageUri}"
+            reviewImage="@{null}"
+            android:adjustViewBounds="true"
+
             tools:src="@drawable/ic_contract" />
 
         <ImageView

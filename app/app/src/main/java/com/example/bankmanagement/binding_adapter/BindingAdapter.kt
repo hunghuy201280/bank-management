@@ -1,5 +1,6 @@
 package com.example.bankmanagement.binding_adapter
 
+import android.app.Activity
 import android.graphics.Paint
 import android.icu.text.NumberFormat
 import android.net.Uri
@@ -34,6 +35,8 @@ import com.example.bankmanagement.models.application.liquidation.LiquidationAppl
 import com.example.bankmanagement.models.application.liquidation.LiquidationDecision
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.utils.toLocalDate
+import com.google.android.material.internal.ContextUtils.getActivity
+import com.juliomarcos.ImageViewPopUpHelper
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -41,6 +44,18 @@ import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
+import androidx.core.content.ContextCompat.startActivity
+
+import android.os.Bundle
+
+import android.graphics.Bitmap
+
+import com.example.bankmanagement.view.full_screen_image.FullScreenImage
+
+import android.content.Intent
+
+
+
 
 
 //@BindingAdapter("currentRole", "requireRole", requireAll = false)
@@ -55,12 +70,24 @@ import java.util.concurrent.TimeUnit
 //
 //}
 
-@BindingAdapter("layout_width")
-fun setLayoutWidth(view: View, width: Float) {
-    val layoutParams = view.layoutParams
-    layoutParams.width = width.toInt()
-    view.layoutParams = layoutParams
+@BindingAdapter("reviewImage")
+fun setImageOnClick(view: ImageView, temp: Any?) {
+
+    val activity = Utils.getActivity(view.context)
+    view.setOnClickListener {
+       // ImageViewPopUpHelper.enablePopUpOnClick(activity!!, view)
+        val intent = Intent(activity, FullScreenImage::class.java)
+
+        view.buildDrawingCache()
+        val image: Bitmap = view.getDrawingCache()
+
+        val extras = Bundle()
+        extras.putParcelable("imagebitmap", image)
+        intent.putExtras(extras)
+        activity?.startActivity(intent)
+    }
 }
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("durationFromTime")

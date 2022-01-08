@@ -3,5 +3,5 @@ import com.example.bankmanagement.base.BaseUserView
 
 interface CreateApplicationUICallback: BaseUserView {
     fun dismissDialog()
-    fun refreshData()
+    fun refreshDataCallback()
 }

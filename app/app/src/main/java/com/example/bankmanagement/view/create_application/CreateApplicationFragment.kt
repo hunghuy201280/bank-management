@@ -115,7 +115,7 @@ class CreateApplicationFragment(private val type: ApplicationType,private val re
         dismiss()
     }
 
-    override fun refreshData() {
+    override fun refreshDataCallback() {
         this.refreshData()
 
     }

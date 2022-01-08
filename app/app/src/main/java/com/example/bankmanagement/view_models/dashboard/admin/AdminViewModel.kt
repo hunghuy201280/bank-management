@@ -58,6 +58,9 @@ constructor(
             }
             catch(e:HttpException){
                 Log.e(TAG,"Get statistic error: ${e.response()?.errorBody()?.string()}")
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                }
             }
         }
     }

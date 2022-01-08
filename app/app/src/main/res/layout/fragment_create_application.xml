@@ -136,6 +136,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_2sdp"
+                android:visibility="@{viewModel.applicationType==ApplicationType.Extension?View.VISIBLE:View.GONE}"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextTitleH3Regular"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:text="@string/extension_duration"
+                    android:textColor="@color/cornflower_blue" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/DashboardEditTextFilter"
+                    app:text="@={viewModel.duration}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_2sdp"
                 android:orientation="horizontal">
 
                 <TextView
