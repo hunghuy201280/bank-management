@@ -4,18 +4,15 @@ import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentCreateApplicationBinding
-import com.example.bankmanagement.models.LoanContract
 import com.example.bankmanagement.models.application.ApplicationType
 import com.example.bankmanagement.utils.Utils
 import com.example.bankmanagement.view_models.create_application.ContractSuggestionAdapter
@@ -113,11 +110,14 @@ class CreateApplicationFragment(private val type: ApplicationType,private val re
     }
 
 
-    override fun dismissDialog(refresh: Boolean) {
-        if(refresh){
-            this.refreshData()
-        }
+    override fun dismissDialog() {
+
         dismiss()
+    }
+
+    override fun refreshData() {
+        this.refreshData()
+
     }
 
     override fun showLoading(show: Boolean) {

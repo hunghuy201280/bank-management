@@ -48,12 +48,12 @@ constructor(
             Utils.showNotifyDialog(
                 v.context,
                 title = "Invalid data",
-                mainText = "Please fill all the required information to create contract"
+                mainText = "Please fill all the required information to create application"
             )
+
             return
         }
         showLoading(true)
-        uiCallback?.dismissDialog()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val signatureUrl =
@@ -66,7 +66,9 @@ constructor(
                             v.context,
                             mainText = "Error: signatureUrl is empty",
                             onDismiss = {
-                            })
+                            },
+                            isError = true
+                        )
                     }
                     return@launch
                 }
@@ -100,16 +102,28 @@ constructor(
                 }
                 Log.d(TAG, "Create application result: $newContract")
                 withContext(Dispatchers.Main) {
+                    showLoading(false)
+
                     Utils.showCompleteDialog(
                         v.context,
                         mainText = "application created successfully",
                         onDismiss = {
-                            uiCallback?.dismissDialog(true)
+                            uiCallback?.refreshData()
                         })
                 }
             } catch (e: HttpException) {
-                Log.e(TAG, "Create application error: ${e.response()?.errorBody()?.string()}")
-
+                val error=e.response()?.errorBody()?.string()
+                Log.e(TAG, "Create application error: $error")
+                withContext(Dispatchers.Main) {
+                    showLoading(false)
+                    Utils.showCompleteDialog(
+                        v.context,
+                        mainText = "Error: $error",
+                        onDismiss = {
+                        },
+                        isError = true
+                    )
+                }
             }
         }
     }

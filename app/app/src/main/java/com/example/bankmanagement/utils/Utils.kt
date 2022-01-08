@@ -41,9 +41,8 @@ import androidx.core.content.ContextCompat
 import android.graphics.PorterDuffColorFilter
 
 import android.graphics.drawable.Drawable
-
-
-
+import android.media.Image
+import android.widget.ImageView
 
 
 class Utils {
@@ -131,10 +130,16 @@ class Utils {
             context: Context,
             mainText: String = "Completed",
             onDismiss: View.OnClickListener?=null,
+            isError:Boolean=false
         ) {
+
             val dialog =
                 MaterialDialog(context).noAutoDismiss().apply { setContentView(R.layout.app_complete_dialog) }
             dialog.findViewById<TextView>(R.id.completeTextView).text = mainText
+            if(isError){
+                dialog.findViewById<ImageView>(R.id.iconImgView).setImageResource(R.drawable.ic_error)
+            }
+
             Timer().schedule(2000) {
 
                 dialog.dismiss()
