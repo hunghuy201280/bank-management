@@ -119,6 +119,13 @@ constructor(
             })
     }
 
+    override suspend fun createDeposit(branchCode: String, amount: Double) {
+        val body = mapOf<String, Any>(
+            "amount" to amount,
+        )
+        apiService.createDeposit(accessToken, branchCode, body)
+    }
+
     override suspend fun searchCustomers(
         name: String?,
         phoneNumber: String?,

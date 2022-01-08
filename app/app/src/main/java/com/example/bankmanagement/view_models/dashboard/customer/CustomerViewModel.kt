@@ -14,6 +14,7 @@ import com.example.bankmanagement.view.dashboard.customer.CustomerUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -41,6 +42,7 @@ constructor(
     }
 
     fun getCustomers() {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             _getCustomers()
         }
@@ -61,6 +63,9 @@ constructor(
 
     private suspend fun _getCustomers() {
         val result = mainRepo.searchCustomers()
+        withContext(Dispatchers.Main) {
+            showLoading(false)
+        }
         customers.postValue(result)
         val temp=mainRepo.getCustomerDetail(customerId = result.first().id)
 

@@ -42,7 +42,7 @@
                     android:layout_toEndOf="@id/statisticTV" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sign_in_button"
+                    android:id="@+id/addBalanceBtn"
                     style="@style/DashboardActionButton"
                     android:layout_width="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -188,7 +188,7 @@
                                 android:id="@+id/lineChart"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_margin="@dimen/_8sdp" />
+                                android:layout_margin="@dimen/_4sdp" />
 
                         </com.google.android.material.card.MaterialCardView>
 

@@ -18,6 +18,7 @@ import com.example.bankmanagement.view.dashboard.profile.ProfileUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import retrofit2.HttpException
@@ -46,6 +47,7 @@ constructor(
     }
 
     fun getProfiles() {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             _getProfiles();
         }
@@ -65,6 +67,9 @@ constructor(
 
     private suspend fun _getProfiles() {
         val profiles = mainRepo.getLoanProfiles()
+        withContext(Dispatchers.Main) {
+            showLoading(false)
+        }
         loanProfiles.postValue(profiles)
 
     }

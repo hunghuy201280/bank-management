@@ -63,6 +63,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
                 val textView=view!!.findViewById<TextView>(R.id.titleTextView)
                 textView.apply {
                     setTextColor(ContextCompat.getColor(context,R.color.primaryText))
+                    setBackgroundColor(ContextCompat.getColor(binding.tabLayout.context,R.color.white))
                     Utils.setTextViewDrawableColor(this,R.color.cornflower_blue)
                 }
 
@@ -74,6 +75,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
                 val textView=view!!.findViewById<TextView>(R.id.titleTextView)
                 textView.apply {
                     setTextColor(ContextCompat.getColor(context,R.color.disableText))
+                    setBackgroundColor(ContextCompat.getColor(binding.tabLayout.context,android.R.color.transparent))
                     Utils.setTextViewDrawableColor(this,R.color.disableText)
                 }
             }
@@ -93,9 +95,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, BaseViewModel>(
                 //set initial style
                 if(position==0){
                     setTextColor(ContextCompat.getColor(context,R.color.primaryText))
+                    setBackgroundColor(ContextCompat.getColor(binding.tabLayout.context,R.color.white))
                     Utils.setTextViewDrawableColor(this,R.color.cornflower_blue)
                 }else{
                     setTextColor(ContextCompat.getColor(context,R.color.disableText))
+                    setBackgroundColor(ContextCompat.getColor(binding.tabLayout.context,android.R.color.transparent))
                     Utils.setTextViewDrawableColor(this,R.color.disableText)
                 }
             }

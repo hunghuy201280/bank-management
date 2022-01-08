@@ -1,10 +1,14 @@
 package com.example.bankmanagement.view.dashboard.admin
 
+import android.view.View
+import android.widget.AdapterView
 import androidx.fragment.app.viewModels
 import com.example.bankmanagement.R
 import com.example.bankmanagement.base.BaseUserView
 import com.example.bankmanagement.databinding.FragmentAdminBinding
+import com.example.bankmanagement.view.dashboard.admin.add_balance.CreateDepositDialogFragment
 import com.example.bankmanagement.view_models.dashboard.admin.AdminViewModel
+import com.example.bankmanagement.widgets.adapter.CustomSpinnerAdapter
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -46,7 +50,12 @@ class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), Base
     }
 
     override fun initView() {
+        initSpinner()
         initLineChart()
+
+        binding.addBalanceBtn.setOnClickListener {
+            CreateDepositDialogFragment().show(childFragmentManager, CreateDepositDialogFragment.TAG)
+        }
 //
 //        //region Loan type dropdown
 //        val loanTypes = LoanType.getFilterValues()
@@ -65,9 +74,35 @@ class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), Base
 //        //endregion
     }
 
-    fun initLineChart() {
+    private fun initSpinner() {
+        val yearList = mutableListOf<String>()
+        for (i in 2000..2022) {
+            yearList.add(i.toString())
+        }
+        yearList.reverse()
+        val yearSpinnerAdapter = CustomSpinnerAdapter(requireContext(), R.layout.list_item, yearList)
+        binding.yearDropdown.adapter = yearSpinnerAdapter
+        //Set default position
+        val defaultPosition = yearSpinnerAdapter.getPosition("2021")
+        binding.yearDropdown.setSelection(defaultPosition)
+        binding.yearDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewModel.getStatistic(parent?.selectedItem as String)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    private fun initLineChart() {
         val xAxisValues: List<String> = ArrayList(
-            Arrays.asList(
+            listOf(
+                "",
                 "Jan",
                 "Feb",
                 "Mar",
@@ -82,16 +117,18 @@ class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), Base
                 "Dec"
             )
         )
-        binding.lineChart.xAxis.let {
-            it.valueFormatter = IndexAxisValueFormatter(xAxisValues)
-            it.position = XAxis.XAxisPosition.BOTTOM
+        binding.lineChart.let {
+            it.xAxis.valueFormatter = IndexAxisValueFormatter(xAxisValues)
+            it.xAxis.position = XAxis.XAxisPosition.BOTTOM
+            it.xAxis.setDrawAxisLine(false)
+            it.xAxis.setDrawGridLines(false)
+//        it.axisRight.setGridDashedLine(DashPathEffect(floatArrayOf(1f, 1f), 0f))
+            it.axisRight.isEnabled = false
+            it.legend.isEnabled = false
+            it.description.isEnabled = false
+            it.animateXY(5000, 5000)
+            it.invalidate()
         }
-        binding.lineChart.xAxis.setDrawAxisLine(false)
-        binding.lineChart.xAxis.setDrawGridLines(false)
-//        binding.lineChart.axisRight.setGridDashedLine(DashPathEffect(floatArrayOf(1f, 1f), 0f))
-        binding.lineChart.axisRight.isEnabled = false
-        binding.lineChart.legend.isEnabled = false
-        binding.lineChart.description.isEnabled = false
     }
 
     override fun initData() {
@@ -158,7 +195,7 @@ class AdminFragment : BaseFragment<FragmentAdminBinding, AdminViewModel>(), Base
         //Disable value in line
         lineDataSet.setDrawValues(false)
 
-        //Set draw line curve
+        //Set draw line curve and animation
         lineDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
 
         val dataSet = arrayListOf<ILineDataSet>()

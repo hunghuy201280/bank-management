@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:paddingVertical="@dimen/_2sdp"
             android:drawablePadding="@dimen/_8sdp"
             android:singleLine="true"
             android:textColor="@color/black"

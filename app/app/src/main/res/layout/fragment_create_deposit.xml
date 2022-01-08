@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.bankmanagement.view_models.dashboard.admin.CreateDepositViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_85sdp"
+        android:background="@drawable/bg_white_corner_5dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextTitleH2SemiBold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="@dimen/_3sdp"
+            android:text="@string/add_balance"
+            android:textColor="@color/secondaryText"
+            tools:text="Add balance" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginVertical="@dimen/default_margin"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/DashboardEditTextFilter"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="Enter input here"
+                android:inputType="numberDecimal"
+                android:text="@={viewModel.amountString}" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelButton"
+                style="@style/NegativeButton"
+                android:onClick="@{() -> viewModel.onCancel()}"
+                android:text="@string/cancel" />
+
+            <View
+                android:layout_width="@dimen/default_margin"
+                android:layout_height="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addButton"
+                style="@style/PositiveButton"
+                android:onClick="@{(v) -> viewModel.onAdd(v)}"
+                android:text="@string/add" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

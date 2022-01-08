@@ -47,6 +47,11 @@ interface MainRepository {
         loanStatus: LoanStatus? = null,
     ): ArrayList<LoanProfile>
 
+    suspend fun createDeposit(
+        branchCode: String,
+        amount: Double
+    )
+
     suspend fun searchCustomers(
         name: String? = null,
         phoneNumber: String? = null,

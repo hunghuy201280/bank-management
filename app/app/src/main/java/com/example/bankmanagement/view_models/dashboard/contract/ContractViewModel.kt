@@ -73,10 +73,13 @@ constructor(
     }
 
     fun getContract() {
+        showLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             _getContracts()
             restoreState()
-
+            withContext(Dispatchers.Main) {
+                showLoading(false)
+            }
         }
     }
 
