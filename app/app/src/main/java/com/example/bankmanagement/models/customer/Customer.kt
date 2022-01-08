@@ -43,7 +43,13 @@ abstract class Customer(
     }
 
     fun getCustomerCode(): String {
-        return (id.substring(0,4) + id.substring(id.length - 4, id.length)).uppercase()
+        return (id.substring(0,5) + id.substring(id.length - 5, id.length)).uppercase()
+    }
+
+    fun getAcronym(): String {
+        val wordList = name.split(" ")
+        val acronym = wordList[0][0].toString() + wordList[1][0].toString()
+        return acronym.uppercase()
     }
 
 }

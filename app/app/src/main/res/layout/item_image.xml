@@ -25,10 +25,10 @@
 
         <ImageView
             android:id="@+id/deleteImage"
-            android:layout_width="@dimen/_16sdp"
-            android:layout_height="@dimen/_16sdp"
+            android:layout_width="@dimen/default_margin"
+            android:layout_height="@dimen/default_margin"
             android:layout_alignParentEnd="true"
-            android:src="@color/cornflower_blue"
-            />
+            android:background="@color/white"
+            android:src="@drawable/ic_close_square" />
     </RelativeLayout>
 </layout>

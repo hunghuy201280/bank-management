@@ -4,10 +4,12 @@ import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.afollestad.materialdialogs.MaterialDialog
+import com.example.bankmanagement.R
 import com.example.bankmanagement.databinding.FragmentCreateCustomerBinding
 import com.example.bankmanagement.models.customer.CustomerType
 import com.example.bankmanagement.view_models.create_application.ContractSuggestionAdapter
@@ -48,6 +50,15 @@ class CreateCustomerFragment(private val type: CustomerType, private val refresh
 
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val window = dialog!!.window ?: return
+        val params = window.attributes
+        params.width = resources.getDimension(R.dimen._292sdp).toInt()
+        params.height = LinearLayout.LayoutParams.WRAP_CONTENT
+        window.attributes = params
     }
 
     fun initViewModel() {

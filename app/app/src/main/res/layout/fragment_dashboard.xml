@@ -35,20 +35,41 @@
                 android:layout_height="match_parent"
                 android:background="@color/primaryBackground"
                 android:gravity="center_horizontal"
-
                 android:orientation="vertical">
 
                 <io.secf4ult.verticaltablayout.VerticalTabLayout
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:background="@color/primaryBackground"
-                    app:tabPaddingEnd="0dp"
                     app:tabBackground="?attr/selectableItemBackground"
                     app:tabGravity="start"
                     app:tabIndicatorColor="@color/cornflower_blue"
                     app:tabInlineLabel="true"
+                    app:tabPaddingEnd="0dp"
                     app:tabUnboundedRipple="false" />
+
+                <LinearLayout
+                    android:id="@+id/logoutBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:src="@drawable/ic_logout" />
+
+                    <TextView
+                        style="@style/TextTitleH3Medium"
+                        android:text="Log out"
+                        android:textColor="@color/secondaryText" />
+
+                </LinearLayout>
 
 
                 <!--                <q.rorbin.verticaltablayout.VerticalTabLayout-->

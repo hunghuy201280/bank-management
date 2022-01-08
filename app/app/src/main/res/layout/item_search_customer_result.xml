@@ -19,24 +19,40 @@
     <LinearLayout
         android:layout_width="@dimen/_350sdp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:background="@{selectedCustomer != null &amp;&amp; selectedCustomer.id==item.id ? @drawable/bg_active_search_customer_background : null}"
         android:layout_marginBottom="@dimen/_8sdp"
+        android:background="@{selectedCustomer != null &amp;&amp; selectedCustomer.id==item.id ? @drawable/bg_active_search_customer_background : null}"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/_5sdp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
-            <View
+            <FrameLayout
                 android:id="@+id/circleLeft"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="@drawable/circle_active_background" />
+                android:layout_marginEnd="@dimen/_8sdp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_active_background" />
+
+                <TextView
+                    style="@style/TextTitleH3Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/H0"
+                    android:text="@{item.acronym}"
+                    tools:text="HH" />
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/customerName"
@@ -46,7 +62,7 @@
                 tools:text="Truong Hung Huy" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_200sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/customerName"
                 android:layout_toEndOf="@id/circleLeft"
@@ -61,9 +77,9 @@
 
                 <TextView
                     style="@style/TextTitleH2Regular"
-                    android:visibility="@{item.email != null ? View.VISIBLE : View.GONE}"
                     android:text="@{` | ` + item.email}"
                     android:textColor="@color/textSecondary"
+                    android:visibility="@{item.email != null ? View.VISIBLE : View.GONE}"
                     tools:text="123xzcq21" />
             </LinearLayout>
 
@@ -71,11 +87,11 @@
 
         <TextView
             style="@style/TextTitleH2Regular"
-            android:textColor="@color/textSecondary"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@{String.valueOf(item.phoneNumber)}"
+            android:textColor="@color/textSecondary"
             tools:text="0938563752" />
 
         <ImageView

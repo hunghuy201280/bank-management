@@ -56,6 +56,12 @@ class SignInFragment(
         
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.email.value = ""
+        viewModel.password.value = ""
+    }
+
     override fun initAction() {
         binding.signInButton.setOnClickListener{
             viewModel.signIn(mainViewModel.currentBranch.value!!.id)
