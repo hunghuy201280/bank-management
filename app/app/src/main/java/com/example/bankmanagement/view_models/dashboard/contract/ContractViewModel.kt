@@ -22,6 +22,7 @@ import com.example.bankmanagement.view.dashboard.contract.ContractUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.socket.emitter.Emitter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.joda.time.DateTime
@@ -73,7 +74,8 @@ constructor(
     }
 
     fun getContract() {
-        viewModelScope.launch(Dispatchers.IO) {
+        //viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 _getContracts()
                 restoreState()
@@ -117,7 +119,8 @@ constructor(
     }
 
     fun onFindClicked() {
-        viewModelScope.launch(Dispatchers.IO) {
+        //viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 val result = mainRepo.getContracts(
                     contractNumber = contractNumber.value,

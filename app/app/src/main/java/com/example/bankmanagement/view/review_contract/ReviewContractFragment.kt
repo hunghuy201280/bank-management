@@ -119,7 +119,8 @@ class ReviewContractFragment :
             pieDataSet.valueTextColor = Color.TRANSPARENT
             val pieData = PieData(pieDataSet)
             binding.pieChart.data = pieData
-        });
+            binding.pieChart.invalidate()
+        })
 
 
 

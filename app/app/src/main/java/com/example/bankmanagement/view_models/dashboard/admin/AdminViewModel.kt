@@ -22,6 +22,7 @@ import com.example.bankmanagement.utils.toUtcISO
 import com.example.bankmanagement.view.dashboard.application.ApplicationUICallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.joda.time.DateTime
@@ -47,7 +48,8 @@ constructor(
 
     fun getStatistic(year: String){
         val yearInt = year.toInt()
-        viewModelScope.launch(Dispatchers.IO) {
+        //viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             try{
                 val result = mainRepo.getRevenueStatistic(yearInt)
                 withContext(Dispatchers.Main) {

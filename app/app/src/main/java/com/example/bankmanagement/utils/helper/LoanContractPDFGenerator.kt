@@ -72,7 +72,7 @@ class LoanContractPDFGenerator(val branchInfo: BranchInfo) :
 
         //#endregion
 
-        generateGeneralInfo(profile, document)
+        generateGeneralInfo(input, document)
 
         generateArticle1(profile, document)
 
@@ -859,8 +859,9 @@ class LoanContractPDFGenerator(val branchInfo: BranchInfo) :
 
     }
 
-    private fun generateGeneralInfo(input: LoanProfile, document: Document) {
+    private fun generateGeneralInfo(contract: LoanContract, document: Document) {
 
+        val input=contract.loanProfile
         val congHoaXaHoi =
             Paragraph("Socialist Republic of Vietnam".uppercase()).addStyle(titleStyle)
                 .setFontSize(24f)
@@ -870,10 +871,10 @@ class LoanContractPDFGenerator(val branchInfo: BranchInfo) :
             Paragraph("–––––––––***–––––––––").addStyle(titleStyle).setFontSize(20f)
 
         val title =
-            Paragraph("Loan profile application".uppercase()).addStyle(titleStyle).setFontSize(24f)
+            Paragraph("Loan contract application".uppercase()).addStyle(titleStyle).setFontSize(24f)
                 .setBold()
 
-        val loanNumber = Paragraph("Number: ${input.loanApplicationNumber}").apply {
+        val loanNumber = Paragraph("Number: ${contract.contractNumber}").apply {
             addStyle(titleStyle)
             setFontSize(20f)
             setUnderline()

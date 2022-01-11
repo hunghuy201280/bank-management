@@ -26,189 +26,194 @@
 
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="@dimen/_247sdp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_corner_5dp"
-        android:orientation="vertical"
-        tools:context=".view.dashboard.application.review_application.ReviewApplicationDialogFragment">
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="@dimen/_247sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_corner_5dp"
+            android:orientation="vertical"
+            tools:context=".view.dashboard.application.review_application.ReviewApplicationDialogFragment">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/TextTitleH2SemiBold"
-                applicationType="@{item}"
-                isTitle="@{true}"
-                android:layout_centerHorizontal="true"
-                android:layout_marginVertical="@dimen/_3sdp"
-                android:textColor="@color/secondaryText"
-                tools:text="Liquidation application detail" />
+                <TextView
+                    style="@style/TextTitleH2SemiBold"
+                    applicationType="@{item}"
+                    isTitle="@{true}"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="@dimen/_3sdp"
+                    android:textColor="@color/secondaryText"
+                    tools:text="Liquidation application detail" />
+
+                <ImageView
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="@dimen/_8sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:src="@drawable/ic_edit" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/application_profile_text_row"
+                    app:alignStart="@{true}"
+                    app:content="@{item.loanContract}"
+                    app:header="@{@string/contract_number}" />
+
+                <include
+                    layout="@layout/application_profile_text_row"
+                    app:alignStart="@{true}"
+                    app:content="@{item.applicationNumber}"
+                    app:header="@{@string/application_number}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        android:layout_width="@dimen/_70sdp"
+                        android:text="@string/date_created"
+                        android:textColor="@color/cornflower_blue" />
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        bindCommonDate="@{item.createdAt}"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/secondaryText"
+                        tools:text="HSVV.21.21.21" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        android:layout_width="@dimen/_70sdp"
+                        android:text="@string/reason"
+                        android:textColor="@color/cornflower_blue" />
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        android:layout_width="match_parent"
+                        android:text="@{item.reason}"
+                        android:textColor="@color/secondaryText"
+                        tools:text="Reason reason" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        android:layout_width="@dimen/_70sdp"
+                        android:text="@string/status"
+                        android:textColor="@color/cornflower_blue" />
+
+                    <TextView
+                        style="@style/StatusTextView"
+                        statusSpan="@{item.status}"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/secondaryText"
+                        tools:text="HSVV.21.21.21" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        android:layout_width="@dimen/_70sdp"
+                        android:text="@string/amount"
+                        android:textColor="@color/cornflower_blue" />
+
+                    <TextView
+                        style="@style/TextTitleH3Regular"
+                        price="@{item.amount}"
+                        android:textColor="@color/secondaryText"
+                        tools:text="HSVV.21.21.21" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/TextTitleH3Regular"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:text="@string/signature_image"
+                    android:textColor="@color/cornflower_blue" />
+
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="@dimen/_8sdp"
-                android:layout_height="@dimen/_8sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:src="@drawable/ic_edit" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider"
-            android:layout_marginBottom="@dimen/_3sdp"
-            android:background="@color/divider" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:orientation="vertical">
-
-            <include
-                layout="@layout/application_profile_text_row"
-                app:alignStart="@{true}"
-                app:content="@{item.loanContract}"
-                app:header="@{@string/contract_number}" />
-
-            <include
-                layout="@layout/application_profile_text_row"
-                app:alignStart="@{true}"
-                app:content="@{item.applicationNumber}"
-                app:header="@{@string/application_number}" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_4sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextTitleH3Regular"
-                    android:layout_width="@dimen/_70sdp"
-                    android:text="@string/date_created"
-                    android:textColor="@color/cornflower_blue" />
-
-                <TextView
-                    style="@style/TextTitleH3Regular"
-                    bindCommonDate="@{item.createdAt}"
-                    android:layout_width="@dimen/_75sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/secondaryText"
-                    tools:text="HSVV.21.21.21" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_4sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextTitleH3Regular"
-                    android:layout_width="@dimen/_70sdp"
-                    android:text="@string/reason"
-                    android:textColor="@color/cornflower_blue" />
-
-                <TextView
-                    style="@style/TextTitleH3Regular"
-                    android:layout_width="match_parent"
-                    android:text="@{item.reason}"
-                    android:textColor="@color/secondaryText"
-                    tools:text="Reason reason" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_4sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextTitleH3Regular"
-                    android:layout_width="@dimen/_70sdp"
-                    android:text="@string/status"
-                    android:textColor="@color/cornflower_blue" />
-
-                <TextView
-                    style="@style/StatusTextView"
-                    statusSpan="@{item.status}"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/secondaryText"
-                    tools:text="HSVV.21.21.21" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_4sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextTitleH3Regular"
-                    android:layout_width="@dimen/_70sdp"
-                    android:text="@string/amount"
-                    android:textColor="@color/cornflower_blue" />
-
-                <TextView
-                    style="@style/TextTitleH3Regular"
-                    price="@{item.amount}"
-                    android:textColor="@color/secondaryText"
-                    tools:text="HSVV.21.21.21" />
-            </LinearLayout>
-
-            <TextView
-                style="@style/TextTitleH3Regular"
-                android:layout_marginVertical="@dimen/_4sdp"
-                android:layout_width="@dimen/_70sdp"
-                android:text="@string/signature_image"
-                android:textColor="@color/cornflower_blue" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageView"
-            bindImage="@{item.signatureImage.toString()}"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_47sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginVertical="@dimen/default_margin"
-            android:scaleType="fitXY"
-            tools:src="@drawable/image_customer_card" />
-
-        <com.google.android.material.button.MaterialButton
-            style="@style/DashboardActionButton"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="@{()->viewModel.onBack()}"
-            android:text="@string/back"
-            android:visibility="@{mainVM.currentStaff.roleName  == StaffRole.Director.name()?View.GONE:View.VISIBLE}" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:orientation="horizontal"
-            android:visibility="@{mainVM.currentStaff.roleName==StaffRole.Director.name() &amp;&amp; viewModel.application.status == LoanStatus.Pending ?View.VISIBLE:View.GONE}">
+                android:id="@+id/imageView"
+                bindImage="@{item.signatureImage.toString()}"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_47sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:scaleType="fitXY"
+                tools:src="@drawable/image_customer_card" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/rejectButton"
-                style="@style/RejectButton"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:onClick="@{(v)->viewModel.rejectApplication(v)}"
-                android:text="@string/reject" />
+                style="@style/DashboardActionButton"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="@{()->viewModel.onBack()}"
+                android:text="@string/back"
+                android:visibility="@{mainVM.currentStaff.roleName  == StaffRole.Director.name()?View.GONE:View.VISIBLE}" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/approveButton"
-                style="@style/ApproveButton"
-                android:onClick="@{(v)->viewModel.approveApplication(v)}"
-                android:text="@string/approve" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:visibility="@{mainVM.currentStaff.roleName==StaffRole.Director.name() &amp;&amp; viewModel.application.status == LoanStatus.Pending ?View.VISIBLE:View.GONE}">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/rejectButton"
+                    style="@style/RejectButton"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:onClick="@{(v)->viewModel.rejectApplication(v)}"
+                    android:text="@string/reject" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/approveButton"
+                    style="@style/ApproveButton"
+                    android:onClick="@{(v)->viewModel.approveApplication(v)}"
+                    android:text="@string/approve" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </ScrollView>
 </layout>

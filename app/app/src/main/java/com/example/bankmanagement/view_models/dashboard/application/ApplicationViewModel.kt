@@ -21,6 +21,7 @@ import com.example.bankmanagement.view.dashboard.application.ApplicationUICallba
 import com.juliomarcos.ImageViewPopUpHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.joda.time.DateTime
@@ -57,7 +58,8 @@ constructor(
     }
 
     fun loadApplications() {
-        viewModelScope.launch(Dispatchers.IO) {
+        //viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 val apiResult = mainRepo.getApplications()
                 val result = arrayListOf<BaseApplication>()
@@ -76,7 +78,8 @@ constructor(
 
     fun onContractNumberClicked(contractNumber: String) {
         showLoading(true)
-        viewModelScope.launch(Dispatchers.IO) {
+       // viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 val res = mainRepo.getContract(contractNumber = contractNumber)
                 reviewLoanContractArgs.value = res
@@ -111,7 +114,8 @@ constructor(
     }
 
     fun onFindClicked() {
-        viewModelScope.launch(Dispatchers.IO) {
+      //  viewModelScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 var result: List<BaseApplication> = listOf()
                 when (type.value) {
